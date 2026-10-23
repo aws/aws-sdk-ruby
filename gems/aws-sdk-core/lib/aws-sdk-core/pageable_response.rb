@@ -218,9 +218,5 @@ module Aws
 
     end
 
-    # Mixed into the response class once rather than extended onto each
-    # response: Kernel#extend clears the method cache for every method the
-    # extension defines, process-wide, on every request.
-    Seahorse::Client::Response.include(Extension)
   end
 end
