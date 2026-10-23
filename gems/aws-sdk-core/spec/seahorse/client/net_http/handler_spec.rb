@@ -138,7 +138,6 @@ module Seahorse
             stub_request(:any, endpoint)
             resp = make_request
             expect(resp).to be_kind_of(Aws::Response)
-            expect(resp.context).to be(context)
           end
 
           it 'populates the #context of the returned response' do

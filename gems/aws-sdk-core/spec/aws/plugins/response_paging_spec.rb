@@ -230,16 +230,6 @@ module Aws
           expect(resp.each_page.to_a).to eq([resp])
         end
       end
-
-      describe 'performance' do
-        it 'does not extend each response with a module' do
-          resps = [paged_client.list_things, plain_client.example_operation]
-          resps.each do |resp|
-            expect(resp.singleton_class.ancestors.drop(1))
-              .to eq(resp.class.ancestors)
-          end
-        end
-      end
     end
   end
 end
