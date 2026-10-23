@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Reuse a single read buffer when computing request checksums in a header.
+
 * Feature - Reduce memory allocations when streaming request bodies with checksum trailers while preserving compatibility with custom IO bodies.
 
 3.264.0 (2026-11-04)
