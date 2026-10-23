@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Issue - Mix `PageableResponse` into `Seahorse::Client::Response` once instead of extending every response object, which cleared Ruby's method cache for each of the extension's methods on every request and made YJIT discard compiled code.
+* Feature - Reduce object allocation overhead for SDK responses by returning instances of `Aws::Response` with paging methods on the class. Preserve the `Aws::PageableResponse` module and its `.apply` interface.
 
 3.260.0 (2026-10-21)
 ------------------
