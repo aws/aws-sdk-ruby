@@ -77,6 +77,7 @@ module Aws::MediaConnect
     BridgeSource = Shapes::StructureShape.new(name: 'BridgeSource')
     BridgeState = Shapes::StringShape.new(name: 'BridgeState')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
+    ColorInformation = Shapes::StructureShape.new(name: 'ColorInformation')
     Colorimetry = Shapes::StringShape.new(name: 'Colorimetry')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConnectionStatus = Shapes::StringShape.new(name: 'ConnectionStatus')
@@ -288,6 +289,7 @@ module Aws::MediaConnect
     Messages = Shapes::StructureShape.new(name: 'Messages')
     MonitoringConfig = Shapes::StructureShape.new(name: 'MonitoringConfig')
     MulticastSourceSettings = Shapes::StructureShape.new(name: 'MulticastSourceSettings')
+    NdiAudioReferenceLevel = Shapes::IntegerShape.new(name: 'NdiAudioReferenceLevel')
     NdiConfig = Shapes::StructureShape.new(name: 'NdiConfig')
     NdiDiscoveryServerConfig = Shapes::StructureShape.new(name: 'NdiDiscoveryServerConfig')
     NdiMediaInfo = Shapes::StructureShape.new(name: 'NdiMediaInfo')
@@ -310,6 +312,7 @@ module Aws::MediaConnect
     PublicRouterNetworkInterfaceConfigurationAllowRulesList = Shapes::ListShape.new(name: 'PublicRouterNetworkInterfaceConfigurationAllowRulesList')
     PublicRouterNetworkInterfaceRule = Shapes::StructureShape.new(name: 'PublicRouterNetworkInterfaceRule')
     PublicRouterNetworkInterfaceRuleCidrString = Shapes::StringShape.new(name: 'PublicRouterNetworkInterfaceRuleCidrString')
+    PublicTlsEncryptionConfiguration = Shapes::StructureShape.new(name: 'PublicTlsEncryptionConfiguration')
     PurchaseOfferingRequest = Shapes::StructureShape.new(name: 'PurchaseOfferingRequest')
     PurchaseOfferingResponse = Shapes::StructureShape.new(name: 'PurchaseOfferingResponse')
     Range = Shapes::StringShape.new(name: 'Range')
@@ -408,6 +411,8 @@ module Aws::MediaConnect
     RouterOutputTypeList = Shapes::ListShape.new(name: 'RouterOutputTypeList')
     RoutingScope = Shapes::StringShape.new(name: 'RoutingScope')
     RoutingScopeList = Shapes::ListShape.new(name: 'RoutingScopeList')
+    RtmpPushRouterOutputConfiguration = Shapes::StructureShape.new(name: 'RtmpPushRouterOutputConfiguration')
+    RtmpPushRouterOutputConfigurationDestinationPortInteger = Shapes::IntegerShape.new(name: 'RtmpPushRouterOutputConfigurationDestinationPortInteger')
     RtpRouterInputConfiguration = Shapes::StructureShape.new(name: 'RtpRouterInputConfiguration')
     RtpRouterInputConfigurationPortInteger = Shapes::IntegerShape.new(name: 'RtpRouterInputConfigurationPortInteger')
     RtpRouterOutputConfiguration = Shapes::StructureShape.new(name: 'RtpRouterOutputConfiguration')
@@ -469,6 +474,9 @@ module Aws::MediaConnect
     Tcs = Shapes::StringShape.new(name: 'Tcs')
     ThumbnailDetails = Shapes::StructureShape.new(name: 'ThumbnailDetails')
     ThumbnailState = Shapes::StringShape.new(name: 'ThumbnailState')
+    TlsEncryption = Shapes::StructureShape.new(name: 'TlsEncryption')
+    TlsEncryptionConfiguration = Shapes::UnionShape.new(name: 'TlsEncryptionConfiguration')
+    TlsEncryptionType = Shapes::StringShape.new(name: 'TlsEncryptionType')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     Transport = Shapes::StructureShape.new(name: 'Transport')
     TransportMediaInfo = Shapes::StructureShape.new(name: 'TransportMediaInfo')
@@ -530,7 +538,10 @@ module Aws::MediaConnect
     UpdateRouterOutputRequest = Shapes::StructureShape.new(name: 'UpdateRouterOutputRequest')
     UpdateRouterOutputRequestNameString = Shapes::StringShape.new(name: 'UpdateRouterOutputRequestNameString')
     UpdateRouterOutputResponse = Shapes::StructureShape.new(name: 'UpdateRouterOutputResponse')
+    VideoColorimetry = Shapes::StringShape.new(name: 'VideoColorimetry')
+    VideoMatrixCoefficients = Shapes::StringShape.new(name: 'VideoMatrixCoefficients')
     VideoMonitoringSetting = Shapes::StructureShape.new(name: 'VideoMonitoringSetting')
+    VideoTransferCharacteristics = Shapes::StringShape.new(name: 'VideoTransferCharacteristics')
     VpcInterface = Shapes::StructureShape.new(name: 'VpcInterface')
     VpcInterfaceAttachment = Shapes::StructureShape.new(name: 'VpcInterfaceAttachment')
     VpcInterfaceRequest = Shapes::StructureShape.new(name: 'VpcInterfaceRequest')
@@ -701,6 +712,7 @@ module Aws::MediaConnect
     AddOutputRequest.add_member(:router_integration_state, Shapes::ShapeRef.new(shape: State, location_name: "routerIntegrationState"))
     AddOutputRequest.add_member(:router_integration_transit_encryption, Shapes::ShapeRef.new(shape: FlowTransitEncryption, location_name: "routerIntegrationTransitEncryption"))
     AddOutputRequest.add_member(:ndi_output_timecode_source, Shapes::ShapeRef.new(shape: NdiOutputTimecodeSource, location_name: "ndiOutputTimecodeSource"))
+    AddOutputRequest.add_member(:ndi_audio_reference_level, Shapes::ShapeRef.new(shape: NdiAudioReferenceLevel, location_name: "ndiAudioReferenceLevel"))
     AddOutputRequest.struct_class = Types::AddOutputRequest
 
     AudioMonitoringSetting.add_member(:silent_audio, Shapes::ShapeRef.new(shape: SilentAudio, location_name: "silentAudio"))
@@ -813,6 +825,11 @@ module Aws::MediaConnect
     BridgeSource.add_member(:flow_source, Shapes::ShapeRef.new(shape: BridgeFlowSource, location_name: "flowSource"))
     BridgeSource.add_member(:network_source, Shapes::ShapeRef.new(shape: BridgeNetworkSource, location_name: "networkSource"))
     BridgeSource.struct_class = Types::BridgeSource
+
+    ColorInformation.add_member(:colorimetry, Shapes::ShapeRef.new(shape: VideoColorimetry, location_name: "colorimetry"))
+    ColorInformation.add_member(:transfer_characteristics, Shapes::ShapeRef.new(shape: VideoTransferCharacteristics, location_name: "transferCharacteristics"))
+    ColorInformation.add_member(:matrix_coefficients, Shapes::ShapeRef.new(shape: VideoMatrixCoefficients, location_name: "matrixCoefficients"))
+    ColorInformation.struct_class = Types::ColorInformation
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
@@ -1614,6 +1631,7 @@ module Aws::MediaConnect
     NdiMediaStreamInfo.add_member(:codec, Shapes::ShapeRef.new(shape: String, required: true, location_name: "codec"))
     NdiMediaStreamInfo.add_member(:stream_id, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "streamId"))
     NdiMediaStreamInfo.add_member(:scan_mode, Shapes::ShapeRef.new(shape: ScanMode, location_name: "scanMode"))
+    NdiMediaStreamInfo.add_member(:color, Shapes::ShapeRef.new(shape: ColorInformation, location_name: "color"))
     NdiMediaStreamInfo.add_member(:frame_resolution, Shapes::ShapeRef.new(shape: FrameResolution, location_name: "frameResolution"))
     NdiMediaStreamInfo.add_member(:frame_rate, Shapes::ShapeRef.new(shape: String, location_name: "frameRate"))
     NdiMediaStreamInfo.add_member(:channels, Shapes::ShapeRef.new(shape: Integer, location_name: "channels"))
@@ -1630,6 +1648,7 @@ module Aws::MediaConnect
     NdiSourceMetadataInfo.struct_class = Types::NdiSourceMetadataInfo
 
     NdiSourceSettings.add_member(:source_name, Shapes::ShapeRef.new(shape: String, location_name: "sourceName"))
+    NdiSourceSettings.add_member(:audio_reference_level, Shapes::ShapeRef.new(shape: NdiAudioReferenceLevel, location_name: "audioReferenceLevel"))
     NdiSourceSettings.struct_class = Types::NdiSourceSettings
 
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -1678,6 +1697,8 @@ module Aws::MediaConnect
 
     PublicRouterNetworkInterfaceRule.add_member(:cidr, Shapes::ShapeRef.new(shape: PublicRouterNetworkInterfaceRuleCidrString, required: true, location_name: "cidr"))
     PublicRouterNetworkInterfaceRule.struct_class = Types::PublicRouterNetworkInterfaceRule
+
+    PublicTlsEncryptionConfiguration.struct_class = Types::PublicTlsEncryptionConfiguration
 
     PurchaseOfferingRequest.add_member(:offering_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "OfferingArn"))
     PurchaseOfferingRequest.add_member(:reservation_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "reservationName"))
@@ -2028,11 +2049,13 @@ module Aws::MediaConnect
 
     RouterOutputProtocolConfiguration.add_member(:rist, Shapes::ShapeRef.new(shape: RistRouterOutputConfiguration, location_name: "rist"))
     RouterOutputProtocolConfiguration.add_member(:srt_listener, Shapes::ShapeRef.new(shape: SrtListenerRouterOutputConfiguration, location_name: "srtListener"))
+    RouterOutputProtocolConfiguration.add_member(:rtmp_push, Shapes::ShapeRef.new(shape: RtmpPushRouterOutputConfiguration, location_name: "rtmpPush"))
     RouterOutputProtocolConfiguration.add_member(:srt_caller, Shapes::ShapeRef.new(shape: SrtCallerRouterOutputConfiguration, location_name: "srtCaller"))
     RouterOutputProtocolConfiguration.add_member(:rtp, Shapes::ShapeRef.new(shape: RtpRouterOutputConfiguration, location_name: "rtp"))
     RouterOutputProtocolConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     RouterOutputProtocolConfiguration.add_member_subclass(:rist, Types::RouterOutputProtocolConfiguration::Rist)
     RouterOutputProtocolConfiguration.add_member_subclass(:srt_listener, Types::RouterOutputProtocolConfiguration::SrtListener)
+    RouterOutputProtocolConfiguration.add_member_subclass(:rtmp_push, Types::RouterOutputProtocolConfiguration::RtmpPush)
     RouterOutputProtocolConfiguration.add_member_subclass(:srt_caller, Types::RouterOutputProtocolConfiguration::SrtCaller)
     RouterOutputProtocolConfiguration.add_member_subclass(:rtp, Types::RouterOutputProtocolConfiguration::Rtp)
     RouterOutputProtocolConfiguration.add_member_subclass(:unknown, Types::RouterOutputProtocolConfiguration::Unknown)
@@ -2054,6 +2077,13 @@ module Aws::MediaConnect
     RouterOutputTypeList.member = Shapes::ShapeRef.new(shape: RouterOutputType)
 
     RoutingScopeList.member = Shapes::ShapeRef.new(shape: RoutingScope)
+
+    RtmpPushRouterOutputConfiguration.add_member(:destination_address, Shapes::ShapeRef.new(shape: String, required: true, location_name: "destinationAddress"))
+    RtmpPushRouterOutputConfiguration.add_member(:destination_port, Shapes::ShapeRef.new(shape: RtmpPushRouterOutputConfigurationDestinationPortInteger, required: true, location_name: "destinationPort"))
+    RtmpPushRouterOutputConfiguration.add_member(:application_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "applicationName"))
+    RtmpPushRouterOutputConfiguration.add_member(:stream_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "streamName"))
+    RtmpPushRouterOutputConfiguration.add_member(:tls_encryption, Shapes::ShapeRef.new(shape: TlsEncryption, location_name: "tlsEncryption"))
+    RtmpPushRouterOutputConfiguration.struct_class = Types::RtmpPushRouterOutputConfiguration
 
     RtpRouterInputConfiguration.add_member(:port, Shapes::ShapeRef.new(shape: RtpRouterInputConfigurationPortInteger, required: true, location_name: "port"))
     RtpRouterInputConfiguration.add_member(:forward_error_correction, Shapes::ShapeRef.new(shape: ForwardErrorCorrectionState, location_name: "forwardErrorCorrection"))
@@ -2256,6 +2286,16 @@ module Aws::MediaConnect
     ThumbnailDetails.add_member(:timestamp, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "timestamp"))
     ThumbnailDetails.struct_class = Types::ThumbnailDetails
 
+    TlsEncryption.add_member(:encryption_type, Shapes::ShapeRef.new(shape: TlsEncryptionType, location_name: "encryptionType"))
+    TlsEncryption.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: TlsEncryptionConfiguration, required: true, location_name: "encryptionConfiguration"))
+    TlsEncryption.struct_class = Types::TlsEncryption
+
+    TlsEncryptionConfiguration.add_member(:public, Shapes::ShapeRef.new(shape: PublicTlsEncryptionConfiguration, location_name: "public"))
+    TlsEncryptionConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    TlsEncryptionConfiguration.add_member_subclass(:public, Types::TlsEncryptionConfiguration::Public)
+    TlsEncryptionConfiguration.add_member_subclass(:unknown, Types::TlsEncryptionConfiguration::Unknown)
+    TlsEncryptionConfiguration.struct_class = Types::TlsEncryptionConfiguration
+
     TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     TooManyRequestsException.struct_class = Types::TooManyRequestsException
 
@@ -2276,13 +2316,16 @@ module Aws::MediaConnect
     Transport.add_member(:ndi_program_name, Shapes::ShapeRef.new(shape: String, location_name: "ndiProgramName"))
     Transport.add_member(:ndi_source_settings, Shapes::ShapeRef.new(shape: NdiSourceSettings, location_name: "ndiSourceSettings"))
     Transport.add_member(:ndi_output_timecode_source, Shapes::ShapeRef.new(shape: NdiOutputTimecodeSource, location_name: "ndiOutputTimecodeSource"))
+    Transport.add_member(:ndi_audio_reference_level, Shapes::ShapeRef.new(shape: NdiAudioReferenceLevel, location_name: "ndiAudioReferenceLevel"))
     Transport.struct_class = Types::Transport
 
     TransportMediaInfo.add_member(:programs, Shapes::ShapeRef.new(shape: __listOfTransportStreamProgram, required: true, location_name: "programs"))
+    TransportMediaInfo.add_member(:ts_id, Shapes::ShapeRef.new(shape: Integer, location_name: "tsId"))
     TransportMediaInfo.struct_class = Types::TransportMediaInfo
 
     TransportStream.add_member(:channels, Shapes::ShapeRef.new(shape: Integer, location_name: "channels"))
     TransportStream.add_member(:codec, Shapes::ShapeRef.new(shape: String, location_name: "codec"))
+    TransportStream.add_member(:color, Shapes::ShapeRef.new(shape: ColorInformation, location_name: "color"))
     TransportStream.add_member(:frame_rate, Shapes::ShapeRef.new(shape: String, location_name: "frameRate"))
     TransportStream.add_member(:frame_resolution, Shapes::ShapeRef.new(shape: FrameResolution, location_name: "frameResolution"))
     TransportStream.add_member(:pid, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "pid"))
@@ -2428,6 +2471,7 @@ module Aws::MediaConnect
     UpdateFlowOutputRequest.add_member(:router_integration_state, Shapes::ShapeRef.new(shape: State, location_name: "routerIntegrationState"))
     UpdateFlowOutputRequest.add_member(:router_integration_transit_encryption, Shapes::ShapeRef.new(shape: FlowTransitEncryption, location_name: "routerIntegrationTransitEncryption"))
     UpdateFlowOutputRequest.add_member(:ndi_output_timecode_source, Shapes::ShapeRef.new(shape: NdiOutputTimecodeSource, location_name: "ndiOutputTimecodeSource"))
+    UpdateFlowOutputRequest.add_member(:ndi_audio_reference_level, Shapes::ShapeRef.new(shape: NdiAudioReferenceLevel, location_name: "ndiAudioReferenceLevel"))
     UpdateFlowOutputRequest.struct_class = Types::UpdateFlowOutputRequest
 
     UpdateFlowOutputResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: String, location_name: "flowArn"))

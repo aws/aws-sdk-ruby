@@ -168,12 +168,19 @@ module Aws::ConnectHealth
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -532,7 +539,7 @@ module Aws::ConnectHealth
     #     session_id: "SessionId", # required
     #     domain_id: "DomainId", # required
     #     subscription_id: "SubscriptionId", # required
-    #     language_code: "en-US", # required, accepts en-US
+    #     language_code: "en-US", # required, accepts en-US, multi
     #     media_sample_rate_hertz: 1, # required
     #     media_encoding: "pcm", # required, accepts pcm, flac
     #     input_event_stream_hander: EventStreams::MedicalScribeInputStream.new,
@@ -548,7 +555,7 @@ module Aws::ConnectHealth
     #   resp.domain_id #=> String
     #   resp.subscription_id #=> String
     #   resp.request_id #=> String
-    #   resp.language_code #=> String, one of "en-US"
+    #   resp.language_code #=> String, one of "en-US", "multi"
     #   resp.media_sample_rate_hertz #=> Integer
     #   resp.media_encoding #=> String, one of "pcm", "flac"
     #   # All events are available at resp.response_stream:
@@ -617,7 +624,7 @@ module Aws::ConnectHealth
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connecthealth'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -206,6 +206,33 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
+    # The auto billing group creation preference for a billing transfer.
+    # When the preference is enabled, Billing Conductor automatically
+    # creates an indirect billing transfer billing group, with the specified
+    # pricing plan, for each account that transfers its bill to the bill
+    # source account of the billing transfer.
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether Billing Conductor automatically creates billing
+    #   groups for the billing transfer. The preference is disabled by
+    #   default.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] pricing_plan_arn
+    #   The Amazon Resource Name (ARN) of the pricing plan to apply to the
+    #   automatically created billing groups. This value is required when
+    #   `Enabled` is `true`, and must be omitted when `Enabled` is `false`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/AutoTransferBillingGroupCreationPreference AWS API Documentation
+    #
+    class AutoTransferBillingGroupCreationPreference < Struct.new(
+      :enabled,
+      :pricing_plan_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] target_arn
     #   A percentage custom line item ARN to associate the resources to.
     #   @return [String]
@@ -1417,6 +1444,43 @@ module Aws::BillingConductor
     class GetBillingGroupCostReportOutput < Struct.new(
       :billing_group_cost_report_results,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] responsibility_transfer_arn
+    #   The Amazon Resource Name (ARN) of the billing transfer whose
+    #   preference you want to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/GetBillingTransferPreferenceInput AWS API Documentation
+    #
+    class GetBillingTransferPreferenceInput < Struct.new(
+      :responsibility_transfer_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] responsibility_transfer_arn
+    #   The Amazon Resource Name (ARN) of the billing transfer that the
+    #   preference applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_billing_transfer_billing_group_creation
+    #   The auto billing group creation preference for the billing transfer.
+    #   @return [Types::AutoTransferBillingGroupCreationPreference]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The most recent time when the preference was modified. This value is
+    #   empty if the preference has never been set for the billing transfer.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/GetBillingTransferPreferenceOutput AWS API Documentation
+    #
+    class GetBillingTransferPreferenceOutput < Struct.new(
+      :responsibility_transfer_arn,
+      :auto_billing_transfer_billing_group_creation,
+      :last_modified_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2802,6 +2866,61 @@ module Aws::BillingConductor
       :status_reason,
       :account_grouping)
       SENSITIVE = [:name, :description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you specify to ensure
+    #   idempotency of the request. Idempotency ensures that an API request
+    #   completes no more than one time. With an idempotent request, if the
+    #   original request completes successfully, any subsequent retries
+    #   complete successfully without performing any further actions.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] responsibility_transfer_arn
+    #   The Amazon Resource Name (ARN) of the billing transfer whose
+    #   preference you want to set.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_billing_transfer_billing_group_creation
+    #   The auto billing group creation preference to set for the billing
+    #   transfer.
+    #   @return [Types::AutoTransferBillingGroupCreationPreference]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/UpdateBillingTransferPreferenceInput AWS API Documentation
+    #
+    class UpdateBillingTransferPreferenceInput < Struct.new(
+      :client_token,
+      :responsibility_transfer_arn,
+      :auto_billing_transfer_billing_group_creation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] responsibility_transfer_arn
+    #   The Amazon Resource Name (ARN) of the billing transfer that the
+    #   preference applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_billing_transfer_billing_group_creation
+    #   The updated auto billing group creation preference for the billing
+    #   transfer.
+    #   @return [Types::AutoTransferBillingGroupCreationPreference]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The most recent time when the preference was modified.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/UpdateBillingTransferPreferenceOutput AWS API Documentation
+    #
+    class UpdateBillingTransferPreferenceOutput < Struct.new(
+      :responsibility_transfer_arn,
+      :auto_billing_transfer_billing_group_creation,
+      :last_modified_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 

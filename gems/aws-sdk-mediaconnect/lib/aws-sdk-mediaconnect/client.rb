@@ -199,12 +199,19 @@ module Aws::MediaConnect
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -752,6 +759,7 @@ module Aws::MediaConnect
     #           },
     #         },
     #         ndi_output_timecode_source: "EMBEDDED_TIMECODE", # accepts EMBEDDED_TIMECODE, UTC_SYSTEM_TIME
+    #         ndi_audio_reference_level: 1,
     #       },
     #     ],
     #   })
@@ -805,7 +813,9 @@ module Aws::MediaConnect
     #   resp.outputs[0].transport.ndi_speed_hq_quality #=> Integer
     #   resp.outputs[0].transport.ndi_program_name #=> String
     #   resp.outputs[0].transport.ndi_source_settings.source_name #=> String
+    #   resp.outputs[0].transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.outputs[0].transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
+    #   resp.outputs[0].transport.ndi_audio_reference_level #=> Integer
     #   resp.outputs[0].vpc_interface_attachment.vpc_interface_name #=> String
     #   resp.outputs[0].bridge_arn #=> String
     #   resp.outputs[0].bridge_ports #=> Array
@@ -895,6 +905,7 @@ module Aws::MediaConnect
     #         },
     #         ndi_source_settings: {
     #           source_name: "String",
+    #           audio_reference_level: 1,
     #         },
     #         source_tags: {
     #           "String" => "String",
@@ -961,7 +972,9 @@ module Aws::MediaConnect
     #   resp.sources[0].transport.ndi_speed_hq_quality #=> Integer
     #   resp.sources[0].transport.ndi_program_name #=> String
     #   resp.sources[0].transport.ndi_source_settings.source_name #=> String
+    #   resp.sources[0].transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.sources[0].transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
+    #   resp.sources[0].transport.ndi_audio_reference_level #=> Integer
     #   resp.sources[0].vpc_interface_name #=> String
     #   resp.sources[0].whitelist_cidr #=> String
     #   resp.sources[0].gateway_bridge_source.bridge_arn #=> String
@@ -1118,7 +1131,7 @@ module Aws::MediaConnect
     #   resp.router_inputs[0].region_name #=> String
     #   resp.router_inputs[0].availability_zone #=> String
     #   resp.router_inputs[0].maximum_bitrate #=> Integer
-    #   resp.router_inputs[0].tier #=> String, one of "INPUT_100", "INPUT_50", "INPUT_20"
+    #   resp.router_inputs[0].tier #=> String, one of "INPUT_100", "INPUT_50", "INPUT_20", "INPUT_500", "INPUT_250"
     #   resp.router_inputs[0].routing_scope #=> String, one of "REGIONAL", "GLOBAL"
     #   resp.router_inputs[0].created_at #=> Time
     #   resp.router_inputs[0].updated_at #=> Time
@@ -1253,6 +1266,11 @@ module Aws::MediaConnect
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.srt_listener.minimum_latency_milliseconds #=> Integer
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.srt_listener.encryption_configuration.encryption_key.secret_arn #=> String
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.srt_listener.encryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_outputs[0].configuration.standard.protocol_configuration.rtmp_push.destination_address #=> String
+    #   resp.router_outputs[0].configuration.standard.protocol_configuration.rtmp_push.destination_port #=> Integer
+    #   resp.router_outputs[0].configuration.standard.protocol_configuration.rtmp_push.application_name #=> String
+    #   resp.router_outputs[0].configuration.standard.protocol_configuration.rtmp_push.stream_name #=> String
+    #   resp.router_outputs[0].configuration.standard.protocol_configuration.rtmp_push.tls_encryption.encryption_type #=> String, one of "PUBLIC"
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.srt_caller.destination_address #=> String
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.srt_caller.destination_port #=> Integer
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.srt_caller.minimum_latency_milliseconds #=> Integer
@@ -1262,7 +1280,7 @@ module Aws::MediaConnect
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.rtp.destination_address #=> String
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.rtp.destination_port #=> Integer
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
-    #   resp.router_outputs[0].configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"
+    #   resp.router_outputs[0].configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER", "RTMP_PUSH"
     #   resp.router_outputs[0].configuration.media_connect_flow.flow_arn #=> String
     #   resp.router_outputs[0].configuration.media_connect_flow.flow_source_arn #=> String
     #   resp.router_outputs[0].configuration.media_connect_flow.destination_transit_encryption.encryption_key_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
@@ -1278,7 +1296,7 @@ module Aws::MediaConnect
     #   resp.router_outputs[0].availability_zone #=> String
     #   resp.router_outputs[0].maximum_bitrate #=> Integer
     #   resp.router_outputs[0].routing_scope #=> String, one of "REGIONAL", "GLOBAL"
-    #   resp.router_outputs[0].tier #=> String, one of "OUTPUT_100", "OUTPUT_50", "OUTPUT_20"
+    #   resp.router_outputs[0].tier #=> String, one of "OUTPUT_100", "OUTPUT_50", "OUTPUT_20", "OUTPUT_500", "OUTPUT_250"
     #   resp.router_outputs[0].created_at #=> Time
     #   resp.router_outputs[0].updated_at #=> Time
     #   resp.router_outputs[0].messages #=> Array
@@ -1626,6 +1644,7 @@ module Aws::MediaConnect
     #           },
     #         },
     #         ndi_output_timecode_source: "EMBEDDED_TIMECODE", # accepts EMBEDDED_TIMECODE, UTC_SYSTEM_TIME
+    #         ndi_audio_reference_level: 1,
     #       },
     #     ],
     #     source: {
@@ -1678,6 +1697,7 @@ module Aws::MediaConnect
     #       },
     #       ndi_source_settings: {
     #         source_name: "String",
+    #         audio_reference_level: 1,
     #       },
     #       source_tags: {
     #         "String" => "String",
@@ -1754,6 +1774,7 @@ module Aws::MediaConnect
     #         },
     #         ndi_source_settings: {
     #           source_name: "String",
+    #           audio_reference_level: 1,
     #         },
     #         source_tags: {
     #           "String" => "String",
@@ -1919,7 +1940,9 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].transport.ndi_speed_hq_quality #=> Integer
     #   resp.flow.outputs[0].transport.ndi_program_name #=> String
     #   resp.flow.outputs[0].transport.ndi_source_settings.source_name #=> String
+    #   resp.flow.outputs[0].transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.flow.outputs[0].transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
+    #   resp.flow.outputs[0].transport.ndi_audio_reference_level #=> Integer
     #   resp.flow.outputs[0].vpc_interface_attachment.vpc_interface_name #=> String
     #   resp.flow.outputs[0].bridge_arn #=> String
     #   resp.flow.outputs[0].bridge_ports #=> Array
@@ -1973,7 +1996,9 @@ module Aws::MediaConnect
     #   resp.flow.source.transport.ndi_speed_hq_quality #=> Integer
     #   resp.flow.source.transport.ndi_program_name #=> String
     #   resp.flow.source.transport.ndi_source_settings.source_name #=> String
+    #   resp.flow.source.transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.flow.source.transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
+    #   resp.flow.source.transport.ndi_audio_reference_level #=> Integer
     #   resp.flow.source.vpc_interface_name #=> String
     #   resp.flow.source.whitelist_cidr #=> String
     #   resp.flow.source.gateway_bridge_source.bridge_arn #=> String
@@ -2031,7 +2056,9 @@ module Aws::MediaConnect
     #   resp.flow.sources[0].transport.ndi_speed_hq_quality #=> Integer
     #   resp.flow.sources[0].transport.ndi_program_name #=> String
     #   resp.flow.sources[0].transport.ndi_source_settings.source_name #=> String
+    #   resp.flow.sources[0].transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.flow.sources[0].transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
+    #   resp.flow.sources[0].transport.ndi_audio_reference_level #=> Integer
     #   resp.flow.sources[0].vpc_interface_name #=> String
     #   resp.flow.sources[0].whitelist_cidr #=> String
     #   resp.flow.sources[0].gateway_bridge_source.bridge_arn #=> String
@@ -2160,7 +2187,22 @@ module Aws::MediaConnect
     #   same Region. GLOBAL - connects to outputs in any Region.
     #
     # @option params [required, String] :tier
-    #   The tier level for the router input.
+    #   The tier level for the router input. The tier sets the maximum
+    #   bitrate, in Mbps, for the router input. Valid values include the
+    #   following:
+    #
+    #   * `INPUT_20` – 20 Mbps
+    #
+    #   * `INPUT_50` – 50 Mbps
+    #
+    #   * `INPUT_100` – 100 Mbps
+    #
+    #   * `INPUT_250` – 250 Mbps
+    #
+    #   * `INPUT_500` – 500 Mbps
+    #
+    #   The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support
+    #   TR-07 (JPEG XS) workflows.
     #
     # @option params [String] :region_name
     #   The Amazon Web Services Region for the router input. Defaults to the
@@ -2325,7 +2367,7 @@ module Aws::MediaConnect
     #     },
     #     maximum_bitrate: 1, # required
     #     routing_scope: "REGIONAL", # required, accepts REGIONAL, GLOBAL
-    #     tier: "INPUT_100", # required, accepts INPUT_100, INPUT_50, INPUT_20
+    #     tier: "INPUT_100", # required, accepts INPUT_100, INPUT_50, INPUT_20, INPUT_500, INPUT_250
     #     region_name: "String",
     #     availability_zone: "String",
     #     transit_encryption: {
@@ -2433,7 +2475,7 @@ module Aws::MediaConnect
     #   resp.router_input.region_name #=> String
     #   resp.router_input.availability_zone #=> String
     #   resp.router_input.maximum_bitrate #=> Integer
-    #   resp.router_input.tier #=> String, one of "INPUT_100", "INPUT_50", "INPUT_20"
+    #   resp.router_input.tier #=> String, one of "INPUT_100", "INPUT_50", "INPUT_20", "INPUT_500", "INPUT_250"
     #   resp.router_input.routing_scope #=> String, one of "REGIONAL", "GLOBAL"
     #   resp.router_input.created_at #=> Time
     #   resp.router_input.updated_at #=> Time
@@ -2575,7 +2617,22 @@ module Aws::MediaConnect
     #   Region. GLOBAL - can take inputs from any Region.
     #
     # @option params [required, String] :tier
-    #   The tier level for the router output.
+    #   The tier level for the router output. The tier sets the maximum
+    #   bitrate, in Mbps, for the router output. Valid values include the
+    #   following:
+    #
+    #   * `OUTPUT_20` – 20 Mbps
+    #
+    #   * `OUTPUT_50` – 50 Mbps
+    #
+    #   * `OUTPUT_100` – 100 Mbps
+    #
+    #   * `OUTPUT_250` – 250 Mbps
+    #
+    #   * `OUTPUT_500` – 500 Mbps
+    #
+    #   The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support
+    #   TR-07 (JPEG XS) workflows.
     #
     # @option params [String] :region_name
     #   The Amazon Web Services Region for the router output. Defaults to the
@@ -2628,6 +2685,19 @@ module Aws::MediaConnect
     #               },
     #             },
     #           },
+    #           rtmp_push: {
+    #             destination_address: "String", # required
+    #             destination_port: 1, # required
+    #             application_name: "String", # required
+    #             stream_name: "String", # required
+    #             tls_encryption: {
+    #               encryption_type: "PUBLIC", # accepts PUBLIC
+    #               encryption_configuration: { # required
+    #                 public: {
+    #                 },
+    #               },
+    #             },
+    #           },
     #           srt_caller: {
     #             destination_address: "String", # required
     #             destination_port: 1, # required
@@ -2646,7 +2716,7 @@ module Aws::MediaConnect
     #             forward_error_correction: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #         },
-    #         protocol: "RTP", # accepts RTP, RIST, SRT_CALLER, SRT_LISTENER
+    #         protocol: "RTP", # accepts RTP, RIST, SRT_CALLER, SRT_LISTENER, RTMP_PUSH
     #       },
     #       media_connect_flow: {
     #         flow_arn: "FlowArn",
@@ -2681,7 +2751,7 @@ module Aws::MediaConnect
     #     },
     #     maximum_bitrate: 1, # required
     #     routing_scope: "REGIONAL", # required, accepts REGIONAL, GLOBAL
-    #     tier: "OUTPUT_100", # required, accepts OUTPUT_100, OUTPUT_50, OUTPUT_20
+    #     tier: "OUTPUT_100", # required, accepts OUTPUT_100, OUTPUT_50, OUTPUT_20, OUTPUT_500, OUTPUT_250
     #     region_name: "String",
     #     availability_zone: "String",
     #     maintenance_configuration: {
@@ -2715,6 +2785,11 @@ module Aws::MediaConnect
     #   resp.router_output.configuration.standard.protocol_configuration.srt_listener.minimum_latency_milliseconds #=> Integer
     #   resp.router_output.configuration.standard.protocol_configuration.srt_listener.encryption_configuration.encryption_key.secret_arn #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.srt_listener.encryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.destination_address #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.destination_port #=> Integer
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.application_name #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.stream_name #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.tls_encryption.encryption_type #=> String, one of "PUBLIC"
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.destination_address #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.destination_port #=> Integer
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.minimum_latency_milliseconds #=> Integer
@@ -2724,7 +2799,7 @@ module Aws::MediaConnect
     #   resp.router_output.configuration.standard.protocol_configuration.rtp.destination_address #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.rtp.destination_port #=> Integer
     #   resp.router_output.configuration.standard.protocol_configuration.rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
-    #   resp.router_output.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"
+    #   resp.router_output.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER", "RTMP_PUSH"
     #   resp.router_output.configuration.media_connect_flow.flow_arn #=> String
     #   resp.router_output.configuration.media_connect_flow.flow_source_arn #=> String
     #   resp.router_output.configuration.media_connect_flow.destination_transit_encryption.encryption_key_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
@@ -2740,7 +2815,7 @@ module Aws::MediaConnect
     #   resp.router_output.availability_zone #=> String
     #   resp.router_output.maximum_bitrate #=> Integer
     #   resp.router_output.routing_scope #=> String, one of "REGIONAL", "GLOBAL"
-    #   resp.router_output.tier #=> String, one of "OUTPUT_100", "OUTPUT_50", "OUTPUT_20"
+    #   resp.router_output.tier #=> String, one of "OUTPUT_100", "OUTPUT_50", "OUTPUT_20", "OUTPUT_500", "OUTPUT_250"
     #   resp.router_output.created_at #=> Time
     #   resp.router_output.updated_at #=> Time
     #   resp.router_output.messages #=> Array
@@ -3165,7 +3240,9 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].transport.ndi_speed_hq_quality #=> Integer
     #   resp.flow.outputs[0].transport.ndi_program_name #=> String
     #   resp.flow.outputs[0].transport.ndi_source_settings.source_name #=> String
+    #   resp.flow.outputs[0].transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.flow.outputs[0].transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
+    #   resp.flow.outputs[0].transport.ndi_audio_reference_level #=> Integer
     #   resp.flow.outputs[0].vpc_interface_attachment.vpc_interface_name #=> String
     #   resp.flow.outputs[0].bridge_arn #=> String
     #   resp.flow.outputs[0].bridge_ports #=> Array
@@ -3219,7 +3296,9 @@ module Aws::MediaConnect
     #   resp.flow.source.transport.ndi_speed_hq_quality #=> Integer
     #   resp.flow.source.transport.ndi_program_name #=> String
     #   resp.flow.source.transport.ndi_source_settings.source_name #=> String
+    #   resp.flow.source.transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.flow.source.transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
+    #   resp.flow.source.transport.ndi_audio_reference_level #=> Integer
     #   resp.flow.source.vpc_interface_name #=> String
     #   resp.flow.source.whitelist_cidr #=> String
     #   resp.flow.source.gateway_bridge_source.bridge_arn #=> String
@@ -3277,7 +3356,9 @@ module Aws::MediaConnect
     #   resp.flow.sources[0].transport.ndi_speed_hq_quality #=> Integer
     #   resp.flow.sources[0].transport.ndi_program_name #=> String
     #   resp.flow.sources[0].transport.ndi_source_settings.source_name #=> String
+    #   resp.flow.sources[0].transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.flow.sources[0].transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
+    #   resp.flow.sources[0].transport.ndi_audio_reference_level #=> Integer
     #   resp.flow.sources[0].vpc_interface_name #=> String
     #   resp.flow.sources[0].whitelist_cidr #=> String
     #   resp.flow.sources[0].gateway_bridge_source.bridge_arn #=> String
@@ -3378,6 +3459,9 @@ module Aws::MediaConnect
     #   resp.transport_media_info.programs[0].streams #=> Array
     #   resp.transport_media_info.programs[0].streams[0].channels #=> Integer
     #   resp.transport_media_info.programs[0].streams[0].codec #=> String
+    #   resp.transport_media_info.programs[0].streams[0].color.colorimetry #=> String, one of "BT709", "BT470M", "BT470BG", "BT601", "SMPTE240M", "GENERIC_FILM", "BT2020", "SMPTE428", "SMPTE431", "SMPTE432"
+    #   resp.transport_media_info.programs[0].streams[0].color.transfer_characteristics #=> String, one of "BT709", "BT470M", "BT470BG", "BT601", "SMPTE240M", "LINEAR", "LOG100", "LOG316", "IEC61966_2_4", "BT1361_ECG", "IEC61966_2_1", "BT2020_10", "BT2020_12", "BT2100_PQ", "SMPTE428", "BT2100_HLG"
+    #   resp.transport_media_info.programs[0].streams[0].color.matrix_coefficients #=> String, one of "IDENTITY", "BT709", "FCC", "BT470BG", "BT601", "SMPTE240M", "YCGCO", "BT2020_NCL", "BT2020_CL", "SMPTE2085", "CHROMATICITY_DERIVED_NCL", "CHROMATICITY_DERIVED_CL", "BT2100_ICTCP", "IPT_C2"
     #   resp.transport_media_info.programs[0].streams[0].frame_rate #=> String
     #   resp.transport_media_info.programs[0].streams[0].frame_resolution.frame_height #=> Integer
     #   resp.transport_media_info.programs[0].streams[0].frame_resolution.frame_width #=> Integer
@@ -3385,6 +3469,7 @@ module Aws::MediaConnect
     #   resp.transport_media_info.programs[0].streams[0].sample_rate #=> Integer
     #   resp.transport_media_info.programs[0].streams[0].sample_size #=> Integer
     #   resp.transport_media_info.programs[0].streams[0].stream_type #=> String
+    #   resp.transport_media_info.ts_id #=> Integer
     #   resp.ndi_info.active_source.source_name #=> String
     #   resp.ndi_info.discovered_sources #=> Array
     #   resp.ndi_info.discovered_sources[0].source_name #=> String
@@ -3393,6 +3478,9 @@ module Aws::MediaConnect
     #   resp.ndi_info.media_info.streams[0].codec #=> String
     #   resp.ndi_info.media_info.streams[0].stream_id #=> Integer
     #   resp.ndi_info.media_info.streams[0].scan_mode #=> String, one of "progressive", "interlace", "progressive-segmented-frame"
+    #   resp.ndi_info.media_info.streams[0].color.colorimetry #=> String, one of "BT709", "BT470M", "BT470BG", "BT601", "SMPTE240M", "GENERIC_FILM", "BT2020", "SMPTE428", "SMPTE431", "SMPTE432"
+    #   resp.ndi_info.media_info.streams[0].color.transfer_characteristics #=> String, one of "BT709", "BT470M", "BT470BG", "BT601", "SMPTE240M", "LINEAR", "LOG100", "LOG316", "IEC61966_2_4", "BT1361_ECG", "IEC61966_2_1", "BT2020_10", "BT2020_12", "BT2100_PQ", "SMPTE428", "BT2100_HLG"
+    #   resp.ndi_info.media_info.streams[0].color.matrix_coefficients #=> String, one of "IDENTITY", "BT709", "FCC", "BT470BG", "BT601", "SMPTE240M", "YCGCO", "BT2020_NCL", "BT2020_CL", "SMPTE2085", "CHROMATICITY_DERIVED_NCL", "CHROMATICITY_DERIVED_CL", "BT2100_ICTCP", "IPT_C2"
     #   resp.ndi_info.media_info.streams[0].frame_resolution.frame_height #=> Integer
     #   resp.ndi_info.media_info.streams[0].frame_resolution.frame_width #=> Integer
     #   resp.ndi_info.media_info.streams[0].frame_rate #=> String
@@ -3690,7 +3778,7 @@ module Aws::MediaConnect
     #   resp.router_input.region_name #=> String
     #   resp.router_input.availability_zone #=> String
     #   resp.router_input.maximum_bitrate #=> Integer
-    #   resp.router_input.tier #=> String, one of "INPUT_100", "INPUT_50", "INPUT_20"
+    #   resp.router_input.tier #=> String, one of "INPUT_100", "INPUT_50", "INPUT_20", "INPUT_500", "INPUT_250"
     #   resp.router_input.routing_scope #=> String, one of "REGIONAL", "GLOBAL"
     #   resp.router_input.created_at #=> Time
     #   resp.router_input.updated_at #=> Time
@@ -3778,6 +3866,9 @@ module Aws::MediaConnect
     #   resp.source_metadata_details.router_input_metadata.transport_stream_media_info.programs[0].streams #=> Array
     #   resp.source_metadata_details.router_input_metadata.transport_stream_media_info.programs[0].streams[0].channels #=> Integer
     #   resp.source_metadata_details.router_input_metadata.transport_stream_media_info.programs[0].streams[0].codec #=> String
+    #   resp.source_metadata_details.router_input_metadata.transport_stream_media_info.programs[0].streams[0].color.colorimetry #=> String, one of "BT709", "BT470M", "BT470BG", "BT601", "SMPTE240M", "GENERIC_FILM", "BT2020", "SMPTE428", "SMPTE431", "SMPTE432"
+    #   resp.source_metadata_details.router_input_metadata.transport_stream_media_info.programs[0].streams[0].color.transfer_characteristics #=> String, one of "BT709", "BT470M", "BT470BG", "BT601", "SMPTE240M", "LINEAR", "LOG100", "LOG316", "IEC61966_2_4", "BT1361_ECG", "IEC61966_2_1", "BT2020_10", "BT2020_12", "BT2100_PQ", "SMPTE428", "BT2100_HLG"
+    #   resp.source_metadata_details.router_input_metadata.transport_stream_media_info.programs[0].streams[0].color.matrix_coefficients #=> String, one of "IDENTITY", "BT709", "FCC", "BT470BG", "BT601", "SMPTE240M", "YCGCO", "BT2020_NCL", "BT2020_CL", "SMPTE2085", "CHROMATICITY_DERIVED_NCL", "CHROMATICITY_DERIVED_CL", "BT2100_ICTCP", "IPT_C2"
     #   resp.source_metadata_details.router_input_metadata.transport_stream_media_info.programs[0].streams[0].frame_rate #=> String
     #   resp.source_metadata_details.router_input_metadata.transport_stream_media_info.programs[0].streams[0].frame_resolution.frame_height #=> Integer
     #   resp.source_metadata_details.router_input_metadata.transport_stream_media_info.programs[0].streams[0].frame_resolution.frame_width #=> Integer
@@ -3785,6 +3876,7 @@ module Aws::MediaConnect
     #   resp.source_metadata_details.router_input_metadata.transport_stream_media_info.programs[0].streams[0].sample_rate #=> Integer
     #   resp.source_metadata_details.router_input_metadata.transport_stream_media_info.programs[0].streams[0].sample_size #=> Integer
     #   resp.source_metadata_details.router_input_metadata.transport_stream_media_info.programs[0].streams[0].stream_type #=> String
+    #   resp.source_metadata_details.router_input_metadata.transport_stream_media_info.ts_id #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/GetRouterInputSourceMetadata AWS API Documentation
     #
@@ -3911,6 +4003,11 @@ module Aws::MediaConnect
     #   resp.router_output.configuration.standard.protocol_configuration.srt_listener.minimum_latency_milliseconds #=> Integer
     #   resp.router_output.configuration.standard.protocol_configuration.srt_listener.encryption_configuration.encryption_key.secret_arn #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.srt_listener.encryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.destination_address #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.destination_port #=> Integer
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.application_name #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.stream_name #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.tls_encryption.encryption_type #=> String, one of "PUBLIC"
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.destination_address #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.destination_port #=> Integer
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.minimum_latency_milliseconds #=> Integer
@@ -3920,7 +4017,7 @@ module Aws::MediaConnect
     #   resp.router_output.configuration.standard.protocol_configuration.rtp.destination_address #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.rtp.destination_port #=> Integer
     #   resp.router_output.configuration.standard.protocol_configuration.rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
-    #   resp.router_output.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"
+    #   resp.router_output.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER", "RTMP_PUSH"
     #   resp.router_output.configuration.media_connect_flow.flow_arn #=> String
     #   resp.router_output.configuration.media_connect_flow.flow_source_arn #=> String
     #   resp.router_output.configuration.media_connect_flow.destination_transit_encryption.encryption_key_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
@@ -3936,7 +4033,7 @@ module Aws::MediaConnect
     #   resp.router_output.availability_zone #=> String
     #   resp.router_output.maximum_bitrate #=> Integer
     #   resp.router_output.routing_scope #=> String, one of "REGIONAL", "GLOBAL"
-    #   resp.router_output.tier #=> String, one of "OUTPUT_100", "OUTPUT_50", "OUTPUT_20"
+    #   resp.router_output.tier #=> String, one of "OUTPUT_100", "OUTPUT_50", "OUTPUT_20", "OUTPUT_500", "OUTPUT_250"
     #   resp.router_output.created_at #=> Time
     #   resp.router_output.updated_at #=> Time
     #   resp.router_output.messages #=> Array
@@ -5922,7 +6019,9 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].transport.ndi_speed_hq_quality #=> Integer
     #   resp.flow.outputs[0].transport.ndi_program_name #=> String
     #   resp.flow.outputs[0].transport.ndi_source_settings.source_name #=> String
+    #   resp.flow.outputs[0].transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.flow.outputs[0].transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
+    #   resp.flow.outputs[0].transport.ndi_audio_reference_level #=> Integer
     #   resp.flow.outputs[0].vpc_interface_attachment.vpc_interface_name #=> String
     #   resp.flow.outputs[0].bridge_arn #=> String
     #   resp.flow.outputs[0].bridge_ports #=> Array
@@ -5976,7 +6075,9 @@ module Aws::MediaConnect
     #   resp.flow.source.transport.ndi_speed_hq_quality #=> Integer
     #   resp.flow.source.transport.ndi_program_name #=> String
     #   resp.flow.source.transport.ndi_source_settings.source_name #=> String
+    #   resp.flow.source.transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.flow.source.transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
+    #   resp.flow.source.transport.ndi_audio_reference_level #=> Integer
     #   resp.flow.source.vpc_interface_name #=> String
     #   resp.flow.source.whitelist_cidr #=> String
     #   resp.flow.source.gateway_bridge_source.bridge_arn #=> String
@@ -6034,7 +6135,9 @@ module Aws::MediaConnect
     #   resp.flow.sources[0].transport.ndi_speed_hq_quality #=> Integer
     #   resp.flow.sources[0].transport.ndi_program_name #=> String
     #   resp.flow.sources[0].transport.ndi_source_settings.source_name #=> String
+    #   resp.flow.sources[0].transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.flow.sources[0].transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
+    #   resp.flow.sources[0].transport.ndi_audio_reference_level #=> Integer
     #   resp.flow.sources[0].vpc_interface_name #=> String
     #   resp.flow.sources[0].whitelist_cidr #=> String
     #   resp.flow.sources[0].gateway_bridge_source.bridge_arn #=> String
@@ -6365,6 +6468,12 @@ module Aws::MediaConnect
     #   * `UTC_SYSTEM_TIME` - Generates timecodes based on the system clock
     #     time when each frame is sent.
     #
+    # @option params [Integer] :ndi_audio_reference_level
+    #   The audio reference level of the NDI receiver, in decibels relative to
+    #   full scale (dBFS). Common values are `-20` (NDI and SMPTE) and `-18`
+    #   (EBU). If you don't specify this field, MediaConnect leaves the value
+    #   unchanged.
+    #
     # @return [Types::UpdateFlowOutputResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFlowOutputResponse#flow_arn #flow_arn} => String
@@ -6436,6 +6545,7 @@ module Aws::MediaConnect
     #       },
     #     },
     #     ndi_output_timecode_source: "EMBEDDED_TIMECODE", # accepts EMBEDDED_TIMECODE, UTC_SYSTEM_TIME
+    #     ndi_audio_reference_level: 1,
     #   })
     #
     # @example Response structure
@@ -6486,7 +6596,9 @@ module Aws::MediaConnect
     #   resp.output.transport.ndi_speed_hq_quality #=> Integer
     #   resp.output.transport.ndi_program_name #=> String
     #   resp.output.transport.ndi_source_settings.source_name #=> String
+    #   resp.output.transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.output.transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
+    #   resp.output.transport.ndi_audio_reference_level #=> Integer
     #   resp.output.vpc_interface_attachment.vpc_interface_name #=> String
     #   resp.output.bridge_arn #=> String
     #   resp.output.bridge_ports #=> Array
@@ -6689,6 +6801,7 @@ module Aws::MediaConnect
     #     },
     #     ndi_source_settings: {
     #       source_name: "String",
+    #       audio_reference_level: 1,
     #     },
     #     router_integration_state: "ENABLED", # accepts ENABLED, DISABLED
     #     router_integration_transit_decryption: {
@@ -6749,7 +6862,9 @@ module Aws::MediaConnect
     #   resp.source.transport.ndi_speed_hq_quality #=> Integer
     #   resp.source.transport.ndi_program_name #=> String
     #   resp.source.transport.ndi_source_settings.source_name #=> String
+    #   resp.source.transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.source.transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
+    #   resp.source.transport.ndi_audio_reference_level #=> Integer
     #   resp.source.vpc_interface_name #=> String
     #   resp.source.whitelist_cidr #=> String
     #   resp.source.gateway_bridge_source.bridge_arn #=> String
@@ -6829,7 +6944,22 @@ module Aws::MediaConnect
     #   Region.
     #
     # @option params [String] :tier
-    #   The updated tier level for the router input.
+    #   The updated tier level for the router input. The tier sets the maximum
+    #   bitrate, in Mbps, for the router input. Valid values include the
+    #   following:
+    #
+    #   * `INPUT_20` – 20 Mbps
+    #
+    #   * `INPUT_50` – 50 Mbps
+    #
+    #   * `INPUT_100` – 100 Mbps
+    #
+    #   * `INPUT_250` – 250 Mbps
+    #
+    #   * `INPUT_500` – 500 Mbps
+    #
+    #   The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support
+    #   TR-07 (JPEG XS) workflows.
     #
     # @option params [Types::RouterInputTransitEncryption] :transit_encryption
     #   The updated transit encryption settings for the router input.
@@ -6976,7 +7106,7 @@ module Aws::MediaConnect
     #     },
     #     maximum_bitrate: 1,
     #     routing_scope: "REGIONAL", # accepts REGIONAL, GLOBAL
-    #     tier: "INPUT_100", # accepts INPUT_100, INPUT_50, INPUT_20
+    #     tier: "INPUT_100", # accepts INPUT_100, INPUT_50, INPUT_20, INPUT_500, INPUT_250
     #     transit_encryption: {
     #       encryption_key_type: "SECRETS_MANAGER", # accepts SECRETS_MANAGER, AUTOMATIC
     #       encryption_key_configuration: { # required
@@ -7078,7 +7208,7 @@ module Aws::MediaConnect
     #   resp.router_input.region_name #=> String
     #   resp.router_input.availability_zone #=> String
     #   resp.router_input.maximum_bitrate #=> Integer
-    #   resp.router_input.tier #=> String, one of "INPUT_100", "INPUT_50", "INPUT_20"
+    #   resp.router_input.tier #=> String, one of "INPUT_100", "INPUT_50", "INPUT_20", "INPUT_500", "INPUT_250"
     #   resp.router_input.routing_scope #=> String, one of "REGIONAL", "GLOBAL"
     #   resp.router_input.created_at #=> Time
     #   resp.router_input.updated_at #=> Time
@@ -7214,7 +7344,22 @@ module Aws::MediaConnect
     #   Region. GLOBAL - can take inputs from any Region.
     #
     # @option params [String] :tier
-    #   The updated tier level for the router output.
+    #   The updated tier level for the router output. The tier sets the
+    #   maximum bitrate, in Mbps, for the router output. Valid values include
+    #   the following:
+    #
+    #   * `OUTPUT_20` – 20 Mbps
+    #
+    #   * `OUTPUT_50` – 50 Mbps
+    #
+    #   * `OUTPUT_100` – 100 Mbps
+    #
+    #   * `OUTPUT_250` – 250 Mbps
+    #
+    #   * `OUTPUT_500` – 500 Mbps
+    #
+    #   The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support
+    #   TR-07 (JPEG XS) workflows.
     #
     # @option params [Types::MaintenanceConfiguration] :maintenance_configuration
     #   The updated maintenance configuration settings for the router output,
@@ -7253,6 +7398,19 @@ module Aws::MediaConnect
     #               },
     #             },
     #           },
+    #           rtmp_push: {
+    #             destination_address: "String", # required
+    #             destination_port: 1, # required
+    #             application_name: "String", # required
+    #             stream_name: "String", # required
+    #             tls_encryption: {
+    #               encryption_type: "PUBLIC", # accepts PUBLIC
+    #               encryption_configuration: { # required
+    #                 public: {
+    #                 },
+    #               },
+    #             },
+    #           },
     #           srt_caller: {
     #             destination_address: "String", # required
     #             destination_port: 1, # required
@@ -7271,7 +7429,7 @@ module Aws::MediaConnect
     #             forward_error_correction: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #         },
-    #         protocol: "RTP", # accepts RTP, RIST, SRT_CALLER, SRT_LISTENER
+    #         protocol: "RTP", # accepts RTP, RIST, SRT_CALLER, SRT_LISTENER, RTMP_PUSH
     #       },
     #       media_connect_flow: {
     #         flow_arn: "FlowArn",
@@ -7306,7 +7464,7 @@ module Aws::MediaConnect
     #     },
     #     maximum_bitrate: 1,
     #     routing_scope: "REGIONAL", # accepts REGIONAL, GLOBAL
-    #     tier: "OUTPUT_100", # accepts OUTPUT_100, OUTPUT_50, OUTPUT_20
+    #     tier: "OUTPUT_100", # accepts OUTPUT_100, OUTPUT_50, OUTPUT_20, OUTPUT_500, OUTPUT_250
     #     maintenance_configuration: {
     #       preferred_day_time: {
     #         day: "MONDAY", # required, accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
@@ -7334,6 +7492,11 @@ module Aws::MediaConnect
     #   resp.router_output.configuration.standard.protocol_configuration.srt_listener.minimum_latency_milliseconds #=> Integer
     #   resp.router_output.configuration.standard.protocol_configuration.srt_listener.encryption_configuration.encryption_key.secret_arn #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.srt_listener.encryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.destination_address #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.destination_port #=> Integer
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.application_name #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.stream_name #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.tls_encryption.encryption_type #=> String, one of "PUBLIC"
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.destination_address #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.destination_port #=> Integer
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.minimum_latency_milliseconds #=> Integer
@@ -7343,7 +7506,7 @@ module Aws::MediaConnect
     #   resp.router_output.configuration.standard.protocol_configuration.rtp.destination_address #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.rtp.destination_port #=> Integer
     #   resp.router_output.configuration.standard.protocol_configuration.rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
-    #   resp.router_output.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"
+    #   resp.router_output.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER", "RTMP_PUSH"
     #   resp.router_output.configuration.media_connect_flow.flow_arn #=> String
     #   resp.router_output.configuration.media_connect_flow.flow_source_arn #=> String
     #   resp.router_output.configuration.media_connect_flow.destination_transit_encryption.encryption_key_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
@@ -7359,7 +7522,7 @@ module Aws::MediaConnect
     #   resp.router_output.availability_zone #=> String
     #   resp.router_output.maximum_bitrate #=> Integer
     #   resp.router_output.routing_scope #=> String, one of "REGIONAL", "GLOBAL"
-    #   resp.router_output.tier #=> String, one of "OUTPUT_100", "OUTPUT_50", "OUTPUT_20"
+    #   resp.router_output.tier #=> String, one of "OUTPUT_100", "OUTPUT_50", "OUTPUT_20", "OUTPUT_500", "OUTPUT_250"
     #   resp.router_output.created_at #=> Time
     #   resp.router_output.updated_at #=> Time
     #   resp.router_output.messages #=> Array
@@ -7406,7 +7569,7 @@ module Aws::MediaConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediaconnect'
-      context[:gem_version] = '1.107.0'
+      context[:gem_version] = '1.112.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

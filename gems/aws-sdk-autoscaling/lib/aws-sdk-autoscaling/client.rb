@@ -199,12 +199,19 @@ module Aws::AutoScaling
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -2583,6 +2590,57 @@ module Aws::AutoScaling
     # @param [Hash] params ({})
     def describe_account_limits(params = {}, options = {})
       req = build_request(:describe_account_limits, params)
+      req.send_request(options)
+    end
+
+    # Describes the current Amazon EC2 Auto Scaling account settings for
+    # your account. Account settings are a framework that allows you to
+    # enable or disable features for your account. The framework also gives
+    # you visibility into features that will be enforced by a given date,
+    # providing a time window to prepare for backwards-incompatible changes.
+    #
+    # @option params [String] :name
+    #   The name of the account setting to describe. If you omit this
+    #   parameter, all account settings are described.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of items to return with this call. The default
+    #   value is `50` and the maximum value is `100`.
+    #
+    # @return [Types::DescribeAccountSettingsAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAccountSettingsAnswer#settings #settings} => Array&lt;Types::AccountSetting&gt;
+    #   * {Types::DescribeAccountSettingsAnswer#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_account_settings({
+    #     name: "AsciiStringMaxLen255",
+    #     next_token: "XmlString",
+    #     max_records: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.settings #=> Array
+    #   resp.settings[0].name #=> String
+    #   resp.settings[0].value #=> String
+    #   resp.settings[0].enforcement_type #=> String
+    #   resp.settings[0].enforcement_date #=> Time
+    #   resp.settings[0].default_value #=> String
+    #   resp.settings[0].enforced_value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAccountSettings AWS API Documentation
+    #
+    # @overload describe_account_settings(params = {})
+    # @param [Hash] params ({})
+    def describe_account_settings(params = {}, options = {})
+      req = build_request(:describe_account_settings, params)
       req.send_request(options)
     end
 
@@ -5647,6 +5705,40 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
+    # Modifies an account setting for your account. You can use this
+    # operation to opt in or opt out of features provided through account
+    # settings when permitted. Account settings give you control over
+    # features that might have backwards-incompatible changes. When Amazon
+    # EC2 Auto Scaling introduces such changes, account settings allow you
+    # to test and adopt new features. Some account settings are enforced
+    # after a specified date. This means that after the enforcement date,
+    # you can no longer modify the setting.
+    #
+    # @option params [required, String] :name
+    #   The name of the account setting to modify. Each account setting has a
+    #   unique name that identifies the specific feature it controls.
+    #
+    # @option params [required, String] :value
+    #   The value for the account setting.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_account_setting({
+    #     name: "AsciiStringMaxLen255", # required
+    #     value: "AsciiStringMaxLen255", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutAccountSetting AWS API Documentation
+    #
+    # @overload put_account_setting(params = {})
+    # @param [Hash] params ({})
+    def put_account_setting(params = {}, options = {})
+      req = build_request(:put_account_setting, params)
+      req.send_request(options)
+    end
+
     # Creates or updates a lifecycle hook for the specified Auto Scaling
     # group.
     #
@@ -7904,7 +7996,7 @@ module Aws::AutoScaling
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.168.0'
+      context[:gem_version] = '1.171.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

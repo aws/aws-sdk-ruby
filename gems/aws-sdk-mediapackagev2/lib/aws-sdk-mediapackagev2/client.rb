@@ -199,12 +199,19 @@ module Aws::MediaPackageV2
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -1984,6 +1991,10 @@ module Aws::MediaPackageV2
     #           role_arn: "SpekeKeyProviderRoleArnString", # required
     #           url: "SpekeKeyProviderUrlString", # required
     #           certificate_arn: "SpekeKeyProviderCertificateArnString",
+    #           speke_version: "V2_0", # accepts V2_0, V2_1
+    #           content_key_period_configuration: {
+    #             content_key_period_timing: "INDEX_ONLY", # accepts INDEX_ONLY, START_END_ONLY, INDEX_WITH_START_END
+    #           },
     #         },
     #       },
     #       output_timestamp_mode: "PASSTHROUGH", # accepts PASSTHROUGH, REBASED_TO_CHANNEL_START
@@ -2012,6 +2023,10 @@ module Aws::MediaPackageV2
     #           end: Time.now,
     #           time_delay_seconds: 1,
     #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH", # required, accepts LAYOUT_2EH, LAYOUT_2PL, LAYOUT_3EL, LAYOUT_3PL, LAYOUT_4E, LAYOUT_4PL
+    #             sources: ["ResourceName"], # required
+    #           },
     #         },
     #         url_encode_child_manifest: false,
     #         uri_path_type: "LEAF", # accepts LEAF, ROOT
@@ -2038,6 +2053,10 @@ module Aws::MediaPackageV2
     #           end: Time.now,
     #           time_delay_seconds: 1,
     #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH", # required, accepts LAYOUT_2EH, LAYOUT_2PL, LAYOUT_3EL, LAYOUT_3PL, LAYOUT_4E, LAYOUT_4PL
+    #             sources: ["ResourceName"], # required
+    #           },
     #         },
     #         url_encode_child_manifest: false,
     #         uri_path_type: "LEAF", # accepts LEAF, ROOT
@@ -2054,6 +2073,10 @@ module Aws::MediaPackageV2
     #           end: Time.now,
     #           time_delay_seconds: 1,
     #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH", # required, accepts LAYOUT_2EH, LAYOUT_2PL, LAYOUT_3EL, LAYOUT_3PL, LAYOUT_4E, LAYOUT_4PL
+    #             sources: ["ResourceName"], # required
+    #           },
     #         },
     #         min_update_period_seconds: 1,
     #         min_buffer_time_seconds: 1,
@@ -2122,6 +2145,10 @@ module Aws::MediaPackageV2
     #           end: Time.now,
     #           time_delay_seconds: 1,
     #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH", # required, accepts LAYOUT_2EH, LAYOUT_2PL, LAYOUT_3EL, LAYOUT_3PL, LAYOUT_4E, LAYOUT_4PL
+    #             sources: ["ResourceName"], # required
+    #           },
     #         },
     #         manifest_layout: "FULL", # accepts FULL, COMPACT
     #       },
@@ -2167,6 +2194,8 @@ module Aws::MediaPackageV2
     #   resp.segment.encryption.speke_key_provider.role_arn #=> String
     #   resp.segment.encryption.speke_key_provider.url #=> String
     #   resp.segment.encryption.speke_key_provider.certificate_arn #=> String
+    #   resp.segment.encryption.speke_key_provider.speke_version #=> String, one of "V2_0", "V2_1"
+    #   resp.segment.encryption.speke_key_provider.content_key_period_configuration.content_key_period_timing #=> String, one of "INDEX_ONLY", "START_END_ONLY", "INDEX_WITH_START_END"
     #   resp.segment.output_timestamp_mode #=> String, one of "PASSTHROUGH", "REBASED_TO_CHANNEL_START"
     #   resp.created_at #=> Time
     #   resp.modified_at #=> Time
@@ -2186,6 +2215,9 @@ module Aws::MediaPackageV2
     #   resp.hls_manifests[0].filter_configuration.end #=> Time
     #   resp.hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
     #   resp.hls_manifests[0].filter_configuration.clip_start_time #=> Time
+    #   resp.hls_manifests[0].filter_configuration.multiview.layout #=> String, one of "LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"
+    #   resp.hls_manifests[0].filter_configuration.multiview.sources #=> Array
+    #   resp.hls_manifests[0].filter_configuration.multiview.sources[0] #=> String
     #   resp.hls_manifests[0].start_tag.time_offset #=> Float
     #   resp.hls_manifests[0].start_tag.precise #=> Boolean
     #   resp.hls_manifests[0].url_encode_child_manifest #=> Boolean
@@ -2204,6 +2236,9 @@ module Aws::MediaPackageV2
     #   resp.low_latency_hls_manifests[0].filter_configuration.end #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
     #   resp.low_latency_hls_manifests[0].filter_configuration.clip_start_time #=> Time
+    #   resp.low_latency_hls_manifests[0].filter_configuration.multiview.layout #=> String, one of "LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"
+    #   resp.low_latency_hls_manifests[0].filter_configuration.multiview.sources #=> Array
+    #   resp.low_latency_hls_manifests[0].filter_configuration.multiview.sources[0] #=> String
     #   resp.low_latency_hls_manifests[0].start_tag.time_offset #=> Float
     #   resp.low_latency_hls_manifests[0].start_tag.precise #=> Boolean
     #   resp.low_latency_hls_manifests[0].url_encode_child_manifest #=> Boolean
@@ -2218,6 +2253,9 @@ module Aws::MediaPackageV2
     #   resp.dash_manifests[0].filter_configuration.end #=> Time
     #   resp.dash_manifests[0].filter_configuration.time_delay_seconds #=> Integer
     #   resp.dash_manifests[0].filter_configuration.clip_start_time #=> Time
+    #   resp.dash_manifests[0].filter_configuration.multiview.layout #=> String, one of "LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"
+    #   resp.dash_manifests[0].filter_configuration.multiview.sources #=> Array
+    #   resp.dash_manifests[0].filter_configuration.multiview.sources[0] #=> String
     #   resp.dash_manifests[0].min_update_period_seconds #=> Integer
     #   resp.dash_manifests[0].min_buffer_time_seconds #=> Integer
     #   resp.dash_manifests[0].suggested_presentation_delay_seconds #=> Integer
@@ -2261,6 +2299,9 @@ module Aws::MediaPackageV2
     #   resp.mss_manifests[0].filter_configuration.end #=> Time
     #   resp.mss_manifests[0].filter_configuration.time_delay_seconds #=> Integer
     #   resp.mss_manifests[0].filter_configuration.clip_start_time #=> Time
+    #   resp.mss_manifests[0].filter_configuration.multiview.layout #=> String, one of "LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"
+    #   resp.mss_manifests[0].filter_configuration.multiview.sources #=> Array
+    #   resp.mss_manifests[0].filter_configuration.multiview.sources[0] #=> String
     #   resp.mss_manifests[0].manifest_window_seconds #=> Integer
     #   resp.mss_manifests[0].manifest_layout #=> String, one of "FULL", "COMPACT"
     #   resp.force_endpoint_error_configuration.endpoint_error_conditions #=> Array
@@ -3177,6 +3218,8 @@ module Aws::MediaPackageV2
     #   resp.segment.encryption.speke_key_provider.role_arn #=> String
     #   resp.segment.encryption.speke_key_provider.url #=> String
     #   resp.segment.encryption.speke_key_provider.certificate_arn #=> String
+    #   resp.segment.encryption.speke_key_provider.speke_version #=> String, one of "V2_0", "V2_1"
+    #   resp.segment.encryption.speke_key_provider.content_key_period_configuration.content_key_period_timing #=> String, one of "INDEX_ONLY", "START_END_ONLY", "INDEX_WITH_START_END"
     #   resp.segment.output_timestamp_mode #=> String, one of "PASSTHROUGH", "REBASED_TO_CHANNEL_START"
     #   resp.created_at #=> Time
     #   resp.modified_at #=> Time
@@ -3197,6 +3240,9 @@ module Aws::MediaPackageV2
     #   resp.hls_manifests[0].filter_configuration.end #=> Time
     #   resp.hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
     #   resp.hls_manifests[0].filter_configuration.clip_start_time #=> Time
+    #   resp.hls_manifests[0].filter_configuration.multiview.layout #=> String, one of "LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"
+    #   resp.hls_manifests[0].filter_configuration.multiview.sources #=> Array
+    #   resp.hls_manifests[0].filter_configuration.multiview.sources[0] #=> String
     #   resp.hls_manifests[0].start_tag.time_offset #=> Float
     #   resp.hls_manifests[0].start_tag.precise #=> Boolean
     #   resp.hls_manifests[0].url_encode_child_manifest #=> Boolean
@@ -3215,6 +3261,9 @@ module Aws::MediaPackageV2
     #   resp.low_latency_hls_manifests[0].filter_configuration.end #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
     #   resp.low_latency_hls_manifests[0].filter_configuration.clip_start_time #=> Time
+    #   resp.low_latency_hls_manifests[0].filter_configuration.multiview.layout #=> String, one of "LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"
+    #   resp.low_latency_hls_manifests[0].filter_configuration.multiview.sources #=> Array
+    #   resp.low_latency_hls_manifests[0].filter_configuration.multiview.sources[0] #=> String
     #   resp.low_latency_hls_manifests[0].start_tag.time_offset #=> Float
     #   resp.low_latency_hls_manifests[0].start_tag.precise #=> Boolean
     #   resp.low_latency_hls_manifests[0].url_encode_child_manifest #=> Boolean
@@ -3229,6 +3278,9 @@ module Aws::MediaPackageV2
     #   resp.dash_manifests[0].filter_configuration.end #=> Time
     #   resp.dash_manifests[0].filter_configuration.time_delay_seconds #=> Integer
     #   resp.dash_manifests[0].filter_configuration.clip_start_time #=> Time
+    #   resp.dash_manifests[0].filter_configuration.multiview.layout #=> String, one of "LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"
+    #   resp.dash_manifests[0].filter_configuration.multiview.sources #=> Array
+    #   resp.dash_manifests[0].filter_configuration.multiview.sources[0] #=> String
     #   resp.dash_manifests[0].min_update_period_seconds #=> Integer
     #   resp.dash_manifests[0].min_buffer_time_seconds #=> Integer
     #   resp.dash_manifests[0].suggested_presentation_delay_seconds #=> Integer
@@ -3272,6 +3324,9 @@ module Aws::MediaPackageV2
     #   resp.mss_manifests[0].filter_configuration.end #=> Time
     #   resp.mss_manifests[0].filter_configuration.time_delay_seconds #=> Integer
     #   resp.mss_manifests[0].filter_configuration.clip_start_time #=> Time
+    #   resp.mss_manifests[0].filter_configuration.multiview.layout #=> String, one of "LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"
+    #   resp.mss_manifests[0].filter_configuration.multiview.sources #=> Array
+    #   resp.mss_manifests[0].filter_configuration.multiview.sources[0] #=> String
     #   resp.mss_manifests[0].manifest_window_seconds #=> Integer
     #   resp.mss_manifests[0].manifest_layout #=> String, one of "FULL", "COMPACT"
     #   resp.force_endpoint_error_configuration.endpoint_error_conditions #=> Array
@@ -5230,6 +5285,10 @@ module Aws::MediaPackageV2
     #           role_arn: "SpekeKeyProviderRoleArnString", # required
     #           url: "SpekeKeyProviderUrlString", # required
     #           certificate_arn: "SpekeKeyProviderCertificateArnString",
+    #           speke_version: "V2_0", # accepts V2_0, V2_1
+    #           content_key_period_configuration: {
+    #             content_key_period_timing: "INDEX_ONLY", # accepts INDEX_ONLY, START_END_ONLY, INDEX_WITH_START_END
+    #           },
     #         },
     #       },
     #       output_timestamp_mode: "PASSTHROUGH", # accepts PASSTHROUGH, REBASED_TO_CHANNEL_START
@@ -5257,6 +5316,10 @@ module Aws::MediaPackageV2
     #           end: Time.now,
     #           time_delay_seconds: 1,
     #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH", # required, accepts LAYOUT_2EH, LAYOUT_2PL, LAYOUT_3EL, LAYOUT_3PL, LAYOUT_4E, LAYOUT_4PL
+    #             sources: ["ResourceName"], # required
+    #           },
     #         },
     #         url_encode_child_manifest: false,
     #         uri_path_type: "LEAF", # accepts LEAF, ROOT
@@ -5283,6 +5346,10 @@ module Aws::MediaPackageV2
     #           end: Time.now,
     #           time_delay_seconds: 1,
     #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH", # required, accepts LAYOUT_2EH, LAYOUT_2PL, LAYOUT_3EL, LAYOUT_3PL, LAYOUT_4E, LAYOUT_4PL
+    #             sources: ["ResourceName"], # required
+    #           },
     #         },
     #         url_encode_child_manifest: false,
     #         uri_path_type: "LEAF", # accepts LEAF, ROOT
@@ -5299,6 +5366,10 @@ module Aws::MediaPackageV2
     #           end: Time.now,
     #           time_delay_seconds: 1,
     #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH", # required, accepts LAYOUT_2EH, LAYOUT_2PL, LAYOUT_3EL, LAYOUT_3PL, LAYOUT_4E, LAYOUT_4PL
+    #             sources: ["ResourceName"], # required
+    #           },
     #         },
     #         min_update_period_seconds: 1,
     #         min_buffer_time_seconds: 1,
@@ -5367,6 +5438,10 @@ module Aws::MediaPackageV2
     #           end: Time.now,
     #           time_delay_seconds: 1,
     #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH", # required, accepts LAYOUT_2EH, LAYOUT_2PL, LAYOUT_3EL, LAYOUT_3PL, LAYOUT_4E, LAYOUT_4PL
+    #             sources: ["ResourceName"], # required
+    #           },
     #         },
     #         manifest_layout: "FULL", # accepts FULL, COMPACT
     #       },
@@ -5410,6 +5485,8 @@ module Aws::MediaPackageV2
     #   resp.segment.encryption.speke_key_provider.role_arn #=> String
     #   resp.segment.encryption.speke_key_provider.url #=> String
     #   resp.segment.encryption.speke_key_provider.certificate_arn #=> String
+    #   resp.segment.encryption.speke_key_provider.speke_version #=> String, one of "V2_0", "V2_1"
+    #   resp.segment.encryption.speke_key_provider.content_key_period_configuration.content_key_period_timing #=> String, one of "INDEX_ONLY", "START_END_ONLY", "INDEX_WITH_START_END"
     #   resp.segment.output_timestamp_mode #=> String, one of "PASSTHROUGH", "REBASED_TO_CHANNEL_START"
     #   resp.created_at #=> Time
     #   resp.modified_at #=> Time
@@ -5429,6 +5506,9 @@ module Aws::MediaPackageV2
     #   resp.hls_manifests[0].filter_configuration.end #=> Time
     #   resp.hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
     #   resp.hls_manifests[0].filter_configuration.clip_start_time #=> Time
+    #   resp.hls_manifests[0].filter_configuration.multiview.layout #=> String, one of "LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"
+    #   resp.hls_manifests[0].filter_configuration.multiview.sources #=> Array
+    #   resp.hls_manifests[0].filter_configuration.multiview.sources[0] #=> String
     #   resp.hls_manifests[0].start_tag.time_offset #=> Float
     #   resp.hls_manifests[0].start_tag.precise #=> Boolean
     #   resp.hls_manifests[0].url_encode_child_manifest #=> Boolean
@@ -5447,6 +5527,9 @@ module Aws::MediaPackageV2
     #   resp.low_latency_hls_manifests[0].filter_configuration.end #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
     #   resp.low_latency_hls_manifests[0].filter_configuration.clip_start_time #=> Time
+    #   resp.low_latency_hls_manifests[0].filter_configuration.multiview.layout #=> String, one of "LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"
+    #   resp.low_latency_hls_manifests[0].filter_configuration.multiview.sources #=> Array
+    #   resp.low_latency_hls_manifests[0].filter_configuration.multiview.sources[0] #=> String
     #   resp.low_latency_hls_manifests[0].start_tag.time_offset #=> Float
     #   resp.low_latency_hls_manifests[0].start_tag.precise #=> Boolean
     #   resp.low_latency_hls_manifests[0].url_encode_child_manifest #=> Boolean
@@ -5460,6 +5543,9 @@ module Aws::MediaPackageV2
     #   resp.mss_manifests[0].filter_configuration.end #=> Time
     #   resp.mss_manifests[0].filter_configuration.time_delay_seconds #=> Integer
     #   resp.mss_manifests[0].filter_configuration.clip_start_time #=> Time
+    #   resp.mss_manifests[0].filter_configuration.multiview.layout #=> String, one of "LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"
+    #   resp.mss_manifests[0].filter_configuration.multiview.sources #=> Array
+    #   resp.mss_manifests[0].filter_configuration.multiview.sources[0] #=> String
     #   resp.mss_manifests[0].manifest_window_seconds #=> Integer
     #   resp.mss_manifests[0].manifest_layout #=> String, one of "FULL", "COMPACT"
     #   resp.force_endpoint_error_configuration.endpoint_error_conditions #=> Array
@@ -5479,6 +5565,9 @@ module Aws::MediaPackageV2
     #   resp.dash_manifests[0].filter_configuration.end #=> Time
     #   resp.dash_manifests[0].filter_configuration.time_delay_seconds #=> Integer
     #   resp.dash_manifests[0].filter_configuration.clip_start_time #=> Time
+    #   resp.dash_manifests[0].filter_configuration.multiview.layout #=> String, one of "LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"
+    #   resp.dash_manifests[0].filter_configuration.multiview.sources #=> Array
+    #   resp.dash_manifests[0].filter_configuration.multiview.sources[0] #=> String
     #   resp.dash_manifests[0].min_update_period_seconds #=> Integer
     #   resp.dash_manifests[0].min_buffer_time_seconds #=> Integer
     #   resp.dash_manifests[0].suggested_presentation_delay_seconds #=> Integer
@@ -5541,7 +5630,7 @@ module Aws::MediaPackageV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediapackagev2'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -159,6 +159,9 @@ module Aws::DynamoDB
     DescribeTimeToLiveInput = Shapes::StructureShape.new(name: 'DescribeTimeToLiveInput')
     DescribeTimeToLiveOutput = Shapes::StructureShape.new(name: 'DescribeTimeToLiveOutput')
     DestinationStatus = Shapes::StringShape.new(name: 'DestinationStatus')
+    DisassociateReplicationGroupMemberAction = Shapes::StructureShape.new(name: 'DisassociateReplicationGroupMemberAction')
+    DisassociationMode = Shapes::StringShape.new(name: 'DisassociationMode')
+    DisassociationProtectionEnabled = Shapes::BooleanShape.new(name: 'DisassociationProtectionEnabled')
     DoubleObject = Shapes::FloatShape.new(name: 'DoubleObject')
     DuplicateItemException = Shapes::StructureShape.new(name: 'DuplicateItemException')
     EnableKinesisStreamingConfiguration = Shapes::StructureShape.new(name: 'EnableKinesisStreamingConfiguration')
@@ -201,6 +204,7 @@ module Aws::DynamoDB
     FailureException = Shapes::StructureShape.new(name: 'FailureException')
     FailureMessage = Shapes::StringShape.new(name: 'FailureMessage')
     FilterConditionMap = Shapes::MapShape.new(name: 'FilterConditionMap')
+    FilterSpecification = Shapes::StructureShape.new(name: 'FilterSpecification')
     Get = Shapes::StructureShape.new(name: 'Get')
     GetItemInput = Shapes::StructureShape.new(name: 'GetItemInput')
     GetItemOutput = Shapes::StructureShape.new(name: 'GetItemOutput')
@@ -975,6 +979,10 @@ module Aws::DynamoDB
     DescribeTimeToLiveOutput.add_member(:time_to_live_description, Shapes::ShapeRef.new(shape: TimeToLiveDescription, location_name: "TimeToLiveDescription"))
     DescribeTimeToLiveOutput.struct_class = Types::DescribeTimeToLiveOutput
 
+    DisassociateReplicationGroupMemberAction.add_member(:region_name, Shapes::ShapeRef.new(shape: RegionName, required: true, location_name: "RegionName"))
+    DisassociateReplicationGroupMemberAction.add_member(:disassociation_mode, Shapes::ShapeRef.new(shape: DisassociationMode, required: true, location_name: "DisassociationMode"))
+    DisassociateReplicationGroupMemberAction.struct_class = Types::DisassociateReplicationGroupMemberAction
+
     DuplicateItemException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     DuplicateItemException.struct_class = Types::DuplicateItemException
 
@@ -1044,6 +1052,7 @@ module Aws::DynamoDB
     ExportDescription.add_member(:item_count, Shapes::ShapeRef.new(shape: ItemCount, location_name: "ItemCount"))
     ExportDescription.add_member(:export_type, Shapes::ShapeRef.new(shape: ExportType, location_name: "ExportType"))
     ExportDescription.add_member(:incremental_export_specification, Shapes::ShapeRef.new(shape: IncrementalExportSpecification, location_name: "IncrementalExportSpecification"))
+    ExportDescription.add_member(:filter_specification, Shapes::ShapeRef.new(shape: FilterSpecification, location_name: "FilterSpecification"))
     ExportDescription.struct_class = Types::ExportDescription
 
     ExportNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
@@ -1067,6 +1076,7 @@ module Aws::DynamoDB
     ExportTableToPointInTimeInput.add_member(:export_format, Shapes::ShapeRef.new(shape: ExportFormat, location_name: "ExportFormat"))
     ExportTableToPointInTimeInput.add_member(:export_type, Shapes::ShapeRef.new(shape: ExportType, location_name: "ExportType"))
     ExportTableToPointInTimeInput.add_member(:incremental_export_specification, Shapes::ShapeRef.new(shape: IncrementalExportSpecification, location_name: "IncrementalExportSpecification"))
+    ExportTableToPointInTimeInput.add_member(:filter_specification, Shapes::ShapeRef.new(shape: FilterSpecification, location_name: "FilterSpecification"))
     ExportTableToPointInTimeInput.struct_class = Types::ExportTableToPointInTimeInput
 
     ExportTableToPointInTimeOutput.add_member(:export_description, Shapes::ShapeRef.new(shape: ExportDescription, location_name: "ExportDescription"))
@@ -1084,6 +1094,13 @@ module Aws::DynamoDB
 
     FilterConditionMap.key = Shapes::ShapeRef.new(shape: AttributeName)
     FilterConditionMap.value = Shapes::ShapeRef.new(shape: Condition)
+
+    FilterSpecification.add_member(:filter_expression, Shapes::ShapeRef.new(shape: ConditionExpression, location_name: "FilterExpression"))
+    FilterSpecification.add_member(:projection_expression, Shapes::ShapeRef.new(shape: ProjectionExpression, location_name: "ProjectionExpression"))
+    FilterSpecification.add_member(:key_condition_expression, Shapes::ShapeRef.new(shape: KeyExpression, location_name: "KeyConditionExpression"))
+    FilterSpecification.add_member(:expression_attribute_names, Shapes::ShapeRef.new(shape: ExpressionAttributeNameMap, location_name: "ExpressionAttributeNames"))
+    FilterSpecification.add_member(:expression_attribute_values, Shapes::ShapeRef.new(shape: ExpressionAttributeValueMap, location_name: "ExpressionAttributeValues"))
+    FilterSpecification.struct_class = Types::FilterSpecification
 
     Get.add_member(:key, Shapes::ShapeRef.new(shape: Key, required: true, location_name: "Key"))
     Get.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName"))
@@ -1687,6 +1704,7 @@ module Aws::DynamoDB
     ReplicationGroupUpdate.add_member(:create, Shapes::ShapeRef.new(shape: CreateReplicationGroupMemberAction, location_name: "Create"))
     ReplicationGroupUpdate.add_member(:update, Shapes::ShapeRef.new(shape: UpdateReplicationGroupMemberAction, location_name: "Update"))
     ReplicationGroupUpdate.add_member(:delete, Shapes::ShapeRef.new(shape: DeleteReplicationGroupMemberAction, location_name: "Delete"))
+    ReplicationGroupUpdate.add_member(:disassociate, Shapes::ShapeRef.new(shape: DisassociateReplicationGroupMemberAction, location_name: "Disassociate"))
     ReplicationGroupUpdate.struct_class = Types::ReplicationGroupUpdate
 
     ReplicationGroupUpdateList.member = Shapes::ShapeRef.new(shape: ReplicationGroupUpdate)
@@ -1885,6 +1903,7 @@ module Aws::DynamoDB
     TableDescription.add_member(:archival_summary, Shapes::ShapeRef.new(shape: ArchivalSummary, location_name: "ArchivalSummary"))
     TableDescription.add_member(:table_class_summary, Shapes::ShapeRef.new(shape: TableClassSummary, location_name: "TableClassSummary"))
     TableDescription.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: DeletionProtectionEnabled, location_name: "DeletionProtectionEnabled"))
+    TableDescription.add_member(:disassociation_protection_enabled, Shapes::ShapeRef.new(shape: DisassociationProtectionEnabled, location_name: "DisassociationProtectionEnabled"))
     TableDescription.add_member(:on_demand_throughput, Shapes::ShapeRef.new(shape: OnDemandThroughput, location_name: "OnDemandThroughput"))
     TableDescription.add_member(:warm_throughput, Shapes::ShapeRef.new(shape: TableWarmThroughputDescription, location_name: "WarmThroughput"))
     TableDescription.add_member(:multi_region_consistency, Shapes::ShapeRef.new(shape: MultiRegionConsistency, location_name: "MultiRegionConsistency"))
@@ -2089,6 +2108,7 @@ module Aws::DynamoDB
     UpdateTableInput.add_member(:on_demand_throughput, Shapes::ShapeRef.new(shape: OnDemandThroughput, location_name: "OnDemandThroughput"))
     UpdateTableInput.add_member(:warm_throughput, Shapes::ShapeRef.new(shape: WarmThroughput, location_name: "WarmThroughput"))
     UpdateTableInput.add_member(:global_table_settings_replication_mode, Shapes::ShapeRef.new(shape: GlobalTableSettingsReplicationMode, location_name: "GlobalTableSettingsReplicationMode"))
+    UpdateTableInput.add_member(:disassociation_protection_enabled, Shapes::ShapeRef.new(shape: DisassociationProtectionEnabled, location_name: "DisassociationProtectionEnabled"))
     UpdateTableInput.add_member(:vector_index_updates, Shapes::ShapeRef.new(shape: VectorIndexUpdateList, location_name: "VectorIndexUpdates"))
     UpdateTableInput.struct_class = Types::UpdateTableInput
 

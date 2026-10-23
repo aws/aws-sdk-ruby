@@ -199,12 +199,19 @@ module Aws::CodeCommit
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -1259,8 +1266,8 @@ module Aws::CodeCommit
     #   Services account. Repository names are limited to 100 alphanumeric,
     #   dash, and underscore characters, and cannot include certain
     #   characters. For more information about the limits on repository names,
-    #   see [Quotas][1] in the *CodeCommit User Guide*. The suffix .git is
-    #   prohibited.
+    #   see [Quotas][1] in the <i> CodeCommit User Guide</i>. The suffix .git
+    #   is prohibited.
     #
     #    </note>
     #
@@ -1287,8 +1294,8 @@ module Aws::CodeCommit
     #   The ID of the encryption key. You can view the ID of an encryption key
     #   in the KMS console, or use the KMS APIs to programmatically retrieve a
     #   key ID. For more information about acceptable values for kmsKeyID, see
-    #   [KeyId][1] in the Decrypt API description in the *Key Management
-    #   Service API Reference*.
+    #   [KeyId][1] in the Decrypt API description in the <i> Key Management
+    #   Service API Reference</i>.
     #
     #   If no key is specified, the default `aws/codecommit` Amazon Web
     #   Services managed key is used.
@@ -3469,7 +3476,7 @@ module Aws::CodeCommit
 
     # Gets information about Amazon Web Servicestags for a specified Amazon
     # Resource Name (ARN) in CodeCommit. For a list of valid resources in
-    # CodeCommit, see [CodeCommit Resources and Operations][1] in the<i>
+    # CodeCommit, see [ CodeCommit Resources and Operations][1] in the<i>
     # CodeCommit User Guide</i>.
     #
     #
@@ -4393,7 +4400,7 @@ module Aws::CodeCommit
     #   The emoji reaction you want to add or update. To remove a reaction,
     #   provide a value of blank or null. You can also provide the value of
     #   none. For information about emoji reaction values supported in
-    #   CodeCommit, see the [CodeCommit User Guide][1].
+    #   CodeCommit, see the [ CodeCommit User Guide][1].
     #
     #
     #
@@ -4544,8 +4551,8 @@ module Aws::CodeCommit
     end
 
     # Adds or updates tags for a resource in CodeCommit. For a list of valid
-    # resources in CodeCommit, see [CodeCommit Resources and Operations][1]
-    # in the *CodeCommit User Guide*.
+    # resources in CodeCommit, see [ CodeCommit Resources and Operations][1]
+    # in the <i> CodeCommit User Guide</i>.
     #
     #
     #
@@ -4627,8 +4634,8 @@ module Aws::CodeCommit
     end
 
     # Removes tags for a resource in CodeCommit. For a list of valid
-    # resources in CodeCommit, see [CodeCommit Resources and Operations][1]
-    # in the *CodeCommit User Guide*.
+    # resources in CodeCommit, see [ CodeCommit Resources and Operations][1]
+    # in the <i> CodeCommit User Guide</i>.
     #
     #
     #
@@ -5216,8 +5223,8 @@ module Aws::CodeCommit
     #   The ID of the encryption key. You can view the ID of an encryption key
     #   in the KMS console, or use the KMS APIs to programmatically retrieve a
     #   key ID. For more information about acceptable values for keyID, see
-    #   [KeyId][1] in the Decrypt API description in the *Key Management
-    #   Service API Reference*.
+    #   [KeyId][1] in the Decrypt API description in the <i> Key Management
+    #   Service API Reference</i>.
     #
     #
     #
@@ -5304,7 +5311,7 @@ module Aws::CodeCommit
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-codecommit'
-      context[:gem_version] = '1.105.0'
+      context[:gem_version] = '1.108.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

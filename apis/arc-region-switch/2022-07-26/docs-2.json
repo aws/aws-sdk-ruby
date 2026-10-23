@@ -16,6 +16,7 @@
     "ListPlansInRegion": "<p>Lists all Region switch plans in your Amazon Web Services account that are available in the current Amazon Web Services Region.</p>",
     "ListRoute53HealthChecks": "<p>List the Amazon Route 53 health checks.</p>",
     "ListRoute53HealthChecksInRegion": "<p>List the Amazon Route 53 health checks in a specific Amazon Web Services Region.</p>",
+    "ListServiceQuotaWarnings": "<p>Lists the service quota warnings for the plans that you can access. Region switch creates a warning when the applied quota value in one Region of a plan is lower than the value required for the matching resource in another Region or account in the plan.</p> <p>Returns the warnings for the plans that you own and for plans that are shared with your account through Resource Access Manager (RAM). To return warnings for specific plans, provide a list of plan Amazon Resource Names (ARNs). Region switch ignores any plan ARN that you can't access. If you don't provide any plan ARNs, Region switch returns the warnings for all of your accessible plans.</p>",
     "ListTagsForResource": "<p>Lists the tags attached to a Region switch resource.</p>",
     "StartPlanExecution": "<p>Starts the execution of a Region switch plan. You can execute a plan in either <code>graceful</code> or <code>ungraceful</code> mode.</p> <p>Specifing <code>ungraceful</code> mode either changes the behavior of the execution blocks in a workflow or skips specific execution blocks.</p>",
     "TagResource": "<p>Adds or updates tags for a Region switch resource. You can assign metadata to your resources in the form of tags, which are key-value pairs.</p>",
@@ -58,7 +59,8 @@
       "refs": {
         "AbbreviatedPlan$owner": "<p>The owner of a Region switch plan.</p>",
         "Plan$owner": "<p>The owner of a plan.</p>",
-        "S3ReportOutputConfiguration$bucketOwner": "<p>The Amazon Web Services account ID that owns the S3 bucket. Required to ensure the bucket is still owned by the same expected owner at generation time.</p>"
+        "S3ReportOutputConfiguration$bucketOwner": "<p>The Amazon Web Services account ID that owns the S3 bucket. Required to ensure the bucket is still owned by the same expected owner at generation time.</p>",
+        "ServiceQuotaWarningSummary$accountId": "<p>The Amazon Web Services account ID that owns the plan that the warning applies to.</p>"
       }
     },
     "AlarmCondition": {
@@ -184,6 +186,14 @@
       "base": null,
       "refs": {
         "AuroraServerlessScalingConfiguration$timeoutMinutes": "<p>The timeout value specified for the configuration.</p>"
+      }
+    },
+    "Boolean": {
+      "base": null,
+      "refs": {
+        "CreatePlanRequest$serviceQuotaChecksEnabled": "<p>Specifies whether to enable service quota checks for the Region switch plan.</p>",
+        "Plan$serviceQuotaChecksEnabled": "<p>Indicates whether service quota checks are enabled for the Region switch plan. When enabled, Region switch compares the applied service quota values across the plan's Amazon Web Services Regions and creates a warning when a quota in one Region is lower than the value required for the matching resource in another Region. Service quota checks are advisory and don't prevent you from creating, evaluating, or executing a plan.</p>",
+        "UpdatePlanRequest$serviceQuotaChecksEnabled": "<p>Specifies whether service quota checks are enabled for the Region switch plan.</p>"
       }
     },
     "CancelPlanExecutionRequest": {
@@ -546,7 +556,8 @@
     "Float": {
       "base": null,
       "refs": {
-        "CustomActionLambdaConfiguration$retryIntervalMinutes": "<p>The retry interval specified.</p>"
+        "CustomActionLambdaConfiguration$retryIntervalMinutes": "<p>The retry interval specified.</p>",
+        "SsmSendCommandConfiguration$retryIntervalMinutes": "<p>How often, in minutes, Region switch retries the command if it returns a failure.</p>"
       }
     },
     "GeneratedReport": {
@@ -614,19 +625,19 @@
     "GlobalAuroraDefaultBehavior": {
       "base": null,
       "refs": {
-        "GlobalAuroraConfiguration$behavior": "<p>The behavior for a global database, that is, only allow switchover or also allow failover.</p>"
+        "GlobalAuroraConfiguration$behavior": "<p>The default behavior for the Aurora global database execution block. Valid values:</p> <ul> <li> <p> <code>switchoverOnly</code> - Calls <code>SwitchoverGlobalCluster</code> for a zero-data-loss switchover during graceful execution.</p> </li> <li> <p> <code>failover</code> - Calls <code>FailoverGlobalCluster</code> with <code>AllowDataLoss</code> set to <code>true</code>. This operation might cause data loss, including during graceful execution.</p> </li> </ul>"
       }
     },
     "GlobalAuroraUngraceful": {
-      "base": "<p>Configuration for handling failures when performing operations on Aurora global databases.</p>",
+      "base": "<p>Configuration for an Aurora global database execution block in ungraceful mode.</p>",
       "refs": {
-        "GlobalAuroraConfiguration$ungraceful": "<p>The settings for ungraceful execution.</p>"
+        "GlobalAuroraConfiguration$ungraceful": "<p>The behavior to use when the plan runs in ungraceful mode. If you omit this value, Region switch uses the value of <code>behavior</code>.</p>"
       }
     },
     "GlobalAuroraUngracefulBehavior": {
       "base": null,
       "refs": {
-        "GlobalAuroraUngraceful$ungraceful": "<p>The settings for ungraceful execution.</p>"
+        "GlobalAuroraUngraceful$ungraceful": "<p>The ungraceful behavior. The only valid value is <code>failover</code>, which calls <code>FailoverGlobalCluster</code> with <code>AllowDataLoss</code> set to <code>true</code> and might cause data loss.</p>"
       }
     },
     "GlobalClusterIdentifier": {
@@ -659,6 +670,7 @@
         "RegionSwitchPlanConfiguration$crossAccountRole": "<p>The cross account role for the configuration.</p>",
         "Route53HealthCheckConfiguration$crossAccountRole": "<p>The cross account role for the configuration.</p>",
         "Service$crossAccountRole": "<p>The cross account role for a service.</p>",
+        "SsmDocumentConfig$crossAccountRole": "<p>The cross-account role for the configuration.</p>",
         "UpdatePlanRequest$executionRole": "<p>The updated IAM role ARN that grants Region switch the permissions needed to execute the plan steps.</p>"
       }
     },
@@ -747,6 +759,12 @@
       "base": null,
       "refs": {
         "CustomActionLambdaConfiguration$lambdas": "<p>The Amazon Web Services Lambda functions for the execution block.</p>"
+      }
+    },
+    "LambdaPayload": {
+      "base": null,
+      "refs": {
+        "Lambdas$payload": "<p>The JSON payload to send to the Lambda function invocation. If you don't specify a payload, Region switch invokes the function with only the execution metadata.</p> <p>If you provide a JSON object, Region switch merges execution metadata keys (<code>InvokedBy</code>, <code>PlanArn</code>, <code>ExecutionId</code>, <code>StepName</code>) into the top level. If one of your keys has the same name as a metadata key, your key takes precedence.</p> <p>If you provide any other JSON type (string, number, boolean, or array), Region switch forwards it to the Lambda function unchanged, without adding metadata.</p>"
       }
     },
     "LambdaUngraceful": {
@@ -839,6 +857,14 @@
       "base": null,
       "refs": {}
     },
+    "ListServiceQuotaWarningsRequest": {
+      "base": null,
+      "refs": {}
+    },
+    "ListServiceQuotaWarningsResponse": {
+      "base": null,
+      "refs": {}
+    },
     "ListTagsForResourceRequest": {
       "base": null,
       "refs": {}
@@ -852,7 +878,8 @@
       "refs": {
         "GetPlanEvaluationStatusRequest$maxResults": "<p>The number of objects that you want to return with this call.</p>",
         "ListPlansInRegionRequest$maxResults": "<p>The number of objects that you want to return with this call.</p>",
-        "ListPlansRequest$maxResults": "<p>The number of objects that you want to return with this call.</p>"
+        "ListPlansRequest$maxResults": "<p>The number of objects that you want to return with this call.</p>",
+        "ListServiceQuotaWarningsRequest$maxResults": "<p>The maximum number of results to return with this call. Valid values are <code>1</code> to <code>100</code>. If you don't specify a value, the operation returns up to the maximum number of results.</p>"
       }
     },
     "MinimalWorkflow": {
@@ -915,7 +942,9 @@
         "ListRoute53HealthChecksInRegionRequest$nextToken": "<p>Specifies that you want to receive the next page of results. Valid only if you received a <code>nextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>nextToken</code> response to request the next page of results.</p>",
         "ListRoute53HealthChecksInRegionResponse$nextToken": "<p>A pagination token. A response may contain no results while still including a <code>nextToken</code>. Continue paginating until <code>nextToken</code> is null to retrieve all results.</p>",
         "ListRoute53HealthChecksRequest$nextToken": "<p>Specifies that you want to receive the next page of results. Valid only if you received a <code>nextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>nextToken</code> response to request the next page of results.</p>",
-        "ListRoute53HealthChecksResponse$nextToken": "<p>A pagination token. A response may contain no results while still including a <code>nextToken</code>. Continue paginating until <code>nextToken</code> is null to retrieve all results.</p>"
+        "ListRoute53HealthChecksResponse$nextToken": "<p>A pagination token. A response may contain no results while still including a <code>nextToken</code>. Continue paginating until <code>nextToken</code> is null to retrieve all results.</p>",
+        "ListServiceQuotaWarningsRequest$nextToken": "<p>Specifies that you want to receive the next page of results. Valid only if you received a <code>nextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>nextToken</code> response to request the next page of results.</p>",
+        "ListServiceQuotaWarningsResponse$nextToken": "<p>A pagination token. A response may contain no results while still including a <code>nextToken</code>. Continue paginating until <code>nextToken</code> is null to retrieve all results.</p>"
       }
     },
     "ParallelExecutionBlockConfiguration": {
@@ -954,7 +983,9 @@
         "ListRoute53HealthChecksRequest$arn": "<p>The Amazon Resource Name (ARN) of the Amazon Route 53 health check request.</p>",
         "ListTagsForResourceRequest$arn": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
         "Plan$arn": "<p>The Amazon Resource Name (ARN) of the plan.</p>",
+        "PlanArnList$member": null,
         "RegionSwitchPlanConfiguration$arn": "<p>The Amazon Resource Name (ARN) of the plan configuration.</p>",
+        "ServiceQuotaWarningSummary$planArn": "<p>The Amazon Resource Name (ARN) of the plan that the warning applies to.</p>",
         "StartPlanExecutionRequest$planArn": "<p>The Amazon Resource Name (ARN) of the plan to execute.</p>",
         "StartPlanExecutionResponse$plan": "<p>The details of the Region switch plan.</p>",
         "TagResourceRequest$arn": "<p>The Amazon Resource Name (ARN) for a tag that you add to a resource.</p>",
@@ -962,6 +993,12 @@
         "UpdatePlanExecutionRequest$planArn": "<p>The Amazon Resource Name (ARN) of the plan with the execution to update.</p>",
         "UpdatePlanExecutionStepRequest$planArn": "<p>The Amazon Resource Name (ARN) of the plan containing the execution step to update.</p>",
         "UpdatePlanRequest$arn": "<p>The Amazon Resource Name (ARN) of the plan.</p>"
+      }
+    },
+    "PlanArnList": {
+      "base": null,
+      "refs": {
+        "ListServiceQuotaWarningsRequest$planArns": "<p>The Amazon Resource Names (ARNs) of the plans to return service quota warnings for. You can specify up to 100 plan ARNs. Region switch ignores any plan ARN that you can't access. If you omit this parameter, Region switch returns the warnings for all of your accessible plans.</p>"
       }
     },
     "PlanList": {
@@ -1080,9 +1117,11 @@
         "RegionEventSourceMappingMap$key": null,
         "RegionList$member": null,
         "RegionNeptuneClusterArnMap$key": null,
+        "RegionSsmDocumentMap$key": null,
         "RegionalScalingResource$key": null,
         "Route53HealthCheck$region": "<p>The Amazon Route 53 Region.</p>",
         "Route53ResourceRecordSet$region": "<p>The Amazon Route 53 record set Region.</p>",
+        "ServiceQuotaWarningSummary$quotaRegion": "<p>The Amazon Web Services Region that the quota applies to.</p>",
         "Trigger$targetRegion": "<p>The Amazon Web Services Region for a trigger.</p>",
         "Workflow$workflowTargetRegion": "<p>The Amazon Web Services Region that the workflow targets.</p>"
       }
@@ -1124,6 +1163,12 @@
       "base": "<p>A map of Region to Neptune database cluster ARN for Neptune global database configuration.</p>",
       "refs": {
         "NeptuneGlobalDatabaseConfiguration$regionDatabaseClusterArns": "<p>The database cluster Amazon Resource Names (ARNs) for a Neptune global database.</p>"
+      }
+    },
+    "RegionSsmDocumentMap": {
+      "base": "<p>The Systems Manager document and target configuration for each Amazon Web Services Region that the configuration applies to.</p>",
+      "refs": {
+        "SsmSendCommandConfiguration$regionDocuments": "<p>The Systems Manager document and target configuration for each Amazon Web Services Region in the plan. Provide an entry for each Amazon Web Services Region that you want the command to run in.</p>"
       }
     },
     "RegionSwitchPlanConfiguration": {
@@ -1319,6 +1364,120 @@
         "EcsCapacityIncreaseConfiguration$services": "<p>The services specified for the configuration.</p>"
       }
     },
+    "ServiceQuotaWarningStatus": {
+      "base": "<p>The status of a service quota warning. Valid values:</p> <p> <code>pending</code> - Region switch submitted a quota increase request that is still open.</p> <p> <code>denied</code> - The quota increase request was denied.</p> <p> <code>insufficientPermissions</code> - The plan's execution role is missing a permission that service quota checks require.</p> <p> <code>maxRegionSwitchRequestsExceeded</code> - Region switch reached its limit on the number of open quota increase requests.</p> <p> <code>maxAccountRequestsExceeded</code> - The account reached the maximum number of open quota increase requests.</p>",
+      "refs": {
+        "ServiceQuotaWarningSummary$status": "<p>The status of the service quota warning.</p>"
+      }
+    },
+    "ServiceQuotaWarningSummary": {
+      "base": "<p>A service quota warning for a plan. Region switch creates a warning when the applied quota value in one Region of a plan is lower than the value for the matching resource in another Region or account in the plan, or when it can't complete a service quota check.</p>",
+      "refs": {
+        "ServiceQuotaWarningSummaryList$member": null
+      }
+    },
+    "ServiceQuotaWarningSummaryList": {
+      "base": null,
+      "refs": {
+        "ListServiceQuotaWarningsResponse$serviceQuotaWarningSummaries": "<p>The service quota warnings for the plans that you can access.</p>"
+      }
+    },
+    "SsmDocumentArn": {
+      "base": "<p>The Amazon Resource Name (ARN) of the Systems Manager document to run.</p>",
+      "refs": {
+        "SsmDocumentConfig$documentArn": "<p>The Amazon Resource Name (ARN) of the Systems Manager document to run.</p>"
+      }
+    },
+    "SsmDocumentConfig": {
+      "base": "<p>The Systems Manager document to run and the managed nodes to target for a single Amazon Web Services Region.</p>",
+      "refs": {
+        "RegionSsmDocumentMap$value": null
+      }
+    },
+    "SsmDocumentParameters": {
+      "base": "<p>The parameters passed to the Systems Manager document.</p>",
+      "refs": {
+        "SsmDocumentConfig$parameters": "<p>The parameters that are passed to this Region's Systems Manager document. You set parameters for each document, so each Region can run its document with its own parameters.</p>"
+      }
+    },
+    "SsmDocumentVersion": {
+      "base": "<p>The version of the Systems Manager document to run.</p>",
+      "refs": {
+        "SsmDocumentConfig$documentVersion": "<p>The version of the Systems Manager document to run for this Region. When you omit it, Systems Manager runs the document's default version.</p>"
+      }
+    },
+    "SsmParameterKey": {
+      "base": "<p>The name of a Systems Manager document parameter.</p>",
+      "refs": {
+        "SsmDocumentParameters$key": null
+      }
+    },
+    "SsmParameterValue": {
+      "base": "<p>A single value supplied for a Systems Manager document parameter.</p>",
+      "refs": {
+        "SsmParameterValues$member": null
+      }
+    },
+    "SsmParameterValues": {
+      "base": "<p>The values supplied for a single Systems Manager document parameter.</p>",
+      "refs": {
+        "SsmDocumentParameters$value": null
+      }
+    },
+    "SsmSendCommandConfiguration": {
+      "base": "<p>Configuration for an AWS Systems Manager <code>SendCommand</code> execution block in a Region switch plan. This execution block runs a Systems Manager document on the managed nodes that you target in each Amazon Web Services Region of the plan.</p>",
+      "refs": {
+        "ExecutionBlockConfiguration$ssmSendCommandConfig": "<p>Specifies an AWS Systems Manager <code>SendCommand</code> execution block.</p>"
+      }
+    },
+    "SsmSendCommandConfigurationTimeoutMinutesInteger": {
+      "base": null,
+      "refs": {
+        "SsmSendCommandConfiguration$timeoutMinutes": "<p>The timeout value specified for the configuration.</p>"
+      }
+    },
+    "SsmSendCommandUngraceful": {
+      "base": "<p>The ungraceful execution settings for an AWS Systems Manager <code>SendCommand</code> execution block.</p>",
+      "refs": {
+        "SsmSendCommandConfiguration$ungraceful": "<p>Specifies the settings that determine how the execution block behaves when the plan runs ungracefully, such as whether to skip the command.</p>"
+      }
+    },
+    "SsmSendCommandUngracefulBehavior": {
+      "base": "<p>The ungraceful behavior for an AWS Systems Manager <code>SendCommand</code> execution block, which must be set to <code>skip</code>.</p>",
+      "refs": {
+        "SsmSendCommandUngraceful$behavior": "<p>Specifies whether to skip running this command during an ungraceful execution. Set to <code>skip</code> to skip the command.</p>"
+      }
+    },
+    "SsmTarget": {
+      "base": "<p>A single <code>SendCommand</code> target filter, consisting of a target key and the values matched by that key.</p>",
+      "refs": {
+        "SsmTargetList$member": null
+      }
+    },
+    "SsmTargetKey": {
+      "base": "<p>A target key used to select managed nodes, such as <code>tag:Environment</code> or <code>InstanceIds</code>.</p>",
+      "refs": {
+        "SsmTarget$key": "<p>The target key, such as <code>tag:Environment</code> or <code>InstanceIds</code>.</p>"
+      }
+    },
+    "SsmTargetList": {
+      "base": "<p>The target filters passed to <code>SendCommand</code>. You can specify up to five filters.</p>",
+      "refs": {
+        "SsmDocumentConfig$targets": "<p>The target filters that Systems Manager resolves to managed nodes when the command runs. To target specific managed nodes, use the <code>InstanceIds</code> key. You can specify up to five target filters.</p>"
+      }
+    },
+    "SsmTargetValue": {
+      "base": "<p>A single value matched by a target key.</p>",
+      "refs": {
+        "SsmTargetValueList$member": null
+      }
+    },
+    "SsmTargetValueList": {
+      "base": "<p>The values matched by a single target key.</p>",
+      "refs": {
+        "SsmTarget$values": "<p>The values matched by this target key. Multiple values combine with a logical OR.</p>"
+      }
+    },
     "StartPlanExecutionRequest": {
       "base": null,
       "refs": {}
@@ -1442,6 +1601,13 @@
         "Route53HealthCheckConfiguration$externalId": "<p>The external ID (secret key) for the configuration.</p>",
         "S3ReportOutput$s3ObjectKey": "<p>The S3 object key where the generated report is stored.</p>",
         "Service$externalId": "<p>The external ID (secret key) for the service.</p>",
+        "ServiceQuotaWarningSummary$serviceCode": "<p>The service code of the service that the quota belongs to, as defined in Service Quotas. For example, <code>ec2</code>.</p>",
+        "ServiceQuotaWarningSummary$quotaCode": "<p>The quota code of the quota that the warning applies to, as defined in Service Quotas.</p>",
+        "ServiceQuotaWarningSummary$quotaName": "<p>The name of the quota that the warning applies to, as defined in Service Quotas.</p>",
+        "ServiceQuotaWarningSummary$requestId": "<p>The ID of the quota increase request that Region switch submitted, if it submitted one for this quota.</p>",
+        "ServiceQuotaWarningSummary$caseId": "<p>The ID of the support case associated with the quota increase request, if Region switch submitted one for this quota.</p>",
+        "ServiceQuotaWarningSummary$warningMessage": "<p>A message that describes the service quota warning.</p>",
+        "SsmDocumentConfig$externalId": "<p>The external ID (secret key) for the configuration.</p>",
         "StartPlanExecutionRequest$targetRegion": "<p>The Amazon Web Services Region to target with this execution. This is the Region that traffic will be shifted to or from, depending on the action.</p>",
         "StartPlanExecutionRequest$latestVersion": "<p>A boolean value indicating whether to use the latest version of the plan. If set to false, you must specify a specific version.</p>",
         "StartPlanExecutionResponse$planVersion": "<p>The version of the plan, a unique number generated by Region switch.</p>",
@@ -1505,6 +1671,8 @@
         "GetPlanExecutionResponse$endTime": "<p>The time (UTC) when the plan execution ended.</p>",
         "Plan$updatedAt": "<p>The timestamp when the plan was last updated.</p>",
         "ResourceWarning$warningUpdatedTime": "<p>The timestamp when the warning was last updated.</p>",
+        "ServiceQuotaWarningSummary$lastCheckedAt": "<p>The time (UTC) when Region switch last checked this quota.</p>",
+        "ServiceQuotaWarningSummary$warningCreatedAt": "<p>The time (UTC) when Region switch created this warning.</p>",
         "StepState$startTime": "<p>The timestamp when a step started execution.</p>",
         "StepState$endTime": "<p>The timestamp when a step endeded execution.</p>"
       }
@@ -1584,6 +1752,13 @@
     "UpdatePlanResponse": {
       "base": null,
       "refs": {}
+    },
+    "WaitELBTargetGroupHealthy": {
+      "base": null,
+      "refs": {
+        "Ec2AsgCapacityIncreaseConfiguration$waitELBTargetGroupHealthy": "<p>If enabled, the step completes only after each attached ELB target group reports a healthy target count that matches the group's new desired capacity calculated in the step.</p>",
+        "EcsCapacityIncreaseConfiguration$waitELBTargetGroupHealthy": "<p>If enabled, the step completes only after each attached ELB target group reports a healthy target count that matches the service's new desired task count calculated in the step.</p>"
+      }
     },
     "Workflow": {
       "base": "<p>Represents a workflow in a Region switch plan. A workflow defines a sequence of steps to execute during a Region switch.</p>",

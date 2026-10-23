@@ -812,6 +812,57 @@ module Aws
       cascading_control_configuration: Params::cascading_control_configuration?
     }
 
+      type hierarchy_filter_list_control_display_options = {
+      title_options: Params::label_options?,
+      info_icon_label_options: {
+        visibility: ("HIDDEN" | "VISIBLE")?,
+        info_icon_text: ::String?
+      }?,
+      search_options: {
+        visibility: ("HIDDEN" | "VISIBLE")?
+      }?
+    }
+
+      type hierarchy_filter_list_control = {
+      filter_control_id: ::String,
+      source_filter_id: ::String,
+      title: ::String?,
+      display_options: Params::hierarchy_filter_list_control_display_options?,
+      type: ("MULTI_SELECT" | "SINGLE_SELECT")?,
+      commit_mode: ("AUTO" | "MANUAL")?,
+      control_sort_configurations: Array[
+        Params::control_sort_configuration
+      ]?,
+      control_title_format_text: {
+        plain_text: ::String?,
+        rich_text: ::String?
+      }?
+    }
+
+      type hierarchy_filter_drop_down_control_display_options = {
+      title_options: Params::label_options?,
+      info_icon_label_options: {
+        visibility: ("HIDDEN" | "VISIBLE")?,
+        info_icon_text: ::String?
+      }?
+    }
+
+      type hierarchy_filter_drop_down_control = {
+      filter_control_id: ::String,
+      source_filter_id: ::String,
+      title: ::String?,
+      display_options: Params::hierarchy_filter_drop_down_control_display_options?,
+      type: ("MULTI_SELECT" | "SINGLE_SELECT")?,
+      commit_mode: ("AUTO" | "MANUAL")?,
+      control_sort_configurations: Array[
+        Params::control_sort_configuration
+      ]?,
+      control_title_format_text: {
+        plain_text: ::String?,
+        rich_text: ::String?
+      }?
+    }
+
       type filter_control = {
       date_time_picker: Params::filter_date_time_picker_control?,
       list: Params::filter_list_control?,
@@ -820,7 +871,9 @@ module Aws
       text_area: Params::filter_text_area_control?,
       slider: Params::filter_slider_control?,
       relative_date_time: Params::filter_relative_date_time_control?,
-      cross_sheet: Params::filter_cross_sheet_control?
+      cross_sheet: Params::filter_cross_sheet_control?,
+      hierarchy_list: Params::hierarchy_filter_list_control?,
+      hierarchy_dropdown: Params::hierarchy_filter_drop_down_control?
     }
 
       type table_aggregated_field_wells = {
@@ -4691,6 +4744,32 @@ module Aws
       commit_mode: ("AUTO" | "MANUAL")?
     }
 
+      type default_hierarchy_filter_list_control_options = {
+      display_options: Params::hierarchy_filter_list_control_display_options?,
+      type: ("MULTI_SELECT" | "SINGLE_SELECT")?,
+      commit_mode: ("AUTO" | "MANUAL")?,
+      control_sort_configurations: Array[
+        Params::control_sort_configuration
+      ]?,
+      control_title_format_text: {
+        plain_text: ::String?,
+        rich_text: ::String?
+      }?
+    }
+
+      type default_hierarchy_filter_drop_down_control_options = {
+      display_options: Params::hierarchy_filter_drop_down_control_display_options?,
+      type: ("MULTI_SELECT" | "SINGLE_SELECT")?,
+      commit_mode: ("AUTO" | "MANUAL")?,
+      control_sort_configurations: Array[
+        Params::control_sort_configuration
+      ]?,
+      control_title_format_text: {
+        plain_text: ::String?,
+        rich_text: ::String?
+      }?
+    }
+
       type default_filter_control_options = {
       default_date_time_picker_options: Params::default_date_time_picker_control_options?,
       default_list_options: Params::default_filter_list_control_options?,
@@ -4698,7 +4777,9 @@ module Aws
       default_text_field_options: Params::default_text_field_control_options?,
       default_text_area_options: Params::default_text_area_control_options?,
       default_slider_options: Params::default_slider_control_options?,
-      default_relative_date_time_options: Params::default_relative_date_time_control_options?
+      default_relative_date_time_options: Params::default_relative_date_time_control_options?,
+      default_hierarchy_list: Params::default_hierarchy_filter_list_control_options?,
+      default_hierarchy_dropdown: Params::default_hierarchy_filter_drop_down_control_options?
     }
 
       type default_filter_control_configuration = {
@@ -4873,6 +4954,50 @@ module Aws
       inner_filter: Params::inner_filter
     }
 
+      type hierarchy_filter_node = {
+      column: {
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
+        column_name: ::String
+      },
+      parent_value: ::String?,
+      hierarchy_values: Array[::String]?,
+      children: Array[
+        {
+          column: {
+            data_set_identifier: ::String?,
+            topic_identifier: ::String?,
+            column_name: ::String
+          },
+          parent_value: ::String?,
+          hierarchy_values: Array[::String]?,
+          children: untyped?
+        }
+      ]?
+    }
+
+      type hierarchy_filter = {
+      filter_id: ::String,
+      column: {
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
+        column_name: ::String
+      },
+      hierarchy_levels: Array[
+        {
+          column: {
+            data_set_identifier: ::String?,
+            topic_identifier: ::String?,
+            column_name: ::String
+          }
+        }
+      ],
+      hierarchy_tree: Params::hierarchy_filter_node?,
+      null_option: ("ALL_VALUES" | "NULLS_ONLY" | "NON_NULLS_ONLY"),
+      match_operator: ("INCLUDE" | "EXCLUDE"),
+      default_filter_control_configuration: Params::default_filter_control_configuration?
+    }
+
       type filter = {
       category_filter: Params::category_filter?,
       numeric_range_filter: Params::numeric_range_filter?,
@@ -4881,7 +5006,8 @@ module Aws
       time_range_filter: Params::time_range_filter?,
       relative_dates_filter: Params::relative_dates_filter?,
       top_bottom_filter: Params::top_bottom_filter?,
-      nested_filter: Params::nested_filter?
+      nested_filter: Params::nested_filter?,
+      hierarchy_filter: Params::hierarchy_filter?
     }
 
       type decal_settings_configuration = {
@@ -5301,6 +5427,122 @@ module Aws
       create_and_update_new_relic_action: ("DENY" | "ALLOW")?,
       share_new_relic_action: ("DENY" | "ALLOW")?,
       use_new_relic_action: ("DENY" | "ALLOW")?,
+      pager_duty_agent_action: ("DENY" | "ALLOW")?,
+      create_and_update_pager_duty_agent_action: ("DENY" | "ALLOW")?,
+      share_pager_duty_agent_action: ("DENY" | "ALLOW")?,
+      use_pager_duty_agent_action: ("DENY" | "ALLOW")?,
+      visier_agent_action: ("DENY" | "ALLOW")?,
+      create_and_update_visier_agent_action: ("DENY" | "ALLOW")?,
+      share_visier_agent_action: ("DENY" | "ALLOW")?,
+      use_visier_agent_action: ("DENY" | "ALLOW")?,
+      zoom_action: ("DENY" | "ALLOW")?,
+      create_and_update_zoom_action: ("DENY" | "ALLOW")?,
+      share_zoom_action: ("DENY" | "ALLOW")?,
+      use_zoom_action: ("DENY" | "ALLOW")?,
+      snow_flake_action: ("DENY" | "ALLOW")?,
+      create_and_update_snow_flake_action: ("DENY" | "ALLOW")?,
+      share_snow_flake_action: ("DENY" | "ALLOW")?,
+      use_snow_flake_action: ("DENY" | "ALLOW")?,
+      zapier_action: ("DENY" | "ALLOW")?,
+      create_and_update_zapier_action: ("DENY" | "ALLOW")?,
+      share_zapier_action: ("DENY" | "ALLOW")?,
+      use_zapier_action: ("DENY" | "ALLOW")?,
+      airtable_action: ("DENY" | "ALLOW")?,
+      create_and_update_airtable_action: ("DENY" | "ALLOW")?,
+      share_airtable_action: ("DENY" | "ALLOW")?,
+      use_airtable_action: ("DENY" | "ALLOW")?,
+      dropbox_action: ("DENY" | "ALLOW")?,
+      create_and_update_dropbox_action: ("DENY" | "ALLOW")?,
+      share_dropbox_action: ("DENY" | "ALLOW")?,
+      use_dropbox_action: ("DENY" | "ALLOW")?,
+      gmail_action: ("DENY" | "ALLOW")?,
+      create_and_update_gmail_action: ("DENY" | "ALLOW")?,
+      share_gmail_action: ("DENY" | "ALLOW")?,
+      use_gmail_action: ("DENY" | "ALLOW")?,
+      google_analytics_action: ("DENY" | "ALLOW")?,
+      create_and_update_google_analytics_action: ("DENY" | "ALLOW")?,
+      share_google_analytics_action: ("DENY" | "ALLOW")?,
+      use_google_analytics_action: ("DENY" | "ALLOW")?,
+      google_docs_action: ("DENY" | "ALLOW")?,
+      create_and_update_google_docs_action: ("DENY" | "ALLOW")?,
+      share_google_docs_action: ("DENY" | "ALLOW")?,
+      use_google_docs_action: ("DENY" | "ALLOW")?,
+      google_drive_action: ("DENY" | "ALLOW")?,
+      create_and_update_google_drive_action: ("DENY" | "ALLOW")?,
+      share_google_drive_action: ("DENY" | "ALLOW")?,
+      use_google_drive_action: ("DENY" | "ALLOW")?,
+      google_meet_action: ("DENY" | "ALLOW")?,
+      create_and_update_google_meet_action: ("DENY" | "ALLOW")?,
+      share_google_meet_action: ("DENY" | "ALLOW")?,
+      use_google_meet_action: ("DENY" | "ALLOW")?,
+      google_sheets_action: ("DENY" | "ALLOW")?,
+      create_and_update_google_sheets_action: ("DENY" | "ALLOW")?,
+      share_google_sheets_action: ("DENY" | "ALLOW")?,
+      use_google_sheets_action: ("DENY" | "ALLOW")?,
+      google_slides_action: ("DENY" | "ALLOW")?,
+      create_and_update_google_slides_action: ("DENY" | "ALLOW")?,
+      share_google_slides_action: ("DENY" | "ALLOW")?,
+      use_google_slides_action: ("DENY" | "ALLOW")?,
+      quick_books_action: ("DENY" | "ALLOW")?,
+      create_and_update_quick_books_action: ("DENY" | "ALLOW")?,
+      share_quick_books_action: ("DENY" | "ALLOW")?,
+      use_quick_books_action: ("DENY" | "ALLOW")?,
+      figma_action: ("DENY" | "ALLOW")?,
+      create_and_update_figma_action: ("DENY" | "ALLOW")?,
+      share_figma_action: ("DENY" | "ALLOW")?,
+      use_figma_action: ("DENY" | "ALLOW")?,
+      whats_app_action: ("DENY" | "ALLOW")?,
+      create_and_update_whats_app_action: ("DENY" | "ALLOW")?,
+      share_whats_app_action: ("DENY" | "ALLOW")?,
+      use_whats_app_action: ("DENY" | "ALLOW")?,
+      google_chat_action: ("DENY" | "ALLOW")?,
+      create_and_update_google_chat_action: ("DENY" | "ALLOW")?,
+      share_google_chat_action: ("DENY" | "ALLOW")?,
+      use_google_chat_action: ("DENY" | "ALLOW")?,
+      one_note_action: ("DENY" | "ALLOW")?,
+      create_and_update_one_note_action: ("DENY" | "ALLOW")?,
+      share_one_note_action: ("DENY" | "ALLOW")?,
+      use_one_note_action: ("DENY" | "ALLOW")?,
+      shopify_action: ("DENY" | "ALLOW")?,
+      create_and_update_shopify_action: ("DENY" | "ALLOW")?,
+      share_shopify_action: ("DENY" | "ALLOW")?,
+      use_shopify_action: ("DENY" | "ALLOW")?,
+      adobe_action: ("DENY" | "ALLOW")?,
+      create_and_update_adobe_action: ("DENY" | "ALLOW")?,
+      share_adobe_action: ("DENY" | "ALLOW")?,
+      use_adobe_action: ("DENY" | "ALLOW")?,
+      cisco_webex_vidcast_action: ("DENY" | "ALLOW")?,
+      create_and_update_cisco_webex_vidcast_action: ("DENY" | "ALLOW")?,
+      share_cisco_webex_vidcast_action: ("DENY" | "ALLOW")?,
+      use_cisco_webex_vidcast_action: ("DENY" | "ALLOW")?,
+      cisco_webex_meetings_action: ("DENY" | "ALLOW")?,
+      create_and_update_cisco_webex_meetings_action: ("DENY" | "ALLOW")?,
+      share_cisco_webex_meetings_action: ("DENY" | "ALLOW")?,
+      use_cisco_webex_meetings_action: ("DENY" | "ALLOW")?,
+      dun_and_bradstreet_action: ("DENY" | "ALLOW")?,
+      create_and_update_dun_and_bradstreet_action: ("DENY" | "ALLOW")?,
+      share_dun_and_bradstreet_action: ("DENY" | "ALLOW")?,
+      use_dun_and_bradstreet_action: ("DENY" | "ALLOW")?,
+      hg_insights_action: ("DENY" | "ALLOW")?,
+      create_and_update_hg_insights_action: ("DENY" | "ALLOW")?,
+      share_hg_insights_action: ("DENY" | "ALLOW")?,
+      use_hg_insights_action: ("DENY" | "ALLOW")?,
+      zoom_info_action: ("DENY" | "ALLOW")?,
+      create_and_update_zoom_info_action: ("DENY" | "ALLOW")?,
+      share_zoom_info_action: ("DENY" | "ALLOW")?,
+      use_zoom_info_action: ("DENY" | "ALLOW")?,
+      moodys_action: ("DENY" | "ALLOW")?,
+      create_and_update_moodys_action: ("DENY" | "ALLOW")?,
+      share_moodys_action: ("DENY" | "ALLOW")?,
+      use_moodys_action: ("DENY" | "ALLOW")?,
+      bee_action: ("DENY" | "ALLOW")?,
+      create_and_update_bee_action: ("DENY" | "ALLOW")?,
+      share_bee_action: ("DENY" | "ALLOW")?,
+      use_bee_action: ("DENY" | "ALLOW")?,
+      gong_action: ("DENY" | "ALLOW")?,
+      create_and_update_gong_action: ("DENY" | "ALLOW")?,
+      share_gong_action: ("DENY" | "ALLOW")?,
+      use_gong_action: ("DENY" | "ALLOW")?,
       topic: ("DENY" | "ALLOW")?,
       edit_visual_with_q: ("DENY" | "ALLOW")?,
       build_calculated_field_with_q: ("DENY" | "ALLOW")?,
@@ -5326,7 +5568,187 @@ module Aws
       trigger: ("DENY" | "ALLOW")?,
       schedule_trigger: ("DENY" | "ALLOW")?,
       inbound_email_trigger: ("DENY" | "ALLOW")?,
-      quick_event_trigger: ("DENY" | "ALLOW")?
+      quick_event_trigger: ("DENY" | "ALLOW")?,
+      file_data_source: ("DENY" | "ALLOW")?,
+      create_file_data_source: ("DENY" | "ALLOW")?,
+      update_file_data_source: ("DENY" | "ALLOW")?,
+      share_file_data_source: ("DENY" | "ALLOW")?,
+      s3_data_source: ("DENY" | "ALLOW")?,
+      create_s3_data_source: ("DENY" | "ALLOW")?,
+      update_s3_data_source: ("DENY" | "ALLOW")?,
+      share_s3_data_source: ("DENY" | "ALLOW")?,
+      s3_analytics_data_source: ("DENY" | "ALLOW")?,
+      create_s3_analytics_data_source: ("DENY" | "ALLOW")?,
+      update_s3_analytics_data_source: ("DENY" | "ALLOW")?,
+      share_s3_analytics_data_source: ("DENY" | "ALLOW")?,
+      s3_tables_data_source: ("DENY" | "ALLOW")?,
+      create_s3_tables_data_source: ("DENY" | "ALLOW")?,
+      update_s3_tables_data_source: ("DENY" | "ALLOW")?,
+      share_s3_tables_data_source: ("DENY" | "ALLOW")?,
+      athena_data_source: ("DENY" | "ALLOW")?,
+      create_athena_data_source: ("DENY" | "ALLOW")?,
+      update_athena_data_source: ("DENY" | "ALLOW")?,
+      share_athena_data_source: ("DENY" | "ALLOW")?,
+      rds_data_source: ("DENY" | "ALLOW")?,
+      create_rds_data_source: ("DENY" | "ALLOW")?,
+      update_rds_data_source: ("DENY" | "ALLOW")?,
+      share_rds_data_source: ("DENY" | "ALLOW")?,
+      redshift_auto_discovered_data_source: ("DENY" | "ALLOW")?,
+      create_redshift_auto_discovered_data_source: ("DENY" | "ALLOW")?,
+      update_redshift_auto_discovered_data_source: ("DENY" | "ALLOW")?,
+      share_redshift_auto_discovered_data_source: ("DENY" | "ALLOW")?,
+      redshift_manual_data_source: ("DENY" | "ALLOW")?,
+      create_redshift_manual_data_source: ("DENY" | "ALLOW")?,
+      update_redshift_manual_data_source: ("DENY" | "ALLOW")?,
+      share_redshift_manual_data_source: ("DENY" | "ALLOW")?,
+      open_search_data_source: ("DENY" | "ALLOW")?,
+      create_open_search_data_source: ("DENY" | "ALLOW")?,
+      update_open_search_data_source: ("DENY" | "ALLOW")?,
+      share_open_search_data_source: ("DENY" | "ALLOW")?,
+      timestream_data_source: ("DENY" | "ALLOW")?,
+      create_timestream_data_source: ("DENY" | "ALLOW")?,
+      update_timestream_data_source: ("DENY" | "ALLOW")?,
+      share_timestream_data_source: ("DENY" | "ALLOW")?,
+      aurora_data_source: ("DENY" | "ALLOW")?,
+      create_aurora_data_source: ("DENY" | "ALLOW")?,
+      update_aurora_data_source: ("DENY" | "ALLOW")?,
+      share_aurora_data_source: ("DENY" | "ALLOW")?,
+      my_sql_data_source: ("DENY" | "ALLOW")?,
+      create_my_sql_data_source: ("DENY" | "ALLOW")?,
+      update_my_sql_data_source: ("DENY" | "ALLOW")?,
+      share_my_sql_data_source: ("DENY" | "ALLOW")?,
+      postgre_sql_data_source: ("DENY" | "ALLOW")?,
+      create_postgre_sql_data_source: ("DENY" | "ALLOW")?,
+      update_postgre_sql_data_source: ("DENY" | "ALLOW")?,
+      share_postgre_sql_data_source: ("DENY" | "ALLOW")?,
+      oracle_data_source: ("DENY" | "ALLOW")?,
+      create_oracle_data_source: ("DENY" | "ALLOW")?,
+      update_oracle_data_source: ("DENY" | "ALLOW")?,
+      share_oracle_data_source: ("DENY" | "ALLOW")?,
+      sql_server_data_source: ("DENY" | "ALLOW")?,
+      create_sql_server_data_source: ("DENY" | "ALLOW")?,
+      update_sql_server_data_source: ("DENY" | "ALLOW")?,
+      share_sql_server_data_source: ("DENY" | "ALLOW")?,
+      maria_db_data_source: ("DENY" | "ALLOW")?,
+      create_maria_db_data_source: ("DENY" | "ALLOW")?,
+      update_maria_db_data_source: ("DENY" | "ALLOW")?,
+      share_maria_db_data_source: ("DENY" | "ALLOW")?,
+      snowflake_data_source: ("DENY" | "ALLOW")?,
+      create_snowflake_data_source: ("DENY" | "ALLOW")?,
+      update_snowflake_data_source: ("DENY" | "ALLOW")?,
+      share_snowflake_data_source: ("DENY" | "ALLOW")?,
+      google_big_query_data_source: ("DENY" | "ALLOW")?,
+      create_google_big_query_data_source: ("DENY" | "ALLOW")?,
+      update_google_big_query_data_source: ("DENY" | "ALLOW")?,
+      share_google_big_query_data_source: ("DENY" | "ALLOW")?,
+      databricks_data_source: ("DENY" | "ALLOW")?,
+      create_databricks_data_source: ("DENY" | "ALLOW")?,
+      update_databricks_data_source: ("DENY" | "ALLOW")?,
+      share_databricks_data_source: ("DENY" | "ALLOW")?,
+      starburst_data_source: ("DENY" | "ALLOW")?,
+      create_starburst_data_source: ("DENY" | "ALLOW")?,
+      update_starburst_data_source: ("DENY" | "ALLOW")?,
+      share_starburst_data_source: ("DENY" | "ALLOW")?,
+      trino_data_source: ("DENY" | "ALLOW")?,
+      create_trino_data_source: ("DENY" | "ALLOW")?,
+      update_trino_data_source: ("DENY" | "ALLOW")?,
+      share_trino_data_source: ("DENY" | "ALLOW")?,
+      impala_data_source: ("DENY" | "ALLOW")?,
+      create_impala_data_source: ("DENY" | "ALLOW")?,
+      update_impala_data_source: ("DENY" | "ALLOW")?,
+      share_impala_data_source: ("DENY" | "ALLOW")?,
+      teradata_data_source: ("DENY" | "ALLOW")?,
+      create_teradata_data_source: ("DENY" | "ALLOW")?,
+      update_teradata_data_source: ("DENY" | "ALLOW")?,
+      share_teradata_data_source: ("DENY" | "ALLOW")?,
+      presto_data_source: ("DENY" | "ALLOW")?,
+      create_presto_data_source: ("DENY" | "ALLOW")?,
+      update_presto_data_source: ("DENY" | "ALLOW")?,
+      share_presto_data_source: ("DENY" | "ALLOW")?,
+      spark_data_source: ("DENY" | "ALLOW")?,
+      create_spark_data_source: ("DENY" | "ALLOW")?,
+      update_spark_data_source: ("DENY" | "ALLOW")?,
+      share_spark_data_source: ("DENY" | "ALLOW")?,
+      exasol_data_source: ("DENY" | "ALLOW")?,
+      create_exasol_data_source: ("DENY" | "ALLOW")?,
+      update_exasol_data_source: ("DENY" | "ALLOW")?,
+      share_exasol_data_source: ("DENY" | "ALLOW")?,
+      db_2_data_source: ("DENY" | "ALLOW")?,
+      create_db_2_data_source: ("DENY" | "ALLOW")?,
+      update_db_2_data_source: ("DENY" | "ALLOW")?,
+      share_db_2_data_source: ("DENY" | "ALLOW")?,
+      sap_hana_data_source: ("DENY" | "ALLOW")?,
+      create_sap_hana_data_source: ("DENY" | "ALLOW")?,
+      update_sap_hana_data_source: ("DENY" | "ALLOW")?,
+      share_sap_hana_data_source: ("DENY" | "ALLOW")?,
+      denodo_data_source: ("DENY" | "ALLOW")?,
+      create_denodo_data_source: ("DENY" | "ALLOW")?,
+      update_denodo_data_source: ("DENY" | "ALLOW")?,
+      share_denodo_data_source: ("DENY" | "ALLOW")?,
+      dremio_data_source: ("DENY" | "ALLOW")?,
+      create_dremio_data_source: ("DENY" | "ALLOW")?,
+      update_dremio_data_source: ("DENY" | "ALLOW")?,
+      share_dremio_data_source: ("DENY" | "ALLOW")?,
+      salesforce_data_source: ("DENY" | "ALLOW")?,
+      create_salesforce_data_source: ("DENY" | "ALLOW")?,
+      update_salesforce_data_source: ("DENY" | "ALLOW")?,
+      share_salesforce_data_source: ("DENY" | "ALLOW")?,
+      radiant_data_source: ("DENY" | "ALLOW")?,
+      create_radiant_data_source: ("DENY" | "ALLOW")?,
+      update_radiant_data_source: ("DENY" | "ALLOW")?,
+      share_radiant_data_source: ("DENY" | "ALLOW")?,
+      pay_pal_data_source: ("DENY" | "ALLOW")?,
+      create_pay_pal_data_source: ("DENY" | "ALLOW")?,
+      update_pay_pal_data_source: ("DENY" | "ALLOW")?,
+      share_pay_pal_data_source: ("DENY" | "ALLOW")?,
+      square_data_source: ("DENY" | "ALLOW")?,
+      create_square_data_source: ("DENY" | "ALLOW")?,
+      update_square_data_source: ("DENY" | "ALLOW")?,
+      share_square_data_source: ("DENY" | "ALLOW")?,
+      git_hub_data_source: ("DENY" | "ALLOW")?,
+      create_git_hub_data_source: ("DENY" | "ALLOW")?,
+      update_git_hub_data_source: ("DENY" | "ALLOW")?,
+      share_git_hub_data_source: ("DENY" | "ALLOW")?,
+      twitter_data_source: ("DENY" | "ALLOW")?,
+      create_twitter_data_source: ("DENY" | "ALLOW")?,
+      update_twitter_data_source: ("DENY" | "ALLOW")?,
+      share_twitter_data_source: ("DENY" | "ALLOW")?,
+      jira_data_source: ("DENY" | "ALLOW")?,
+      create_jira_data_source: ("DENY" | "ALLOW")?,
+      update_jira_data_source: ("DENY" | "ALLOW")?,
+      share_jira_data_source: ("DENY" | "ALLOW")?,
+      service_now_data_source: ("DENY" | "ALLOW")?,
+      create_service_now_data_source: ("DENY" | "ALLOW")?,
+      update_service_now_data_source: ("DENY" | "ALLOW")?,
+      share_service_now_data_source: ("DENY" | "ALLOW")?,
+      adobe_analytics_data_source: ("DENY" | "ALLOW")?,
+      create_adobe_analytics_data_source: ("DENY" | "ALLOW")?,
+      update_adobe_analytics_data_source: ("DENY" | "ALLOW")?,
+      share_adobe_analytics_data_source: ("DENY" | "ALLOW")?,
+      google_analytics_data_source: ("DENY" | "ALLOW")?,
+      create_google_analytics_data_source: ("DENY" | "ALLOW")?,
+      update_google_analytics_data_source: ("DENY" | "ALLOW")?,
+      share_google_analytics_data_source: ("DENY" | "ALLOW")?,
+      google_sheets_data_source: ("DENY" | "ALLOW")?,
+      create_google_sheets_data_source: ("DENY" | "ALLOW")?,
+      update_google_sheets_data_source: ("DENY" | "ALLOW")?,
+      share_google_sheets_data_source: ("DENY" | "ALLOW")?,
+      document_db_data_source: ("DENY" | "ALLOW")?,
+      create_document_db_data_source: ("DENY" | "ALLOW")?,
+      update_document_db_data_source: ("DENY" | "ALLOW")?,
+      share_document_db_data_source: ("DENY" | "ALLOW")?,
+      mongo_db_data_source: ("DENY" | "ALLOW")?,
+      create_mongo_db_data_source: ("DENY" | "ALLOW")?,
+      update_mongo_db_data_source: ("DENY" | "ALLOW")?,
+      share_mongo_db_data_source: ("DENY" | "ALLOW")?,
+      mongo_atlas_data_source: ("DENY" | "ALLOW")?,
+      create_mongo_atlas_data_source: ("DENY" | "ALLOW")?,
+      update_mongo_atlas_data_source: ("DENY" | "ALLOW")?,
+      share_mongo_atlas_data_source: ("DENY" | "ALLOW")?,
+      dynamo_db_data_source: ("DENY" | "ALLOW")?,
+      create_dynamo_db_data_source: ("DENY" | "ALLOW")?,
+      update_dynamo_db_data_source: ("DENY" | "ALLOW")?,
+      share_dynamo_db_data_source: ("DENY" | "ALLOW")?
     }
 
       type dashboard_source_template = {
@@ -6145,6 +6567,14 @@ module Aws
       o_auth_parameters: Params::o_auth_parameters?
     }
 
+      type databricks_parameters = {
+      host: ::String,
+      port: ::Integer,
+      sql_endpoint_path: ::String,
+      authentication_type: ("PASSWORD" | "KEYPAIR" | "TOKEN" | "X509")?,
+      o_auth_parameters: Params::o_auth_parameters?
+    }
+
       type starburst_parameters = {
       host: ::String,
       port: ::Integer,
@@ -6262,11 +6692,7 @@ module Aws
         host: ::String,
         port: ::Integer
       }?,
-      databricks_parameters: {
-        host: ::String,
-        port: ::Integer,
-        sql_endpoint_path: ::String
-      }?,
+      databricks_parameters: Params::databricks_parameters?,
       starburst_parameters: Params::starburst_parameters?,
       trino_parameters: {
         host: ::String,
@@ -6338,6 +6764,19 @@ module Aws
         client_id: ::String?,
         client_secret: ::String?,
         username: ::String?
+      }?,
+      service_account_credentials: {
+        admin_account_email: ::String,
+        service_account_private_key: ::String,
+        client_email: ::String
+      }?,
+      share_point_client_credentials: {
+        kms_key_arn: ::String,
+        cert_thumbprint: ::String
+      }?,
+      one_drive_client_credentials: {
+        kms_key_arn: ::String,
+        cert_thumbprint: ::String
       }?
     }
 

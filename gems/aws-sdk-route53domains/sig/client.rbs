@@ -27,6 +27,7 @@ module Aws
                       ?convert_params: bool,
                       ?correct_clock_skew: bool,
                       ?defaults_mode: String,
+                      ?disable_clock_skew_correction: bool,
                       ?disable_host_prefix_injection: bool,
                       ?disable_request_compression: bool,
                       ?endpoint: String,
@@ -118,6 +119,7 @@ module Aws
       interface _CheckDomainAvailabilityResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CheckDomainAvailabilityResponse]
         def availability: () -> ("AVAILABLE" | "AVAILABLE_RESERVED" | "AVAILABLE_PREORDER" | "UNAVAILABLE" | "UNAVAILABLE_PREMIUM" | "UNAVAILABLE_RESTRICTED" | "RESERVED" | "DONT_KNOW" | "INVALID_NAME_FOR_TLD" | "PENDING")
+        def price: () -> Types::PriceWithCurrency
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#check_domain_availability-instance_method
       def check_domain_availability: (
@@ -130,6 +132,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::CheckDomainTransferabilityResponse]
         def transferability: () -> Types::DomainTransferability
         def message: () -> ::String
+        def price: () -> Types::PriceWithCurrency
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#check_domain_transferability-instance_method
       def check_domain_transferability: (
@@ -251,6 +254,16 @@ module Aws
                              ) -> _GetDomainDetailResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDomainDetailResponseSuccess
 
+      interface _GetDomainPricesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDomainPricesResponse]
+        def domain_price: () -> Types::DomainPrice
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#get_domain_prices-instance_method
+      def get_domain_prices: (
+                               domain_name: ::String
+                             ) -> _GetDomainPricesResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDomainPricesResponseSuccess
+
       interface _GetDomainSuggestionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDomainSuggestionsResponse]
         def suggestions_list: () -> ::Array[Types::DomainSuggestion]
@@ -259,7 +272,8 @@ module Aws
       def get_domain_suggestions: (
                                     domain_name: ::String,
                                     suggestion_count: ::Integer,
-                                    only_available: bool
+                                    only_available: bool,
+                                    ?only_standard_prices: bool
                                   ) -> _GetDomainSuggestionsResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDomainSuggestionsResponseSuccess
 
@@ -367,7 +381,11 @@ module Aws
                              ?privacy_protect_registrant_contact: bool,
                              ?privacy_protect_tech_contact: bool,
                              ?billing_contact: Params::contact_detail,
-                             ?privacy_protect_billing_contact: bool
+                             ?privacy_protect_billing_contact: bool,
+                             ?consent: {
+                               max_price: ::Float,
+                               currency: ::String
+                             }
                            ) -> _RegisterDomainResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterDomainResponseSuccess
 
@@ -389,7 +407,11 @@ module Aws
       def renew_domain: (
                           domain_name: ::String,
                           ?duration_in_years: ::Integer,
-                          current_expiry_year: ::Integer
+                          current_expiry_year: ::Integer,
+                          ?consent: {
+                            max_price: ::Float,
+                            currency: ::String
+                          }
                         ) -> _RenewDomainResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RenewDomainResponseSuccess
 
@@ -445,7 +467,11 @@ module Aws
                              ?privacy_protect_registrant_contact: bool,
                              ?privacy_protect_tech_contact: bool,
                              ?billing_contact: Params::contact_detail,
-                             ?privacy_protect_billing_contact: bool
+                             ?privacy_protect_billing_contact: bool,
+                             ?consent: {
+                               max_price: ::Float,
+                               currency: ::String
+                             }
                            ) -> _TransferDomainResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TransferDomainResponseSuccess
 

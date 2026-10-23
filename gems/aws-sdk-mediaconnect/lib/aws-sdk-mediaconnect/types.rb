@@ -626,6 +626,13 @@ module Aws::MediaConnect
     #     time when each frame is sent.
     #   @return [String]
     #
+    # @!attribute [rw] ndi_audio_reference_level
+    #   The audio reference level of the NDI receiver, in decibels relative
+    #   to full scale (dBFS). Common values are `-20` (NDI and SMPTE) and
+    #   `-18` (EBU). If you don't specify this field, MediaConnect uses
+    #   `-20`.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddOutputRequest AWS API Documentation
     #
     class AddOutputRequest < Struct.new(
@@ -650,7 +657,8 @@ module Aws::MediaConnect
       :output_tags,
       :router_integration_state,
       :router_integration_transit_encryption,
-      :ndi_output_timecode_source)
+      :ndi_output_timecode_source,
+      :ndi_audio_reference_level)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1157,6 +1165,33 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # The color signaling of the video stream.
+    #
+    # @!attribute [rw] colorimetry
+    #   The color primaries that the video stream uses (for example, `BT709`
+    #   or `BT2020`).
+    #   @return [String]
+    #
+    # @!attribute [rw] transfer_characteristics
+    #   The transfer characteristics that the video stream uses (for
+    #   example, `BT601`, `BT709`, `BT2100_PQ`, or `BT2100_HLG`).
+    #   @return [String]
+    #
+    # @!attribute [rw] matrix_coefficients
+    #   The YCbCr matrix coefficients that the video stream uses (for
+    #   example, `BT709` or `BT2020_NCL`).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ColorInformation AWS API Documentation
+    #
+    class ColorInformation < Struct.new(
+      :colorimetry,
+      :transfer_characteristics,
+      :matrix_coefficients)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The requested operation would cause a conflict with the current state
     # of a service resource associated with the request. Resolve the
     # conflict before retrying this request.
@@ -1459,7 +1494,22 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] tier
-    #   The tier level for the router input.
+    #   The tier level for the router input. The tier sets the maximum
+    #   bitrate, in Mbps, for the router input. Valid values include the
+    #   following:
+    #
+    #   * `INPUT_20` – 20 Mbps
+    #
+    #   * `INPUT_50` – 50 Mbps
+    #
+    #   * `INPUT_100` – 100 Mbps
+    #
+    #   * `INPUT_250` – 250 Mbps
+    #
+    #   * `INPUT_500` – 500 Mbps
+    #
+    #   The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support
+    #   TR-07 (JPEG XS) workflows.
     #   @return [String]
     #
     # @!attribute [rw] region_name
@@ -1597,7 +1647,22 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] tier
-    #   The tier level for the router output.
+    #   The tier level for the router output. The tier sets the maximum
+    #   bitrate, in Mbps, for the router output. Valid values include the
+    #   following:
+    #
+    #   * `OUTPUT_20` – 20 Mbps
+    #
+    #   * `OUTPUT_50` – 50 Mbps
+    #
+    #   * `OUTPUT_100` – 100 Mbps
+    #
+    #   * `OUTPUT_250` – 250 Mbps
+    #
+    #   * `OUTPUT_500` – 500 Mbps
+    #
+    #   The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support
+    #   TR-07 (JPEG XS) workflows.
     #   @return [String]
     #
     # @!attribute [rw] region_name
@@ -4522,6 +4587,16 @@ module Aws::MediaConnect
 
     # Configuration settings for connecting a router input to a flow output.
     #
+    # To connect the router input to the flow output, provide both `flowArn`
+    # and `flowOutputArn`. To disconnect it, call the update operation and
+    # omit both fields while keeping this configuration object.
+    #
+    # <note markdown="1"> You can't change `sourceTransitDecryption` while the router input is
+    # connected to a flow output. To change it, first disconnect the router
+    # input, then update the decryption.
+    #
+    #  </note>
+    #
     # @!attribute [rw] flow_arn
     #   The ARN of the flow to connect to.
     #   @return [String]
@@ -4555,6 +4630,17 @@ module Aws::MediaConnect
     # Configuration settings for connecting a router output to a
     # MediaConnect flow source.
     #
+    # To connect the router output to the flow source, provide both
+    # `flowArn` and `flowSourceArn`. To disconnect it, call the update
+    # operation and omit both fields while keeping this configuration
+    # object.
+    #
+    # <note markdown="1"> You can't change `destinationTransitEncryption` while the router
+    # output is connected to a flow source. To change it, first disconnect
+    # the router output, then update the encryption.
+    #
+    #  </note>
+    #
     # @!attribute [rw] flow_arn
     #   The ARN of the flow to connect to this router output.
     #   @return [String]
@@ -4587,6 +4673,18 @@ module Aws::MediaConnect
 
     # Configuration settings for connecting a router input to a MediaLive
     # channel output.
+    #
+    # To connect the router input to the MediaLive channel output, provide
+    # all three of `mediaLiveChannelArn`, `mediaLivePipelineId`, and
+    # `mediaLiveChannelOutputName`. To disconnect it, call the update
+    # operation and omit all three fields while keeping this configuration
+    # object.
+    #
+    # <note markdown="1"> You can't change `sourceTransitDecryption` while the router input is
+    # connected to a MediaLive channel output. To change it, first
+    # disconnect the router input, then update the decryption.
+    #
+    #  </note>
     #
     # @!attribute [rw] media_live_channel_arn
     #   The ARN of the MediaLive channel to connect to this router input.
@@ -4628,6 +4726,17 @@ module Aws::MediaConnect
 
     # Configuration settings for connecting a router output to a MediaLive
     # input.
+    #
+    # To connect the router output to the MediaLive input, provide both
+    # `mediaLiveInputArn` and `mediaLivePipelineId`. To disconnect it, call
+    # the update operation and omit both fields while keeping this
+    # configuration object.
+    #
+    # <note markdown="1"> You can't change `destinationTransitEncryption` while the router
+    # output is connected to a MediaLive input. To change it, first
+    # disconnect the router output, then update the encryption.
+    #
+    #  </note>
     #
     # @!attribute [rw] media_live_input_arn
     #   The ARN of the MediaLive input to connect to this router output.
@@ -5223,6 +5332,11 @@ module Aws::MediaConnect
     #   is `Video`.
     #   @return [String]
     #
+    # @!attribute [rw] color
+    #   The color signaling of the video stream. Used when the `streamType`
+    #   is `Video`.
+    #   @return [Types::ColorInformation]
+    #
     # @!attribute [rw] frame_resolution
     #   The width and height dimensions of the video frame in pixels. Used
     #   when the `streamType` is `Video`.
@@ -5250,6 +5364,7 @@ module Aws::MediaConnect
       :codec,
       :stream_id,
       :scan_mode,
+      :color,
       :frame_resolution,
       :frame_rate,
       :channels,
@@ -5311,16 +5426,29 @@ module Aws::MediaConnect
     # The settings for the NDI® source. This includes the exact name of the
     # upstream NDI sender that you want to connect to your source.
     #
+    # <note markdown="1"> When you update the NDI source, include only the members you want to
+    # change. MediaConnect leaves the members that you don't specify
+    # unchanged.
+    #
+    #  </note>
+    #
     # @!attribute [rw] source_name
     #   The exact name of an existing NDI sender that's registered with
     #   your discovery server. If included, the format of this name must be
     #   `MACHINENAME (ProgramName)`.
     #   @return [String]
     #
+    # @!attribute [rw] audio_reference_level
+    #   The audio reference level of the NDI sender, in decibels relative to
+    #   full scale (dBFS). Common values are `-20` (NDI and SMPTE) and `-18`
+    #   (EBU). If you don't specify this field, MediaConnect uses `-20`.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/NdiSourceSettings AWS API Documentation
     #
     class NdiSourceSettings < Struct.new(
-      :source_name)
+      :source_name,
+      :audio_reference_level)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5585,6 +5713,16 @@ module Aws::MediaConnect
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # The TLS encryption configuration for destinations that present a
+    # certificate from a publicly trusted certificate authority. This type
+    # does not require any additional settings.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/PublicTlsEncryptionConfiguration AWS API Documentation
+    #
+    class PublicTlsEncryptionConfiguration < Aws::EmptyStructure; end
 
     # @!attribute [rw] offering_arn
     #   The Amazon Resource Name (ARN) of the offering.
@@ -6189,7 +6327,22 @@ module Aws::MediaConnect
     #   @return [Integer]
     #
     # @!attribute [rw] tier
-    #   The tier level of the router input.
+    #   The tier level for the router input. The tier sets the maximum
+    #   bitrate, in Mbps, for the router input. Valid values include the
+    #   following:
+    #
+    #   * `INPUT_20` – 20 Mbps
+    #
+    #   * `INPUT_50` – 50 Mbps
+    #
+    #   * `INPUT_100` – 100 Mbps
+    #
+    #   * `INPUT_250` – 250 Mbps
+    #
+    #   * `INPUT_500` – 500 Mbps
+    #
+    #   The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support
+    #   TR-07 (JPEG XS) workflows.
     #   @return [String]
     #
     # @!attribute [rw] routing_scope
@@ -6299,6 +6452,18 @@ module Aws::MediaConnect
     # @!attribute [rw] media_live_channel
     #   Configuration settings for connecting a router input to a MediaLive
     #   channel output.
+    #
+    #   To connect the router input to the MediaLive channel output, provide
+    #   all three of `mediaLiveChannelArn`, `mediaLivePipelineId`, and
+    #   `mediaLiveChannelOutputName`. To disconnect it, call the update
+    #   operation and omit all three fields while keeping this configuration
+    #   object.
+    #
+    #   <note markdown="1"> You can't change `sourceTransitDecryption` while the router input
+    #   is connected to a MediaLive channel output. To change it, first
+    #   disconnect the router input, then update the decryption.
+    #
+    #    </note>
     #   @return [Types::MediaLiveChannelRouterInputConfiguration]
     #
     # @!attribute [rw] failover
@@ -6309,6 +6474,17 @@ module Aws::MediaConnect
     # @!attribute [rw] media_connect_flow
     #   Configuration settings for connecting a router input to a flow
     #   output.
+    #
+    #   To connect the router input to the flow output, provide both
+    #   `flowArn` and `flowOutputArn`. To disconnect it, call the update
+    #   operation and omit both fields while keeping this configuration
+    #   object.
+    #
+    #   <note markdown="1"> You can't change `sourceTransitDecryption` while the router input
+    #   is connected to a flow output. To change it, first disconnect the
+    #   router input, then update the decryption.
+    #
+    #    </note>
     #   @return [Types::MediaConnectFlowRouterInputConfiguration]
     #
     # @!attribute [rw] merge
@@ -6852,7 +7028,22 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] tier
-    #   The tier level of the router output.
+    #   The tier level for the router output. The tier sets the maximum
+    #   bitrate, in Mbps, for the router output. Valid values include the
+    #   following:
+    #
+    #   * `OUTPUT_20` – 20 Mbps
+    #
+    #   * `OUTPUT_50` – 50 Mbps
+    #
+    #   * `OUTPUT_100` – 100 Mbps
+    #
+    #   * `OUTPUT_250` – 250 Mbps
+    #
+    #   * `OUTPUT_500` – 500 Mbps
+    #
+    #   The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support
+    #   TR-07 (JPEG XS) workflows.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -6955,11 +7146,33 @@ module Aws::MediaConnect
     # @!attribute [rw] media_connect_flow
     #   Configuration settings for connecting a router output to a
     #   MediaConnect flow source.
+    #
+    #   To connect the router output to the flow source, provide both
+    #   `flowArn` and `flowSourceArn`. To disconnect it, call the update
+    #   operation and omit both fields while keeping this configuration
+    #   object.
+    #
+    #   <note markdown="1"> You can't change `destinationTransitEncryption` while the router
+    #   output is connected to a flow source. To change it, first disconnect
+    #   the router output, then update the encryption.
+    #
+    #    </note>
     #   @return [Types::MediaConnectFlowRouterOutputConfiguration]
     #
     # @!attribute [rw] media_live_input
     #   Configuration settings for connecting a router output to a MediaLive
     #   input.
+    #
+    #   To connect the router output to the MediaLive input, provide both
+    #   `mediaLiveInputArn` and `mediaLivePipelineId`. To disconnect it,
+    #   call the update operation and omit both fields while keeping this
+    #   configuration object.
+    #
+    #   <note markdown="1"> You can't change `destinationTransitEncryption` while the router
+    #   output is connected to a MediaLive input. To change it, first
+    #   disconnect the router output, then update the encryption.
+    #
+    #    </note>
     #   @return [Types::MediaLiveInputRouterOutputConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RouterOutputConfiguration AWS API Documentation
@@ -7069,6 +7282,15 @@ module Aws::MediaConnect
     #   minimum latency, and encryption key configuration.
     #   @return [Types::SrtListenerRouterOutputConfiguration]
     #
+    # @!attribute [rw] rtmp_push
+    #   The configuration settings for a router output that pushes a stream
+    #   to a destination using the RTMP (Real-Time Messaging Protocol)
+    #   protocol, or RTMPS (RTMP over TLS) when TLS encryption is specified.
+    #   These settings include the destination address and port, the
+    #   application and stream names, and optional TLS encryption
+    #   configuration.
+    #   @return [Types::RtmpPushRouterOutputConfiguration]
+    #
     # @!attribute [rw] srt_caller
     #   The configuration settings for a router output using the SRT (Secure
     #   Reliable Transport) protocol in caller mode, including the
@@ -7087,6 +7309,7 @@ module Aws::MediaConnect
     class RouterOutputProtocolConfiguration < Struct.new(
       :rist,
       :srt_listener,
+      :rtmp_push,
       :srt_caller,
       :rtp,
       :unknown)
@@ -7096,6 +7319,7 @@ module Aws::MediaConnect
 
       class Rist < RouterOutputProtocolConfiguration; end
       class SrtListener < RouterOutputProtocolConfiguration; end
+      class RtmpPush < RouterOutputProtocolConfiguration; end
       class SrtCaller < RouterOutputProtocolConfiguration; end
       class Rtp < RouterOutputProtocolConfiguration; end
       class Unknown < RouterOutputProtocolConfiguration; end
@@ -7152,6 +7376,56 @@ module Aws::MediaConnect
       class MediaConnectFlow < RouterOutputStreamDetails; end
       class MediaLiveInput < RouterOutputStreamDetails; end
       class Unknown < RouterOutputStreamDetails; end
+    end
+
+    # The configuration settings for a router output that pushes a stream to
+    # a destination using the RTMP (Real-Time Messaging Protocol) protocol,
+    # or RTMPS (RTMP over TLS) when TLS encryption is specified. These
+    # settings include the destination address and port, the application and
+    # stream names, and optional TLS encryption configuration.
+    #
+    # @!attribute [rw] destination_address
+    #   The IP address or hostname of the destination RTMP server that the
+    #   router output pushes the stream to. Provide only the server address;
+    #   specify the application and stream names separately.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_port
+    #   The TCP port on the destination RTMP server. For RTMP, valid values
+    #   range from `1024` to `65535`. For RTMPS (RTMP over TLS), valid
+    #   values are `443` or `1024` to `65535`. RTMP typically uses port
+    #   `1935`, and RTMPS typically uses port `443`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] application_name
+    #   The name of the RTMP application on the destination server. Together
+    #   with the stream name, the application name forms the RTMP URL path,
+    #   in the pattern
+    #   `rtmp://destinationAddress/applicationName/streamName`.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_name
+    #   The name of the RTMP stream that the output publishes to the
+    #   destination application. The stream name forms the final segment of
+    #   the RTMP URL path.
+    #   @return [String]
+    #
+    # @!attribute [rw] tls_encryption
+    #   The TLS encryption settings for the output. When you specify these
+    #   settings, the output uses RTMPS (RTMP over TLS) to establish a
+    #   secure, encrypted connection to the destination server.
+    #   @return [Types::TlsEncryption]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RtmpPushRouterOutputConfiguration AWS API Documentation
+    #
+    class RtmpPushRouterOutputConfiguration < Struct.new(
+      :destination_address,
+      :destination_port,
+      :application_name,
+      :stream_name,
+      :tls_encryption)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # The configuration settings for a Router Input using the RTP (Real-Time
@@ -8208,6 +8482,50 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # The Transport Layer Security (TLS) encryption settings used to
+    # establish a secure connection to a destination.
+    #
+    # @!attribute [rw] encryption_type
+    #   The type of TLS encryption to use for the connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The configuration settings for the specified TLS encryption type.
+    #   @return [Types::TlsEncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/TlsEncryption AWS API Documentation
+    #
+    class TlsEncryption < Struct.new(
+      :encryption_type,
+      :encryption_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration settings for TLS encryption.
+    #
+    # @note TlsEncryptionConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note TlsEncryptionConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of TlsEncryptionConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] public
+    #   The TLS encryption configuration that validates the destination by
+    #   using a publicly trusted certificate authority.
+    #   @return [Types::PublicTlsEncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/TlsEncryptionConfiguration AWS API Documentation
+    #
+    class TlsEncryptionConfiguration < Struct.new(
+      :public,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Public < TlsEncryptionConfiguration; end
+      class Unknown < TlsEncryptionConfiguration; end
+    end
+
     # The request was denied due to request throttling.
     #
     # @!attribute [rw] message
@@ -8323,6 +8641,13 @@ module Aws::MediaConnect
     #     time when each frame is sent.
     #   @return [String]
     #
+    # @!attribute [rw] ndi_audio_reference_level
+    #   The audio reference level of the NDI receiver, in decibels relative
+    #   to full scale (dBFS). Common values are `-20` (NDI and SMPTE) and
+    #   `-18` (EBU). For NDI outputs, this field is always present and
+    #   defaults to `-20`.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Transport AWS API Documentation
     #
     class Transport < Struct.new(
@@ -8342,7 +8667,8 @@ module Aws::MediaConnect
       :ndi_speed_hq_quality,
       :ndi_program_name,
       :ndi_source_settings,
-      :ndi_output_timecode_source)
+      :ndi_output_timecode_source,
+      :ndi_audio_reference_level)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8353,10 +8679,16 @@ module Aws::MediaConnect
     #   The list of transport stream programs in the current flow's source.
     #   @return [Array<Types::TransportStreamProgram>]
     #
+    # @!attribute [rw] ts_id
+    #   The transport stream ID (TSID) of the source, from the Program
+    #   Association Table (PAT).
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/TransportMediaInfo AWS API Documentation
     #
     class TransportMediaInfo < Struct.new(
-      :programs)
+      :programs,
+      :ts_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8370,6 +8702,10 @@ module Aws::MediaConnect
     # @!attribute [rw] codec
     #   The codec used by the stream.
     #   @return [String]
+    #
+    # @!attribute [rw] color
+    #   The color signaling of the video stream.
+    #   @return [Types::ColorInformation]
     #
     # @!attribute [rw] frame_rate
     #   The frame rate used by the video stream.
@@ -8400,6 +8736,7 @@ module Aws::MediaConnect
     class TransportStream < Struct.new(
       :channels,
       :codec,
+      :color,
       :frame_rate,
       :frame_resolution,
       :pid,
@@ -9120,6 +9457,13 @@ module Aws::MediaConnect
     #     time when each frame is sent.
     #   @return [String]
     #
+    # @!attribute [rw] ndi_audio_reference_level
+    #   The audio reference level of the NDI receiver, in decibels relative
+    #   to full scale (dBFS). Common values are `-20` (NDI and SMPTE) and
+    #   `-18` (EBU). If you don't specify this field, MediaConnect leaves
+    #   the value unchanged.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowOutputRequest AWS API Documentation
     #
     class UpdateFlowOutputRequest < Struct.new(
@@ -9145,7 +9489,8 @@ module Aws::MediaConnect
       :ndi_speed_hq_quality,
       :router_integration_state,
       :router_integration_transit_encryption,
-      :ndi_output_timecode_source)
+      :ndi_output_timecode_source,
+      :ndi_audio_reference_level)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9520,7 +9865,22 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] tier
-    #   The updated tier level for the router input.
+    #   The updated tier level for the router input. The tier sets the
+    #   maximum bitrate, in Mbps, for the router input. Valid values include
+    #   the following:
+    #
+    #   * `INPUT_20` – 20 Mbps
+    #
+    #   * `INPUT_50` – 50 Mbps
+    #
+    #   * `INPUT_100` – 100 Mbps
+    #
+    #   * `INPUT_250` – 250 Mbps
+    #
+    #   * `INPUT_500` – 500 Mbps
+    #
+    #   The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support
+    #   TR-07 (JPEG XS) workflows.
     #   @return [String]
     #
     # @!attribute [rw] transit_encryption
@@ -9626,7 +9986,22 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] tier
-    #   The updated tier level for the router output.
+    #   The updated tier level for the router output. The tier sets the
+    #   maximum bitrate, in Mbps, for the router output. Valid values
+    #   include the following:
+    #
+    #   * `OUTPUT_20` – 20 Mbps
+    #
+    #   * `OUTPUT_50` – 50 Mbps
+    #
+    #   * `OUTPUT_100` – 100 Mbps
+    #
+    #   * `OUTPUT_250` – 250 Mbps
+    #
+    #   * `OUTPUT_500` – 500 Mbps
+    #
+    #   The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support
+    #   TR-07 (JPEG XS) workflows.
     #   @return [String]
     #
     # @!attribute [rw] maintenance_configuration

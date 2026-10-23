@@ -199,12 +199,19 @@ module Aws::S3Vectors
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -825,6 +832,7 @@ module Aws::S3Vectors
     #   resp.index.metadata_configuration.non_filterable_metadata_keys[0] #=> String
     #   resp.index.encryption_configuration.sse_type #=> String, one of "AES256", "aws:kms"
     #   resp.index.encryption_configuration.kms_key_arn #=> String
+    #   resp.index.index_mode #=> String, one of "CLASSIC", "ENHANCED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3vectors-2025-07-15/GetIndex AWS API Documentation
     #
@@ -868,6 +876,7 @@ module Aws::S3Vectors
     #   resp.vector_bucket.creation_time #=> Time
     #   resp.vector_bucket.encryption_configuration.sse_type #=> String, one of "AES256", "aws:kms"
     #   resp.vector_bucket.encryption_configuration.kms_key_arn #=> String
+    #   resp.vector_bucket.default_index_mode #=> String, one of "CLASSIC", "ENHANCED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3vectors-2025-07-15/GetVectorBucket AWS API Documentation
     #
@@ -1259,6 +1268,46 @@ module Aws::S3Vectors
       req.send_request(options)
     end
 
+    # Updates the default index mode for a vector bucket. The updated
+    # default applies to vector indexes that you create after the request
+    # succeeds. The operation doesn't change existing vector indexes. To
+    # specify the vector bucket, you must use either the vector bucket name
+    # or the vector bucket Amazon Resource Name (ARN).
+    #
+    # Permissions
+    #
+    # : You must have the `s3vectors:PutVectorBucketDefaultIndexMode`
+    #   permission to use this operation.
+    #
+    # @option params [String] :vector_bucket_name
+    #   The name of the vector bucket to update.
+    #
+    # @option params [String] :vector_bucket_arn
+    #   The Amazon Resource Name (ARN) of the vector bucket to update.
+    #
+    # @option params [required, String] :default_index_mode
+    #   The default mode to assign to new vector indexes in the vector bucket.
+    #   This change doesn't affect existing vector indexes.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_vector_bucket_default_index_mode({
+    #     vector_bucket_name: "VectorBucketName",
+    #     vector_bucket_arn: "VectorBucketArn",
+    #     default_index_mode: "CLASSIC", # required, accepts CLASSIC, ENHANCED
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3vectors-2025-07-15/PutVectorBucketDefaultIndexMode AWS API Documentation
+    #
+    # @overload put_vector_bucket_default_index_mode(params = {})
+    # @param [Hash] params ({})
+    def put_vector_bucket_default_index_mode(params = {}, options = {})
+      req = build_request(:put_vector_bucket_default_index_mode, params)
+      req.send_request(options)
+    end
+
     # Creates a bucket policy for a vector bucket. To specify the bucket,
     # you must use either the vector bucket name or the vector bucket Amazon
     # Resource Name (ARN).
@@ -1436,6 +1485,18 @@ module Aws::S3Vectors
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-metadata-filtering.html
     #
+    # @option params [String] :query_mode
+    #   The mode to use to process the query. If you don't specify a query
+    #   mode, the operation uses the mode that's currently configured for the
+    #   vector index.
+    #
+    #   Valid values:
+    #
+    #   * `CLASSIC` - Applies metadata filters during the vector search. You
+    #     can't specify `CLASSIC` for an `ENHANCED` index.
+    #
+    #   * `ENHANCED` - Applies metadata filters before the vector search.
+    #
     # @option params [Boolean] :return_metadata
     #   Indicates whether to include metadata in the response. The default
     #   value is `false`.
@@ -1468,6 +1529,7 @@ module Aws::S3Vectors
     #     },
     #     filter: {
     #     },
+    #     query_mode: "CLASSIC", # accepts CLASSIC, ENHANCED
     #     return_metadata: false,
     #     return_distance: false,
     #     next_token: "QueryVectorsNextToken",
@@ -1592,6 +1654,59 @@ module Aws::S3Vectors
       req.send_request(options)
     end
 
+    # Updates the mode for an existing vector index. You can set the mode to
+    # `ENHANCED` for any vector index. You can set the mode to `CLASSIC`
+    # only for a vector index in a vector bucket created before September
+    # 30, 2026. This operation doesn't change the default index mode of the
+    # vector bucket or the mode of other vector indexes. Specify the vector
+    # index by using its Amazon Resource Name (ARN) or both the vector
+    # bucket name and vector index name.
+    #
+    # Permissions
+    #
+    # : You must have the `s3vectors:UpdateIndexMode` permission to use this
+    #   operation.
+    #
+    # @option params [String] :vector_bucket_name
+    #   The name of the vector bucket that contains the vector index.
+    #
+    # @option params [String] :index_name
+    #   The name of the vector index to update.
+    #
+    # @option params [String] :index_arn
+    #   The Amazon Resource Name (ARN) of the vector index to update.
+    #
+    # @option params [required, String] :index_mode
+    #   The new mode for the vector index.
+    #
+    #   Valid values:
+    #
+    #   * `CLASSIC` - Applies metadata filters during the vector search. You
+    #     can specify `CLASSIC` only for a vector index in a vector bucket
+    #     created before September 30, 2026.
+    #
+    #   * `ENHANCED` - Applies metadata filters before the vector search.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_index_mode({
+    #     vector_bucket_name: "VectorBucketName",
+    #     index_name: "IndexName",
+    #     index_arn: "IndexArn",
+    #     index_mode: "CLASSIC", # required, accepts CLASSIC, ENHANCED
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3vectors-2025-07-15/UpdateIndexMode AWS API Documentation
+    #
+    # @overload update_index_mode(params = {})
+    # @param [Hash] params ({})
+    def update_index_mode(params = {}, options = {})
+      req = build_request(:update_index_mode, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1610,7 +1725,7 @@ module Aws::S3Vectors
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3vectors'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

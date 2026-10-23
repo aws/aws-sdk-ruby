@@ -199,12 +199,19 @@ module Aws::QConnect
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -1830,6 +1837,7 @@ module Aws::QConnect
     #   resp.assistant.capability_configuration.type #=> String, one of "V1", "V2"
     #   resp.assistant.ai_agent_configuration #=> Hash
     #   resp.assistant.ai_agent_configuration["AIAgentType"].ai_agent_id #=> String
+    #   resp.assistant.ai_agent_configuration["AIAgentType"].enabled #=> Boolean
     #   resp.assistant.orchestrator_configuration_list #=> Array
     #   resp.assistant.orchestrator_configuration_list[0].ai_agent_id #=> String
     #   resp.assistant.orchestrator_configuration_list[0].orchestrator_use_case #=> String
@@ -3220,6 +3228,7 @@ module Aws::QConnect
     #     ai_agent_configuration: {
     #       "MANUAL_SEARCH" => {
     #         ai_agent_id: "UuidWithQualifier", # required
+    #         enabled: false,
     #       },
     #     },
     #     contact_arn: "GenericArn",
@@ -3254,6 +3263,7 @@ module Aws::QConnect
     #   resp.session.tag_filter.or_conditions[0].tag_condition.value #=> String
     #   resp.session.ai_agent_configuration #=> Hash
     #   resp.session.ai_agent_configuration["AIAgentType"].ai_agent_id #=> String
+    #   resp.session.ai_agent_configuration["AIAgentType"].enabled #=> Boolean
     #   resp.session.origin #=> String, one of "SYSTEM", "CUSTOMER"
     #   resp.session.orchestrator_configuration_list #=> Array
     #   resp.session.orchestrator_configuration_list[0].ai_agent_id #=> String
@@ -4120,6 +4130,7 @@ module Aws::QConnect
     #   resp.assistant.capability_configuration.type #=> String, one of "V1", "V2"
     #   resp.assistant.ai_agent_configuration #=> Hash
     #   resp.assistant.ai_agent_configuration["AIAgentType"].ai_agent_id #=> String
+    #   resp.assistant.ai_agent_configuration["AIAgentType"].enabled #=> Boolean
     #   resp.assistant.orchestrator_configuration_list #=> Array
     #   resp.assistant.orchestrator_configuration_list[0].ai_agent_id #=> String
     #   resp.assistant.orchestrator_configuration_list[0].orchestrator_use_case #=> String
@@ -4801,7 +4812,7 @@ module Aws::QConnect
     #     max_results: 1,
     #     wait_time_seconds: 1,
     #     next_chunk_token: "NextToken",
-    #     recommendation_type: "KNOWLEDGE_CONTENT", # accepts KNOWLEDGE_CONTENT, GENERATIVE_RESPONSE, GENERATIVE_ANSWER, DETECTED_INTENT, GENERATIVE_ANSWER_CHUNK, BLOCKED_GENERATIVE_ANSWER_CHUNK, INTENT_ANSWER_CHUNK, BLOCKED_INTENT_ANSWER_CHUNK, EMAIL_RESPONSE_CHUNK, EMAIL_OVERVIEW_CHUNK, EMAIL_GENERATIVE_ANSWER_CHUNK, CASE_SUMMARIZATION_CHUNK, BLOCKED_CASE_SUMMARIZATION_CHUNK, SUGGESTED_MESSAGE, NOTES_CHUNK, BLOCKED_NOTES_CHUNK
+    #     recommendation_type: "KNOWLEDGE_CONTENT", # accepts KNOWLEDGE_CONTENT, GENERATIVE_RESPONSE, GENERATIVE_ANSWER, DETECTED_INTENT, GENERATIVE_ANSWER_CHUNK, BLOCKED_GENERATIVE_ANSWER_CHUNK, INTENT_ANSWER_CHUNK, BLOCKED_INTENT_ANSWER_CHUNK, EMAIL_RESPONSE_CHUNK, EMAIL_OVERVIEW_CHUNK, EMAIL_GENERATIVE_ANSWER_CHUNK, CASE_SUMMARIZATION_CHUNK, BLOCKED_CASE_SUMMARIZATION_CHUNK, SUGGESTED_MESSAGE, NOTES_CHUNK, BLOCKED_NOTES_CHUNK, PROACTIVE_RECOMMENDATION
     #   })
     #
     # @example Response structure
@@ -4824,7 +4835,7 @@ module Aws::QConnect
     #   resp.recommendations[0].document.excerpt.highlights[0].end_offset_exclusive #=> Integer
     #   resp.recommendations[0].relevance_score #=> Float
     #   resp.recommendations[0].relevance_level #=> String, one of "HIGH", "MEDIUM", "LOW"
-    #   resp.recommendations[0].type #=> String, one of "KNOWLEDGE_CONTENT", "GENERATIVE_RESPONSE", "GENERATIVE_ANSWER", "DETECTED_INTENT", "GENERATIVE_ANSWER_CHUNK", "BLOCKED_GENERATIVE_ANSWER_CHUNK", "INTENT_ANSWER_CHUNK", "BLOCKED_INTENT_ANSWER_CHUNK", "EMAIL_RESPONSE_CHUNK", "EMAIL_OVERVIEW_CHUNK", "EMAIL_GENERATIVE_ANSWER_CHUNK", "CASE_SUMMARIZATION_CHUNK", "BLOCKED_CASE_SUMMARIZATION_CHUNK", "SUGGESTED_MESSAGE", "NOTES_CHUNK", "BLOCKED_NOTES_CHUNK"
+    #   resp.recommendations[0].type #=> String, one of "KNOWLEDGE_CONTENT", "GENERATIVE_RESPONSE", "GENERATIVE_ANSWER", "DETECTED_INTENT", "GENERATIVE_ANSWER_CHUNK", "BLOCKED_GENERATIVE_ANSWER_CHUNK", "INTENT_ANSWER_CHUNK", "BLOCKED_INTENT_ANSWER_CHUNK", "EMAIL_RESPONSE_CHUNK", "EMAIL_OVERVIEW_CHUNK", "EMAIL_GENERATIVE_ANSWER_CHUNK", "CASE_SUMMARIZATION_CHUNK", "BLOCKED_CASE_SUMMARIZATION_CHUNK", "SUGGESTED_MESSAGE", "NOTES_CHUNK", "BLOCKED_NOTES_CHUNK", "PROACTIVE_RECOMMENDATION"
     #   resp.recommendations[0].data.reference.content_reference.knowledge_base_arn #=> String
     #   resp.recommendations[0].data.reference.content_reference.knowledge_base_id #=> String
     #   resp.recommendations[0].data.reference.content_reference.content_arn #=> String
@@ -4885,6 +4896,7 @@ module Aws::QConnect
     #   resp.recommendations[0].data.details.notes_data.completion #=> String
     #   resp.recommendations[0].data.details.notes_chunk_data.completion #=> String
     #   resp.recommendations[0].data.details.notes_chunk_data.next_chunk_token #=> String
+    #   resp.recommendations[0].data.details.proactive_recommendation_data.next_message_token #=> String
     #   resp.triggers #=> Array
     #   resp.triggers[0].id #=> String
     #   resp.triggers[0].type #=> String, one of "QUERY", "GENERATIVE"
@@ -4945,6 +4957,7 @@ module Aws::QConnect
     #   resp.session.tag_filter.or_conditions[0].tag_condition.value #=> String
     #   resp.session.ai_agent_configuration #=> Hash
     #   resp.session.ai_agent_configuration["AIAgentType"].ai_agent_id #=> String
+    #   resp.session.ai_agent_configuration["AIAgentType"].enabled #=> Boolean
     #   resp.session.origin #=> String, one of "SYSTEM", "CUSTOMER"
     #   resp.session.orchestrator_configuration_list #=> Array
     #   resp.session.orchestrator_configuration_list[0].ai_agent_id #=> String
@@ -5726,6 +5739,7 @@ module Aws::QConnect
     #   resp.assistant_summaries[0].capability_configuration.type #=> String, one of "V1", "V2"
     #   resp.assistant_summaries[0].ai_agent_configuration #=> Hash
     #   resp.assistant_summaries[0].ai_agent_configuration["AIAgentType"].ai_agent_id #=> String
+    #   resp.assistant_summaries[0].ai_agent_configuration["AIAgentType"].enabled #=> Boolean
     #   resp.assistant_summaries[0].orchestrator_configuration_list #=> Array
     #   resp.assistant_summaries[0].orchestrator_configuration_list[0].ai_agent_id #=> String
     #   resp.assistant_summaries[0].orchestrator_configuration_list[0].orchestrator_use_case #=> String
@@ -6741,6 +6755,7 @@ module Aws::QConnect
     #   resp.results[0].data.details.notes_data.completion #=> String
     #   resp.results[0].data.details.notes_chunk_data.completion #=> String
     #   resp.results[0].data.details.notes_chunk_data.next_chunk_token #=> String
+    #   resp.results[0].data.details.proactive_recommendation_data.next_message_token #=> String
     #   resp.results[0].type #=> String, one of "KNOWLEDGE_CONTENT", "INTENT_ANSWER", "GENERATIVE_ANSWER", "GENERATIVE_ANSWER_CHUNK", "BLOCKED_GENERATIVE_ANSWER_CHUNK", "INTENT_ANSWER_CHUNK", "BLOCKED_INTENT_ANSWER_CHUNK", "EMAIL_RESPONSE_CHUNK", "EMAIL_OVERVIEW_CHUNK", "EMAIL_GENERATIVE_ANSWER_CHUNK", "CASE_SUMMARIZATION_CHUNK", "BLOCKED_CASE_SUMMARIZATION_CHUNK", "NOTES", "NOTES_CHUNK", "BLOCKED_NOTES_CHUNK"
     #   resp.next_token #=> String
     #
@@ -7012,6 +7027,7 @@ module Aws::QConnect
     # @return [Types::RetrieveResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RetrieveResponse#results #results} => Array&lt;Types::RetrieveResult&gt;
+    #   * {Types::RetrieveResponse#errors #errors} => Array&lt;Types::RetrieveError&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -7101,6 +7117,10 @@ module Aws::QConnect
     #   resp.results[0].source_id #=> String
     #   resp.results[0].reference_type #=> String, one of "WEB_CRAWLER", "KNOWLEDGE_BASE", "BEDROCK_KB_S3", "BEDROCK_KB_WEB", "BEDROCK_KB_CONFLUENCE", "BEDROCK_KB_SALESFORCE", "BEDROCK_KB_SHAREPOINT", "BEDROCK_KB_KENDRA", "BEDROCK_KB_CUSTOM_DOCUMENT", "BEDROCK_KB_SQL"
     #   resp.results[0].content_text #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].association_id #=> String
+    #   resp.errors[0].code #=> String, one of "ACCESS_DENIED", "RESOURCE_NOT_FOUND", "VALIDATION_ERROR", "THROTTLED", "DEPENDENCY_FAILED", "INTERNAL_SERVER_ERROR"
+    #   resp.errors[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/Retrieve AWS API Documentation
     #
@@ -8630,6 +8650,7 @@ module Aws::QConnect
     #     ai_agent_type: "MANUAL_SEARCH", # required, accepts MANUAL_SEARCH, ANSWER_RECOMMENDATION, SELF_SERVICE, EMAIL_RESPONSE, EMAIL_OVERVIEW, EMAIL_GENERATIVE_ANSWER, ORCHESTRATION, NOTE_TAKING, CASE_SUMMARIZATION
     #     configuration: { # required
     #       ai_agent_id: "UuidWithQualifier", # required
+    #       enabled: false,
     #     },
     #     orchestrator_use_case: "NonEmptyString",
     #   })
@@ -8649,6 +8670,7 @@ module Aws::QConnect
     #   resp.assistant.capability_configuration.type #=> String, one of "V1", "V2"
     #   resp.assistant.ai_agent_configuration #=> Hash
     #   resp.assistant.ai_agent_configuration["AIAgentType"].ai_agent_id #=> String
+    #   resp.assistant.ai_agent_configuration["AIAgentType"].enabled #=> Boolean
     #   resp.assistant.orchestrator_configuration_list #=> Array
     #   resp.assistant.orchestrator_configuration_list[0].ai_agent_id #=> String
     #   resp.assistant.orchestrator_configuration_list[0].orchestrator_use_case #=> String
@@ -9576,6 +9598,7 @@ module Aws::QConnect
     #     ai_agent_configuration: {
     #       "MANUAL_SEARCH" => {
     #         ai_agent_id: "UuidWithQualifier", # required
+    #         enabled: false,
     #       },
     #     },
     #     orchestrator_configuration_list: [
@@ -9609,6 +9632,7 @@ module Aws::QConnect
     #   resp.session.tag_filter.or_conditions[0].tag_condition.value #=> String
     #   resp.session.ai_agent_configuration #=> Hash
     #   resp.session.ai_agent_configuration["AIAgentType"].ai_agent_id #=> String
+    #   resp.session.ai_agent_configuration["AIAgentType"].enabled #=> Boolean
     #   resp.session.origin #=> String, one of "SYSTEM", "CUSTOMER"
     #   resp.session.orchestrator_configuration_list #=> Array
     #   resp.session.orchestrator_configuration_list[0].ai_agent_id #=> String
@@ -9699,7 +9723,7 @@ module Aws::QConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-qconnect'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

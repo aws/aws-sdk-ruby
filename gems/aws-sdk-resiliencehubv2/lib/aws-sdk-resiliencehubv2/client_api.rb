@@ -109,6 +109,16 @@ module Aws::Resiliencehubv2
     DependencyInsightsStatus = Shapes::StringShape.new(name: 'DependencyInsightsStatus')
     DependencySummary = Shapes::StructureShape.new(name: 'DependencySummary')
     DependencySummaryList = Shapes::ListShape.new(name: 'DependencySummaryList')
+    DevOpsAgentConfidence = Shapes::StringShape.new(name: 'DevOpsAgentConfidence')
+    DevOpsAgentConfiguration = Shapes::StructureShape.new(name: 'DevOpsAgentConfiguration')
+    DevOpsAgentConfigurationView = Shapes::StructureShape.new(name: 'DevOpsAgentConfigurationView')
+    DevOpsAgentConnectionStatus = Shapes::StringShape.new(name: 'DevOpsAgentConnectionStatus')
+    DevOpsAgentInvestigation = Shapes::StructureShape.new(name: 'DevOpsAgentInvestigation')
+    DevOpsAgentInvestigationStatus = Shapes::StringShape.new(name: 'DevOpsAgentInvestigationStatus')
+    DevOpsAgentRegion = Shapes::StringShape.new(name: 'DevOpsAgentRegion')
+    DevOpsAgentSpaceArn = Shapes::StringShape.new(name: 'DevOpsAgentSpaceArn')
+    DevOpsAgentSpaceId = Shapes::StringShape.new(name: 'DevOpsAgentSpaceId')
+    DevOpsAgentVerdict = Shapes::StringShape.new(name: 'DevOpsAgentVerdict')
     DisasterRecoverySource = Shapes::StructureShape.new(name: 'DisasterRecoverySource')
     Double = Shapes::FloatShape.new(name: 'Double')
     EdgePropertyList = Shapes::ListShape.new(name: 'EdgePropertyList')
@@ -628,6 +638,7 @@ module Aws::Resiliencehubv2
     CreateServiceRequest.add_member(:dependency_discovery, Shapes::ShapeRef.new(shape: DependencyDiscoveryInput, location_name: "dependencyDiscovery"))
     CreateServiceRequest.add_member(:report_configuration, Shapes::ShapeRef.new(shape: ServiceReportConfiguration, location_name: "reportConfiguration"))
     CreateServiceRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
+    CreateServiceRequest.add_member(:dev_ops_agent_configuration, Shapes::ShapeRef.new(shape: DevOpsAgentConfiguration, location_name: "devOpsAgentConfiguration"))
     CreateServiceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateServiceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateServiceRequest.struct_class = Types::CreateServiceRequest
@@ -774,6 +785,25 @@ module Aws::Resiliencehubv2
 
     DependencySummaryList.member = Shapes::ShapeRef.new(shape: DependencySummary)
 
+    DevOpsAgentConfiguration.add_member(:agent_space_arn, Shapes::ShapeRef.new(shape: DevOpsAgentSpaceArn, location_name: "agentSpaceArn"))
+    DevOpsAgentConfiguration.struct_class = Types::DevOpsAgentConfiguration
+
+    DevOpsAgentConfigurationView.add_member(:agent_space_arn, Shapes::ShapeRef.new(shape: DevOpsAgentSpaceArn, location_name: "agentSpaceArn"))
+    DevOpsAgentConfigurationView.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: DevOpsAgentSpaceId, location_name: "agentSpaceId"))
+    DevOpsAgentConfigurationView.add_member(:region, Shapes::ShapeRef.new(shape: DevOpsAgentRegion, location_name: "region"))
+    DevOpsAgentConfigurationView.add_member(:status, Shapes::ShapeRef.new(shape: DevOpsAgentConnectionStatus, location_name: "status"))
+    DevOpsAgentConfigurationView.add_member(:operator_app_url, Shapes::ShapeRef.new(shape: String, location_name: "operatorAppUrl"))
+    DevOpsAgentConfigurationView.add_member(:connected_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "connectedAt"))
+    DevOpsAgentConfigurationView.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    DevOpsAgentConfigurationView.struct_class = Types::DevOpsAgentConfigurationView
+
+    DevOpsAgentInvestigation.add_member(:verdict, Shapes::ShapeRef.new(shape: DevOpsAgentVerdict, location_name: "verdict"))
+    DevOpsAgentInvestigation.add_member(:confidence, Shapes::ShapeRef.new(shape: DevOpsAgentConfidence, location_name: "confidence"))
+    DevOpsAgentInvestigation.add_member(:deep_link, Shapes::ShapeRef.new(shape: String, location_name: "deepLink"))
+    DevOpsAgentInvestigation.add_member(:status, Shapes::ShapeRef.new(shape: DevOpsAgentInvestigationStatus, location_name: "status"))
+    DevOpsAgentInvestigation.add_member(:summary, Shapes::ShapeRef.new(shape: String, location_name: "summary"))
+    DevOpsAgentInvestigation.struct_class = Types::DevOpsAgentInvestigation
+
     DisasterRecoverySource.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
     DisasterRecoverySource.add_member(:policy_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "policyName"))
     DisasterRecoverySource.add_member(:source, Shapes::ShapeRef.new(shape: PolicyValueSource, location_name: "source"))
@@ -850,6 +880,7 @@ module Aws::Resiliencehubv2
     Finding.add_member(:observability_recommendations, Shapes::ShapeRef.new(shape: ObservabilityRecommendationsList, location_name: "observabilityRecommendations"))
     Finding.add_member(:testing_recommendations, Shapes::ShapeRef.new(shape: TestingRecommendationsList, location_name: "testingRecommendations"))
     Finding.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    Finding.add_member(:investigation_deep_link, Shapes::ShapeRef.new(shape: String, location_name: "investigationDeepLink"))
     Finding.struct_class = Types::Finding
 
     FindingSummary.add_member(:service_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "serviceArn"))
@@ -861,6 +892,7 @@ module Aws::Resiliencehubv2
     FindingSummary.add_member(:status, Shapes::ShapeRef.new(shape: FindingStatus, location_name: "status"))
     FindingSummary.add_member(:policy_component, Shapes::ShapeRef.new(shape: PolicyComponent, location_name: "policyComponent"))
     FindingSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    FindingSummary.add_member(:investigation_deep_link, Shapes::ShapeRef.new(shape: String, location_name: "investigationDeepLink"))
     FindingSummary.struct_class = Types::FindingSummary
 
     FindingsList.member = Shapes::ShapeRef.new(shape: FindingSummary)
@@ -1422,6 +1454,10 @@ module Aws::Resiliencehubv2
     Resource.add_member(:aws_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "awsRegion"))
     Resource.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "awsAccountId"))
     Resource.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "resourceType"))
+    Resource.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZoneId"))
+    Resource.add_member(:availability_zone_name, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZoneName"))
+    Resource.add_member(:containment_parent_id, Shapes::ShapeRef.new(shape: String, location_name: "containmentParentId"))
+    Resource.add_member(:logical_resource_group_id, Shapes::ShapeRef.new(shape: String, location_name: "logicalResourceGroupId"))
     Resource.struct_class = Types::Resource
 
     ResourceConfiguration.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagList, location_name: "resourceTags"))
@@ -1492,6 +1528,7 @@ module Aws::Resiliencehubv2
     Service.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, location_name: "organizationId"))
     Service.add_member(:ou_id, Shapes::ShapeRef.new(shape: OuId, location_name: "ouId"))
     Service.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
+    Service.add_member(:dev_ops_agent_configuration, Shapes::ShapeRef.new(shape: DevOpsAgentConfigurationView, location_name: "devOpsAgentConfiguration"))
     Service.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     Service.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     Service.struct_class = Types::Service
@@ -1654,6 +1691,8 @@ module Aws::Resiliencehubv2
     ServiceSummary.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, location_name: "regions"))
     ServiceSummary.add_member(:policy_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "policyArn"))
     ServiceSummary.add_member(:assessment_status, Shapes::ShapeRef.new(shape: AssessmentStatus, location_name: "assessmentStatus"))
+    ServiceSummary.add_member(:dev_ops_agent_status, Shapes::ShapeRef.new(shape: DevOpsAgentConnectionStatus, location_name: "devOpsAgentStatus"))
+    ServiceSummary.add_member(:dev_ops_agent_space_arn, Shapes::ShapeRef.new(shape: DevOpsAgentSpaceArn, location_name: "devOpsAgentSpaceArn"))
     ServiceSummary.add_member(:open_findings_count, Shapes::ShapeRef.new(shape: Integer, location_name: "openFindingsCount"))
     ServiceSummary.add_member(:resolved_findings_count, Shapes::ShapeRef.new(shape: Integer, location_name: "resolvedFindingsCount"))
     ServiceSummary.add_member(:dependency_discovery, Shapes::ShapeRef.new(shape: DependencyDiscoveryConfig, location_name: "dependencyDiscovery"))
@@ -1916,6 +1955,7 @@ module Aws::Resiliencehubv2
     TestRun.add_member(:permission_model, Shapes::ShapeRef.new(shape: PermissionModel, location_name: "permissionModel"))
     TestRun.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, location_name: "regions"))
     TestRun.add_member(:account_targeting, Shapes::ShapeRef.new(shape: AccountTargeting, location_name: "accountTargeting"))
+    TestRun.add_member(:dev_ops_agent_investigation, Shapes::ShapeRef.new(shape: DevOpsAgentInvestigation, location_name: "devOpsAgentInvestigation"))
     TestRun.struct_class = Types::TestRun
 
     TestRunDependencySummary.add_member(:dependency_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "dependencyId"))
@@ -2140,6 +2180,7 @@ module Aws::Resiliencehubv2
     UpdateServiceRequest.add_member(:permission_model, Shapes::ShapeRef.new(shape: PermissionModel, location_name: "permissionModel"))
     UpdateServiceRequest.add_member(:dependency_discovery, Shapes::ShapeRef.new(shape: DependencyDiscoveryInput, location_name: "dependencyDiscovery"))
     UpdateServiceRequest.add_member(:report_configuration, Shapes::ShapeRef.new(shape: ServiceReportConfiguration, location_name: "reportConfiguration"))
+    UpdateServiceRequest.add_member(:dev_ops_agent_configuration, Shapes::ShapeRef.new(shape: DevOpsAgentConfiguration, location_name: "devOpsAgentConfiguration"))
     UpdateServiceRequest.struct_class = Types::UpdateServiceRequest
 
     UpdateServiceResponse.add_member(:service, Shapes::ShapeRef.new(shape: Service, required: true, location_name: "service"))
@@ -2613,6 +2654,7 @@ module Aws::Resiliencehubv2
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
@@ -2626,6 +2668,7 @@ module Aws::Resiliencehubv2
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 

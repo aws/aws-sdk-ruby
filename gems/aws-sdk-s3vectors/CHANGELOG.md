@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2026-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.25.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.24.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.23.0 (2026-09-30)
+------------------
+
+* Feature - Amazon S3 Vectors now supports metadata prefiltering, providing higher recall on filtered queries.
+
 1.22.0 (2026-09-11)
 ------------------
 

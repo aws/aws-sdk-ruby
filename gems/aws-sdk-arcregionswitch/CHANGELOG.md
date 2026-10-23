@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2026-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.28.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.27.0 (2026-10-14)
+------------------
+
+* Feature - Features - Adds support for an optional payload to invoke the Lambda function with as part of the Custom action Lambda execution block
+
+1.26.0 (2026-10-13)
+------------------
+
+* Feature - Adds support for SSM Execution Block in Region switch plans
+
+1.25.0 (2026-09-25)
+------------------
+
+* Feature - Adds a service quota checker to Region switch to verify quota parity between your primary and standby Region, and automatically submit quota limit increases. Adds an optional EC2 Auto Scaling and ECS setting that waits for instances or tasks in the scaled-up Region to be healthy in target groups.
+
 1.24.0 (2026-09-11)
 ------------------
 

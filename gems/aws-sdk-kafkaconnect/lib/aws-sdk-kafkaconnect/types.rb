@@ -1669,6 +1669,37 @@ module Aws::KafkaConnect
       include Aws::Structure
     end
 
+    # @!attribute [rw] connector_arn
+    #   The Amazon Resource Name (ARN) of the connector that you want to
+    #   pause.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/PauseConnectorRequest AWS API Documentation
+    #
+    class PauseConnectorRequest < Struct.new(
+      :connector_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_arn
+    #   The Amazon Resource Name (ARN) of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_operation_arn
+    #   The Amazon Resource Name (ARN) of the connector operation created to
+    #   perform the pause.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/PauseConnectorResponse AWS API Documentation
+    #
+    class PauseConnectorResponse < Struct.new(
+      :connector_arn,
+      :connector_operation_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A plugin is an Amazon Web Services resource that contains the code
     # that defines your connector logic.
     #
@@ -1792,6 +1823,37 @@ module Aws::KafkaConnect
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/RestartConnectorResponse AWS API Documentation
     #
     class RestartConnectorResponse < Struct.new(
+      :connector_arn,
+      :connector_operation_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_arn
+    #   The Amazon Resource Name (ARN) of the connector that you want to
+    #   resume.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/ResumeConnectorRequest AWS API Documentation
+    #
+    class ResumeConnectorRequest < Struct.new(
+      :connector_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_arn
+    #   The Amazon Resource Name (ARN) of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_operation_arn
+    #   The Amazon Resource Name (ARN) of the connector operation created to
+    #   perform the resume.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/ResumeConnectorResponse AWS API Documentation
+    #
+    class ResumeConnectorResponse < Struct.new(
       :connector_arn,
       :connector_operation_arn)
       SENSITIVE = []
@@ -2099,6 +2161,18 @@ module Aws::KafkaConnect
     #   connector.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] skip_health_validation
+    #   Specifies whether the update bypasses connector-level and task-level
+    #   health checks. If `true`, the update skips the health checks. The
+    #   update stays in effect even if the connector or its tasks are
+    #   unhealthy, and Amazon MSK Connect doesn't roll it back. If `false`
+    #   or not specified, the health checks run. If they fail, MSK Connect
+    #   automatically rolls the connector back to its previous
+    #   configuration, and the update doesn't take effect. To update a
+    #   connector that is in the `PAUSED` state, you must set this parameter
+    #   to `true`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] connector_arn
     #   The Amazon Resource Name (ARN) of the connector that you want to
     #   update.
@@ -2113,6 +2187,7 @@ module Aws::KafkaConnect
     class UpdateConnectorRequest < Struct.new(
       :capacity,
       :connector_configuration,
+      :skip_health_validation,
       :connector_arn,
       :current_version)
       SENSITIVE = [:connector_configuration]

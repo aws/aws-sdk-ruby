@@ -103,6 +103,7 @@ module Aws::Invoicing
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    MarketplacePunchOutPreference = Shapes::StructureShape.new(name: 'MarketplacePunchOutPreference')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxResultsInteger = Shapes::IntegerShape.new(name: 'MaxResultsInteger')
     Month = Shapes::IntegerShape.new(name: 'Month')
@@ -232,6 +233,8 @@ module Aws::Invoicing
     CreateProcurementPortalPreferenceRequest.add_member(:einvoice_delivery_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "EinvoiceDeliveryEnabled"))
     CreateProcurementPortalPreferenceRequest.add_member(:einvoice_delivery_preference, Shapes::ShapeRef.new(shape: EinvoiceDeliveryPreference, location_name: "EinvoiceDeliveryPreference"))
     CreateProcurementPortalPreferenceRequest.add_member(:purchase_order_retrieval_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "PurchaseOrderRetrievalEnabled"))
+    CreateProcurementPortalPreferenceRequest.add_member(:marketplace_punch_out_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "MarketplacePunchOutEnabled"))
+    CreateProcurementPortalPreferenceRequest.add_member(:marketplace_punch_out_preference, Shapes::ShapeRef.new(shape: MarketplacePunchOutPreference, location_name: "MarketplacePunchOutPreference"))
     CreateProcurementPortalPreferenceRequest.add_member(:contacts, Shapes::ShapeRef.new(shape: Contacts, required: true, location_name: "Contacts"))
     CreateProcurementPortalPreferenceRequest.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagList, location_name: "ResourceTags"))
     CreateProcurementPortalPreferenceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: BasicStringWithoutSpace, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
@@ -468,6 +471,9 @@ module Aws::Invoicing
     ListTagsForResourceResponse.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagList, location_name: "ResourceTags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    MarketplacePunchOutPreference.add_member(:approval_request_redirect_url, Shapes::ShapeRef.new(shape: BasicStringWithoutSpace, location_name: "ApprovalRequestRedirectUrl"))
+    MarketplacePunchOutPreference.struct_class = Types::MarketplacePunchOutPreference
+
     ProcurementPortal.add_member(:portal_identifier, Shapes::ShapeRef.new(shape: ProcurementPortalIdString, required: true, location_name: "PortalIdentifier"))
     ProcurementPortal.add_member(:portal_name, Shapes::ShapeRef.new(shape: ProcurementPortalName, required: true, location_name: "PortalName"))
     ProcurementPortal.add_member(:portal_display_name, Shapes::ShapeRef.new(shape: BasicString, location_name: "PortalDisplayName"))
@@ -489,6 +495,8 @@ module Aws::Invoicing
     ProcurementPortalPreference.add_member(:einvoice_delivery_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "EinvoiceDeliveryEnabled"))
     ProcurementPortalPreference.add_member(:einvoice_delivery_preference, Shapes::ShapeRef.new(shape: EinvoiceDeliveryPreference, location_name: "EinvoiceDeliveryPreference"))
     ProcurementPortalPreference.add_member(:purchase_order_retrieval_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "PurchaseOrderRetrievalEnabled"))
+    ProcurementPortalPreference.add_member(:marketplace_punch_out_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "MarketplacePunchOutEnabled"))
+    ProcurementPortalPreference.add_member(:marketplace_punch_out_preference, Shapes::ShapeRef.new(shape: MarketplacePunchOutPreference, location_name: "MarketplacePunchOutPreference"))
     ProcurementPortalPreference.add_member(:contacts, Shapes::ShapeRef.new(shape: Contacts, location_name: "Contacts"))
     ProcurementPortalPreference.add_member(:einvoice_delivery_preference_status, Shapes::ShapeRef.new(shape: ProcurementPortalPreferenceStatus, location_name: "EinvoiceDeliveryPreferenceStatus"))
     ProcurementPortalPreference.add_member(:einvoice_delivery_preference_status_reason, Shapes::ShapeRef.new(shape: BasicString, location_name: "EinvoiceDeliveryPreferenceStatusReason"))
@@ -515,6 +523,7 @@ module Aws::Invoicing
     ProcurementPortalPreferenceSummary.add_member(:selector, Shapes::ShapeRef.new(shape: ProcurementPortalPreferenceSelector, location_name: "Selector"))
     ProcurementPortalPreferenceSummary.add_member(:einvoice_delivery_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "EinvoiceDeliveryEnabled"))
     ProcurementPortalPreferenceSummary.add_member(:purchase_order_retrieval_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "PurchaseOrderRetrievalEnabled"))
+    ProcurementPortalPreferenceSummary.add_member(:marketplace_punch_out_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "MarketplacePunchOutEnabled"))
     ProcurementPortalPreferenceSummary.add_member(:einvoice_delivery_preference_status, Shapes::ShapeRef.new(shape: ProcurementPortalPreferenceStatus, location_name: "EinvoiceDeliveryPreferenceStatus"))
     ProcurementPortalPreferenceSummary.add_member(:einvoice_delivery_preference_status_reason, Shapes::ShapeRef.new(shape: BasicString, location_name: "EinvoiceDeliveryPreferenceStatusReason"))
     ProcurementPortalPreferenceSummary.add_member(:purchase_order_retrieval_preference_status, Shapes::ShapeRef.new(shape: ProcurementPortalPreferenceStatus, location_name: "PurchaseOrderRetrievalPreferenceStatus"))
@@ -550,6 +559,8 @@ module Aws::Invoicing
     PutProcurementPortalPreferenceRequest.add_member(:einvoice_delivery_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "EinvoiceDeliveryEnabled"))
     PutProcurementPortalPreferenceRequest.add_member(:einvoice_delivery_preference, Shapes::ShapeRef.new(shape: EinvoiceDeliveryPreference, location_name: "EinvoiceDeliveryPreference"))
     PutProcurementPortalPreferenceRequest.add_member(:purchase_order_retrieval_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "PurchaseOrderRetrievalEnabled"))
+    PutProcurementPortalPreferenceRequest.add_member(:marketplace_punch_out_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "MarketplacePunchOutEnabled"))
+    PutProcurementPortalPreferenceRequest.add_member(:marketplace_punch_out_preference, Shapes::ShapeRef.new(shape: MarketplacePunchOutPreference, location_name: "MarketplacePunchOutPreference"))
     PutProcurementPortalPreferenceRequest.add_member(:contacts, Shapes::ShapeRef.new(shape: Contacts, required: true, location_name: "Contacts"))
     PutProcurementPortalPreferenceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: BasicStringWithoutSpace, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     PutProcurementPortalPreferenceRequest.struct_class = Types::PutProcurementPortalPreferenceRequest
@@ -766,6 +777,7 @@ module Aws::Invoicing
         o.input = Shapes::ShapeRef.new(shape: DeleteProcurementPortalPreferenceRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteProcurementPortalPreferenceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)

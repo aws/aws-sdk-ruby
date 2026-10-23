@@ -1,0 +1,251 @@
+{
+  "version" : 2,
+  "testCases" : [ {
+    "id" : "ExecuteSamplingOperationSample",
+    "operationName" : "ExecuteSamplingOperation",
+    "input" : {
+      "trainingSessionName" : "smoke-test-nonexistent-session",
+      "operationConfig" : {
+        "sample" : {
+          "prompt" : {
+            "chunks" : [ {
+              "tokens" : [ 1, 2, 3 ],
+              "type" : "encoded_text"
+            } ]
+          },
+          "numSamples" : 1,
+          "samplingParams" : {
+            "maxTokens" : 512
+          }
+        }
+      }
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ExecuteSamplingOperationComputeLogprobs",
+    "operationName" : "ExecuteSamplingOperation",
+    "input" : {
+      "trainingSessionName" : "smoke-test-nonexistent-session",
+      "operationConfig" : {
+        "computeLogprobs" : {
+          "prompt" : {
+            "chunks" : [ {
+              "tokens" : [ 1, 2, 3 ],
+              "type" : "encoded_text"
+            } ]
+          }
+        }
+      }
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ExecuteSamplingOperationLoadWeightsForSampling",
+    "operationName" : "ExecuteSamplingOperation",
+    "input" : {
+      "trainingSessionName" : "smoke-test-nonexistent-session",
+      "operationConfig" : {
+        "loadWeightsForSampling" : {
+          "modelPackageArn" : "arn:aws:sagemaker:us-west-2:123456789012:model-package/smoke-test/1"
+        }
+      }
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ExecuteTrainingOperationForward",
+    "operationName" : "ExecuteTrainingOperation",
+    "input" : {
+      "trainingSessionName" : "smoke-test-nonexistent-session",
+      "sequenceNumber" : 1,
+      "operationConfig" : {
+        "forward" : {
+          "lossFnName" : "cross_entropy",
+          "datumList" : [ {
+            "modelInput" : {
+              "chunks" : [ {
+                "tokens" : [ 1, 2, 3 ],
+                "type" : "encoded_text"
+              } ]
+            }
+          } ]
+        }
+      }
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ExecuteTrainingOperationForwardBackward",
+    "operationName" : "ExecuteTrainingOperation",
+    "input" : {
+      "trainingSessionName" : "smoke-test-nonexistent-session",
+      "sequenceNumber" : 1,
+      "operationConfig" : {
+        "forwardBackward" : {
+          "lossFnName" : "importance_sampling",
+          "datumList" : [ {
+            "modelInput" : {
+              "chunks" : [ {
+                "tokens" : [ 1, 2, 3 ],
+                "type" : "encoded_text"
+              } ]
+            }
+          } ]
+        }
+      }
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ExecuteTrainingOperationOptimizerStep",
+    "operationName" : "ExecuteTrainingOperation",
+    "input" : {
+      "trainingSessionName" : "smoke-test-nonexistent-session",
+      "sequenceNumber" : 1,
+      "operationConfig" : {
+        "optimizerStep" : {
+          "adamParamsConfig" : {
+            "learningRate" : 0.001
+          }
+        }
+      }
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ExecuteTrainingOperationSaveWeights",
+    "operationName" : "ExecuteTrainingOperation",
+    "input" : {
+      "trainingSessionName" : "smoke-test-nonexistent-session",
+      "sequenceNumber" : 1,
+      "operationConfig" : {
+        "saveWeights" : { }
+      }
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ExecuteTrainingOperationSaveState",
+    "operationName" : "ExecuteTrainingOperation",
+    "input" : {
+      "trainingSessionName" : "smoke-test-nonexistent-session",
+      "sequenceNumber" : 1,
+      "operationConfig" : {
+        "saveState" : { }
+      }
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ExecuteTrainingOperationLoadState",
+    "operationName" : "ExecuteTrainingOperation",
+    "input" : {
+      "trainingSessionName" : "smoke-test-nonexistent-session",
+      "sequenceNumber" : 1,
+      "operationConfig" : {
+        "loadState" : {
+          "modelPackageArn" : "arn:aws:sagemaker:us-west-2:123456789012:model-package/smoke-test",
+          "loadOptimizer" : true
+        }
+      }
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetTrainingOperationResultFailure",
+    "operationName" : "GetTrainingOperationResult",
+    "input" : {
+      "trainingSessionName" : "smoke-test-nonexistent-session",
+      "operationId" : "smoke-test-nonexistent-operation"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetSamplingOperationResultFailure",
+    "operationName" : "GetSamplingOperationResult",
+    "input" : {
+      "trainingSessionName" : "smoke-test-nonexistent-session",
+      "operationId" : "smoke-test-nonexistent-operation"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  } ]
+}

@@ -199,12 +199,19 @@ module Aws::NeptuneGraph
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -784,7 +791,7 @@ module Aws::NeptuneGraph
     #
     # @option params [Integer] :replica_count
     #   The number of replicas in other AZs to provision on the new graph
-    #   after import. Default = 0, Min = 0, Max = 2.
+    #   after import. Default = 1, Min = 0, Max = 2.
     #
     #   Additional charges equivalent to the m-NCUs selected for the graph
     #   apply for each replica.
@@ -1748,6 +1755,11 @@ module Aws::NeptuneGraph
 
     # Lists import tasks.
     #
+    # @option params [String] :graph_identifier
+    #   The unique identifier of the Neptune Analytics graph. When provided,
+    #   the service returns only import tasks associated with this graph. If
+    #   not specified, the service returns all import tasks.
+    #
     # @option params [String] :next_token
     #   Pagination token used to paginate output.
     #
@@ -1774,6 +1786,7 @@ module Aws::NeptuneGraph
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_import_tasks({
+    #     graph_identifier: "GraphIdentifier",
     #     next_token: "PaginationToken",
     #     max_results: 1,
     #   })
@@ -2565,7 +2578,7 @@ module Aws::NeptuneGraph
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-neptunegraph'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

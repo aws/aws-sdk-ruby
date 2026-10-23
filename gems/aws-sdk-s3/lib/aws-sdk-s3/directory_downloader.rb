@@ -148,8 +148,9 @@ module Aws
             stream_objects
             @object_queue << DONE_MARKER
           rescue ClosedQueueError
-            # abort requested
-          rescue StandardError => e
+            nil # abort requested
+          # Any error, or the consumer waits on the queue forever
+          rescue Exception => e # rubocop:disable Lint/RescueException
             close
             raise e
           end
@@ -208,7 +209,12 @@ module Aws
         end
 
         def validate_key(key)
-          segments = key.split('/')
+          validation_key = key
+          if File::ALT_SEPARATOR
+            validation_key = key.gsub(File::ALT_SEPARATOR, File::SEPARATOR)
+          end
+
+          segments = validation_key.split(File::SEPARATOR)
           return unless segments.any? { |s| %w[. ..].include?(s) }
 
           DirectoryDownloadError.new("invalid key '#{key}': contains '.' or '..' path segments")

@@ -73,6 +73,7 @@ module Aws::MediaConvert
     AudioSelector = Shapes::StructureShape.new(name: 'AudioSelector')
     AudioSelectorGroup = Shapes::StructureShape.new(name: 'AudioSelectorGroup')
     AudioSelectorType = Shapes::StringShape.new(name: 'AudioSelectorType')
+    AudioSmpte337Passthrough = Shapes::StringShape.new(name: 'AudioSmpte337Passthrough')
     AudioTypeControl = Shapes::StringShape.new(name: 'AudioTypeControl')
     AutomatedAbrRule = Shapes::StructureShape.new(name: 'AutomatedAbrRule')
     AutomatedAbrSettings = Shapes::StructureShape.new(name: 'AutomatedAbrSettings')
@@ -84,6 +85,7 @@ module Aws::MediaConvert
     Av1FramerateConversionAlgorithm = Shapes::StringShape.new(name: 'Av1FramerateConversionAlgorithm')
     Av1QvbrSettings = Shapes::StructureShape.new(name: 'Av1QvbrSettings')
     Av1RateControlMode = Shapes::StringShape.new(name: 'Av1RateControlMode')
+    Av1SceneChangeDetect = Shapes::StringShape.new(name: 'Av1SceneChangeDetect')
     Av1Settings = Shapes::StructureShape.new(name: 'Av1Settings')
     Av1SpatialAdaptiveQuantization = Shapes::StringShape.new(name: 'Av1SpatialAdaptiveQuantization')
     AvailBlanking = Shapes::StructureShape.new(name: 'AvailBlanking')
@@ -191,6 +193,7 @@ module Aws::MediaConvert
     CreateQueueResponse = Shapes::StructureShape.new(name: 'CreateQueueResponse')
     CreateResourceShareRequest = Shapes::StructureShape.new(name: 'CreateResourceShareRequest')
     CreateResourceShareResponse = Shapes::StructureShape.new(name: 'CreateResourceShareResponse')
+    DashAdaptationSetGrouping = Shapes::StringShape.new(name: 'DashAdaptationSetGrouping')
     DashAdditionalManifest = Shapes::StructureShape.new(name: 'DashAdditionalManifest')
     DashIsoEncryptionSettings = Shapes::StructureShape.new(name: 'DashIsoEncryptionSettings')
     DashIsoGroupAudioChannelConfigSchemeIdUri = Shapes::StringShape.new(name: 'DashIsoGroupAudioChannelConfigSchemeIdUri')
@@ -602,6 +605,7 @@ module Aws::MediaConvert
     OutputSettings = Shapes::StructureShape.new(name: 'OutputSettings')
     PadVideo = Shapes::StringShape.new(name: 'PadVideo')
     PartnerWatermarking = Shapes::StructureShape.new(name: 'PartnerWatermarking')
+    PassthroughSegmentationMode = Shapes::StringShape.new(name: 'PassthroughSegmentationMode')
     PassthroughSettings = Shapes::StructureShape.new(name: 'PassthroughSettings')
     Policy = Shapes::StructureShape.new(name: 'Policy')
     Preset = Shapes::StructureShape.new(name: 'Preset')
@@ -839,6 +843,7 @@ module Aws::MediaConvert
     __integerMin1000Max1152000000 = Shapes::IntegerShape.new(name: '__integerMin1000Max1152000000')
     __integerMin1000Max1466400000 = Shapes::IntegerShape.new(name: '__integerMin1000Max1466400000')
     __integerMin1000Max288000000 = Shapes::IntegerShape.new(name: '__integerMin1000Max288000000')
+    __integerMin1000Max3000 = Shapes::IntegerShape.new(name: '__integerMin1000Max3000')
     __integerMin1000Max30000 = Shapes::IntegerShape.new(name: '__integerMin1000Max30000')
     __integerMin1000Max300000000 = Shapes::IntegerShape.new(name: '__integerMin1000Max300000000')
     __integerMin1000Max480000000 = Shapes::IntegerShape.new(name: '__integerMin1000Max480000000')
@@ -920,6 +925,7 @@ module Aws::MediaConvert
     __listOfCmafAdditionalManifest = Shapes::ListShape.new(name: '__listOfCmafAdditionalManifest')
     __listOfCmafImageBasedTrickPlayVariant = Shapes::ListShape.new(name: '__listOfCmafImageBasedTrickPlayVariant')
     __listOfColorConversion3DLUTSetting = Shapes::ListShape.new(name: '__listOfColorConversion3DLUTSetting')
+    __listOfDashAdaptationSetGrouping = Shapes::ListShape.new(name: '__listOfDashAdaptationSetGrouping')
     __listOfDashAdditionalManifest = Shapes::ListShape.new(name: '__listOfDashAdditionalManifest')
     __listOfDashIsoImageBasedTrickPlayVariant = Shapes::ListShape.new(name: '__listOfDashIsoImageBasedTrickPlayVariant')
     __listOfElementalInferenceFeature = Shapes::ListShape.new(name: '__listOfElementalInferenceFeature')
@@ -941,6 +947,7 @@ module Aws::MediaConvert
     __listOfJobEngineVersion = Shapes::ListShape.new(name: '__listOfJobEngineVersion')
     __listOfJobTemplate = Shapes::ListShape.new(name: '__listOfJobTemplate')
     __listOfJobsQueryFilter = Shapes::ListShape.new(name: '__listOfJobsQueryFilter')
+    __listOfMotionImageInserter = Shapes::ListShape.new(name: '__listOfMotionImageInserter')
     __listOfMsSmoothAdditionalManifest = Shapes::ListShape.new(name: '__listOfMsSmoothAdditionalManifest')
     __listOfMultiViewSettings = Shapes::ListShape.new(name: '__listOfMultiViewSettings')
     __listOfOutput = Shapes::ListShape.new(name: '__listOfOutput')
@@ -1178,6 +1185,7 @@ module Aws::MediaConvert
     AudioSelector.add_member(:program_selection, Shapes::ShapeRef.new(shape: __integerMin0Max8, location_name: "programSelection"))
     AudioSelector.add_member(:remix_settings, Shapes::ShapeRef.new(shape: RemixSettings, location_name: "remixSettings"))
     AudioSelector.add_member(:selector_type, Shapes::ShapeRef.new(shape: AudioSelectorType, location_name: "selectorType"))
+    AudioSelector.add_member(:smpte_337_passthrough, Shapes::ShapeRef.new(shape: AudioSmpte337Passthrough, location_name: "smpte337Passthrough"))
     AudioSelector.add_member(:streams, Shapes::ShapeRef.new(shape: __listOf__integerMin1Max2147483647, location_name: "streams"))
     AudioSelector.add_member(:tracks, Shapes::ShapeRef.new(shape: __listOf__integerMin1Max2147483647, location_name: "tracks"))
     AudioSelector.struct_class = Types::AudioSelector
@@ -1208,6 +1216,7 @@ module Aws::MediaConvert
 
     Av1Settings.add_member(:adaptive_quantization, Shapes::ShapeRef.new(shape: Av1AdaptiveQuantization, location_name: "adaptiveQuantization"))
     Av1Settings.add_member(:bit_depth, Shapes::ShapeRef.new(shape: Av1BitDepth, location_name: "bitDepth"))
+    Av1Settings.add_member(:bitrate, Shapes::ShapeRef.new(shape: __integerMin1000Max1152000000, location_name: "bitrate"))
     Av1Settings.add_member(:film_grain_synthesis, Shapes::ShapeRef.new(shape: Av1FilmGrainSynthesis, location_name: "filmGrainSynthesis"))
     Av1Settings.add_member(:framerate_control, Shapes::ShapeRef.new(shape: Av1FramerateControl, location_name: "framerateControl"))
     Av1Settings.add_member(:framerate_conversion_algorithm, Shapes::ShapeRef.new(shape: Av1FramerateConversionAlgorithm, location_name: "framerateConversionAlgorithm"))
@@ -1219,7 +1228,10 @@ module Aws::MediaConvert
     Av1Settings.add_member(:per_frame_metrics, Shapes::ShapeRef.new(shape: __listOfFrameMetricType, location_name: "perFrameMetrics"))
     Av1Settings.add_member(:qvbr_settings, Shapes::ShapeRef.new(shape: Av1QvbrSettings, location_name: "qvbrSettings"))
     Av1Settings.add_member(:rate_control_mode, Shapes::ShapeRef.new(shape: Av1RateControlMode, location_name: "rateControlMode"))
+    Av1Settings.add_member(:scene_change_detect, Shapes::ShapeRef.new(shape: Av1SceneChangeDetect, location_name: "sceneChangeDetect"))
     Av1Settings.add_member(:slices, Shapes::ShapeRef.new(shape: __integerMin1Max32, location_name: "slices"))
+    Av1Settings.add_member(:sliding_window_ms, Shapes::ShapeRef.new(shape: __integerMin1000Max3000, location_name: "slidingWindowMs"))
+    Av1Settings.add_member(:sliding_window_peak_bitrate, Shapes::ShapeRef.new(shape: __integerMin1000Max1152000000, location_name: "slidingWindowPeakBitrate"))
     Av1Settings.add_member(:spatial_adaptive_quantization, Shapes::ShapeRef.new(shape: Av1SpatialAdaptiveQuantization, location_name: "spatialAdaptiveQuantization"))
     Av1Settings.struct_class = Types::Av1Settings
 
@@ -1352,6 +1364,7 @@ module Aws::MediaConvert
     CmafGroupSettings.add_member(:base_url, Shapes::ShapeRef.new(shape: __string, location_name: "baseUrl"))
     CmafGroupSettings.add_member(:client_cache, Shapes::ShapeRef.new(shape: CmafClientCache, location_name: "clientCache"))
     CmafGroupSettings.add_member(:codec_specification, Shapes::ShapeRef.new(shape: CmafCodecSpecification, location_name: "codecSpecification"))
+    CmafGroupSettings.add_member(:dash_adaptation_set_grouping, Shapes::ShapeRef.new(shape: __listOfDashAdaptationSetGrouping, location_name: "dashAdaptationSetGrouping"))
     CmafGroupSettings.add_member(:dash_i_frame_trick_play_name_modifier, Shapes::ShapeRef.new(shape: __stringMin1Max256, location_name: "dashIFrameTrickPlayNameModifier"))
     CmafGroupSettings.add_member(:dash_manifest_style, Shapes::ShapeRef.new(shape: DashManifestStyle, location_name: "dashManifestStyle"))
     CmafGroupSettings.add_member(:destination, Shapes::ShapeRef.new(shape: __stringPatternS3, location_name: "destination"))
@@ -1553,6 +1566,7 @@ module Aws::MediaConvert
     DashIsoGroupSettings.add_member(:additional_manifests, Shapes::ShapeRef.new(shape: __listOfDashAdditionalManifest, location_name: "additionalManifests"))
     DashIsoGroupSettings.add_member(:audio_channel_config_scheme_id_uri, Shapes::ShapeRef.new(shape: DashIsoGroupAudioChannelConfigSchemeIdUri, location_name: "audioChannelConfigSchemeIdUri"))
     DashIsoGroupSettings.add_member(:base_url, Shapes::ShapeRef.new(shape: __string, location_name: "baseUrl"))
+    DashIsoGroupSettings.add_member(:dash_adaptation_set_grouping, Shapes::ShapeRef.new(shape: __listOfDashAdaptationSetGrouping, location_name: "dashAdaptationSetGrouping"))
     DashIsoGroupSettings.add_member(:dash_i_frame_trick_play_name_modifier, Shapes::ShapeRef.new(shape: __stringMin1Max256, location_name: "dashIFrameTrickPlayNameModifier"))
     DashIsoGroupSettings.add_member(:dash_manifest_style, Shapes::ShapeRef.new(shape: DashManifestStyle, location_name: "dashManifestStyle"))
     DashIsoGroupSettings.add_member(:destination, Shapes::ShapeRef.new(shape: __stringPatternS3, location_name: "destination"))
@@ -1926,6 +1940,8 @@ module Aws::MediaConvert
     H264Settings.add_member(:scan_type_conversion_mode, Shapes::ShapeRef.new(shape: H264ScanTypeConversionMode, location_name: "scanTypeConversionMode"))
     H264Settings.add_member(:scene_change_detect, Shapes::ShapeRef.new(shape: H264SceneChangeDetect, location_name: "sceneChangeDetect"))
     H264Settings.add_member(:slices, Shapes::ShapeRef.new(shape: __integerMin1Max32, location_name: "slices"))
+    H264Settings.add_member(:sliding_window_ms, Shapes::ShapeRef.new(shape: __integerMin1000Max3000, location_name: "slidingWindowMs"))
+    H264Settings.add_member(:sliding_window_peak_bitrate, Shapes::ShapeRef.new(shape: __integerMin1000Max1152000000, location_name: "slidingWindowPeakBitrate"))
     H264Settings.add_member(:slow_pal, Shapes::ShapeRef.new(shape: H264SlowPal, location_name: "slowPal"))
     H264Settings.add_member(:softness, Shapes::ShapeRef.new(shape: __integerMin0Max128, location_name: "softness"))
     H264Settings.add_member(:spatial_adaptive_quantization, Shapes::ShapeRef.new(shape: H264SpatialAdaptiveQuantization, location_name: "spatialAdaptiveQuantization"))
@@ -1980,6 +1996,8 @@ module Aws::MediaConvert
     H265Settings.add_member(:scan_type_conversion_mode, Shapes::ShapeRef.new(shape: H265ScanTypeConversionMode, location_name: "scanTypeConversionMode"))
     H265Settings.add_member(:scene_change_detect, Shapes::ShapeRef.new(shape: H265SceneChangeDetect, location_name: "sceneChangeDetect"))
     H265Settings.add_member(:slices, Shapes::ShapeRef.new(shape: __integerMin1Max32, location_name: "slices"))
+    H265Settings.add_member(:sliding_window_ms, Shapes::ShapeRef.new(shape: __integerMin1000Max3000, location_name: "slidingWindowMs"))
+    H265Settings.add_member(:sliding_window_peak_bitrate, Shapes::ShapeRef.new(shape: __integerMin1000Max1466400000, location_name: "slidingWindowPeakBitrate"))
     H265Settings.add_member(:slow_pal, Shapes::ShapeRef.new(shape: H265SlowPal, location_name: "slowPal"))
     H265Settings.add_member(:spatial_adaptive_quantization, Shapes::ShapeRef.new(shape: H265SpatialAdaptiveQuantization, location_name: "spatialAdaptiveQuantization"))
     H265Settings.add_member(:telecine, Shapes::ShapeRef.new(shape: H265Telecine, location_name: "telecine"))
@@ -2265,6 +2283,7 @@ module Aws::MediaConvert
     JobSettings.add_member(:inputs, Shapes::ShapeRef.new(shape: __listOfInput, location_name: "inputs"))
     JobSettings.add_member(:kantar_watermark, Shapes::ShapeRef.new(shape: KantarWatermarkSettings, location_name: "kantarWatermark"))
     JobSettings.add_member(:motion_image_inserter, Shapes::ShapeRef.new(shape: MotionImageInserter, location_name: "motionImageInserter"))
+    JobSettings.add_member(:motion_image_inserters, Shapes::ShapeRef.new(shape: __listOfMotionImageInserter, location_name: "motionImageInserters"))
     JobSettings.add_member(:nielsen_configuration, Shapes::ShapeRef.new(shape: NielsenConfiguration, location_name: "nielsenConfiguration"))
     JobSettings.add_member(:nielsen_non_linear_watermark, Shapes::ShapeRef.new(shape: NielsenNonLinearWatermarkSettings, location_name: "nielsenNonLinearWatermark"))
     JobSettings.add_member(:output_groups, Shapes::ShapeRef.new(shape: __listOfOutputGroup, location_name: "outputGroups"))
@@ -2296,6 +2315,7 @@ module Aws::MediaConvert
     JobTemplateSettings.add_member(:inputs, Shapes::ShapeRef.new(shape: __listOfInputTemplate, location_name: "inputs"))
     JobTemplateSettings.add_member(:kantar_watermark, Shapes::ShapeRef.new(shape: KantarWatermarkSettings, location_name: "kantarWatermark"))
     JobTemplateSettings.add_member(:motion_image_inserter, Shapes::ShapeRef.new(shape: MotionImageInserter, location_name: "motionImageInserter"))
+    JobTemplateSettings.add_member(:motion_image_inserters, Shapes::ShapeRef.new(shape: __listOfMotionImageInserter, location_name: "motionImageInserters"))
     JobTemplateSettings.add_member(:nielsen_configuration, Shapes::ShapeRef.new(shape: NielsenConfiguration, location_name: "nielsenConfiguration"))
     JobTemplateSettings.add_member(:nielsen_non_linear_watermark, Shapes::ShapeRef.new(shape: NielsenNonLinearWatermarkSettings, location_name: "nielsenNonLinearWatermark"))
     JobTemplateSettings.add_member(:output_groups, Shapes::ShapeRef.new(shape: __listOfOutputGroup, location_name: "outputGroups"))
@@ -2571,6 +2591,8 @@ module Aws::MediaConvert
     Mpeg2Settings.add_member(:rate_control_mode, Shapes::ShapeRef.new(shape: Mpeg2RateControlMode, location_name: "rateControlMode"))
     Mpeg2Settings.add_member(:scan_type_conversion_mode, Shapes::ShapeRef.new(shape: Mpeg2ScanTypeConversionMode, location_name: "scanTypeConversionMode"))
     Mpeg2Settings.add_member(:scene_change_detect, Shapes::ShapeRef.new(shape: Mpeg2SceneChangeDetect, location_name: "sceneChangeDetect"))
+    Mpeg2Settings.add_member(:sliding_window_ms, Shapes::ShapeRef.new(shape: __integerMin1000Max3000, location_name: "slidingWindowMs"))
+    Mpeg2Settings.add_member(:sliding_window_peak_bitrate, Shapes::ShapeRef.new(shape: __integerMin1000Max300000000, location_name: "slidingWindowPeakBitrate"))
     Mpeg2Settings.add_member(:slow_pal, Shapes::ShapeRef.new(shape: Mpeg2SlowPal, location_name: "slowPal"))
     Mpeg2Settings.add_member(:softness, Shapes::ShapeRef.new(shape: __integerMin0Max128, location_name: "softness"))
     Mpeg2Settings.add_member(:spatial_adaptive_quantization, Shapes::ShapeRef.new(shape: Mpeg2SpatialAdaptiveQuantization, location_name: "spatialAdaptiveQuantization"))
@@ -2708,6 +2730,8 @@ module Aws::MediaConvert
     PartnerWatermarking.struct_class = Types::PartnerWatermarking
 
     PassthroughSettings.add_member(:frame_control, Shapes::ShapeRef.new(shape: FrameControl, location_name: "frameControl"))
+    PassthroughSettings.add_member(:gops_per_segment, Shapes::ShapeRef.new(shape: __integerMin1Max100, location_name: "gopsPerSegment"))
+    PassthroughSettings.add_member(:segmentation_mode, Shapes::ShapeRef.new(shape: PassthroughSegmentationMode, location_name: "segmentationMode"))
     PassthroughSettings.add_member(:video_selector_mode, Shapes::ShapeRef.new(shape: VideoSelectorMode, location_name: "videoSelectorMode"))
     PassthroughSettings.struct_class = Types::PassthroughSettings
 
@@ -3261,6 +3285,8 @@ module Aws::MediaConvert
 
     __listOfColorConversion3DLUTSetting.member = Shapes::ShapeRef.new(shape: ColorConversion3DLUTSetting)
 
+    __listOfDashAdaptationSetGrouping.member = Shapes::ShapeRef.new(shape: DashAdaptationSetGrouping)
+
     __listOfDashAdditionalManifest.member = Shapes::ShapeRef.new(shape: DashAdditionalManifest)
 
     __listOfDashIsoImageBasedTrickPlayVariant.member = Shapes::ShapeRef.new(shape: DashIsoImageBasedTrickPlayVariant)
@@ -3302,6 +3328,8 @@ module Aws::MediaConvert
     __listOfJobTemplate.member = Shapes::ShapeRef.new(shape: JobTemplate)
 
     __listOfJobsQueryFilter.member = Shapes::ShapeRef.new(shape: JobsQueryFilter)
+
+    __listOfMotionImageInserter.member = Shapes::ShapeRef.new(shape: MotionImageInserter)
 
     __listOfMsSmoothAdditionalManifest.member = Shapes::ShapeRef.new(shape: MsSmoothAdditionalManifest)
 
@@ -3818,8 +3846,8 @@ module Aws::MediaConvert
         o.http_request_uri = "/2017-08-29/probe"
         o.input = Shapes::ShapeRef.new(shape: ProbeRequest)
         o.output = Shapes::ShapeRef.new(shape: ProbeResponse)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)

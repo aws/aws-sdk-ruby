@@ -839,6 +839,25 @@
         "OperationType":{"value":"control"}
       }
     },
+    "UpdateStreamRecordDistributionStrategy":{
+      "name":"UpdateStreamRecordDistributionStrategy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateStreamRecordDistributionStrategyInput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidArgumentException"},
+        {"shape":"ResourceInUseException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ValidationException"}
+      ],
+      "staticContextParams":{
+        "OperationType":{"value":"control"}
+      }
+    },
     "UpdateStreamWarmThroughput":{
       "name":"UpdateStreamWarmThroughput",
       "http":{
@@ -1212,7 +1231,8 @@
         "StreamModeDetails":{"shape":"StreamModeDetails"},
         "Tags":{"shape":"TagMap"},
         "WarmThroughputMiBps":{"shape":"NaturalIntegerObject"},
-        "MaxRecordSizeInKiB":{"shape":"MaxRecordSizeInKiB"}
+        "MaxRecordSizeInKiB":{"shape":"MaxRecordSizeInKiB"},
+        "RecordDistributionStrategy":{"shape":"RecordDistributionStrategy"}
       }
     },
     "Data":{
@@ -2014,10 +2034,7 @@
     },
     "PutRecordInput":{
       "type":"structure",
-      "required":[
-        "Data",
-        "PartitionKey"
-      ],
+      "required":["Data"],
       "members":{
         "StreamName":{"shape":"StreamName"},
         "Data":{"shape":"Data"},
@@ -2075,10 +2092,7 @@
     },
     "PutRecordsRequestEntry":{
       "type":"structure",
-      "required":[
-        "Data",
-        "PartitionKey"
-      ],
+      "required":["Data"],
       "members":{
         "Data":{"shape":"Data"},
         "ExplicitHashKey":{"shape":"HashKey"},
@@ -2128,8 +2142,7 @@
       "type":"structure",
       "required":[
         "SequenceNumber",
-        "Data",
-        "PartitionKey"
+        "Data"
       ],
       "members":{
         "SequenceNumber":{"shape":"SequenceNumber"},
@@ -2146,6 +2159,13 @@
         "RecordFormatType":{"shape":"RecordFormatType"},
         "GSRSchemaARN":{"shape":"GSRSchemaARN"}
       }
+    },
+    "RecordDistributionStrategy":{
+      "type":"string",
+      "enum":[
+        "AUTO",
+        "USER_PARTITION_KEY"
+      ]
     },
     "RecordFormatType":{
       "type":"string",
@@ -2587,7 +2607,8 @@
         "ConsumerCount":{"shape":"ConsumerCountObject"},
         "WarmThroughput":{"shape":"WarmThroughputObject"},
         "MaxRecordSizeInKiB":{"shape":"MaxRecordSizeInKiB"},
-        "ChannelCount":{"shape":"ChannelCountObject"}
+        "ChannelCount":{"shape":"ChannelCountObject"},
+        "RecordDistributionStrategy":{"shape":"RecordDistributionStrategy"}
       }
     },
     "StreamFilter":{
@@ -2896,6 +2917,24 @@
         },
         "StreamModeDetails":{"shape":"StreamModeDetails"},
         "WarmThroughputMiBps":{"shape":"NaturalIntegerObject"}
+      }
+    },
+    "UpdateStreamRecordDistributionStrategyInput":{
+      "type":"structure",
+      "required":[
+        "StreamARN",
+        "RecordDistributionStrategy"
+      ],
+      "members":{
+        "StreamARN":{
+          "shape":"StreamARN",
+          "contextParam":{"name":"StreamARN"}
+        },
+        "StreamId":{
+          "shape":"StreamId",
+          "contextParam":{"name":"StreamId"}
+        },
+        "RecordDistributionStrategy":{"shape":"RecordDistributionStrategy"}
       }
     },
     "UpdateStreamWarmThroughputInput":{

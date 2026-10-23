@@ -755,6 +755,7 @@ module Aws::EventBridge
     DescribeEventBusResponse.add_member(:log_config, Shapes::ShapeRef.new(shape: LogConfig, location_name: "LogConfig"))
     DescribeEventBusResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     DescribeEventBusResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    DescribeEventBusResponse.add_member(:managed_by, Shapes::ShapeRef.new(shape: ManagedBy, location_name: "ManagedBy"))
     DescribeEventBusResponse.struct_class = Types::DescribeEventBusResponse
 
     DescribeEventSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: EventSourceName, required: true, location_name: "Name"))
@@ -860,6 +861,7 @@ module Aws::EventBridge
     EventBus.add_member(:policy, Shapes::ShapeRef.new(shape: String, location_name: "Policy"))
     EventBus.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     EventBus.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    EventBus.add_member(:managed_by, Shapes::ShapeRef.new(shape: ManagedBy, location_name: "ManagedBy"))
     EventBus.struct_class = Types::EventBus
 
     EventBusList.member = Shapes::ShapeRef.new(shape: EventBus)

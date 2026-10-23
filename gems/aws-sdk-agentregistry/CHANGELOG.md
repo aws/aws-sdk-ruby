@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2026-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.8.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.7.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.6.0 (2026-09-30)
+------------------
+
+* Feature - Minor doc update for the AWS Agent Registry Custom metadata SearchDiscoverableRegistryRecords API
+
+1.5.0 (2026-09-28)
+------------------
+
+* Feature - AWS Agent Registry adds support for custom metadata. Discovery APIs now return custom metadata on registry records and support filtering by metadata fields. Semantic search includes custom metadata for improved relevance. Filter customMetadata fields using eq, ne, and in operators.
+
 1.4.0 (2026-09-11)
 ------------------
 

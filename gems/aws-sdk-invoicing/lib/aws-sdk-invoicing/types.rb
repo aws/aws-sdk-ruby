@@ -272,6 +272,14 @@ module Aws::Invoicing
     #   false to disable.
     #   @return [Boolean]
     #
+    # @!attribute [rw] marketplace_punch_out_enabled
+    #   Defaults to false if not provided.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] marketplace_punch_out_preference
+    #   Required for Coupa when MarketplacePunchOutEnabled is true.
+    #   @return [Types::MarketplacePunchOutPreference]
+    #
     # @!attribute [rw] contacts
     #   List of contact information for portal administrators and technical
     #   contacts responsible for the e-invoice integration.
@@ -305,6 +313,8 @@ module Aws::Invoicing
       :einvoice_delivery_enabled,
       :einvoice_delivery_preference,
       :purchase_order_retrieval_enabled,
+      :marketplace_punch_out_enabled,
+      :marketplace_punch_out_preference,
       :contacts,
       :resource_tags,
       :client_token)
@@ -1424,6 +1434,24 @@ module Aws::Invoicing
       include Aws::Structure
     end
 
+    # Represents the Marketplace PunchOut configuration for a procurement
+    # portal preference.
+    #
+    # @!attribute [rw] approval_request_redirect_url
+    #   The URL that buyers are redirected to for approval requests in the
+    #   procurement portal. This is only supported for Coupa. When provided
+    #   together with the procurement portal instance endpoint, its host
+    #   must match the host of that endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/MarketplacePunchOutPreference AWS API Documentation
+    #
+    class MarketplacePunchOutPreference < Struct.new(
+      :approval_request_redirect_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains metadata for a procurement portal, including the portal
     # identifier, name, and default feature configurations.
     #
@@ -1518,14 +1546,25 @@ module Aws::Invoicing
     #   @return [Boolean]
     #
     # @!attribute [rw] einvoice_delivery_preference
-    #   The configuration settings that specify how e-invoices are delivered
-    #   to the procurement portal.
+    #   The e-invoice delivery configuration including document types,
+    #   attachment types, and customization settings.
     #   @return [Types::EinvoiceDeliveryPreference]
     #
     # @!attribute [rw] purchase_order_retrieval_enabled
     #   Indicates whether purchase order retrieval is enabled for this
     #   procurement portal preference.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] marketplace_punch_out_enabled
+    #   Indicates whether Marketplace PunchOut is enabled for this
+    #   procurement portal preference. Defaults to `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] marketplace_punch_out_preference
+    #   The Marketplace PunchOut configuration for this procurement portal
+    #   preference. This is present when `MarketplacePunchOutEnabled` is
+    #   `true`.
+    #   @return [Types::MarketplacePunchOutPreference]
     #
     # @!attribute [rw] contacts
     #   List of contact information for portal administrators and technical
@@ -1582,6 +1621,8 @@ module Aws::Invoicing
       :einvoice_delivery_enabled,
       :einvoice_delivery_preference,
       :purchase_order_retrieval_enabled,
+      :marketplace_punch_out_enabled,
+      :marketplace_punch_out_preference,
       :contacts,
       :einvoice_delivery_preference_status,
       :einvoice_delivery_preference_status_reason,
@@ -1662,6 +1703,11 @@ module Aws::Invoicing
     #   procurement portal preference.
     #   @return [Boolean]
     #
+    # @!attribute [rw] marketplace_punch_out_enabled
+    #   Indicates whether Marketplace PunchOut is enabled for this
+    #   procurement portal preference. Defaults to `false`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] einvoice_delivery_preference_status
     #   The current status of the e-invoice delivery preference in this
     #   summary.
@@ -1710,6 +1756,7 @@ module Aws::Invoicing
       :selector,
       :einvoice_delivery_enabled,
       :purchase_order_retrieval_enabled,
+      :marketplace_punch_out_enabled,
       :einvoice_delivery_preference_status,
       :einvoice_delivery_preference_status_reason,
       :purchase_order_retrieval_preference_status,
@@ -1814,6 +1861,16 @@ module Aws::Invoicing
     #   for this procurement portal preference.
     #   @return [Boolean]
     #
+    # @!attribute [rw] marketplace_punch_out_enabled
+    #   Whether Marketplace PunchOut is enabled for this connection.
+    #   Defaults to false if not provided.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] marketplace_punch_out_preference
+    #   Configuration for Marketplace PunchOut. Required when
+    #   MarketplacePunchOutEnabled is true.
+    #   @return [Types::MarketplacePunchOutPreference]
+    #
     # @!attribute [rw] contacts
     #   Updated list of contact information for portal administrators and
     #   technical contacts.
@@ -1838,6 +1895,8 @@ module Aws::Invoicing
       :einvoice_delivery_enabled,
       :einvoice_delivery_preference,
       :purchase_order_retrieval_enabled,
+      :marketplace_punch_out_enabled,
+      :marketplace_punch_out_preference,
       :contacts,
       :client_token)
       SENSITIVE = [:procurement_portal_shared_secret, :contacts]

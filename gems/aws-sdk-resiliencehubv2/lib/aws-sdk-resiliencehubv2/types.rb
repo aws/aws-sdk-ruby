@@ -645,6 +645,12 @@ module Aws::Resiliencehubv2
     #   ARN.
     #   @return [String]
     #
+    # @!attribute [rw] dev_ops_agent_configuration
+    #   The optional DevOps Agent integration configuration to apply to the
+    #   new service. If you omit this field, the new service has no DevOps
+    #   Agent integration.
+    #   @return [Types::DevOpsAgentConfiguration]
+    #
     # @!attribute [rw] tags
     #   Resource tags.
     #   @return [Hash<String,String>]
@@ -668,6 +674,7 @@ module Aws::Resiliencehubv2
       :dependency_discovery,
       :report_configuration,
       :kms_key_id,
+      :dev_ops_agent_configuration,
       :tags,
       :client_token)
       SENSITIVE = [:tags]
@@ -1289,6 +1296,147 @@ module Aws::Resiliencehubv2
       include Aws::Structure
     end
 
+    # The AWS DevOps Agent (DevOps Agent) integration configuration that you
+    # supply when creating or updating a service. Connecting a service to a
+    # DevOps Agent Agent Space lets DevOps Agent investigate the service's
+    # resilience test runs and attach its analysis to the results. Include
+    # this block with an Agent Space Amazon Resource Name (ARN) to connect
+    # or reconnect the service to an Agent Space. Include it without an
+    # Agent Space ARN to disconnect the service. Omit it to leave the
+    # existing linkage unchanged.
+    #
+    # @!attribute [rw] agent_space_arn
+    #   The ARN of the DevOps Agent Agent Space to link to this service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/DevOpsAgentConfiguration AWS API Documentation
+    #
+    class DevOpsAgentConfiguration < Struct.new(
+      :agent_space_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The current DevOps Agent integration state for a service. Read
+    # operations return this state.
+    #
+    # @!attribute [rw] agent_space_arn
+    #   The ARN of the linked DevOps Agent Agent Space.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_space_id
+    #   The identifier of the linked DevOps Agent Agent Space.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The AWS Region of the linked DevOps Agent Agent Space.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The connection status of the DevOps Agent integration for this
+    #   service. Valid values:
+    #
+    #   * CONNECTING - The service is being connected to the Agent Space.
+    #
+    #   * CONNECTED - The service is connected to the Agent Space.
+    #
+    #   * DISCONNECTED - The service is not connected to an Agent Space.
+    #
+    #   * FAILED - The connection attempt failed. See statusReason for
+    #     details.
+    #   @return [String]
+    #
+    # @!attribute [rw] operator_app_url
+    #   The URL of the DevOps Agent Operator App for the linked Agent Space.
+    #   This URL is present when the connection status is CONNECTED.
+    #   @return [String]
+    #
+    # @!attribute [rw] connected_at
+    #   The timestamp when the service successfully connected to the DevOps
+    #   Agent Agent Space.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status_reason
+    #   A human-readable explanation of the current connection status. This
+    #   field explains the status when the connection fails.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/DevOpsAgentConfigurationView AWS API Documentation
+    #
+    class DevOpsAgentConfigurationView < Struct.new(
+      :agent_space_arn,
+      :agent_space_id,
+      :region,
+      :status,
+      :operator_app_url,
+      :connected_at,
+      :status_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result when DevOps Agent investigates a resilience test run. The
+    # verdict is advisory and builds on the test run's own result, which
+    # remains authoritative.
+    #
+    # @!attribute [rw] verdict
+    #   The investigation verdict. Valid values:
+    #
+    #   * PASS - The resilience test run passed.
+    #
+    #   * FAIL - The resilience test run failed.
+    #
+    #   * INCONCLUSIVE - The investigation could not determine a clear
+    #     outcome.
+    #   @return [String]
+    #
+    # @!attribute [rw] confidence
+    #   The confidence level of the verdict. Valid values:
+    #
+    #   * HIGH - The verdict is highly reliable.
+    #
+    #   * MEDIUM - The verdict has moderate reliability.
+    #
+    #   * LOW - The verdict has low reliability.
+    #   @return [String]
+    #
+    # @!attribute [rw] deep_link
+    #   A deep link to the interactive DevOps Agent investigation session.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The lifecycle status of the investigation. Valid values:
+    #
+    #   * PENDING - The investigation has been created but has not started.
+    #
+    #   * IN\_PROGRESS - The investigation is running.
+    #
+    #   * COMPLETED - The investigation finished successfully.
+    #
+    #   * FAILED - The investigation failed to complete.
+    #
+    #   * TIMED\_OUT - The investigation did not complete within the
+    #     allotted time.
+    #
+    #   * CANCELED - The investigation was canceled.
+    #   @return [String]
+    #
+    # @!attribute [rw] summary
+    #   The DevOps Agent analysis summary for the investigation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/DevOpsAgentInvestigation AWS API Documentation
+    #
+    class DevOpsAgentInvestigation < Struct.new(
+      :verdict,
+      :confidence,
+      :deep_link,
+      :status,
+      :summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the effective disaster recovery approach value for a service.
     #
     # @!attribute [rw] value
@@ -1590,6 +1738,12 @@ module Aws::Resiliencehubv2
     #   The timestamp when the finding was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] investigation_deep_link
+    #   A deep link to an interactive DevOps Agent investigation seeded with
+    #   this finding. This value is null until DevOps Agent creates an
+    #   investigation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/Finding AWS API Documentation
     #
     class Finding < Struct.new(
@@ -1606,7 +1760,8 @@ module Aws::Resiliencehubv2
       :infrastructure_and_code_recommendations,
       :observability_recommendations,
       :testing_recommendations,
-      :updated_at)
+      :updated_at,
+      :investigation_deep_link)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1649,6 +1804,12 @@ module Aws::Resiliencehubv2
     #   The timestamp when the finding was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] investigation_deep_link
+    #   A deep link to an interactive DevOps Agent investigation seeded with
+    #   this finding. This value is null until DevOps Agent creates an
+    #   investigation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/FindingSummary AWS API Documentation
     #
     class FindingSummary < Struct.new(
@@ -1660,7 +1821,8 @@ module Aws::Resiliencehubv2
       :severity,
       :status,
       :policy_component,
-      :updated_at)
+      :updated_at,
+      :investigation_deep_link)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4082,13 +4244,41 @@ module Aws::Resiliencehubv2
     #   The type of the resource.
     #   @return [String]
     #
+    # @!attribute [rw] availability_zone_id
+    #   The Availability Zone ID of the Availability Zone that hosts the
+    #   resource, such as use1-az1. The Availability Zone ID is consistent
+    #   across Amazon Web Services (AWS) accounts, unlike the Availability
+    #   Zone name.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_name
+    #   The name of the Availability Zone that hosts the resource, such as
+    #   us-west-2a.
+    #   @return [String]
+    #
+    # @!attribute [rw] containment_parent_id
+    #   The identifier of the single parent resource that contains this
+    #   resource, used to represent containment relationships in the
+    #   resource topology. A resource has at most one containment parent.
+    #   @return [String]
+    #
+    # @!attribute [rw] logical_resource_group_id
+    #   The identifier of the logical resource group that this resource
+    #   belongs to. Resources that share this identifier are managed as a
+    #   single unit.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/Resource AWS API Documentation
     #
     class Resource < Struct.new(
       :identifier,
       :aws_region,
       :aws_account_id,
-      :resource_type)
+      :resource_type,
+      :availability_zone_id,
+      :availability_zone_name,
+      :containment_parent_id,
+      :logical_resource_group_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4336,6 +4526,10 @@ module Aws::Resiliencehubv2
     #   The AWS account ID that owns the service.
     #   @return [String]
     #
+    # @!attribute [rw] dev_ops_agent_configuration
+    #   The current DevOps Agent integration state for the service.
+    #   @return [Types::DevOpsAgentConfigurationView]
+    #
     # @!attribute [rw] created_at
     #   The timestamp when the service was created.
     #   @return [Time]
@@ -4369,6 +4563,7 @@ module Aws::Resiliencehubv2
       :organization_id,
       :ou_id,
       :account_id,
+      :dev_ops_agent_configuration,
       :created_at,
       :updated_at)
       SENSITIVE = [:tags]
@@ -5011,6 +5206,23 @@ module Aws::Resiliencehubv2
     #   The current assessment status of the service.
     #   @return [String]
     #
+    # @!attribute [rw] dev_ops_agent_status
+    #   The DevOps Agent connection status for the service. Valid values:
+    #
+    #   * CONNECTING - The service is being connected to the Agent Space.
+    #
+    #   * CONNECTED - The service is connected to the Agent Space.
+    #
+    #   * DISCONNECTED - The service is not connected to an Agent Space.
+    #
+    #   * FAILED - The connection attempt failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] dev_ops_agent_space_arn
+    #   The ARN of the DevOps Agent Agent Space linked to the service, when
+    #   the service is linked to one.
+    #   @return [String]
+    #
     # @!attribute [rw] open_findings_count
     #   The number of open findings.
     #   @return [Integer]
@@ -5056,6 +5268,8 @@ module Aws::Resiliencehubv2
       :regions,
       :policy_arn,
       :assessment_status,
+      :dev_ops_agent_status,
+      :dev_ops_agent_space_arn,
       :open_findings_count,
       :resolved_findings_count,
       :dependency_discovery,
@@ -6105,6 +6319,11 @@ module Aws::Resiliencehubv2
     #   account or across multiple accounts.
     #   @return [String]
     #
+    # @!attribute [rw] dev_ops_agent_investigation
+    #   The DevOps Agent investigation result for the test run, present when
+    #   the integration is enabled for the service.
+    #   @return [Types::DevOpsAgentInvestigation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/TestRun AWS API Documentation
     #
     class TestRun < Struct.new(
@@ -6129,7 +6348,8 @@ module Aws::Resiliencehubv2
       :region_switch_execution_id,
       :permission_model,
       :regions,
-      :account_targeting)
+      :account_targeting,
+      :dev_ops_agent_investigation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7029,6 +7249,12 @@ module Aws::Resiliencehubv2
     #   Configuration for automatic report generation on a Service.
     #   @return [Types::ServiceReportConfiguration]
     #
+    # @!attribute [rw] dev_ops_agent_configuration
+    #   The optional DevOps Agent integration configuration to set, replace,
+    #   or disconnect for the service. If you omit this field, the existing
+    #   DevOps Agent linkage stays unchanged.
+    #   @return [Types::DevOpsAgentConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/UpdateServiceRequest AWS API Documentation
     #
     class UpdateServiceRequest < Struct.new(
@@ -7039,7 +7265,8 @@ module Aws::Resiliencehubv2
       :regions,
       :permission_model,
       :dependency_discovery,
-      :report_configuration)
+      :report_configuration,
+      :dev_ops_agent_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

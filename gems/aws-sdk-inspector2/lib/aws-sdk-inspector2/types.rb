@@ -9901,13 +9901,28 @@ module Aws::Inspector2
     #   The total count of critical severity findings.
     #   @return [Integer]
     #
+    # @!attribute [rw] low
+    #   The total count of low severity findings.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] informational
+    #   The total count of informational severity findings.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] untriaged
+    #   The total count of untriaged findings.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/SeverityCounts AWS API Documentation
     #
     class SeverityCounts < Struct.new(
       :all,
       :medium,
       :high,
-      :critical)
+      :critical,
+      :low,
+      :informational,
+      :untriaged)
       SENSITIVE = []
       include Aws::Structure
     end

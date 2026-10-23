@@ -207,10 +207,14 @@ module Aws::GuardDuty
     Destinations = Shapes::ListShape.new(name: 'Destinations')
     Detection = Shapes::StructureShape.new(name: 'Detection')
     DetectionRuleAccountIds = Shapes::ListShape.new(name: 'DetectionRuleAccountIds')
+    DetectionRuleAgentVersion = Shapes::StringShape.new(name: 'DetectionRuleAgentVersion')
     DetectionRuleArn = Shapes::StringShape.new(name: 'DetectionRuleArn')
     DetectionRuleConfigurationStatus = Shapes::StringShape.new(name: 'DetectionRuleConfigurationStatus')
     DetectionRuleDataSource = Shapes::StringShape.new(name: 'DetectionRuleDataSource')
     DetectionRuleDescription = Shapes::StringShape.new(name: 'DetectionRuleDescription')
+    DetectionRuleEc2Requirements = Shapes::StructureShape.new(name: 'DetectionRuleEc2Requirements')
+    DetectionRuleEcsFargateRequirements = Shapes::StructureShape.new(name: 'DetectionRuleEcsFargateRequirements')
+    DetectionRuleEksRequirements = Shapes::StructureShape.new(name: 'DetectionRuleEksRequirements')
     DetectionRuleFilter = Shapes::StructureShape.new(name: 'DetectionRuleFilter')
     DetectionRuleFilterCondition = Shapes::StringShape.new(name: 'DetectionRuleFilterCondition')
     DetectionRuleFilterList = Shapes::ListShape.new(name: 'DetectionRuleFilterList')
@@ -220,6 +224,8 @@ module Aws::GuardDuty
     DetectionRuleOrgConfiguration = Shapes::StructureShape.new(name: 'DetectionRuleOrgConfiguration')
     DetectionRuleOrgConfigurationSummary = Shapes::StructureShape.new(name: 'DetectionRuleOrgConfigurationSummary')
     DetectionRuleOrgConfigurationSummaryList = Shapes::ListShape.new(name: 'DetectionRuleOrgConfigurationSummaryList')
+    DetectionRuleRuntimeMonitoringDetails = Shapes::StructureShape.new(name: 'DetectionRuleRuntimeMonitoringDetails')
+    DetectionRuleRuntimePlatforms = Shapes::StructureShape.new(name: 'DetectionRuleRuntimePlatforms')
     DetectionRuleServiceName = Shapes::StringShape.new(name: 'DetectionRuleServiceName')
     DetectionRuleSeverity = Shapes::StringShape.new(name: 'DetectionRuleSeverity')
     DetectionSource = Shapes::StringShape.new(name: 'DetectionSource')
@@ -497,6 +503,7 @@ module Aws::GuardDuty
     MalwareScan = Shapes::StructureShape.new(name: 'MalwareScan')
     MalwareScanDetails = Shapes::StructureShape.new(name: 'MalwareScanDetails')
     MalwareScans = Shapes::ListShape.new(name: 'MalwareScans')
+    ManagedBy = Shapes::StringShape.new(name: 'ManagedBy')
     ManagementType = Shapes::StringShape.new(name: 'ManagementType')
     MapEquals = Shapes::ListShape.new(name: 'MapEquals')
     Master = Shapes::StructureShape.new(name: 'Master')
@@ -1469,6 +1476,7 @@ module Aws::GuardDuty
 
     DestinationProperties.add_member(:destination_arn, Shapes::ShapeRef.new(shape: String, location_name: "destinationArn"))
     DestinationProperties.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyArn"))
+    DestinationProperties.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location_name: "expectedBucketOwner"))
     DestinationProperties.struct_class = Types::DestinationProperties
 
     Destinations.member = Shapes::ShapeRef.new(shape: Destination)
@@ -1478,6 +1486,15 @@ module Aws::GuardDuty
     Detection.struct_class = Types::Detection
 
     DetectionRuleAccountIds.member = Shapes::ShapeRef.new(shape: AccountId)
+
+    DetectionRuleEc2Requirements.add_member(:min_agent_version, Shapes::ShapeRef.new(shape: DetectionRuleAgentVersion, location_name: "minAgentVersion"))
+    DetectionRuleEc2Requirements.struct_class = Types::DetectionRuleEc2Requirements
+
+    DetectionRuleEcsFargateRequirements.add_member(:min_agent_version, Shapes::ShapeRef.new(shape: DetectionRuleAgentVersion, location_name: "minAgentVersion"))
+    DetectionRuleEcsFargateRequirements.struct_class = Types::DetectionRuleEcsFargateRequirements
+
+    DetectionRuleEksRequirements.add_member(:min_agent_version, Shapes::ShapeRef.new(shape: DetectionRuleAgentVersion, location_name: "minAgentVersion"))
+    DetectionRuleEksRequirements.struct_class = Types::DetectionRuleEksRequirements
 
     DetectionRuleFilter.add_member(:name, Shapes::ShapeRef.new(shape: FilterFieldName, required: true, location_name: "name"))
     DetectionRuleFilter.add_member(:values, Shapes::ShapeRef.new(shape: DetectionRuleFilterValues, required: true, location_name: "values"))
@@ -1510,6 +1527,14 @@ module Aws::GuardDuty
 
     DetectionRuleOrgConfigurationSummaryList.member = Shapes::ShapeRef.new(shape: DetectionRuleOrgConfigurationSummary)
 
+    DetectionRuleRuntimeMonitoringDetails.add_member(:platforms, Shapes::ShapeRef.new(shape: DetectionRuleRuntimePlatforms, location_name: "platforms"))
+    DetectionRuleRuntimeMonitoringDetails.struct_class = Types::DetectionRuleRuntimeMonitoringDetails
+
+    DetectionRuleRuntimePlatforms.add_member(:eks, Shapes::ShapeRef.new(shape: DetectionRuleEksRequirements, location_name: "eks"))
+    DetectionRuleRuntimePlatforms.add_member(:ec2, Shapes::ShapeRef.new(shape: DetectionRuleEc2Requirements, location_name: "ec2"))
+    DetectionRuleRuntimePlatforms.add_member(:ecs_fargate, Shapes::ShapeRef.new(shape: DetectionRuleEcsFargateRequirements, location_name: "ecsFargate"))
+    DetectionRuleRuntimePlatforms.struct_class = Types::DetectionRuleRuntimePlatforms
+
     DetectorAdditionalConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: FeatureAdditionalConfiguration, location_name: "name"))
     DetectorAdditionalConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: FeatureStatus, location_name: "status"))
     DetectorAdditionalConfiguration.struct_class = Types::DetectorAdditionalConfiguration
@@ -1517,6 +1542,7 @@ module Aws::GuardDuty
     DetectorAdditionalConfigurationResult.add_member(:name, Shapes::ShapeRef.new(shape: FeatureAdditionalConfiguration, location_name: "name"))
     DetectorAdditionalConfigurationResult.add_member(:status, Shapes::ShapeRef.new(shape: FeatureStatus, location_name: "status"))
     DetectorAdditionalConfigurationResult.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    DetectorAdditionalConfigurationResult.add_member(:managed_by, Shapes::ShapeRef.new(shape: ManagedBy, location_name: "managedBy"))
     DetectorAdditionalConfigurationResult.struct_class = Types::DetectorAdditionalConfigurationResult
 
     DetectorAdditionalConfigurationResults.member = Shapes::ShapeRef.new(shape: DetectorAdditionalConfigurationResult)
@@ -1532,6 +1558,7 @@ module Aws::GuardDuty
     DetectorFeatureConfigurationResult.add_member(:status, Shapes::ShapeRef.new(shape: FeatureStatus, location_name: "status"))
     DetectorFeatureConfigurationResult.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     DetectorFeatureConfigurationResult.add_member(:additional_configuration, Shapes::ShapeRef.new(shape: DetectorAdditionalConfigurationResults, location_name: "additionalConfiguration"))
+    DetectorFeatureConfigurationResult.add_member(:managed_by, Shapes::ShapeRef.new(shape: ManagedBy, location_name: "managedBy"))
     DetectorFeatureConfigurationResult.struct_class = Types::DetectorFeatureConfigurationResult
 
     DetectorFeatureConfigurations.member = Shapes::ShapeRef.new(shape: DetectorFeatureConfiguration)
@@ -1731,6 +1758,7 @@ module Aws::GuardDuty
     Finding.add_member(:type, Shapes::ShapeRef.new(shape: FindingType, required: true, location_name: "type"))
     Finding.add_member(:updated_at, Shapes::ShapeRef.new(shape: String, required: true, location_name: "updatedAt"))
     Finding.add_member(:associated_attack_sequence_arn, Shapes::ShapeRef.new(shape: String, location_name: "associatedAttackSequenceArn"))
+    Finding.add_member(:custom_detection_rule_name, Shapes::ShapeRef.new(shape: String, location_name: "customDetectionRuleName"))
     Finding.struct_class = Types::Finding
 
     FindingCriteria.add_member(:criterion, Shapes::ShapeRef.new(shape: Criterion, location_name: "criterion"))
@@ -2527,6 +2555,7 @@ module Aws::GuardDuty
     MemberAdditionalConfigurationResult.add_member(:name, Shapes::ShapeRef.new(shape: OrgFeatureAdditionalConfiguration, location_name: "name"))
     MemberAdditionalConfigurationResult.add_member(:status, Shapes::ShapeRef.new(shape: FeatureStatus, location_name: "status"))
     MemberAdditionalConfigurationResult.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    MemberAdditionalConfigurationResult.add_member(:managed_by, Shapes::ShapeRef.new(shape: ManagedBy, location_name: "managedBy"))
     MemberAdditionalConfigurationResult.struct_class = Types::MemberAdditionalConfigurationResult
 
     MemberAdditionalConfigurationResults.member = Shapes::ShapeRef.new(shape: MemberAdditionalConfigurationResult)
@@ -2549,6 +2578,7 @@ module Aws::GuardDuty
     MemberFeaturesConfigurationResult.add_member(:status, Shapes::ShapeRef.new(shape: FeatureStatus, location_name: "status"))
     MemberFeaturesConfigurationResult.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     MemberFeaturesConfigurationResult.add_member(:additional_configuration, Shapes::ShapeRef.new(shape: MemberAdditionalConfigurationResults, location_name: "additionalConfiguration"))
+    MemberFeaturesConfigurationResult.add_member(:managed_by, Shapes::ShapeRef.new(shape: ManagedBy, location_name: "managedBy"))
     MemberFeaturesConfigurationResult.struct_class = Types::MemberFeaturesConfigurationResult
 
     MemberFeaturesConfigurations.member = Shapes::ShapeRef.new(shape: MemberFeaturesConfiguration)
@@ -2825,6 +2855,7 @@ module Aws::GuardDuty
 
     RemoteAccountDetails.add_member(:account_id, Shapes::ShapeRef.new(shape: String, location_name: "accountId"))
     RemoteAccountDetails.add_member(:affiliated, Shapes::ShapeRef.new(shape: Boolean, location_name: "affiliated"))
+    RemoteAccountDetails.add_member(:aws_service_name, Shapes::ShapeRef.new(shape: String, location_name: "awsServiceName"))
     RemoteAccountDetails.struct_class = Types::RemoteAccountDetails
 
     RemoteIpDetails.add_member(:city, Shapes::ShapeRef.new(shape: City, location_name: "city"))
@@ -2924,6 +2955,7 @@ module Aws::GuardDuty
     RuleDetail.add_member(:definition, Shapes::ShapeRef.new(shape: RuleDefinition, required: true, location_name: "definition"))
     RuleDetail.add_member(:language, Shapes::ShapeRef.new(shape: RuleLanguage, location_name: "language"))
     RuleDetail.add_member(:schema, Shapes::ShapeRef.new(shape: RuleSchema, location_name: "schema"))
+    RuleDetail.add_member(:runtime_monitoring_details, Shapes::ShapeRef.new(shape: DetectionRuleRuntimeMonitoringDetails, location_name: "runtimeMonitoringDetails"))
     RuleDetail.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     RuleDetail.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     RuleDetail.struct_class = Types::RuleDetail

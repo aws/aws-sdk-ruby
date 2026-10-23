@@ -10,4 +10,4 @@ Feature: Amazon Glacier
   Scenario: Error handling
     When I attempt to call the "ListVaults" API with:
     | AccountId | abcmnoxyz |
-    Then the request should fail
+    Then I expect the response error code to be "AccessDeniedException"

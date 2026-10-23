@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.660.0 (2026-10-22)
+------------------
+
+* Feature - AWS Transit Gateway now provides managed one-to-one NAT directly on its attachments, through integration with Regional Private NAT Gateway. Use ModifyTransitGatewayAttachmentNatConfiguration to enable NAT and configure NAT rules, and GetTransitGatewayAttachmentNatConfiguration to view them.
+
+1.659.0 (2026-10-21)
+------------------
+
+* Feature - Adds new response fields to DescribeInstanceStatus and Network Insights analysis results.
+
+1.658.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.657.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.656.0 (2026-10-14)
+------------------
+
+* Feature - Adds T8i instance sizes to the InstanceType enum. T8i instances are low-cost burstable instances powered by custom sixth generation Intel Xeon 6 processors, available exclusively on AWS, and built on the latest sixth generation AWS Nitro cards
+
+1.655.0 (2026-10-01)
+------------------
+
+* Feature - This release launches the AMI tag sharing feature, which lets AMI owners share tags alongside their AMIs, eliminating the need to build and maintain custom tag replication workflows.
+
+1.654.0 (2026-09-29)
+------------------
+
+* Feature - Adds the LaunchStatus field to CapacityReservation in the DescribeCapacityReservations response. This field indicates whether you can currently launch instances into an UltraServer.
+
+1.653.0 (2026-09-28)
+------------------
+
+* Feature - API changes to AWS Client VPN to support device posture assessment and Cedar authorization policies
+
+1.652.0 (2026-09-22)
+------------------
+
+* Feature - Amazon EC2 now supports quote-based start date changes for future-dated Capacity Reservations
+
 1.651.0 (2026-09-18)
 ------------------
 

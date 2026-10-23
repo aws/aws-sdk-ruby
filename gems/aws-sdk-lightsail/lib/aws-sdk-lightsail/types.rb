@@ -8283,9 +8283,79 @@ module Aws::Lightsail
     #
     #     `Unit`: The published unit is `Count`.
     #
+    #   * <b> <code>DiskReadOps</code> </b> - The number of read operations
+    #     completed on the system disk of the instance during the period.
+    #     This metric doesn't include activity on additional disks that you
+    #     attach to the instance.
+    #
+    #     `Statistics`: The most useful statistic is `Sum`.
+    #
+    #     `Unit`: The published unit is `Count`.
+    #
+    #   * <b> <code>DiskWriteOps</code> </b> - The number of write
+    #     operations completed on the system disk of the instance during the
+    #     period. This metric doesn't include activity on additional disks
+    #     that you attach to the instance.
+    #
+    #     `Statistics`: The most useful statistic is `Sum`.
+    #
+    #     `Unit`: The published unit is `Count`.
+    #
+    #   * <b> <code>DiskReadBytes</code> </b> - The number of bytes read
+    #     from the system disk of the instance during the period. This
+    #     metric doesn't include activity on additional disks that you
+    #     attach to the instance.
+    #
+    #     `Statistics`: The most useful statistic is `Sum`.
+    #
+    #     `Unit`: The published unit is `Bytes`.
+    #
+    #   * <b> <code>DiskWriteBytes</code> </b> - The number of bytes written
+    #     to the system disk of the instance during the period. This metric
+    #     doesn't include activity on additional disks that you attach to
+    #     the instance.
+    #
+    #     `Statistics`: The most useful statistic is `Sum`.
+    #
+    #     `Unit`: The published unit is `Bytes`.
+    #
+    #   * <b> <code>DiskTotalReadTime</code> </b> - The total number of
+    #     seconds spent by all read operations that completed on the system
+    #     disk of the instance during the period. This metric doesn't
+    #     include activity on additional disks that you attach to the
+    #     instance.
+    #
+    #     `Statistics`: The most useful statistic is `Average`.
+    #
+    #     `Unit`: The published unit is `Seconds`.
+    #
+    #   * <b> <code>DiskTotalWriteTime</code> </b> - The total number of
+    #     seconds spent by all write operations that completed on the system
+    #     disk of the instance during the period. This metric doesn't
+    #     include activity on additional disks that you attach to the
+    #     instance.
+    #
+    #     `Statistics`: The most useful statistic is `Average`.
+    #
+    #     `Unit`: The published unit is `Seconds`.
+    #
+    #   * <b> <code>DiskQueueLength</code> </b> - The number of read and
+    #     write requests that are waiting to access the system disk of the
+    #     instance. This metric doesn't include activity on additional
+    #     disks that you attach to the instance.
+    #
+    #     `Statistics`: The most useful statistic is `Average`.
+    #
+    #     `Unit`: The published unit is `Count`.
+    #
+    #   For more information about system disk performance metrics, see
+    #   [View system disk performance metrics for your Lightsail
+    #   instance][2].
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-viewing-instance-burst-capacity
+    #   [2]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-viewing-instance-disk-performance-metrics
     #   @return [String]
     #
     # @!attribute [rw] period
@@ -12715,7 +12785,9 @@ module Aws::Lightsail
     #
     #   * **Instances**: `BurstCapacityPercentage`, `BurstCapacityTime`,
     #     `CPUUtilization`, `NetworkIn`, `NetworkOut`, `StatusCheckFailed`,
-    #     `StatusCheckFailed_Instance`, and `StatusCheckFailed_System`.
+    #     `StatusCheckFailed_Instance`, `StatusCheckFailed_System`,
+    #     `DiskReadOps`, `DiskWriteOps`, `DiskReadBytes`, `DiskWriteBytes`,
+    #     `DiskTotalReadTime`, `DiskTotalWriteTime`, and `DiskQueueLength`.
     #
     #   * **Load balancers**: `ClientTLSNegotiationErrorCount`,
     #     `HealthyHostCount`, `UnhealthyHostCount`, `HTTPCode_LB_4XX_Count`,

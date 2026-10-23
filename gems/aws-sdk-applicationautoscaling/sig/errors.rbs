@@ -11,33 +11,33 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class ConcurrentUpdateException < ::Aws::Errors::ServiceError
+      class ConcurrentUpdateException < ServiceError
         def message: () -> ::String
       end
-      class FailedResourceAccessException < ::Aws::Errors::ServiceError
+      class FailedResourceAccessException < ServiceError
         def message: () -> ::String
       end
-      class InternalServiceException < ::Aws::Errors::ServiceError
+      class InternalServiceException < ServiceError
         def message: () -> ::String
       end
-      class InvalidNextTokenException < ::Aws::Errors::ServiceError
+      class InvalidNextTokenException < ServiceError
         def message: () -> ::String
       end
-      class LimitExceededException < ::Aws::Errors::ServiceError
+      class LimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class ObjectNotFoundException < ::Aws::Errors::ServiceError
+      class ObjectNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-        def resource_name: () -> ::String
-      end
-      class TooManyTagsException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
         def message: () -> ::String
         def resource_name: () -> ::String
       end
-      class ValidationException < ::Aws::Errors::ServiceError
+      class TooManyTagsException < ServiceError
+        def message: () -> ::String
+        def resource_name: () -> ::String
+      end
+      class ValidationException < ServiceError
         def message: () -> ::String
       end
     end

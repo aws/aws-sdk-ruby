@@ -199,12 +199,19 @@ module Aws::SocialMessaging
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -998,6 +1005,8 @@ module Aws::SocialMessaging
     #   resp.account.event_destinations[0].event_destination_arn #=> String
     #   resp.account.event_destinations[0].role_arn #=> String
     #   resp.account.marketing_messages_onboarding_status #=> String
+    #   resp.account.direct_send_enforcement_status #=> String
+    #   resp.account.direct_send_enforcement_status_expires_at #=> Time
     #   resp.account.dataset_id #=> String
     #   resp.account.phone_numbers #=> Array
     #   resp.account.phone_numbers[0].arn #=> String
@@ -1422,6 +1431,8 @@ module Aws::SocialMessaging
     #   resp.linked_accounts[0].event_destinations[0].event_destination_arn #=> String
     #   resp.linked_accounts[0].event_destinations[0].role_arn #=> String
     #   resp.linked_accounts[0].marketing_messages_onboarding_status #=> String
+    #   resp.linked_accounts[0].direct_send_enforcement_status #=> String
+    #   resp.linked_accounts[0].direct_send_enforcement_status_expires_at #=> Time
     #   resp.linked_accounts[0].dataset_id #=> String
     #   resp.next_token #=> String
     #
@@ -1601,6 +1612,8 @@ module Aws::SocialMessaging
     #   resp.templates[0].template_quality_score #=> String
     #   resp.templates[0].template_language #=> String
     #   resp.templates[0].template_category #=> String
+    #   resp.templates[0].template_source #=> String
+    #   resp.templates[0].correct_category #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/ListWhatsAppMessageTemplates AWS API Documentation
@@ -2298,7 +2311,7 @@ module Aws::SocialMessaging
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-socialmessaging'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -199,12 +199,19 @@ module Aws::CleanRooms
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -1403,6 +1410,17 @@ module Aws::CleanRooms
     #         table_name: "AthenaTableName", # required
     #         catalog_name: "AthenaCatalogName",
     #       },
+    #       databricks: {
+    #         schema_name: "DatabricksObject", # required
+    #         table_name: "DatabricksObject", # required
+    #         workspace_url: "DatabricksWorkspaceUrl", # required
+    #         connection_type: { # required
+    #           delta_sharing: {
+    #             delta_share_endpoint: "DatabricksEndpointUrl", # required
+    #             share_name: "DatabricksObject", # required
+    #           },
+    #         },
+    #       },
     #     },
     #     allowed_columns: ["ColumnName"], # required
     #     analysis_method: "DIRECT_QUERY", # required, accepts DIRECT_QUERY, DIRECT_JOB, MULTIPLE
@@ -1435,6 +1453,12 @@ module Aws::CleanRooms
     #   resp.configured_table.table_reference.athena.database_name #=> String
     #   resp.configured_table.table_reference.athena.table_name #=> String
     #   resp.configured_table.table_reference.athena.catalog_name #=> String
+    #   resp.configured_table.table_reference.databricks.schema_name #=> String
+    #   resp.configured_table.table_reference.databricks.table_name #=> String
+    #   resp.configured_table.table_reference.databricks.workspace_url #=> String
+    #   resp.configured_table.table_reference.databricks.connection_type.delta_sharing.delta_share_endpoint #=> String
+    #   resp.configured_table.table_reference.databricks.connection_type.delta_sharing.share_name #=> String
+    #   resp.configured_table.table_type #=> String, one of "GLUE", "SNOWFLAKE", "ATHENA", "DATABRICKS"
     #   resp.configured_table.create_time #=> Time
     #   resp.configured_table.update_time #=> Time
     #   resp.configured_table.analysis_rule_types #=> Array
@@ -3356,6 +3380,12 @@ module Aws::CleanRooms
     #   resp.configured_table.table_reference.athena.database_name #=> String
     #   resp.configured_table.table_reference.athena.table_name #=> String
     #   resp.configured_table.table_reference.athena.catalog_name #=> String
+    #   resp.configured_table.table_reference.databricks.schema_name #=> String
+    #   resp.configured_table.table_reference.databricks.table_name #=> String
+    #   resp.configured_table.table_reference.databricks.workspace_url #=> String
+    #   resp.configured_table.table_reference.databricks.connection_type.delta_sharing.delta_share_endpoint #=> String
+    #   resp.configured_table.table_reference.databricks.connection_type.delta_sharing.share_name #=> String
+    #   resp.configured_table.table_type #=> String, one of "GLUE", "SNOWFLAKE", "ATHENA", "DATABRICKS"
     #   resp.configured_table.create_time #=> Time
     #   resp.configured_table.update_time #=> Time
     #   resp.configured_table.analysis_rule_types #=> Array
@@ -5001,6 +5031,7 @@ module Aws::CleanRooms
     #   resp.configured_table_summaries[0].id #=> String
     #   resp.configured_table_summaries[0].arn #=> String
     #   resp.configured_table_summaries[0].name #=> String
+    #   resp.configured_table_summaries[0].table_type #=> String, one of "GLUE", "SNOWFLAKE", "ATHENA", "DATABRICKS"
     #   resp.configured_table_summaries[0].create_time #=> Time
     #   resp.configured_table_summaries[0].update_time #=> Time
     #   resp.configured_table_summaries[0].analysis_rule_types #=> Array
@@ -6608,6 +6639,17 @@ module Aws::CleanRooms
     #         table_name: "AthenaTableName", # required
     #         catalog_name: "AthenaCatalogName",
     #       },
+    #       databricks: {
+    #         schema_name: "DatabricksObject", # required
+    #         table_name: "DatabricksObject", # required
+    #         workspace_url: "DatabricksWorkspaceUrl", # required
+    #         connection_type: { # required
+    #           delta_sharing: {
+    #             delta_share_endpoint: "DatabricksEndpointUrl", # required
+    #             share_name: "DatabricksObject", # required
+    #           },
+    #         },
+    #       },
     #     },
     #     allowed_columns: ["ColumnName"],
     #     analysis_method: "DIRECT_QUERY", # accepts DIRECT_QUERY, DIRECT_JOB, MULTIPLE
@@ -6637,6 +6679,12 @@ module Aws::CleanRooms
     #   resp.configured_table.table_reference.athena.database_name #=> String
     #   resp.configured_table.table_reference.athena.table_name #=> String
     #   resp.configured_table.table_reference.athena.catalog_name #=> String
+    #   resp.configured_table.table_reference.databricks.schema_name #=> String
+    #   resp.configured_table.table_reference.databricks.table_name #=> String
+    #   resp.configured_table.table_reference.databricks.workspace_url #=> String
+    #   resp.configured_table.table_reference.databricks.connection_type.delta_sharing.delta_share_endpoint #=> String
+    #   resp.configured_table.table_reference.databricks.connection_type.delta_sharing.share_name #=> String
+    #   resp.configured_table.table_type #=> String, one of "GLUE", "SNOWFLAKE", "ATHENA", "DATABRICKS"
     #   resp.configured_table.create_time #=> Time
     #   resp.configured_table.update_time #=> Time
     #   resp.configured_table.analysis_rule_types #=> Array
@@ -7664,7 +7712,7 @@ module Aws::CleanRooms
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cleanrooms'
-      context[:gem_version] = '1.81.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

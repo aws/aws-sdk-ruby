@@ -1,6 +1,47 @@
 Unreleased Changes
 ------------------
 
+3.278.0 (2026-10-22)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-continuum` gem.
+
+3.277.0 (2026-10-20)
+------------------
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-tnb` gem.
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-finspace` gem.
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-finspacedata` gem.
+
+3.276.0 (2026-10-12)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-sagemakertrainingsessionruntime` gem.
+
+3.275.0 (2026-10-01)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-lambdaweb` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-endusermessaging` gem.
+
+3.274.0 (2026-09-24)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-eventbridgev2` gem.
+
+3.273.0 (2026-09-23)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-networksecuritymanager` gem.
+
+3.272.0 (2026-09-22)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-cloudwatchomni` gem.
+
 3.271.0 (2026-08-25)
 ------------------
 

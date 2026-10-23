@@ -23,7 +23,8 @@ module Aws
       owner: ::String,
       owner_type: ("organization" | "user"),
       instance_identifier: ::String?,
-      runtime_role_arn: ::String?
+      runtime_role_arn: ::String?,
+      release_management_association_id: ::String?
     }
 
       type slack_transmission_target = {
@@ -57,6 +58,33 @@ module Aws
           tool_classification: ("READ_ONLY" | "MUTATIVE" | "DESTRUCTIVE")?
         }
       ]?
+    }
+
+      type ms_teams_transmission_target = {
+      ops_oncall_target: {
+        channel_name: ::String,
+        channel_id: ::String
+      }?,
+      ops_sre_target: {
+        channel_name: ::String,
+        channel_id: ::String
+      }?
+    }
+
+      type ms_teams_configuration = {
+      team_id: ::String,
+      team_name: ::String,
+      transmission_target: Params::ms_teams_transmission_target
+    }
+
+      type release_management_configuration = {
+      name: ::String,
+      network_access: {
+        private_access: {
+          private_connection_name: ::String,
+          runtime_role_arn: ::String
+        }?
+      }
     }
 
       type service_configuration = {
@@ -103,7 +131,8 @@ module Aws
         project_id: ::String,
         project_path: ::String,
         instance_identifier: ::String?,
-        runtime_role_arn: ::String?
+        runtime_role_arn: ::String?,
+        release_management_association_id: ::String?
       }?,
       mcpserversplunk: {
       }?,
@@ -134,7 +163,9 @@ module Aws
       remoteagent: {
       }?,
       remoteagentsigv4: {
-      }?
+      }?,
+      msteams: Params::ms_teams_configuration?,
+      release_management: Params::release_management_configuration?
     }
 
       type capability_configuration = {
@@ -202,6 +233,9 @@ module Aws
         token_name: ::String,
         token_value: ::String,
         authorization_header: ::String?
+      }?,
+      custom_headers: {
+        headers: Hash[::String, ::String]
       }?,
       authorization_discovery: {
         return_to_endpoint: ::String

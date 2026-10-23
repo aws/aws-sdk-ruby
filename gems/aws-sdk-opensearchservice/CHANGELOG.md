@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.115.0 (2026-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.114.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.113.0 (2026-10-19)
+------------------
+
+* Feature - Amazon OpenSearch Service adds a new TLS security policy to support FIPS policy and post-quantum cryptography
+
+1.112.0 (2026-10-08)
+------------------
+
+* Feature - This release adds a new EncryptionMode option (DISK or NATIVE) to EncryptionAtRestOptions for the CreateDomain and UpdateDomainConfig operations, enabling selection of engine-native index-level encryption on supported Amazon OpenSearch Service domains.
+
+1.111.0 (2026-09-29)
+------------------
+
+* Feature - Amazon OpenSearch Service now supports advisory pre-validations for domain config changes. Non-critical checks now surface as warnings you can acknowledge (via the new AcceptedWarnings parameter) and proceed, instead of hard-blocking. Severity is reported in change-progress and dry-run results.
+
 1.110.0 (2026-09-11)
 ------------------
 

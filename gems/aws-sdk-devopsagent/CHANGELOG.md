@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2026-10-21)
+------------------
+
+* Feature - Adds support for Microsoft Teams as a notification service. Associations can now be created and updated with a Microsoft Teams team and channel configuration using the DevOps Agent API and SDKs.
+
+1.20.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.19.0 (2026-10-19)
+------------------
+
+* Feature - Documentation update release for AWS service
+
+1.18.0 (2026-10-12)
+------------------
+
+* Feature - Adds support for the includedData field in GetAgentSpace and ListAgentSpaces APIs
+
+1.17.0 (2026-10-08)
+------------------
+
+* Feature - Adds release management associations with private network access to AWS DevOps Agent, and a releaseManagementAssociationId field on GitHub and GitLab associations. This helps release management agents (Release-readiness review and Release Testing) access customer resources that are behind a VPC.
+
 1.16.0 (2026-09-11)
 ------------------
 

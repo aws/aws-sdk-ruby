@@ -199,12 +199,19 @@ module Aws::SecurityAgent
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -684,6 +691,26 @@ module Aws::SecurityAgent
     #   resp.deleted[0].disable_managed_skills #=> Array
     #   resp.deleted[0].disable_managed_skills[0] #=> String, one of "FINDING_PERSONALIZATION", "LOGIN_OPTIMIZATION"
     #   resp.deleted[0].max_task_hours #=> Float
+    #   resp.deleted[0].report_destination.integration_id #=> String
+    #   resp.deleted[0].report_destination.container_id #=> String
+    #   resp.deleted[0].report_destination.parent_id #=> String
+    #   resp.deleted[0].report_destination.document_id #=> String
+    #   resp.deleted[0].report_filters.risk_levels #=> Array
+    #   resp.deleted[0].report_filters.risk_levels[0] #=> String, one of "UNKNOWN", "INFORMATIONAL", "LOW", "MEDIUM", "HIGH", "CRITICAL"
+    #   resp.deleted[0].report_filters.confidence_levels #=> Array
+    #   resp.deleted[0].report_filters.confidence_levels[0] #=> String, one of "FALSE_POSITIVE", "UNCONFIRMED", "LOW", "MEDIUM", "HIGH"
+    #   resp.deleted[0].report_filters.statuses #=> Array
+    #   resp.deleted[0].report_filters.statuses[0] #=> String, one of "ACTIVE", "RESOLVED", "ACCEPTED", "FALSE_POSITIVE"
+    #   resp.deleted[0].report_filters.risk_types #=> Array
+    #   resp.deleted[0].report_filters.risk_types[0] #=> String, one of "CROSS_SITE_SCRIPTING", "DEFAULT_CREDENTIALS", "INSECURE_DIRECT_OBJECT_REFERENCE", "PRIVILEGE_ESCALATION", "SERVER_SIDE_TEMPLATE_INJECTION", "COMMAND_INJECTION", "CODE_INJECTION", "SQL_INJECTION", "ARBITRARY_FILE_UPLOAD", "INSECURE_DESERIALIZATION", "LOCAL_FILE_INCLUSION", "INFORMATION_DISCLOSURE", "PATH_TRAVERSAL", "SERVER_SIDE_REQUEST_FORGERY", "JSON_WEB_TOKEN_VULNERABILITIES", "XML_EXTERNAL_ENTITY", "FILE_DELETION", "OTHER", "GRAPHQL_VULNERABILITIES", "BUSINESS_LOGIC_VULNERABILITIES", "CRYPTOGRAPHIC_VULNERABILITIES", "DENIAL_OF_SERVICE", "FILE_ACCESS", "FILE_CREATION", "DATABASE_MODIFICATION", "DATABASE_ACCESS", "OUTBOUND_SERVICE_REQUEST", "UNKNOWN"
+    #   resp.deleted[0].report_filters.finding_types #=> Array
+    #   resp.deleted[0].report_filters.finding_types[0] #=> String
+    #   resp.deleted[0].report_filters.task_statuses #=> Array
+    #   resp.deleted[0].report_filters.task_statuses[0] #=> String, one of "IN_PROGRESS", "ABORTED", "COMPLETED", "INTERNAL_ERROR", "FAILED"
+    #   resp.deleted[0].report_filters.annotation_notes #=> Boolean
+    #   resp.deleted[0].report_filters.compliance_report #=> Boolean
+    #   resp.deleted[0].cicd_configuration.enabled #=> Boolean
+    #   resp.deleted[0].test_scope.type #=> String, one of "WEB_APP", "GENERATIVE_AI_APP"
     #   resp.deleted[0].created_at #=> Time
     #   resp.deleted[0].updated_at #=> Time
     #   resp.failed #=> Array
@@ -773,6 +800,116 @@ module Aws::SecurityAgent
     # @param [Hash] params ({})
     def batch_delete_threat_models(params = {}, options = {})
       req = build_request(:batch_delete_threat_models, params)
+      req.send_request(options)
+    end
+
+    # Disassociates a batch of findings from their linked issues.
+    #
+    # @option params [required, String] :agent_space_id
+    #   The identifier of the agent space where the job exists.
+    #
+    # @option params [String] :pentest_job_id
+    #   The identifier of the penetration test job. This parameter is mutually
+    #   exclusive with `codeReviewJobId`.
+    #
+    # @option params [String] :code_review_job_id
+    #   The identifier of the code review job. This parameter is mutually
+    #   exclusive with `pentestJobId`.
+    #
+    # @option params [required, Array<String>] :finding_ids
+    #   The identifiers of the findings to disassociate from their issues.
+    #   Each must belong to the specified job.
+    #
+    # @return [Types::BatchDisassociateFindingIssueOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDisassociateFindingIssueOutput#errors #errors} => Array&lt;Types::BatchDisassociateFindingIssueError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_disassociate_finding_issue({
+    #     agent_space_id: "String", # required
+    #     pentest_job_id: "String",
+    #     code_review_job_id: "String",
+    #     finding_ids: ["String"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.errors #=> Array
+    #   resp.errors[0].finding_id #=> String
+    #   resp.errors[0].code #=> String, one of "CLIENT_ERROR", "INTERNAL_ERROR", "STOPPED_BY_USER"
+    #   resp.errors[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchDisassociateFindingIssue AWS API Documentation
+    #
+    # @overload batch_disassociate_finding_issue(params = {})
+    # @param [Hash] params ({})
+    def batch_disassociate_finding_issue(params = {}, options = {})
+      req = build_request(:batch_disassociate_finding_issue, params)
+      req.send_request(options)
+    end
+
+    # Exports a batch of findings to the connected issue tracker as issues.
+    #
+    # @option params [required, String] :agent_space_id
+    #   The identifier of the agent space where the job exists.
+    #
+    # @option params [String] :pentest_job_id
+    #   The identifier of the penetration test job. This parameter is mutually
+    #   exclusive with `codeReviewJobId`.
+    #
+    # @option params [String] :code_review_job_id
+    #   The identifier of the code review job. This parameter is mutually
+    #   exclusive with `pentestJobId`.
+    #
+    # @option params [required, Types::IssueDestination] :issue_destination
+    #   The destination issue-tracker project the findings are exported to.
+    #   Must be a connected capability of the agent space.
+    #
+    # @option params [required, Array<String>] :finding_ids
+    #   The identifiers of the findings to export. Each must belong to the
+    #   specified job.
+    #
+    # @return [Types::BatchExportFindingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchExportFindingsOutput#results #results} => Array&lt;Types::BatchExportFindingResult&gt;
+    #   * {Types::BatchExportFindingsOutput#errors #errors} => Array&lt;Types::BatchExportFindingError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_export_findings({
+    #     agent_space_id: "String", # required
+    #     pentest_job_id: "String",
+    #     code_review_job_id: "String",
+    #     issue_destination: { # required
+    #       integration_id: "String", # required
+    #       project_key: "String", # required
+    #     },
+    #     finding_ids: ["String"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.results #=> Array
+    #   resp.results[0].finding_id #=> String
+    #   resp.results[0].linked_issue.provider #=> String, one of "GITHUB", "GITLAB", "BITBUCKET", "CONFLUENCE", "AZURE_DEVOPS", "JIRA"
+    #   resp.results[0].linked_issue.integration_id #=> String
+    #   resp.results[0].linked_issue.project_key #=> String
+    #   resp.results[0].linked_issue.issue_key #=> String
+    #   resp.results[0].linked_issue.issue_id #=> String
+    #   resp.results[0].linked_issue.issue_url #=> String
+    #   resp.results[0].linked_issue.site_url #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].finding_id #=> String
+    #   resp.errors[0].code #=> String, one of "CLIENT_ERROR", "INTERNAL_ERROR", "STOPPED_BY_USER"
+    #   resp.errors[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchExportFindings AWS API Documentation
+    #
+    # @overload batch_export_findings(params = {})
+    # @param [Hash] params ({})
+    def batch_export_findings(params = {}, options = {})
+      req = build_request(:batch_export_findings, params)
       req.send_request(options)
     end
 
@@ -978,6 +1115,10 @@ module Aws::SecurityAgent
     #   resp.code_review_jobs[0].integrated_repositories[0].branch #=> String
     #   resp.code_review_jobs[0].code_remediation_strategy #=> String, one of "AUTOMATIC", "DISABLED"
     #   resp.code_review_jobs[0].max_task_hours #=> Float
+    #   resp.code_review_jobs[0].report_destination.integration_id #=> String
+    #   resp.code_review_jobs[0].report_destination.container_id #=> String
+    #   resp.code_review_jobs[0].report_destination.parent_id #=> String
+    #   resp.code_review_jobs[0].report_destination.document_id #=> String
     #   resp.code_review_jobs[0].created_at #=> Time
     #   resp.code_review_jobs[0].updated_at #=> Time
     #   resp.not_found #=> Array
@@ -1052,6 +1193,24 @@ module Aws::SecurityAgent
     #   resp.code_reviews[0].code_remediation_strategy #=> String, one of "AUTOMATIC", "DISABLED"
     #   resp.code_reviews[0].validation_mode #=> String, one of "DISABLED", "SIMULATED"
     #   resp.code_reviews[0].max_task_hours #=> Float
+    #   resp.code_reviews[0].report_destination.integration_id #=> String
+    #   resp.code_reviews[0].report_destination.container_id #=> String
+    #   resp.code_reviews[0].report_destination.parent_id #=> String
+    #   resp.code_reviews[0].report_destination.document_id #=> String
+    #   resp.code_reviews[0].report_filters.risk_levels #=> Array
+    #   resp.code_reviews[0].report_filters.risk_levels[0] #=> String, one of "UNKNOWN", "INFORMATIONAL", "LOW", "MEDIUM", "HIGH", "CRITICAL"
+    #   resp.code_reviews[0].report_filters.confidence_levels #=> Array
+    #   resp.code_reviews[0].report_filters.confidence_levels[0] #=> String, one of "FALSE_POSITIVE", "UNCONFIRMED", "LOW", "MEDIUM", "HIGH"
+    #   resp.code_reviews[0].report_filters.statuses #=> Array
+    #   resp.code_reviews[0].report_filters.statuses[0] #=> String, one of "ACTIVE", "RESOLVED", "ACCEPTED", "FALSE_POSITIVE"
+    #   resp.code_reviews[0].report_filters.risk_types #=> Array
+    #   resp.code_reviews[0].report_filters.risk_types[0] #=> String, one of "CROSS_SITE_SCRIPTING", "DEFAULT_CREDENTIALS", "INSECURE_DIRECT_OBJECT_REFERENCE", "PRIVILEGE_ESCALATION", "SERVER_SIDE_TEMPLATE_INJECTION", "COMMAND_INJECTION", "CODE_INJECTION", "SQL_INJECTION", "ARBITRARY_FILE_UPLOAD", "INSECURE_DESERIALIZATION", "LOCAL_FILE_INCLUSION", "INFORMATION_DISCLOSURE", "PATH_TRAVERSAL", "SERVER_SIDE_REQUEST_FORGERY", "JSON_WEB_TOKEN_VULNERABILITIES", "XML_EXTERNAL_ENTITY", "FILE_DELETION", "OTHER", "GRAPHQL_VULNERABILITIES", "BUSINESS_LOGIC_VULNERABILITIES", "CRYPTOGRAPHIC_VULNERABILITIES", "DENIAL_OF_SERVICE", "FILE_ACCESS", "FILE_CREATION", "DATABASE_MODIFICATION", "DATABASE_ACCESS", "OUTBOUND_SERVICE_REQUEST", "UNKNOWN"
+    #   resp.code_reviews[0].report_filters.finding_types #=> Array
+    #   resp.code_reviews[0].report_filters.finding_types[0] #=> String
+    #   resp.code_reviews[0].report_filters.task_statuses #=> Array
+    #   resp.code_reviews[0].report_filters.task_statuses[0] #=> String, one of "IN_PROGRESS", "ABORTED", "COMPLETED", "INTERNAL_ERROR", "FAILED"
+    #   resp.code_reviews[0].report_filters.annotation_notes #=> Boolean
+    #   resp.code_reviews[0].report_filters.compliance_report #=> Boolean
     #   resp.code_reviews[0].created_at #=> Time
     #   resp.code_reviews[0].updated_at #=> Time
     #   resp.not_found #=> Array
@@ -1107,6 +1266,7 @@ module Aws::SecurityAgent
     #   resp.findings[0].confidence #=> String, one of "FALSE_POSITIVE", "UNCONFIRMED", "LOW", "MEDIUM", "HIGH"
     #   resp.findings[0].validation_status #=> String, one of "CONFIRMED", "NOT_REPRODUCED", "VALIDATION_FAILED", "VALIDATING", "NOT_VALIDATED"
     #   resp.findings[0].attack_script #=> String
+    #   resp.findings[0].remediation_code #=> String
     #   resp.findings[0].code_remediation_task.status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED"
     #   resp.findings[0].code_remediation_task.status_reason #=> String
     #   resp.findings[0].code_remediation_task.task_details #=> Array
@@ -1130,6 +1290,13 @@ module Aws::SecurityAgent
     #   resp.findings[0].revalidation_job_ids #=> Array
     #   resp.findings[0].revalidation_job_ids[0] #=> String
     #   resp.findings[0].original_finding_id #=> String
+    #   resp.findings[0].linked_issue.provider #=> String, one of "GITHUB", "GITLAB", "BITBUCKET", "CONFLUENCE", "AZURE_DEVOPS", "JIRA"
+    #   resp.findings[0].linked_issue.integration_id #=> String
+    #   resp.findings[0].linked_issue.project_key #=> String
+    #   resp.findings[0].linked_issue.issue_key #=> String
+    #   resp.findings[0].linked_issue.issue_id #=> String
+    #   resp.findings[0].linked_issue.issue_url #=> String
+    #   resp.findings[0].linked_issue.site_url #=> String
     #   resp.findings[0].created_at #=> Time
     #   resp.findings[0].updated_at #=> Time
     #   resp.not_found #=> Array
@@ -1290,9 +1457,24 @@ module Aws::SecurityAgent
     #   resp.pentest_jobs[0].disable_managed_skills #=> Array
     #   resp.pentest_jobs[0].disable_managed_skills[0] #=> String, one of "FINDING_PERSONALIZATION", "LOGIN_OPTIMIZATION"
     #   resp.pentest_jobs[0].max_task_hours #=> Float
-    #   resp.pentest_jobs[0].job_type #=> String, one of "FULL", "REVALIDATION"
+    #   resp.pentest_jobs[0].job_type #=> String, one of "FULL", "REVALIDATION", "CICD"
     #   resp.pentest_jobs[0].selected_finding_ids #=> Array
     #   resp.pentest_jobs[0].selected_finding_ids[0] #=> String
+    #   resp.pentest_jobs[0].report_destination.integration_id #=> String
+    #   resp.pentest_jobs[0].report_destination.container_id #=> String
+    #   resp.pentest_jobs[0].report_destination.parent_id #=> String
+    #   resp.pentest_jobs[0].report_destination.document_id #=> String
+    #   resp.pentest_jobs[0].report_url #=> String
+    #   resp.pentest_jobs[0].scope_result.decision #=> String, one of "IN_SCOPE", "SCOPED_OUT", "SCOPE_CONFLICT"
+    #   resp.pentest_jobs[0].scope_result.reason #=> String
+    #   resp.pentest_jobs[0].scope_changes #=> Array
+    #   resp.pentest_jobs[0].scope_changes[0].integration_id #=> String
+    #   resp.pentest_jobs[0].scope_changes[0].provider_resource_id #=> String
+    #   resp.pentest_jobs[0].scope_changes[0].base_commit_sha #=> String
+    #   resp.pentest_jobs[0].scope_changes[0].head_commit_sha #=> String
+    #   resp.pentest_jobs[0].scope_changes[0].trigger_run_id #=> String
+    #   resp.pentest_jobs[0].cicd_configuration.enabled #=> Boolean
+    #   resp.pentest_jobs[0].test_scope.type #=> String, one of "WEB_APP", "GENERATIVE_AI_APP"
     #   resp.pentest_jobs[0].created_at #=> Time
     #   resp.pentest_jobs[0].updated_at #=> Time
     #   resp.not_found #=> Array
@@ -1381,6 +1563,26 @@ module Aws::SecurityAgent
     #   resp.pentests[0].disable_managed_skills #=> Array
     #   resp.pentests[0].disable_managed_skills[0] #=> String, one of "FINDING_PERSONALIZATION", "LOGIN_OPTIMIZATION"
     #   resp.pentests[0].max_task_hours #=> Float
+    #   resp.pentests[0].report_destination.integration_id #=> String
+    #   resp.pentests[0].report_destination.container_id #=> String
+    #   resp.pentests[0].report_destination.parent_id #=> String
+    #   resp.pentests[0].report_destination.document_id #=> String
+    #   resp.pentests[0].report_filters.risk_levels #=> Array
+    #   resp.pentests[0].report_filters.risk_levels[0] #=> String, one of "UNKNOWN", "INFORMATIONAL", "LOW", "MEDIUM", "HIGH", "CRITICAL"
+    #   resp.pentests[0].report_filters.confidence_levels #=> Array
+    #   resp.pentests[0].report_filters.confidence_levels[0] #=> String, one of "FALSE_POSITIVE", "UNCONFIRMED", "LOW", "MEDIUM", "HIGH"
+    #   resp.pentests[0].report_filters.statuses #=> Array
+    #   resp.pentests[0].report_filters.statuses[0] #=> String, one of "ACTIVE", "RESOLVED", "ACCEPTED", "FALSE_POSITIVE"
+    #   resp.pentests[0].report_filters.risk_types #=> Array
+    #   resp.pentests[0].report_filters.risk_types[0] #=> String, one of "CROSS_SITE_SCRIPTING", "DEFAULT_CREDENTIALS", "INSECURE_DIRECT_OBJECT_REFERENCE", "PRIVILEGE_ESCALATION", "SERVER_SIDE_TEMPLATE_INJECTION", "COMMAND_INJECTION", "CODE_INJECTION", "SQL_INJECTION", "ARBITRARY_FILE_UPLOAD", "INSECURE_DESERIALIZATION", "LOCAL_FILE_INCLUSION", "INFORMATION_DISCLOSURE", "PATH_TRAVERSAL", "SERVER_SIDE_REQUEST_FORGERY", "JSON_WEB_TOKEN_VULNERABILITIES", "XML_EXTERNAL_ENTITY", "FILE_DELETION", "OTHER", "GRAPHQL_VULNERABILITIES", "BUSINESS_LOGIC_VULNERABILITIES", "CRYPTOGRAPHIC_VULNERABILITIES", "DENIAL_OF_SERVICE", "FILE_ACCESS", "FILE_CREATION", "DATABASE_MODIFICATION", "DATABASE_ACCESS", "OUTBOUND_SERVICE_REQUEST", "UNKNOWN"
+    #   resp.pentests[0].report_filters.finding_types #=> Array
+    #   resp.pentests[0].report_filters.finding_types[0] #=> String
+    #   resp.pentests[0].report_filters.task_statuses #=> Array
+    #   resp.pentests[0].report_filters.task_statuses[0] #=> String, one of "IN_PROGRESS", "ABORTED", "COMPLETED", "INTERNAL_ERROR", "FAILED"
+    #   resp.pentests[0].report_filters.annotation_notes #=> Boolean
+    #   resp.pentests[0].report_filters.compliance_report #=> Boolean
+    #   resp.pentests[0].cicd_configuration.enabled #=> Boolean
+    #   resp.pentests[0].test_scope.type #=> String, one of "WEB_APP", "GENERATIVE_AI_APP"
     #   resp.pentests[0].created_at #=> Time
     #   resp.pentests[0].updated_at #=> Time
     #   resp.not_found #=> Array
@@ -1585,6 +1787,10 @@ module Aws::SecurityAgent
     #   resp.threat_model_jobs[0].error_information.code #=> String, one of "CLIENT_ERROR", "INTERNAL_ERROR", "STOPPED_BY_USER"
     #   resp.threat_model_jobs[0].error_information.message #=> String
     #   resp.threat_model_jobs[0].system_overview #=> String
+    #   resp.threat_model_jobs[0].report_destination.integration_id #=> String
+    #   resp.threat_model_jobs[0].report_destination.container_id #=> String
+    #   resp.threat_model_jobs[0].report_destination.parent_id #=> String
+    #   resp.threat_model_jobs[0].report_destination.document_id #=> String
     #   resp.not_found #=> Array
     #   resp.not_found[0] #=> String
     #
@@ -1660,6 +1866,10 @@ module Aws::SecurityAgent
     #   resp.threat_models[0].service_role #=> String
     #   resp.threat_models[0].log_config.log_group #=> String
     #   resp.threat_models[0].log_config.log_stream #=> String
+    #   resp.threat_models[0].report_destination.integration_id #=> String
+    #   resp.threat_models[0].report_destination.container_id #=> String
+    #   resp.threat_models[0].report_destination.parent_id #=> String
+    #   resp.threat_models[0].report_destination.document_id #=> String
     #   resp.threat_models[0].created_at #=> Time
     #   resp.threat_models[0].updated_at #=> Time
     #   resp.not_found #=> Array
@@ -1969,6 +2179,13 @@ module Aws::SecurityAgent
     #   from this code review. Must be a positive number. If not set, jobs run
     #   to completion with no budget cap.
     #
+    # @option params [Types::ReportDestination] :report_destination
+    #   The destination for publishing scan reports to an integrated document
+    #   provider.
+    #
+    # @option params [Types::ReportFilters] :report_filters
+    #   The report-generation filters applied when the report is exported.
+    #
     # @return [Types::CreateCodeReviewOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCodeReviewOutput#code_review_id #code_review_id} => String
@@ -1982,6 +2199,8 @@ module Aws::SecurityAgent
     #   * {Types::CreateCodeReviewOutput#code_remediation_strategy #code_remediation_strategy} => String
     #   * {Types::CreateCodeReviewOutput#validation_mode #validation_mode} => String
     #   * {Types::CreateCodeReviewOutput#max_task_hours #max_task_hours} => Float
+    #   * {Types::CreateCodeReviewOutput#report_destination #report_destination} => Types::ReportDestination
+    #   * {Types::CreateCodeReviewOutput#report_filters #report_filters} => Types::ReportFilters
     #
     # @example Request syntax with placeholder values
     #
@@ -2047,6 +2266,22 @@ module Aws::SecurityAgent
     #     code_remediation_strategy: "AUTOMATIC", # accepts AUTOMATIC, DISABLED
     #     validation_mode: "DISABLED", # accepts DISABLED, SIMULATED
     #     max_task_hours: 1.0,
+    #     report_destination: {
+    #       integration_id: "String", # required
+    #       container_id: "String", # required
+    #       parent_id: "String",
+    #       document_id: "String",
+    #     },
+    #     report_filters: {
+    #       risk_levels: ["UNKNOWN"], # accepts UNKNOWN, INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
+    #       confidence_levels: ["FALSE_POSITIVE"], # accepts FALSE_POSITIVE, UNCONFIRMED, LOW, MEDIUM, HIGH
+    #       statuses: ["ACTIVE"], # accepts ACTIVE, RESOLVED, ACCEPTED, FALSE_POSITIVE
+    #       risk_types: ["CROSS_SITE_SCRIPTING"], # accepts CROSS_SITE_SCRIPTING, DEFAULT_CREDENTIALS, INSECURE_DIRECT_OBJECT_REFERENCE, PRIVILEGE_ESCALATION, SERVER_SIDE_TEMPLATE_INJECTION, COMMAND_INJECTION, CODE_INJECTION, SQL_INJECTION, ARBITRARY_FILE_UPLOAD, INSECURE_DESERIALIZATION, LOCAL_FILE_INCLUSION, INFORMATION_DISCLOSURE, PATH_TRAVERSAL, SERVER_SIDE_REQUEST_FORGERY, JSON_WEB_TOKEN_VULNERABILITIES, XML_EXTERNAL_ENTITY, FILE_DELETION, OTHER, GRAPHQL_VULNERABILITIES, BUSINESS_LOGIC_VULNERABILITIES, CRYPTOGRAPHIC_VULNERABILITIES, DENIAL_OF_SERVICE, FILE_ACCESS, FILE_CREATION, DATABASE_MODIFICATION, DATABASE_ACCESS, OUTBOUND_SERVICE_REQUEST, UNKNOWN
+    #       finding_types: ["ReportFilterValue"],
+    #       task_statuses: ["IN_PROGRESS"], # accepts IN_PROGRESS, ABORTED, COMPLETED, INTERNAL_ERROR, FAILED
+    #       annotation_notes: false,
+    #       compliance_report: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -2088,6 +2323,24 @@ module Aws::SecurityAgent
     #   resp.code_remediation_strategy #=> String, one of "AUTOMATIC", "DISABLED"
     #   resp.validation_mode #=> String, one of "DISABLED", "SIMULATED"
     #   resp.max_task_hours #=> Float
+    #   resp.report_destination.integration_id #=> String
+    #   resp.report_destination.container_id #=> String
+    #   resp.report_destination.parent_id #=> String
+    #   resp.report_destination.document_id #=> String
+    #   resp.report_filters.risk_levels #=> Array
+    #   resp.report_filters.risk_levels[0] #=> String, one of "UNKNOWN", "INFORMATIONAL", "LOW", "MEDIUM", "HIGH", "CRITICAL"
+    #   resp.report_filters.confidence_levels #=> Array
+    #   resp.report_filters.confidence_levels[0] #=> String, one of "FALSE_POSITIVE", "UNCONFIRMED", "LOW", "MEDIUM", "HIGH"
+    #   resp.report_filters.statuses #=> Array
+    #   resp.report_filters.statuses[0] #=> String, one of "ACTIVE", "RESOLVED", "ACCEPTED", "FALSE_POSITIVE"
+    #   resp.report_filters.risk_types #=> Array
+    #   resp.report_filters.risk_types[0] #=> String, one of "CROSS_SITE_SCRIPTING", "DEFAULT_CREDENTIALS", "INSECURE_DIRECT_OBJECT_REFERENCE", "PRIVILEGE_ESCALATION", "SERVER_SIDE_TEMPLATE_INJECTION", "COMMAND_INJECTION", "CODE_INJECTION", "SQL_INJECTION", "ARBITRARY_FILE_UPLOAD", "INSECURE_DESERIALIZATION", "LOCAL_FILE_INCLUSION", "INFORMATION_DISCLOSURE", "PATH_TRAVERSAL", "SERVER_SIDE_REQUEST_FORGERY", "JSON_WEB_TOKEN_VULNERABILITIES", "XML_EXTERNAL_ENTITY", "FILE_DELETION", "OTHER", "GRAPHQL_VULNERABILITIES", "BUSINESS_LOGIC_VULNERABILITIES", "CRYPTOGRAPHIC_VULNERABILITIES", "DENIAL_OF_SERVICE", "FILE_ACCESS", "FILE_CREATION", "DATABASE_MODIFICATION", "DATABASE_ACCESS", "OUTBOUND_SERVICE_REQUEST", "UNKNOWN"
+    #   resp.report_filters.finding_types #=> Array
+    #   resp.report_filters.finding_types[0] #=> String
+    #   resp.report_filters.task_statuses #=> Array
+    #   resp.report_filters.task_statuses[0] #=> String, one of "IN_PROGRESS", "ABORTED", "COMPLETED", "INTERNAL_ERROR", "FAILED"
+    #   resp.report_filters.annotation_notes #=> Boolean
+    #   resp.report_filters.compliance_report #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CreateCodeReview AWS API Documentation
     #
@@ -2102,7 +2355,7 @@ module Aws::SecurityAgent
     # for code review and remediation.
     #
     # @option params [required, String] :provider
-    #   The integration provider. Currently, only GITHUB is supported.
+    #   The integration provider.
     #
     # @option params [required, Types::ProviderInput] :input
     #   The provider-specific input required to create the integration.
@@ -2129,7 +2382,7 @@ module Aws::SecurityAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_integration({
-    #     provider: "GITHUB", # required, accepts GITHUB, GITLAB, BITBUCKET, CONFLUENCE
+    #     provider: "GITHUB", # required, accepts GITHUB, GITLAB, BITBUCKET, CONFLUENCE, AZURE_DEVOPS, JIRA
     #     input: { # required
     #       github: {
     #         code: "AuthCode", # required
@@ -2155,6 +2408,22 @@ module Aws::SecurityAgent
     #         code: "AuthCode", # required
     #         state: "CsrfState", # required
     #         site_url: "ConfluenceSiteUrl", # required
+    #       },
+    #       azure_dev_ops: {
+    #         code: "AuthCode", # required
+    #         state: "CsrfState", # required
+    #         organization_name: "String", # required
+    #       },
+    #       bitbucket_data_center: {
+    #         target_url: "TargetUrl", # required
+    #         code: "AuthCode", # required
+    #         state: "CsrfState", # required
+    #       },
+    #       jira: {
+    #         installation_id: "JiraInstallationId", # required
+    #         code: "AuthCode", # required
+    #         state: "CsrfState", # required
+    #         site_url: "JiraSiteUrl", # required
     #       },
     #     },
     #     integration_display_name: "String", # required
@@ -2265,6 +2534,19 @@ module Aws::SecurityAgent
     #   from this pentest. Must be a positive number. If not set, jobs run to
     #   completion with no budget cap.
     #
+    # @option params [Types::ReportDestination] :report_destination
+    #   The destination for publishing scan reports to an integrated document
+    #   provider.
+    #
+    # @option params [Types::ReportFilters] :report_filters
+    #   The report-generation filters applied when the report is exported.
+    #
+    # @option params [Types::CiCdConfiguration] :cicd_configuration
+    #   The CI/CD pentesting configuration to apply to the pentest.
+    #
+    # @option params [Types::TestScope] :test_scope
+    #   The category of application a pentest targets.
+    #
     # @return [Types::CreatePentestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePentestOutput#pentest_id #pentest_id} => String
@@ -2276,6 +2558,10 @@ module Aws::SecurityAgent
     #   * {Types::CreatePentestOutput#service_role #service_role} => String
     #   * {Types::CreatePentestOutput#log_config #log_config} => Types::CloudWatchLog
     #   * {Types::CreatePentestOutput#agent_space_id #agent_space_id} => String
+    #   * {Types::CreatePentestOutput#report_destination #report_destination} => Types::ReportDestination
+    #   * {Types::CreatePentestOutput#report_filters #report_filters} => Types::ReportFilters
+    #   * {Types::CreatePentestOutput#cicd_configuration #cicd_configuration} => Types::CiCdConfiguration
+    #   * {Types::CreatePentestOutput#test_scope #test_scope} => Types::TestScope
     #
     # @example Request syntax with placeholder values
     #
@@ -2362,6 +2648,28 @@ module Aws::SecurityAgent
     #     code_remediation_strategy: "AUTOMATIC", # accepts AUTOMATIC, DISABLED
     #     disable_managed_skills: ["FINDING_PERSONALIZATION"], # accepts FINDING_PERSONALIZATION, LOGIN_OPTIMIZATION
     #     max_task_hours: 1.0,
+    #     report_destination: {
+    #       integration_id: "String", # required
+    #       container_id: "String", # required
+    #       parent_id: "String",
+    #       document_id: "String",
+    #     },
+    #     report_filters: {
+    #       risk_levels: ["UNKNOWN"], # accepts UNKNOWN, INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
+    #       confidence_levels: ["FALSE_POSITIVE"], # accepts FALSE_POSITIVE, UNCONFIRMED, LOW, MEDIUM, HIGH
+    #       statuses: ["ACTIVE"], # accepts ACTIVE, RESOLVED, ACCEPTED, FALSE_POSITIVE
+    #       risk_types: ["CROSS_SITE_SCRIPTING"], # accepts CROSS_SITE_SCRIPTING, DEFAULT_CREDENTIALS, INSECURE_DIRECT_OBJECT_REFERENCE, PRIVILEGE_ESCALATION, SERVER_SIDE_TEMPLATE_INJECTION, COMMAND_INJECTION, CODE_INJECTION, SQL_INJECTION, ARBITRARY_FILE_UPLOAD, INSECURE_DESERIALIZATION, LOCAL_FILE_INCLUSION, INFORMATION_DISCLOSURE, PATH_TRAVERSAL, SERVER_SIDE_REQUEST_FORGERY, JSON_WEB_TOKEN_VULNERABILITIES, XML_EXTERNAL_ENTITY, FILE_DELETION, OTHER, GRAPHQL_VULNERABILITIES, BUSINESS_LOGIC_VULNERABILITIES, CRYPTOGRAPHIC_VULNERABILITIES, DENIAL_OF_SERVICE, FILE_ACCESS, FILE_CREATION, DATABASE_MODIFICATION, DATABASE_ACCESS, OUTBOUND_SERVICE_REQUEST, UNKNOWN
+    #       finding_types: ["ReportFilterValue"],
+    #       task_statuses: ["IN_PROGRESS"], # accepts IN_PROGRESS, ABORTED, COMPLETED, INTERNAL_ERROR, FAILED
+    #       annotation_notes: false,
+    #       compliance_report: false,
+    #     },
+    #     cicd_configuration: {
+    #       enabled: false,
+    #     },
+    #     test_scope: {
+    #       type: "WEB_APP", # required, accepts WEB_APP, GENERATIVE_AI_APP
+    #     },
     #   })
     #
     # @example Response structure
@@ -2402,6 +2710,26 @@ module Aws::SecurityAgent
     #   resp.log_config.log_group #=> String
     #   resp.log_config.log_stream #=> String
     #   resp.agent_space_id #=> String
+    #   resp.report_destination.integration_id #=> String
+    #   resp.report_destination.container_id #=> String
+    #   resp.report_destination.parent_id #=> String
+    #   resp.report_destination.document_id #=> String
+    #   resp.report_filters.risk_levels #=> Array
+    #   resp.report_filters.risk_levels[0] #=> String, one of "UNKNOWN", "INFORMATIONAL", "LOW", "MEDIUM", "HIGH", "CRITICAL"
+    #   resp.report_filters.confidence_levels #=> Array
+    #   resp.report_filters.confidence_levels[0] #=> String, one of "FALSE_POSITIVE", "UNCONFIRMED", "LOW", "MEDIUM", "HIGH"
+    #   resp.report_filters.statuses #=> Array
+    #   resp.report_filters.statuses[0] #=> String, one of "ACTIVE", "RESOLVED", "ACCEPTED", "FALSE_POSITIVE"
+    #   resp.report_filters.risk_types #=> Array
+    #   resp.report_filters.risk_types[0] #=> String, one of "CROSS_SITE_SCRIPTING", "DEFAULT_CREDENTIALS", "INSECURE_DIRECT_OBJECT_REFERENCE", "PRIVILEGE_ESCALATION", "SERVER_SIDE_TEMPLATE_INJECTION", "COMMAND_INJECTION", "CODE_INJECTION", "SQL_INJECTION", "ARBITRARY_FILE_UPLOAD", "INSECURE_DESERIALIZATION", "LOCAL_FILE_INCLUSION", "INFORMATION_DISCLOSURE", "PATH_TRAVERSAL", "SERVER_SIDE_REQUEST_FORGERY", "JSON_WEB_TOKEN_VULNERABILITIES", "XML_EXTERNAL_ENTITY", "FILE_DELETION", "OTHER", "GRAPHQL_VULNERABILITIES", "BUSINESS_LOGIC_VULNERABILITIES", "CRYPTOGRAPHIC_VULNERABILITIES", "DENIAL_OF_SERVICE", "FILE_ACCESS", "FILE_CREATION", "DATABASE_MODIFICATION", "DATABASE_ACCESS", "OUTBOUND_SERVICE_REQUEST", "UNKNOWN"
+    #   resp.report_filters.finding_types #=> Array
+    #   resp.report_filters.finding_types[0] #=> String
+    #   resp.report_filters.task_statuses #=> Array
+    #   resp.report_filters.task_statuses[0] #=> String, one of "IN_PROGRESS", "ABORTED", "COMPLETED", "INTERNAL_ERROR", "FAILED"
+    #   resp.report_filters.annotation_notes #=> Boolean
+    #   resp.report_filters.compliance_report #=> Boolean
+    #   resp.cicd_configuration.enabled #=> Boolean
+    #   resp.test_scope.type #=> String, one of "WEB_APP", "GENERATIVE_AI_APP"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CreatePentest AWS API Documentation
     #
@@ -2782,6 +3110,7 @@ module Aws::SecurityAgent
     #   * {Types::CreateThreatModelOutput#log_config #log_config} => Types::CloudWatchLog
     #   * {Types::CreateThreatModelOutput#created_at #created_at} => Time
     #   * {Types::CreateThreatModelOutput#updated_at #updated_at} => Time
+    #   * {Types::CreateThreatModelOutput#report_destination #report_destination} => Types::ReportDestination
     #
     # @example Request syntax with placeholder values
     #
@@ -2905,6 +3234,10 @@ module Aws::SecurityAgent
     #   resp.log_config.log_stream #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
+    #   resp.report_destination.integration_id #=> String
+    #   resp.report_destination.container_id #=> String
+    #   resp.report_destination.parent_id #=> String
+    #   resp.report_destination.document_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CreateThreatModel AWS API Documentation
     #
@@ -3294,6 +3627,8 @@ module Aws::SecurityAgent
     #   * {Types::GetIntegrationOutput#display_name #display_name} => String
     #   * {Types::GetIntegrationOutput#kms_key_id #kms_key_id} => String
     #   * {Types::GetIntegrationOutput#target_url #target_url} => String
+    #   * {Types::GetIntegrationOutput#site_url #site_url} => String
+    #   * {Types::GetIntegrationOutput#webhook_url #webhook_url} => String
     #   * {Types::GetIntegrationOutput#private_connection_name #private_connection_name} => String
     #
     # @example Request syntax with placeholder values
@@ -3306,11 +3641,13 @@ module Aws::SecurityAgent
     #
     #   resp.integration_id #=> String
     #   resp.installation_id #=> String
-    #   resp.provider #=> String, one of "GITHUB", "GITLAB", "BITBUCKET", "CONFLUENCE"
-    #   resp.provider_type #=> String, one of "SOURCE_CODE", "DOCUMENTATION"
+    #   resp.provider #=> String, one of "GITHUB", "GITLAB", "BITBUCKET", "CONFLUENCE", "AZURE_DEVOPS", "JIRA"
+    #   resp.provider_type #=> String, one of "SOURCE_CODE", "DOCUMENTATION", "ISSUE_TRACKING"
     #   resp.display_name #=> String
     #   resp.kms_key_id #=> String
     #   resp.target_url #=> String
+    #   resp.site_url #=> String
+    #   resp.webhook_url #=> String
     #   resp.private_connection_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/GetIntegration AWS API Documentation
@@ -3420,8 +3757,22 @@ module Aws::SecurityAgent
     # authorization.
     #
     # @option params [required, String] :provider
-    #   The provider to initiate registration with. Currently, only GITHUB is
-    #   supported.
+    #   The provider to initiate registration with.
+    #
+    # @option params [String] :target_url
+    #   The HTTPS URL of a self-managed provider instance. Omit for SaaS
+    #   providers.
+    #
+    # @option params [String] :organization_name
+    #   The name of the organization to connect.
+    #
+    # @option params [String] :client_id
+    #   The client ID of the OAuth application registered on your self-managed
+    #   provider instance.
+    #
+    # @option params [String] :client_secret
+    #   The client secret of the OAuth application registered on your
+    #   self-managed provider instance.
     #
     # @return [Types::InitiateProviderRegistrationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3431,7 +3782,11 @@ module Aws::SecurityAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.initiate_provider_registration({
-    #     provider: "GITHUB", # required, accepts GITHUB, GITLAB, BITBUCKET, CONFLUENCE
+    #     provider: "GITHUB", # required, accepts GITHUB, GITLAB, BITBUCKET, CONFLUENCE, AZURE_DEVOPS, JIRA
+    #     target_url: "TargetUrl",
+    #     organization_name: "String",
+    #     client_id: "ClientId",
+    #     client_secret: "ClientSecret",
     #   })
     #
     # @example Response structure
@@ -3445,6 +3800,63 @@ module Aws::SecurityAgent
     # @param [Hash] params ({})
     def initiate_provider_registration(params = {}, options = {})
       req = build_request(:initiate_provider_registration, params)
+      req.send_request(options)
+    end
+
+    # Returns a paginated list of the email MFA messages received for an
+    # actor at its server-generated email address, most recent first.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
+    #
+    # @option params [required, String] :agent_space_id
+    #   The unique identifier of the agent space that owns the pentest.
+    #
+    # @option params [required, String] :pentest_id
+    #   The unique identifier of the pentest that the actor belongs to.
+    #
+    # @option params [required, String] :actor_identifier
+    #   The identifier of the actor whose messages to list. The identifier is
+    #   case-insensitive.
+    #
+    # @return [Types::ListActorMessagesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListActorMessagesOutput#messages #messages} => Array&lt;Types::ActorMessage&gt;
+    #   * {Types::ListActorMessagesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_actor_messages({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     agent_space_id: "String", # required
+    #     pentest_id: "String", # required
+    #     actor_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.messages #=> Array
+    #   resp.messages[0].sender #=> String
+    #   resp.messages[0].subject #=> String
+    #   resp.messages[0].body #=> String
+    #   resp.messages[0].received_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListActorMessages AWS API Documentation
+    #
+    # @overload list_actor_messages(params = {})
+    # @param [Hash] params ({})
+    def list_actor_messages(params = {}, options = {})
+      req = build_request(:list_actor_messages, params)
       req.send_request(options)
     end
 
@@ -3929,7 +4341,7 @@ module Aws::SecurityAgent
     #   resp = client.list_integrated_resources({
     #     agent_space_id: "AgentSpaceId", # required
     #     integration_id: "IntegrationId",
-    #     resource_type: "CODE_REPOSITORY", # accepts CODE_REPOSITORY, DOCUMENT
+    #     resource_type: "CODE_REPOSITORY", # accepts CODE_REPOSITORY, DOCUMENT, PROJECT
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -3956,15 +4368,62 @@ module Aws::SecurityAgent
     #   resp.integrated_resource_summaries[0].resource.confluence_document.page_id #=> String
     #   resp.integrated_resource_summaries[0].resource.confluence_document.title #=> String
     #   resp.integrated_resource_summaries[0].resource.confluence_document.space_title #=> String
+    #   resp.integrated_resource_summaries[0].resource.azure_dev_ops_repository.name #=> String
+    #   resp.integrated_resource_summaries[0].resource.azure_dev_ops_repository.provider_resource_id #=> String
+    #   resp.integrated_resource_summaries[0].resource.azure_dev_ops_repository.organization #=> String
+    #   resp.integrated_resource_summaries[0].resource.azure_dev_ops_repository.project #=> String
+    #   resp.integrated_resource_summaries[0].resource.azure_dev_ops_repository.project_id #=> String
+    #   resp.integrated_resource_summaries[0].resource.azure_dev_ops_repository.access_type #=> String, one of "PRIVATE", "PUBLIC"
+    #   resp.integrated_resource_summaries[0].resource.jira_project.name #=> String
+    #   resp.integrated_resource_summaries[0].resource.jira_project.provider_resource_id #=> String
+    #   resp.integrated_resource_summaries[0].resource.jira_project.project_key #=> String
+    #   resp.integrated_resource_summaries[0].resource.jira_project.project_id #=> String
+    #   resp.integrated_resource_summaries[0].resource.jira_project.project_name #=> String
+    #   resp.integrated_resource_summaries[0].capabilities.github.trigger_filter_groups #=> Array
+    #   resp.integrated_resource_summaries[0].capabilities.github.trigger_filter_groups[0].events #=> Array
+    #   resp.integrated_resource_summaries[0].capabilities.github.trigger_filter_groups[0].events[0] #=> String, one of "PULL_REQUEST_READY_FOR_REVIEW", "PULL_REQUEST_DRAFT", "PULL_REQUEST_LABEL_ADDED"
+    #   resp.integrated_resource_summaries[0].capabilities.github.trigger_filter_groups[0].filters #=> Array
+    #   resp.integrated_resource_summaries[0].capabilities.github.trigger_filter_groups[0].filters[0].type #=> String, one of "TARGET_BRANCH", "LABEL"
+    #   resp.integrated_resource_summaries[0].capabilities.github.trigger_filter_groups[0].filters[0].patterns #=> Array
+    #   resp.integrated_resource_summaries[0].capabilities.github.trigger_filter_groups[0].filters[0].patterns[0] #=> String
+    #   resp.integrated_resource_summaries[0].capabilities.github.trigger_filter_groups[0].filters[0].match_mode #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.integrated_resource_summaries[0].capabilities.github.leave_comments #=> Boolean
     #   resp.integrated_resource_summaries[0].capabilities.github.remediate_code #=> Boolean
+    #   resp.integrated_resource_summaries[0].capabilities.gitlab.trigger_filter_groups #=> Array
+    #   resp.integrated_resource_summaries[0].capabilities.gitlab.trigger_filter_groups[0].events #=> Array
+    #   resp.integrated_resource_summaries[0].capabilities.gitlab.trigger_filter_groups[0].events[0] #=> String, one of "PULL_REQUEST_READY_FOR_REVIEW", "PULL_REQUEST_DRAFT", "PULL_REQUEST_LABEL_ADDED"
+    #   resp.integrated_resource_summaries[0].capabilities.gitlab.trigger_filter_groups[0].filters #=> Array
+    #   resp.integrated_resource_summaries[0].capabilities.gitlab.trigger_filter_groups[0].filters[0].type #=> String, one of "TARGET_BRANCH", "LABEL"
+    #   resp.integrated_resource_summaries[0].capabilities.gitlab.trigger_filter_groups[0].filters[0].patterns #=> Array
+    #   resp.integrated_resource_summaries[0].capabilities.gitlab.trigger_filter_groups[0].filters[0].patterns[0] #=> String
+    #   resp.integrated_resource_summaries[0].capabilities.gitlab.trigger_filter_groups[0].filters[0].match_mode #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.integrated_resource_summaries[0].capabilities.gitlab.leave_comments #=> Boolean
     #   resp.integrated_resource_summaries[0].capabilities.gitlab.remediate_code #=> Boolean
+    #   resp.integrated_resource_summaries[0].capabilities.bitbucket.trigger_filter_groups #=> Array
+    #   resp.integrated_resource_summaries[0].capabilities.bitbucket.trigger_filter_groups[0].events #=> Array
+    #   resp.integrated_resource_summaries[0].capabilities.bitbucket.trigger_filter_groups[0].events[0] #=> String, one of "PULL_REQUEST_READY_FOR_REVIEW", "PULL_REQUEST_DRAFT", "PULL_REQUEST_LABEL_ADDED"
+    #   resp.integrated_resource_summaries[0].capabilities.bitbucket.trigger_filter_groups[0].filters #=> Array
+    #   resp.integrated_resource_summaries[0].capabilities.bitbucket.trigger_filter_groups[0].filters[0].type #=> String, one of "TARGET_BRANCH", "LABEL"
+    #   resp.integrated_resource_summaries[0].capabilities.bitbucket.trigger_filter_groups[0].filters[0].patterns #=> Array
+    #   resp.integrated_resource_summaries[0].capabilities.bitbucket.trigger_filter_groups[0].filters[0].patterns[0] #=> String
+    #   resp.integrated_resource_summaries[0].capabilities.bitbucket.trigger_filter_groups[0].filters[0].match_mode #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.integrated_resource_summaries[0].capabilities.bitbucket.leave_comments #=> Boolean
     #   resp.integrated_resource_summaries[0].capabilities.bitbucket.remediate_code #=> Boolean
     #   resp.integrated_resource_summaries[0].capabilities.confluence.fetch_document #=> Boolean
     #   resp.integrated_resource_summaries[0].capabilities.confluence.create_document #=> Boolean
     #   resp.integrated_resource_summaries[0].capabilities.confluence.update_document #=> Boolean
+    #   resp.integrated_resource_summaries[0].capabilities.azure_dev_ops.trigger_filter_groups #=> Array
+    #   resp.integrated_resource_summaries[0].capabilities.azure_dev_ops.trigger_filter_groups[0].events #=> Array
+    #   resp.integrated_resource_summaries[0].capabilities.azure_dev_ops.trigger_filter_groups[0].events[0] #=> String, one of "PULL_REQUEST_READY_FOR_REVIEW", "PULL_REQUEST_DRAFT", "PULL_REQUEST_LABEL_ADDED"
+    #   resp.integrated_resource_summaries[0].capabilities.azure_dev_ops.trigger_filter_groups[0].filters #=> Array
+    #   resp.integrated_resource_summaries[0].capabilities.azure_dev_ops.trigger_filter_groups[0].filters[0].type #=> String, one of "TARGET_BRANCH", "LABEL"
+    #   resp.integrated_resource_summaries[0].capabilities.azure_dev_ops.trigger_filter_groups[0].filters[0].patterns #=> Array
+    #   resp.integrated_resource_summaries[0].capabilities.azure_dev_ops.trigger_filter_groups[0].filters[0].patterns[0] #=> String
+    #   resp.integrated_resource_summaries[0].capabilities.azure_dev_ops.trigger_filter_groups[0].filters[0].match_mode #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.integrated_resource_summaries[0].capabilities.azure_dev_ops.leave_comments #=> Boolean
+    #   resp.integrated_resource_summaries[0].capabilities.azure_dev_ops.remediate_code #=> Boolean
+    #   resp.integrated_resource_summaries[0].capabilities.jira.create_issue #=> Boolean
+    #   resp.integrated_resource_summaries[0].capabilities.jira.comment_issue #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListIntegratedResources AWS API Documentation
@@ -4002,8 +4461,8 @@ module Aws::SecurityAgent
     #
     #   resp = client.list_integrations({
     #     filter: {
-    #       provider: "GITHUB", # accepts GITHUB, GITLAB, BITBUCKET, CONFLUENCE
-    #       provider_type: "SOURCE_CODE", # accepts SOURCE_CODE, DOCUMENTATION
+    #       provider: "GITHUB", # accepts GITHUB, GITLAB, BITBUCKET, CONFLUENCE, AZURE_DEVOPS, JIRA
+    #       provider_type: "SOURCE_CODE", # accepts SOURCE_CODE, DOCUMENTATION, ISSUE_TRACKING
     #     },
     #     next_token: "NextToken",
     #     max_results: 1,
@@ -4014,10 +4473,11 @@ module Aws::SecurityAgent
     #   resp.integration_summaries #=> Array
     #   resp.integration_summaries[0].integration_id #=> String
     #   resp.integration_summaries[0].installation_id #=> String
-    #   resp.integration_summaries[0].provider #=> String, one of "GITHUB", "GITLAB", "BITBUCKET", "CONFLUENCE"
-    #   resp.integration_summaries[0].provider_type #=> String, one of "SOURCE_CODE", "DOCUMENTATION"
+    #   resp.integration_summaries[0].provider #=> String, one of "GITHUB", "GITLAB", "BITBUCKET", "CONFLUENCE", "AZURE_DEVOPS", "JIRA"
+    #   resp.integration_summaries[0].provider_type #=> String, one of "SOURCE_CODE", "DOCUMENTATION", "ISSUE_TRACKING"
     #   resp.integration_summaries[0].display_name #=> String
     #   resp.integration_summaries[0].target_url #=> String
+    #   resp.integration_summaries[0].webhook_url #=> String
     #   resp.integration_summaries[0].private_connection_name #=> String
     #   resp.next_token #=> String
     #
@@ -4179,6 +4639,10 @@ module Aws::SecurityAgent
     #   request. For subsequent calls, use the nextToken value returned from
     #   the previous request.
     #
+    # @option params [String] :job_type
+    #   Filters the returned pentest jobs to only those of the specified job
+    #   type.
+    #
     # @return [Types::ListPentestJobsForPentestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListPentestJobsForPentestOutput#pentest_job_summaries #pentest_job_summaries} => Array&lt;Types::PentestJobSummary&gt;
@@ -4193,6 +4657,7 @@ module Aws::SecurityAgent
     #     pentest_id: "String", # required
     #     agent_space_id: "String", # required
     #     next_token: "NextToken",
+    #     job_type: "FULL", # accepts FULL, REVALIDATION, CICD
     #   })
     #
     # @example Response structure
@@ -4204,6 +4669,8 @@ module Aws::SecurityAgent
     #   resp.pentest_job_summaries[0].status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "FAILED", "COMPLETED"
     #   resp.pentest_job_summaries[0].created_at #=> Time
     #   resp.pentest_job_summaries[0].updated_at #=> Time
+    #   resp.pentest_job_summaries[0].job_type #=> String, one of "FULL", "REVALIDATION", "CICD"
+    #   resp.pentest_job_summaries[0].report_url #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListPentestJobsForPentest AWS API Documentation
@@ -4795,14 +5262,20 @@ module Aws::SecurityAgent
     #   The unique identifier of the pentest to start a job for.
     #
     # @option params [String] :job_type
-    #   The type of pentest job to start. Valid values are FULL and
-    #   REVALIDATION. When set to REVALIDATION, the selectedFindingIds
-    #   parameter is required.
+    #   The type of pentest job to start. Valid values are FULL, REVALIDATION,
+    #   and CICD. When set to REVALIDATION, the selectedFindingIds parameter
+    #   is required. When set to CICD, the scopeChanges parameter defines the
+    #   code changes to test.
     #
     # @option params [Array<String>] :selected_finding_ids
     #   The list of finding identifiers to revalidate. Required when jobType
     #   is REVALIDATION. Each finding must belong to the same agent space and
     #   pentest.
+    #
+    # @option params [Array<Types::ScopeChange>] :scope_changes
+    #   The code changes that define the scope of a CI/CD pentest job. Provide
+    #   this when starting a job with jobType CICD to test only the changes in
+    #   the current pipeline run.
     #
     # @return [Types::StartPentestJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4819,8 +5292,17 @@ module Aws::SecurityAgent
     #   resp = client.start_pentest_job({
     #     agent_space_id: "String", # required
     #     pentest_id: "String", # required
-    #     job_type: "FULL", # accepts FULL, REVALIDATION
+    #     job_type: "FULL", # accepts FULL, REVALIDATION, CICD
     #     selected_finding_ids: ["String"],
+    #     scope_changes: [
+    #       {
+    #         integration_id: "String", # required
+    #         provider_resource_id: "String", # required
+    #         base_commit_sha: "String",
+    #         head_commit_sha: "String", # required
+    #         trigger_run_id: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -5188,6 +5670,13 @@ module Aws::SecurityAgent
     #   The updated maximum number of billable task hours allowed for jobs
     #   started from this code review.
     #
+    # @option params [Types::ReportDestination] :report_destination
+    #   The destination for publishing scan reports to an integrated document
+    #   provider.
+    #
+    # @option params [Types::ReportFilters] :report_filters
+    #   The report-generation filters applied when the report is exported.
+    #
     # @return [Types::UpdateCodeReviewOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateCodeReviewOutput#code_review_id #code_review_id} => String
@@ -5201,6 +5690,8 @@ module Aws::SecurityAgent
     #   * {Types::UpdateCodeReviewOutput#code_remediation_strategy #code_remediation_strategy} => String
     #   * {Types::UpdateCodeReviewOutput#validation_mode #validation_mode} => String
     #   * {Types::UpdateCodeReviewOutput#max_task_hours #max_task_hours} => Float
+    #   * {Types::UpdateCodeReviewOutput#report_destination #report_destination} => Types::ReportDestination
+    #   * {Types::UpdateCodeReviewOutput#report_filters #report_filters} => Types::ReportFilters
     #
     # @example Request syntax with placeholder values
     #
@@ -5267,6 +5758,22 @@ module Aws::SecurityAgent
     #     code_remediation_strategy: "AUTOMATIC", # accepts AUTOMATIC, DISABLED
     #     validation_mode: "DISABLED", # accepts DISABLED, SIMULATED
     #     max_task_hours: 1.0,
+    #     report_destination: {
+    #       integration_id: "String", # required
+    #       container_id: "String", # required
+    #       parent_id: "String",
+    #       document_id: "String",
+    #     },
+    #     report_filters: {
+    #       risk_levels: ["UNKNOWN"], # accepts UNKNOWN, INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
+    #       confidence_levels: ["FALSE_POSITIVE"], # accepts FALSE_POSITIVE, UNCONFIRMED, LOW, MEDIUM, HIGH
+    #       statuses: ["ACTIVE"], # accepts ACTIVE, RESOLVED, ACCEPTED, FALSE_POSITIVE
+    #       risk_types: ["CROSS_SITE_SCRIPTING"], # accepts CROSS_SITE_SCRIPTING, DEFAULT_CREDENTIALS, INSECURE_DIRECT_OBJECT_REFERENCE, PRIVILEGE_ESCALATION, SERVER_SIDE_TEMPLATE_INJECTION, COMMAND_INJECTION, CODE_INJECTION, SQL_INJECTION, ARBITRARY_FILE_UPLOAD, INSECURE_DESERIALIZATION, LOCAL_FILE_INCLUSION, INFORMATION_DISCLOSURE, PATH_TRAVERSAL, SERVER_SIDE_REQUEST_FORGERY, JSON_WEB_TOKEN_VULNERABILITIES, XML_EXTERNAL_ENTITY, FILE_DELETION, OTHER, GRAPHQL_VULNERABILITIES, BUSINESS_LOGIC_VULNERABILITIES, CRYPTOGRAPHIC_VULNERABILITIES, DENIAL_OF_SERVICE, FILE_ACCESS, FILE_CREATION, DATABASE_MODIFICATION, DATABASE_ACCESS, OUTBOUND_SERVICE_REQUEST, UNKNOWN
+    #       finding_types: ["ReportFilterValue"],
+    #       task_statuses: ["IN_PROGRESS"], # accepts IN_PROGRESS, ABORTED, COMPLETED, INTERNAL_ERROR, FAILED
+    #       annotation_notes: false,
+    #       compliance_report: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -5308,6 +5815,24 @@ module Aws::SecurityAgent
     #   resp.code_remediation_strategy #=> String, one of "AUTOMATIC", "DISABLED"
     #   resp.validation_mode #=> String, one of "DISABLED", "SIMULATED"
     #   resp.max_task_hours #=> Float
+    #   resp.report_destination.integration_id #=> String
+    #   resp.report_destination.container_id #=> String
+    #   resp.report_destination.parent_id #=> String
+    #   resp.report_destination.document_id #=> String
+    #   resp.report_filters.risk_levels #=> Array
+    #   resp.report_filters.risk_levels[0] #=> String, one of "UNKNOWN", "INFORMATIONAL", "LOW", "MEDIUM", "HIGH", "CRITICAL"
+    #   resp.report_filters.confidence_levels #=> Array
+    #   resp.report_filters.confidence_levels[0] #=> String, one of "FALSE_POSITIVE", "UNCONFIRMED", "LOW", "MEDIUM", "HIGH"
+    #   resp.report_filters.statuses #=> Array
+    #   resp.report_filters.statuses[0] #=> String, one of "ACTIVE", "RESOLVED", "ACCEPTED", "FALSE_POSITIVE"
+    #   resp.report_filters.risk_types #=> Array
+    #   resp.report_filters.risk_types[0] #=> String, one of "CROSS_SITE_SCRIPTING", "DEFAULT_CREDENTIALS", "INSECURE_DIRECT_OBJECT_REFERENCE", "PRIVILEGE_ESCALATION", "SERVER_SIDE_TEMPLATE_INJECTION", "COMMAND_INJECTION", "CODE_INJECTION", "SQL_INJECTION", "ARBITRARY_FILE_UPLOAD", "INSECURE_DESERIALIZATION", "LOCAL_FILE_INCLUSION", "INFORMATION_DISCLOSURE", "PATH_TRAVERSAL", "SERVER_SIDE_REQUEST_FORGERY", "JSON_WEB_TOKEN_VULNERABILITIES", "XML_EXTERNAL_ENTITY", "FILE_DELETION", "OTHER", "GRAPHQL_VULNERABILITIES", "BUSINESS_LOGIC_VULNERABILITIES", "CRYPTOGRAPHIC_VULNERABILITIES", "DENIAL_OF_SERVICE", "FILE_ACCESS", "FILE_CREATION", "DATABASE_MODIFICATION", "DATABASE_ACCESS", "OUTBOUND_SERVICE_REQUEST", "UNKNOWN"
+    #   resp.report_filters.finding_types #=> Array
+    #   resp.report_filters.finding_types[0] #=> String
+    #   resp.report_filters.task_statuses #=> Array
+    #   resp.report_filters.task_statuses[0] #=> String, one of "IN_PROGRESS", "ABORTED", "COMPLETED", "INTERNAL_ERROR", "FAILED"
+    #   resp.report_filters.annotation_notes #=> Boolean
+    #   resp.report_filters.compliance_report #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UpdateCodeReview AWS API Documentation
     #
@@ -5421,17 +5946,64 @@ module Aws::SecurityAgent
     #             title: "String",
     #             space_title: "String",
     #           },
+    #           azure_dev_ops_repository: {
+    #             name: "ProviderResourceName", # required
+    #             organization: "AzureDevOpsOrganization", # required
+    #             project: "String",
+    #           },
+    #           jira_project: {
+    #             name: "ProviderResourceName", # required
+    #             project_key: "String", # required
+    #             project_id: "String", # required
+    #             project_name: "JiraProjectResourceProjectNameString",
+    #           },
     #         },
     #         capabilities: {
     #           github: {
+    #             trigger_filter_groups: [
+    #               {
+    #                 events: ["PULL_REQUEST_READY_FOR_REVIEW"], # accepts PULL_REQUEST_READY_FOR_REVIEW, PULL_REQUEST_DRAFT, PULL_REQUEST_LABEL_ADDED
+    #                 filters: [
+    #                   {
+    #                     type: "TARGET_BRANCH", # required, accepts TARGET_BRANCH, LABEL
+    #                     patterns: ["TriggerRegexPattern"], # required
+    #                     match_mode: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   },
+    #                 ],
+    #               },
+    #             ],
     #             leave_comments: false,
     #             remediate_code: false,
     #           },
     #           gitlab: {
+    #             trigger_filter_groups: [
+    #               {
+    #                 events: ["PULL_REQUEST_READY_FOR_REVIEW"], # accepts PULL_REQUEST_READY_FOR_REVIEW, PULL_REQUEST_DRAFT, PULL_REQUEST_LABEL_ADDED
+    #                 filters: [
+    #                   {
+    #                     type: "TARGET_BRANCH", # required, accepts TARGET_BRANCH, LABEL
+    #                     patterns: ["TriggerRegexPattern"], # required
+    #                     match_mode: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   },
+    #                 ],
+    #               },
+    #             ],
     #             leave_comments: false,
     #             remediate_code: false,
     #           },
     #           bitbucket: {
+    #             trigger_filter_groups: [
+    #               {
+    #                 events: ["PULL_REQUEST_READY_FOR_REVIEW"], # accepts PULL_REQUEST_READY_FOR_REVIEW, PULL_REQUEST_DRAFT, PULL_REQUEST_LABEL_ADDED
+    #                 filters: [
+    #                   {
+    #                     type: "TARGET_BRANCH", # required, accepts TARGET_BRANCH, LABEL
+    #                     patterns: ["TriggerRegexPattern"], # required
+    #                     match_mode: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   },
+    #                 ],
+    #               },
+    #             ],
     #             leave_comments: false,
     #             remediate_code: false,
     #           },
@@ -5439,6 +6011,26 @@ module Aws::SecurityAgent
     #             fetch_document: false,
     #             create_document: false,
     #             update_document: false,
+    #           },
+    #           azure_dev_ops: {
+    #             trigger_filter_groups: [
+    #               {
+    #                 events: ["PULL_REQUEST_READY_FOR_REVIEW"], # accepts PULL_REQUEST_READY_FOR_REVIEW, PULL_REQUEST_DRAFT, PULL_REQUEST_LABEL_ADDED
+    #                 filters: [
+    #                   {
+    #                     type: "TARGET_BRANCH", # required, accepts TARGET_BRANCH, LABEL
+    #                     patterns: ["TriggerRegexPattern"], # required
+    #                     match_mode: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #             leave_comments: false,
+    #             remediate_code: false,
+    #           },
+    #           jira: {
+    #             create_issue: false,
+    #             comment_issue: false,
     #           },
     #         },
     #       },
@@ -5451,6 +6043,44 @@ module Aws::SecurityAgent
     # @param [Hash] params ({})
     def update_integrated_resources(params = {}, options = {})
       req = build_request(:update_integrated_resources, params)
+      req.send_request(options)
+    end
+
+    # Creates an integration's webhook, or rotates the HMAC signing secret
+    # of an existing one. The secret is returned only once, in this
+    # response, and cannot be retrieved again.
+    #
+    # @option params [required, String] :integration_id
+    #   The ID of the integration whose webhook you want to create or rotate.
+    #
+    # @option params [required, String] :webhook_action
+    #   The action to perform on the integration's webhook.
+    #
+    # @return [Types::UpdateIntegrationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateIntegrationOutput#integration_id #integration_id} => String
+    #   * {Types::UpdateIntegrationOutput#webhook_url #webhook_url} => String
+    #   * {Types::UpdateIntegrationOutput#secret #secret} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_integration({
+    #     integration_id: "IntegrationId", # required
+    #     webhook_action: "CREATE_IF_ABSENT", # required, accepts CREATE_IF_ABSENT, ROTATE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.integration_id #=> String
+    #   resp.webhook_url #=> String
+    #   resp.secret #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UpdateIntegration AWS API Documentation
+    #
+    # @overload update_integration(params = {})
+    # @param [Hash] params ({})
+    def update_integration(params = {}, options = {})
+      req = build_request(:update_integration, params)
       req.send_request(options)
     end
 
@@ -5494,6 +6124,19 @@ module Aws::SecurityAgent
     #   The updated maximum number of billable task hours allowed for jobs
     #   started from this pentest.
     #
+    # @option params [Types::ReportDestination] :report_destination
+    #   The destination for publishing scan reports to an integrated document
+    #   provider.
+    #
+    # @option params [Types::ReportFilters] :report_filters
+    #   The report-generation filters applied when the report is exported.
+    #
+    # @option params [Types::CiCdConfiguration] :cicd_configuration
+    #   The updated CI/CD pentesting configuration to apply to the pentest.
+    #
+    # @option params [Types::TestScope] :test_scope
+    #   The category of application a pentest targets.
+    #
     # @return [Types::UpdatePentestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdatePentestOutput#pentest_id #pentest_id} => String
@@ -5505,6 +6148,10 @@ module Aws::SecurityAgent
     #   * {Types::UpdatePentestOutput#service_role #service_role} => String
     #   * {Types::UpdatePentestOutput#log_config #log_config} => Types::CloudWatchLog
     #   * {Types::UpdatePentestOutput#agent_space_id #agent_space_id} => String
+    #   * {Types::UpdatePentestOutput#report_destination #report_destination} => Types::ReportDestination
+    #   * {Types::UpdatePentestOutput#report_filters #report_filters} => Types::ReportFilters
+    #   * {Types::UpdatePentestOutput#cicd_configuration #cicd_configuration} => Types::CiCdConfiguration
+    #   * {Types::UpdatePentestOutput#test_scope #test_scope} => Types::TestScope
     #
     # @example Request syntax with placeholder values
     #
@@ -5592,6 +6239,28 @@ module Aws::SecurityAgent
     #     code_remediation_strategy: "AUTOMATIC", # accepts AUTOMATIC, DISABLED
     #     disable_managed_skills: ["FINDING_PERSONALIZATION"], # accepts FINDING_PERSONALIZATION, LOGIN_OPTIMIZATION
     #     max_task_hours: 1.0,
+    #     report_destination: {
+    #       integration_id: "String", # required
+    #       container_id: "String", # required
+    #       parent_id: "String",
+    #       document_id: "String",
+    #     },
+    #     report_filters: {
+    #       risk_levels: ["UNKNOWN"], # accepts UNKNOWN, INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
+    #       confidence_levels: ["FALSE_POSITIVE"], # accepts FALSE_POSITIVE, UNCONFIRMED, LOW, MEDIUM, HIGH
+    #       statuses: ["ACTIVE"], # accepts ACTIVE, RESOLVED, ACCEPTED, FALSE_POSITIVE
+    #       risk_types: ["CROSS_SITE_SCRIPTING"], # accepts CROSS_SITE_SCRIPTING, DEFAULT_CREDENTIALS, INSECURE_DIRECT_OBJECT_REFERENCE, PRIVILEGE_ESCALATION, SERVER_SIDE_TEMPLATE_INJECTION, COMMAND_INJECTION, CODE_INJECTION, SQL_INJECTION, ARBITRARY_FILE_UPLOAD, INSECURE_DESERIALIZATION, LOCAL_FILE_INCLUSION, INFORMATION_DISCLOSURE, PATH_TRAVERSAL, SERVER_SIDE_REQUEST_FORGERY, JSON_WEB_TOKEN_VULNERABILITIES, XML_EXTERNAL_ENTITY, FILE_DELETION, OTHER, GRAPHQL_VULNERABILITIES, BUSINESS_LOGIC_VULNERABILITIES, CRYPTOGRAPHIC_VULNERABILITIES, DENIAL_OF_SERVICE, FILE_ACCESS, FILE_CREATION, DATABASE_MODIFICATION, DATABASE_ACCESS, OUTBOUND_SERVICE_REQUEST, UNKNOWN
+    #       finding_types: ["ReportFilterValue"],
+    #       task_statuses: ["IN_PROGRESS"], # accepts IN_PROGRESS, ABORTED, COMPLETED, INTERNAL_ERROR, FAILED
+    #       annotation_notes: false,
+    #       compliance_report: false,
+    #     },
+    #     cicd_configuration: {
+    #       enabled: false,
+    #     },
+    #     test_scope: {
+    #       type: "WEB_APP", # required, accepts WEB_APP, GENERATIVE_AI_APP
+    #     },
     #   })
     #
     # @example Response structure
@@ -5632,6 +6301,26 @@ module Aws::SecurityAgent
     #   resp.log_config.log_group #=> String
     #   resp.log_config.log_stream #=> String
     #   resp.agent_space_id #=> String
+    #   resp.report_destination.integration_id #=> String
+    #   resp.report_destination.container_id #=> String
+    #   resp.report_destination.parent_id #=> String
+    #   resp.report_destination.document_id #=> String
+    #   resp.report_filters.risk_levels #=> Array
+    #   resp.report_filters.risk_levels[0] #=> String, one of "UNKNOWN", "INFORMATIONAL", "LOW", "MEDIUM", "HIGH", "CRITICAL"
+    #   resp.report_filters.confidence_levels #=> Array
+    #   resp.report_filters.confidence_levels[0] #=> String, one of "FALSE_POSITIVE", "UNCONFIRMED", "LOW", "MEDIUM", "HIGH"
+    #   resp.report_filters.statuses #=> Array
+    #   resp.report_filters.statuses[0] #=> String, one of "ACTIVE", "RESOLVED", "ACCEPTED", "FALSE_POSITIVE"
+    #   resp.report_filters.risk_types #=> Array
+    #   resp.report_filters.risk_types[0] #=> String, one of "CROSS_SITE_SCRIPTING", "DEFAULT_CREDENTIALS", "INSECURE_DIRECT_OBJECT_REFERENCE", "PRIVILEGE_ESCALATION", "SERVER_SIDE_TEMPLATE_INJECTION", "COMMAND_INJECTION", "CODE_INJECTION", "SQL_INJECTION", "ARBITRARY_FILE_UPLOAD", "INSECURE_DESERIALIZATION", "LOCAL_FILE_INCLUSION", "INFORMATION_DISCLOSURE", "PATH_TRAVERSAL", "SERVER_SIDE_REQUEST_FORGERY", "JSON_WEB_TOKEN_VULNERABILITIES", "XML_EXTERNAL_ENTITY", "FILE_DELETION", "OTHER", "GRAPHQL_VULNERABILITIES", "BUSINESS_LOGIC_VULNERABILITIES", "CRYPTOGRAPHIC_VULNERABILITIES", "DENIAL_OF_SERVICE", "FILE_ACCESS", "FILE_CREATION", "DATABASE_MODIFICATION", "DATABASE_ACCESS", "OUTBOUND_SERVICE_REQUEST", "UNKNOWN"
+    #   resp.report_filters.finding_types #=> Array
+    #   resp.report_filters.finding_types[0] #=> String
+    #   resp.report_filters.task_statuses #=> Array
+    #   resp.report_filters.task_statuses[0] #=> String, one of "IN_PROGRESS", "ABORTED", "COMPLETED", "INTERNAL_ERROR", "FAILED"
+    #   resp.report_filters.annotation_notes #=> Boolean
+    #   resp.report_filters.compliance_report #=> Boolean
+    #   resp.cicd_configuration.enabled #=> Boolean
+    #   resp.test_scope.type #=> String, one of "WEB_APP", "GENERATIVE_AI_APP"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UpdatePentest AWS API Documentation
     #
@@ -5966,6 +6655,10 @@ module Aws::SecurityAgent
     # @option params [Types::CloudWatchLog] :log_config
     #   The updated CloudWatch Logs configuration for the threat model.
     #
+    # @option params [Types::ReportDestination] :report_destination
+    #   The destination for publishing scan reports to an integrated document
+    #   provider.
+    #
     # @return [Types::UpdateThreatModelOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateThreatModelOutput#threat_model_id #threat_model_id} => String
@@ -5978,6 +6671,7 @@ module Aws::SecurityAgent
     #   * {Types::UpdateThreatModelOutput#log_config #log_config} => Types::CloudWatchLog
     #   * {Types::UpdateThreatModelOutput#created_at #created_at} => Time
     #   * {Types::UpdateThreatModelOutput#updated_at #updated_at} => Time
+    #   * {Types::UpdateThreatModelOutput#report_destination #report_destination} => Types::ReportDestination
     #
     # @example Request syntax with placeholder values
     #
@@ -6052,6 +6746,12 @@ module Aws::SecurityAgent
     #       log_group: "String",
     #       log_stream: "String",
     #     },
+    #     report_destination: {
+    #       integration_id: "String", # required
+    #       container_id: "String", # required
+    #       parent_id: "String",
+    #       document_id: "String",
+    #     },
     #   })
     #
     # @example Response structure
@@ -6096,6 +6796,10 @@ module Aws::SecurityAgent
     #   resp.log_config.log_stream #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
+    #   resp.report_destination.integration_id #=> String
+    #   resp.report_destination.container_id #=> String
+    #   resp.report_destination.parent_id #=> String
+    #   resp.report_destination.document_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UpdateThreatModel AWS API Documentation
     #
@@ -6165,7 +6869,7 @@ module Aws::SecurityAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityagent'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -199,12 +199,19 @@ module Aws::Amplify
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -508,7 +515,7 @@ module Aws::Amplify
     #   app. The SSR Compute role allows the Amplify Hosting compute service
     #   to securely access specific Amazon Web Services resources based on the
     #   role's permissions. For more information about the SSR Compute role,
-    #   see [Adding an SSR Compute role][1] in the *Amplify User Guide*.
+    #   see [Adding an SSR Compute role][1] in the <i> Amplify User Guide</i>.
     #
     #
     #
@@ -823,7 +830,7 @@ module Aws::Amplify
     #   ensure that your clients always interact with the correct version of
     #   server-side assets, regardless of when a deployment occurs. For more
     #   information about skew protection, see [Skew protection for Amplify
-    #   deployments][1] in the *Amplify User Guide*.
+    #   deployments][1] in the <i> Amplify User Guide</i>.
     #
     #
     #
@@ -888,8 +895,8 @@ module Aws::Amplify
     #   of an SSR app. The SSR Compute role allows the Amplify Hosting compute
     #   service to securely access specific Amazon Web Services resources
     #   based on the role's permissions. For more information about the SSR
-    #   Compute role, see [Adding an SSR Compute role][1] in the *Amplify User
-    #   Guide*.
+    #   Compute role, see [Adding an SSR Compute role][1] in the <i> Amplify
+    #   User Guide</i>.
     #
     #
     #
@@ -1966,8 +1973,8 @@ module Aws::Amplify
     # To return the build artifacts, use the [GetJob][1] API.
     #
     # For more information about Amplify testing support, see [Setting up
-    # end-to-end Cypress tests for your Amplify application][2] in the
-    # *Amplify Hosting User Guide*.
+    # end-to-end Cypress tests for your Amplify application][2] in the <i>
+    # Amplify Hosting User Guide</i>.
     #
     #
     #
@@ -2613,7 +2620,7 @@ module Aws::Amplify
     #   app. The SSR Compute role allows the Amplify Hosting compute service
     #   to securely access specific Amazon Web Services resources based on the
     #   role's permissions. For more information about the SSR Compute role,
-    #   see [Adding an SSR Compute role][1] in the *Amplify User Guide*.
+    #   see [Adding an SSR Compute role][1] in the <i> Amplify User Guide</i>.
     #
     #
     #
@@ -2869,7 +2876,7 @@ module Aws::Amplify
     #   ensure that your clients always interact with the correct version of
     #   server-side assets, regardless of when a deployment occurs. For more
     #   information about skew protection, see [Skew protection for Amplify
-    #   deployments][1] in the *Amplify User Guide*.
+    #   deployments][1] in the <i> Amplify User Guide</i>.
     #
     #
     #
@@ -2931,8 +2938,8 @@ module Aws::Amplify
     #   of an SSR app. The SSR Compute role allows the Amplify Hosting compute
     #   service to securely access specific Amazon Web Services resources
     #   based on the role's permissions. For more information about the SSR
-    #   Compute role, see [Adding an SSR Compute role][1] in the *Amplify User
-    #   Guide*.
+    #   Compute role, see [Adding an SSR Compute role][1] in the <i> Amplify
+    #   User Guide</i>.
     #
     #
     #
@@ -3156,7 +3163,7 @@ module Aws::Amplify
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-amplify'
-      context[:gem_version] = '1.108.0'
+      context[:gem_version] = '1.111.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

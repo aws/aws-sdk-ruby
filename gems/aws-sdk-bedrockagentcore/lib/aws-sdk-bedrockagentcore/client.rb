@@ -201,12 +201,19 @@ module Aws::BedrockAgentCore
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -502,6 +509,15 @@ module Aws::BedrockAgentCore
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Types::RecordExpirySpecification] :record_expiry_specification
+    #   The record expiry (long-term memory time-to-live) applied to every
+    #   record created by this request. Set `recordExpiryDurationDays` to the
+    #   number of days after which the records expire. Only the expiry
+    #   provided here is applied; the records' strategy association has no
+    #   effect on their expiry. If you do not provide this value, the records
+    #   do not expire. The `REMOVE` action does not apply when creating
+    #   records.
+    #
     # @return [Types::BatchCreateMemoryRecordsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::BatchCreateMemoryRecordsOutput#successful_records #successful_records} => Array&lt;Types::MemoryRecordOutput&gt;
@@ -531,6 +547,10 @@ module Aws::BedrockAgentCore
     #       },
     #     ],
     #     client_token: "String",
+    #     record_expiry_specification: {
+    #       record_expiry_duration_days: 1,
+    #       action: "REMOVE", # accepts REMOVE
+    #     },
     #   })
     #
     # @example Response structure
@@ -618,6 +638,28 @@ module Aws::BedrockAgentCore
     #   A list of memory record update inputs to be processed in the batch
     #   operation.
     #
+    # @option params [Types::RecordExpirySpecification] :record_expiry_specification
+    #   The record expiry (long-term memory time-to-live) applied to every
+    #   record updated by this request. Set `recordExpiryDurationDays` to
+    #   configure or overwrite the number of days after which the records
+    #   expire, or set `action` to `REMOVE` to clear a previously configured
+    #   expiry so that the records no longer expire.
+    #
+    #   When you do not provide this value, the service determines each
+    #   record's expiry from its current state:
+    #
+    #   * If the record already has an expiry configured, the service resets
+    #     and reapplies the expiry based on the last applied
+    #     `recordExpiryDurationDays`.
+    #
+    #   * If the record does not have an expiry configured, no expiry is
+    #     applied and the record remains non-expiring. This is the outcome
+    #     regardless of whether the record's strategy configures an expiry.
+    #
+    #   Providing an explicit `recordExpiryDurationDays` always takes
+    #   precedence: it overwrites an existing expiry, or sets one on a record
+    #   that previously had none.
+    #
     # @return [Types::BatchUpdateMemoryRecordsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::BatchUpdateMemoryRecordsOutput#successful_records #successful_records} => Array&lt;Types::MemoryRecordOutput&gt;
@@ -647,6 +689,10 @@ module Aws::BedrockAgentCore
     #         },
     #       },
     #     ],
+    #     record_expiry_specification: {
+    #       record_expiry_duration_days: 1,
+    #       action: "REMOVE", # accepts REMOVE
+    #     },
     #   })
     #
     # @example Response structure
@@ -1542,6 +1588,7 @@ module Aws::BedrockAgentCore
     #   resp.evaluation_results[0].evaluator_arn #=> String
     #   resp.evaluation_results[0].evaluator_id #=> String
     #   resp.evaluation_results[0].evaluator_name #=> String
+    #   resp.evaluation_results[0].evaluation_dimension_name #=> String
     #   resp.evaluation_results[0].explanation #=> String
     #   resp.evaluation_results[0].context.span_context.session_id #=> String
     #   resp.evaluation_results[0].context.span_context.trace_id #=> String
@@ -1718,6 +1765,7 @@ module Aws::BedrockAgentCore
     #   * {Types::GetBatchEvaluationResponse#data_source_config #data_source_config} => Types::DataSourceConfig
     #   * {Types::GetBatchEvaluationResponse#output_config #output_config} => Types::OutputConfig
     #   * {Types::GetBatchEvaluationResponse#evaluation_results #evaluation_results} => Types::EvaluationJobResults
+    #   * {Types::GetBatchEvaluationResponse#insight_results #insight_results} => Array&lt;Types::InsightResult&gt;
     #   * {Types::GetBatchEvaluationResponse#failure_analysis_result #failure_analysis_result} => Types::FailureAnalysisResultContent
     #   * {Types::GetBatchEvaluationResponse#user_intent_result #user_intent_result} => Types::UserIntentClusteringResultContent
     #   * {Types::GetBatchEvaluationResponse#execution_summary_result #execution_summary_result} => Types::ExecutionSummaryClusteringResultContent
@@ -1771,9 +1819,39 @@ module Aws::BedrockAgentCore
     #   resp.evaluation_results.number_of_sessions_ignored #=> Integer
     #   resp.evaluation_results.evaluator_summaries #=> Array
     #   resp.evaluation_results.evaluator_summaries[0].evaluator_id #=> String
+    #   resp.evaluation_results.evaluator_summaries[0].evaluation_dimension_name #=> String
     #   resp.evaluation_results.evaluator_summaries[0].statistics.average_score #=> Float
     #   resp.evaluation_results.evaluator_summaries[0].total_evaluated #=> Integer
     #   resp.evaluation_results.evaluator_summaries[0].total_failed #=> Integer
+    #   resp.insight_results #=> Array
+    #   resp.insight_results[0].type #=> String, one of "FAILURE"
+    #   resp.insight_results[0].name #=> String
+    #   resp.insight_results[0].description #=> String
+    #   resp.insight_results[0].created_at #=> Time
+    #   resp.insight_results[0].affected_session_count #=> Integer
+    #   resp.insight_results[0].sample_sessions #=> Array
+    #   resp.insight_results[0].sample_sessions[0].session_id #=> String
+    #   resp.insight_results[0].sample_sessions[0].last_seen_at #=> Time
+    #   resp.insight_results[0].sample_sessions[0].findings #=> Array
+    #   resp.insight_results[0].sample_sessions[0].findings[0].target_id #=> String
+    #   resp.insight_results[0].sample_sessions[0].findings[0].target_type #=> String, one of "SPAN_ID", "TRACE_ID", "SPAN_NAME"
+    #   resp.insight_results[0].sample_sessions[0].findings[0].description #=> String
+    #   resp.insight_results[0].sample_sessions[0].findings[0].category #=> String
+    #   resp.insight_results[0].sample_sessions[0].findings[0].confidence #=> Float
+    #   resp.insight_results[0].root_causes #=> Array
+    #   resp.insight_results[0].root_causes[0].name #=> String
+    #   resp.insight_results[0].root_causes[0].explanation #=> String
+    #   resp.insight_results[0].root_causes[0].affected_session_count #=> Integer
+    #   resp.insight_results[0].root_causes[0].suggested_fix #=> String
+    #   resp.insight_results[0].root_causes[0].sample_sessions #=> Array
+    #   resp.insight_results[0].root_causes[0].sample_sessions[0].session_id #=> String
+    #   resp.insight_results[0].root_causes[0].sample_sessions[0].last_seen_at #=> Time
+    #   resp.insight_results[0].root_causes[0].sample_sessions[0].findings #=> Array
+    #   resp.insight_results[0].root_causes[0].sample_sessions[0].findings[0].target_id #=> String
+    #   resp.insight_results[0].root_causes[0].sample_sessions[0].findings[0].target_type #=> String, one of "SPAN_ID", "TRACE_ID", "SPAN_NAME"
+    #   resp.insight_results[0].root_causes[0].sample_sessions[0].findings[0].description #=> String
+    #   resp.insight_results[0].root_causes[0].sample_sessions[0].findings[0].category #=> String
+    #   resp.insight_results[0].root_causes[0].sample_sessions[0].findings[0].confidence #=> Float
     #   resp.failure_analysis_result.failures #=> Array
     #   resp.failure_analysis_result.failures[0].cluster_id #=> Integer
     #   resp.failure_analysis_result.failures[0].name #=> String
@@ -2107,12 +2185,14 @@ module Aws::BedrockAgentCore
     #   resp.memory_record.namespaces #=> Array
     #   resp.memory_record.namespaces[0] #=> String
     #   resp.memory_record.created_at #=> Time
+    #   resp.memory_record.timestamp #=> Time
     #   resp.memory_record.metadata #=> Hash
     #   resp.memory_record.metadata["MetadataKey"].string_value #=> String
     #   resp.memory_record.metadata["MetadataKey"].string_list_value #=> Array
     #   resp.memory_record.metadata["MetadataKey"].string_list_value[0] #=> String
     #   resp.memory_record.metadata["MetadataKey"].number_value #=> Float
     #   resp.memory_record.metadata["MetadataKey"].date_time_value #=> Time
+    #   resp.memory_record.expires_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetMemoryRecord AWS API Documentation
     #
@@ -3851,6 +3931,9 @@ module Aws::BedrockAgentCore
     #   handler.on_runtime_client_error_event do |event|
     #     event # => Aws::BedrockAgentCore::Types::runtimeClientError
     #   end
+    #   handler.on_hook_event_event do |event|
+    #     event # => Aws::BedrockAgentCore::Types::hookEvent
+    #   end
     #
     #   client.invoke_harness(
     #     # params inputs
@@ -3887,6 +3970,9 @@ module Aws::BedrockAgentCore
     #     stream.on_runtime_client_error_event do |event|
     #       event # => Aws::BedrockAgentCore::Types::runtimeClientError
     #     end
+    #     stream.on_hook_event_event do |event|
+    #       event # => Aws::BedrockAgentCore::Types::hookEvent
+    #     end
     #   end
     #
     #   client.invoke_harness(
@@ -3922,6 +4008,9 @@ module Aws::BedrockAgentCore
     #   end
     #   handler.on_runtime_client_error_event do |event|
     #     event # => Aws::BedrockAgentCore::Types::runtimeClientError
+    #   end
+    #   handler.on_hook_event_event do |event|
+    #     event # => Aws::BedrockAgentCore::Types::hookEvent
     #   end
     #
     #   client.invoke_harness(
@@ -4004,6 +4093,7 @@ module Aws::BedrockAgentCore
     #       open_ai_model_config: {
     #         model_id: "ModelId", # required
     #         api_key_arn: "ApiKeyArn", # required
+    #         api_base: "HarnessOpenAiApiBase",
     #         max_tokens: 1,
     #         temperature: 1.0,
     #         top_p: 1.0,
@@ -4110,7 +4200,7 @@ module Aws::BedrockAgentCore
     #
     #   # All events are available at resp.stream:
     #   resp.stream #=> Enumerator
-    #   resp.stream.event_types #=> [:message_start, :content_block_start, :content_block_delta, :content_block_stop, :message_stop, :metadata, :internal_server_exception, :validation_exception, :runtime_client_error]
+    #   resp.stream.event_types #=> [:message_start, :content_block_start, :content_block_delta, :content_block_stop, :message_stop, :metadata, :internal_server_exception, :validation_exception, :runtime_client_error, :hook_event]
     #
     #   # For :message_start event available at #on_message_start_event callback and response eventstream enumerator:
     #   event.role #=> String, one of "user", "assistant"
@@ -4139,7 +4229,7 @@ module Aws::BedrockAgentCore
     #   event.content_block_index #=> Integer
     #
     #   # For :message_stop event available at #on_message_stop_event callback and response eventstream enumerator:
-    #   event.stop_reason #=> String, one of "end_turn", "tool_use", "tool_result", "max_tokens", "stop_sequence", "content_filtered", "malformed_model_output", "malformed_tool_use", "interrupted", "partial_turn", "model_context_window_exceeded", "max_iterations_exceeded", "max_output_tokens_exceeded", "timeout_exceeded"
+    #   event.stop_reason #=> String, one of "end_turn", "tool_use", "tool_result", "max_tokens", "stop_sequence", "content_filtered", "malformed_model_output", "malformed_tool_use", "interrupted", "partial_turn", "model_context_window_exceeded", "max_iterations_exceeded", "max_output_tokens_exceeded", "timeout_exceeded", "hook_stopped"
     #
     #   # For :metadata event available at #on_metadata_event callback and response eventstream enumerator:
     #   event.usage.input_tokens #=> Integer
@@ -4161,6 +4251,13 @@ module Aws::BedrockAgentCore
     #
     #   # For :runtime_client_error event available at #on_runtime_client_error_event callback and response eventstream enumerator:
     #   event.message #=> String
+    #
+    #   # For :hook_event event available at #on_hook_event_event callback and response eventstream enumerator:
+    #   event.hook_event_id #=> String
+    #   event.name #=> String
+    #   event.type #=> String, one of "before_tool_call", "after_tool_call", "before_invocation", "after_invocation"
+    #   event.decision #=> String, one of "allow", "deny"
+    #   event.reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/InvokeHarness AWS API Documentation
     #
@@ -4339,6 +4436,7 @@ module Aws::BedrockAgentCore
     #   resp.batch_evaluations[0].evaluation_results.number_of_sessions_ignored #=> Integer
     #   resp.batch_evaluations[0].evaluation_results.evaluator_summaries #=> Array
     #   resp.batch_evaluations[0].evaluation_results.evaluator_summaries[0].evaluator_id #=> String
+    #   resp.batch_evaluations[0].evaluation_results.evaluator_summaries[0].evaluation_dimension_name #=> String
     #   resp.batch_evaluations[0].evaluation_results.evaluator_summaries[0].statistics.average_score #=> Float
     #   resp.batch_evaluations[0].evaluation_results.evaluator_summaries[0].total_evaluated #=> Integer
     #   resp.batch_evaluations[0].evaluation_results.evaluator_summaries[0].total_failed #=> Integer
@@ -4688,9 +4786,9 @@ module Aws::BedrockAgentCore
     #   memory records.
     #
     # @option params [String] :namespace
-    #   The namespace prefix to filter memory records by. Returns all memory
-    #   records in namespaces that start with the provided prefix. Either
-    #   `namespace` or `namespacePath` is required.
+    #   The exact namespace to filter memory records by. Returns all memory
+    #   records that matches the provided namespace. Either `namespace` or
+    #   `namespacePath` is required.
     #
     # @option params [String] :namespace_path
     #   Use namespacePath for hierarchical retrievals. Return all memory
@@ -4758,6 +4856,7 @@ module Aws::BedrockAgentCore
     #   resp.memory_record_summaries[0].namespaces[0] #=> String
     #   resp.memory_record_summaries[0].created_at #=> Time
     #   resp.memory_record_summaries[0].score #=> Float
+    #   resp.memory_record_summaries[0].timestamp #=> Time
     #   resp.memory_record_summaries[0].metadata #=> Hash
     #   resp.memory_record_summaries[0].metadata["MetadataKey"].string_value #=> String
     #   resp.memory_record_summaries[0].metadata["MetadataKey"].string_list_value #=> Array
@@ -5114,9 +5213,9 @@ module Aws::BedrockAgentCore
     #   memory records.
     #
     # @option params [String] :namespace
-    #   The namespace prefix to filter memory records by. Searches for memory
-    #   records in namespaces that start with the provided prefix. Either
-    #   `namespace` or `namespacePath` is required.
+    #   The exact namespace to filter memory records by. Searches for memory
+    #   records that matches the provided namespace value. Either `namespace`
+    #   or `namespacePath` is required.
     #
     # @option params [String] :namespace_path
     #   Use namespacePath for hierarchical retrievals. Return all memory
@@ -5185,6 +5284,7 @@ module Aws::BedrockAgentCore
     #   resp.memory_record_summaries[0].namespaces[0] #=> String
     #   resp.memory_record_summaries[0].created_at #=> Time
     #   resp.memory_record_summaries[0].score #=> Float
+    #   resp.memory_record_summaries[0].timestamp #=> Time
     #   resp.memory_record_summaries[0].metadata #=> Hash
     #   resp.memory_record_summaries[0].metadata["MetadataKey"].string_value #=> String
     #   resp.memory_record_summaries[0].metadata["MetadataKey"].string_list_value #=> Array
@@ -6566,7 +6666,7 @@ module Aws::BedrockAgentCore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcore'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

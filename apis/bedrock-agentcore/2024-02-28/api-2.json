@@ -1555,7 +1555,8 @@
         "clientToken":{
           "shape":"String",
           "idempotencyToken":true
-        }
+        },
+        "recordExpirySpecification":{"shape":"RecordExpirySpecification"}
       }
     },
     "BatchCreateMemoryRecordsOutput":{
@@ -1669,7 +1670,8 @@
           "location":"uri",
           "locationName":"memoryId"
         },
-        "records":{"shape":"MemoryRecordsUpdateInputList"}
+        "records":{"shape":"MemoryRecordsUpdateInputList"},
+        "recordExpirySpecification":{"shape":"RecordExpirySpecification"}
       }
     },
     "BatchUpdateMemoryRecordsOutput":{
@@ -2897,6 +2899,10 @@
       "max":100000,
       "min":1
     },
+    "EvaluationDimensionName":{
+      "type":"string",
+      "pattern":"[a-zA-Z][a-zA-Z0-9_]{0,47}"
+    },
     "EvaluationErrorCode":{
       "type":"string",
       "max":1024,
@@ -2973,6 +2979,7 @@
         "evaluatorArn":{"shape":"EvaluatorArn"},
         "evaluatorId":{"shape":"EvaluatorId"},
         "evaluatorName":{"shape":"EvaluatorName"},
+        "evaluationDimensionName":{"shape":"EvaluationDimensionName"},
         "explanation":{"shape":"EvaluationExplanation"},
         "context":{"shape":"Context"},
         "value":{"shape":"Double"},
@@ -3060,6 +3067,7 @@
       "type":"structure",
       "members":{
         "evaluatorId":{"shape":"String"},
+        "evaluationDimensionName":{"shape":"String"},
         "statistics":{"shape":"EvaluatorStatistics"},
         "totalEvaluated":{"shape":"Integer"},
         "totalFailed":{"shape":"Integer"}
@@ -3333,6 +3341,25 @@
       },
       "union":true
     },
+    "FindingDescription":{
+      "type":"string",
+      "max":500,
+      "min":1,
+      "sensitive":true
+    },
+    "FindingTargetId":{
+      "type":"string",
+      "max":50,
+      "min":1
+    },
+    "FindingTargetType":{
+      "type":"string",
+      "enum":[
+        "SPAN_ID",
+        "TRACE_ID",
+        "SPAN_NAME"
+      ]
+    },
     "GatewayArn":{
       "type":"string",
       "pattern":"arn:aws(|-cn|-us-gov):bedrock-agentcore:[a-z0-9-]{1,20}:[0-9]{12}:gateway/([0-9a-z][-]?){1,48}-[a-z0-9]{10}"
@@ -3460,6 +3487,7 @@
         "dataSourceConfig":{"shape":"DataSourceConfig"},
         "outputConfig":{"shape":"OutputConfig"},
         "evaluationResults":{"shape":"EvaluationJobResults"},
+        "insightResults":{"shape":"InsightResultList"},
         "failureAnalysisResult":{"shape":"FailureAnalysisResultContent"},
         "userIntentResult":{"shape":"UserIntentClusteringResultContent"},
         "executionSummaryResult":{"shape":"ExecutionSummaryClusteringResultContent"},
@@ -4070,6 +4098,53 @@
         "additionalParams":{"shape":"Document"}
       }
     },
+    "HarnessHookDecision":{
+      "type":"string",
+      "enum":[
+        "allow",
+        "deny"
+      ]
+    },
+    "HarnessHookEvent":{
+      "type":"structure",
+      "required":[
+        "hookEventId",
+        "name",
+        "type"
+      ],
+      "members":{
+        "hookEventId":{"shape":"HarnessHookEventId"},
+        "name":{"shape":"HarnessHookName"},
+        "type":{"shape":"HarnessHookEventType"},
+        "decision":{"shape":"HarnessHookDecision"},
+        "reason":{"shape":"HarnessHookEventReasonString"}
+      },
+      "event":true
+    },
+    "HarnessHookEventId":{
+      "type":"string",
+      "pattern":"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+    },
+    "HarnessHookEventReasonString":{
+      "type":"string",
+      "max":1024,
+      "min":0
+    },
+    "HarnessHookEventType":{
+      "type":"string",
+      "enum":[
+        "before_tool_call",
+        "after_tool_call",
+        "before_invocation",
+        "after_invocation"
+      ]
+    },
+    "HarnessHookName":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":"[a-zA-Z0-9_-]+"
+    },
     "HarnessInlineFunctionConfig":{
       "type":"structure",
       "required":[
@@ -4159,6 +4234,12 @@
       },
       "union":true
     },
+    "HarnessOpenAiApiBase":{
+      "type":"string",
+      "max":16383,
+      "min":1,
+      "sensitive":true
+    },
     "HarnessOpenAiApiFormat":{
       "type":"string",
       "enum":[
@@ -4175,6 +4256,7 @@
       "members":{
         "modelId":{"shape":"ModelId"},
         "apiKeyArn":{"shape":"ApiKeyArn"},
+        "apiBase":{"shape":"HarnessOpenAiApiBase"},
         "maxTokens":{"shape":"MaxTokens"},
         "temperature":{"shape":"Temperature"},
         "topP":{"shape":"TopP"},
@@ -4301,7 +4383,8 @@
         "model_context_window_exceeded",
         "max_iterations_exceeded",
         "max_output_tokens_exceeded",
-        "timeout_exceeded"
+        "timeout_exceeded",
+        "hook_stopped"
       ]
     },
     "HarnessStreamMetrics":{
@@ -4639,6 +4722,12 @@
         "insightId":{"shape":"InsightId"}
       }
     },
+    "InsightDescription":{
+      "type":"string",
+      "max":4000,
+      "min":1,
+      "sensitive":true
+    },
     "InsightId":{
       "type":"string",
       "pattern":"(Builtin\\.[a-zA-Z0-9._-]+|[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10})"
@@ -4648,6 +4737,66 @@
       "member":{"shape":"Insight"},
       "max":10,
       "min":0
+    },
+    "InsightName":{
+      "type":"string",
+      "max":200,
+      "min":1,
+      "sensitive":true
+    },
+    "InsightResult":{
+      "type":"structure",
+      "required":[
+        "type",
+        "name",
+        "description",
+        "createdAt"
+      ],
+      "members":{
+        "type":{"shape":"InsightType"},
+        "name":{"shape":"InsightName"},
+        "description":{"shape":"InsightDescription"},
+        "createdAt":{"shape":"SyntheticTimestamp_date_time"},
+        "affectedSessionCount":{"shape":"Integer"},
+        "sampleSessions":{"shape":"InsightSampleSessionList"},
+        "rootCauses":{"shape":"InsightRootCauseList"}
+      }
+    },
+    "InsightResultList":{
+      "type":"list",
+      "member":{"shape":"InsightResult"},
+      "max":50,
+      "min":0
+    },
+    "InsightRootCause":{
+      "type":"structure",
+      "required":[
+        "name",
+        "explanation"
+      ],
+      "members":{
+        "name":{"shape":"RootCauseName"},
+        "explanation":{"shape":"RootCauseExplanation"},
+        "affectedSessionCount":{"shape":"Integer"},
+        "suggestedFix":{"shape":"SuggestedFix"},
+        "sampleSessions":{"shape":"InsightSampleSessionList"}
+      }
+    },
+    "InsightRootCauseList":{
+      "type":"list",
+      "member":{"shape":"InsightRootCause"},
+      "max":50,
+      "min":0
+    },
+    "InsightSampleSessionList":{
+      "type":"list",
+      "member":{"shape":"SampleSession"},
+      "max":10,
+      "min":0
+    },
+    "InsightType":{
+      "type":"string",
+      "enum":["FAILURE"]
     },
     "InsightsFailureCategory":{
       "type":"string",
@@ -5250,7 +5399,8 @@
         "metadata":{"shape":"HarnessMetadataEvent"},
         "internalServerException":{"shape":"InternalServerException"},
         "validationException":{"shape":"ValidationException"},
-        "runtimeClientError":{"shape":"RuntimeClientError"}
+        "runtimeClientError":{"shape":"RuntimeClientError"},
+        "hookEvent":{"shape":"HarnessHookEvent"}
       },
       "eventstream":true
     },
@@ -5858,7 +6008,9 @@
         "memoryStrategyId":{"shape":"MemoryStrategyId"},
         "namespaces":{"shape":"NamespacesList"},
         "createdAt":{"shape":"Timestamp"},
-        "metadata":{"shape":"MemoryRecordMetadataMap"}
+        "timestamp":{"shape":"Timestamp"},
+        "metadata":{"shape":"MemoryRecordMetadataMap"},
+        "expiresAt":{"shape":"Timestamp"}
       }
     },
     "MemoryRecordCreateInput":{
@@ -5975,6 +6127,7 @@
         "namespaces":{"shape":"NamespacesList"},
         "createdAt":{"shape":"Timestamp"},
         "score":{"shape":"Double"},
+        "timestamp":{"shape":"Timestamp"},
         "metadata":{"shape":"MemoryRecordMetadataMap"}
       }
     },
@@ -6932,6 +7085,23 @@
         "TOOL_DESCRIPTION_RECOMMENDATION"
       ]
     },
+    "RecordExpiryAction":{
+      "type":"string",
+      "enum":["REMOVE"]
+    },
+    "RecordExpiryDurationDays":{
+      "type":"integer",
+      "box":true,
+      "min":31
+    },
+    "RecordExpirySpecification":{
+      "type":"structure",
+      "members":{
+        "recordExpiryDurationDays":{"shape":"RecordExpiryDurationDays"},
+        "action":{"shape":"RecordExpiryAction"}
+      },
+      "union":true
+    },
     "RegistryArn":{
       "type":"string",
       "max":2048,
@@ -7180,6 +7350,18 @@
       "member":{"shape":"RootCauseCluster"},
       "min":0
     },
+    "RootCauseExplanation":{
+      "type":"string",
+      "max":4000,
+      "min":1,
+      "sensitive":true
+    },
+    "RootCauseName":{
+      "type":"string",
+      "max":200,
+      "min":1,
+      "sensitive":true
+    },
     "RuntimeClientError":{
       "type":"structure",
       "members":{
@@ -7243,6 +7425,15 @@
       "type":"string",
       "max":1024,
       "min":1
+    },
+    "SampleSession":{
+      "type":"structure",
+      "required":["sessionId"],
+      "members":{
+        "sessionId":{"shape":"SessionId"},
+        "lastSeenAt":{"shape":"SyntheticTimestamp_date_time"},
+        "findings":{"shape":"SessionFindingList"}
+      }
     },
     "SaveBrowserSessionProfileRequest":{
       "type":"structure",
@@ -7466,6 +7657,34 @@
         "startTime":{"shape":"SyntheticTimestamp_date_time"},
         "endTime":{"shape":"SyntheticTimestamp_date_time"}
       }
+    },
+    "SessionFinding":{
+      "type":"structure",
+      "required":["description"],
+      "members":{
+        "targetId":{"shape":"FindingTargetId"},
+        "targetType":{"shape":"FindingTargetType"},
+        "description":{"shape":"FindingDescription"},
+        "category":{"shape":"SessionFindingCategoryString"},
+        "confidence":{"shape":"SessionFindingConfidenceDouble"}
+      }
+    },
+    "SessionFindingCategoryString":{
+      "type":"string",
+      "max":100,
+      "min":1
+    },
+    "SessionFindingConfidenceDouble":{
+      "type":"double",
+      "box":true,
+      "max":1,
+      "min":0
+    },
+    "SessionFindingList":{
+      "type":"list",
+      "member":{"shape":"SessionFinding"},
+      "max":10,
+      "min":0
     },
     "SessionId":{
       "type":"string",
@@ -8135,6 +8354,12 @@
       "type":"string",
       "max":2048,
       "min":1
+    },
+    "SuggestedFix":{
+      "type":"string",
+      "max":4000,
+      "min":1,
+      "sensitive":true
     },
     "SyntheticTimestamp_date_time":{
       "type":"timestamp",

@@ -199,12 +199,19 @@ module Aws::GuardDuty
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -784,7 +791,7 @@ module Aws::GuardDuty
     #         status: "ENABLED", # accepts ENABLED, DISABLED
     #         additional_configuration: [
     #           {
-    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT, ECS_FARGATE_AGENT_MANAGEMENT, EC2_AGENT_MANAGEMENT
+    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT, ECS_FARGATE_AGENT_MANAGEMENT, EC2_AGENT_MANAGEMENT, RDS_DATA_RISK
     #             status: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #         ],
@@ -2593,6 +2600,7 @@ module Aws::GuardDuty
     #     destination_properties: { # required
     #       destination_arn: "String",
     #       kms_key_arn: "String",
+    #       expected_bucket_owner: "AccountId",
     #     },
     #     client_token: "ClientToken",
     #     tags: {
@@ -3515,7 +3523,7 @@ module Aws::GuardDuty
     #   resp.features[0].name #=> String, one of "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "RUNTIME_MONITORING", "AI_PROTECTION"
     #   resp.features[0].auto_enable #=> String, one of "NEW", "NONE", "ALL"
     #   resp.features[0].additional_configuration #=> Array
-    #   resp.features[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT", "EC2_AGENT_MANAGEMENT"
+    #   resp.features[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT", "EC2_AGENT_MANAGEMENT", "RDS_DATA_RISK"
     #   resp.features[0].additional_configuration[0].auto_enable #=> String, one of "NEW", "NONE", "ALL"
     #   resp.next_token #=> String
     #   resp.auto_enable_organization_members #=> String, one of "NEW", "ALL", "NONE"
@@ -3570,6 +3578,7 @@ module Aws::GuardDuty
     #   resp.publishing_failure_start_timestamp #=> Integer
     #   resp.destination_properties.destination_arn #=> String
     #   resp.destination_properties.kms_key_arn #=> String
+    #   resp.destination_properties.expected_bucket_owner #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -3910,13 +3919,16 @@ module Aws::GuardDuty
     #   resp.rule.name #=> String
     #   resp.rule.description #=> String
     #   resp.rule.severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW"
-    #   resp.rule.data_source #=> String, one of "CloudTrailManagementEvent"
+    #   resp.rule.data_source #=> String, one of "CloudTrailManagementEvent", "RuntimeMonitoring"
     #   resp.rule.tactic #=> String
     #   resp.rule.technique #=> String
     #   resp.rule.service #=> String
     #   resp.rule.definition.expression #=> String
     #   resp.rule.language #=> String, one of "SQL"
     #   resp.rule.schema #=> String, one of "CloudTrail"
+    #   resp.rule.runtime_monitoring_details.platforms.eks.min_agent_version #=> String
+    #   resp.rule.runtime_monitoring_details.platforms.ec2.min_agent_version #=> String
+    #   resp.rule.runtime_monitoring_details.platforms.ecs_fargate.min_agent_version #=> String
     #   resp.rule.created_at #=> Time
     #   resp.rule.updated_at #=> Time
     #
@@ -4075,9 +4087,11 @@ module Aws::GuardDuty
     #   resp.features[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.features[0].updated_at #=> Time
     #   resp.features[0].additional_configuration #=> Array
-    #   resp.features[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT", "EC2_AGENT_MANAGEMENT"
+    #   resp.features[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT", "EC2_AGENT_MANAGEMENT", "RDS_DATA_RISK"
     #   resp.features[0].additional_configuration[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.features[0].additional_configuration[0].updated_at #=> Time
+    #   resp.features[0].additional_configuration[0].managed_by #=> String, one of "GUARDDUTY_POLICY"
+    #   resp.features[0].managed_by #=> String, one of "GUARDDUTY_POLICY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetDetector AWS API Documentation
     #
@@ -4455,6 +4469,7 @@ module Aws::GuardDuty
     #   resp.findings[0].service.action.aws_api_call_action.service_name #=> String
     #   resp.findings[0].service.action.aws_api_call_action.remote_account_details.account_id #=> String
     #   resp.findings[0].service.action.aws_api_call_action.remote_account_details.affiliated #=> Boolean
+    #   resp.findings[0].service.action.aws_api_call_action.remote_account_details.aws_service_name #=> String
     #   resp.findings[0].service.action.aws_api_call_action.affected_resources #=> Hash
     #   resp.findings[0].service.action.aws_api_call_action.affected_resources["String"] #=> String
     #   resp.findings[0].service.action.dns_request_action.domain #=> String
@@ -4887,6 +4902,7 @@ module Aws::GuardDuty
     #   resp.findings[0].type #=> String
     #   resp.findings[0].updated_at #=> String
     #   resp.findings[0].associated_attack_sequence_arn #=> String
+    #   resp.findings[0].custom_detection_rule_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindings AWS API Documentation
     #
@@ -5458,9 +5474,11 @@ module Aws::GuardDuty
     #   resp.member_data_source_configurations[0].features[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.member_data_source_configurations[0].features[0].updated_at #=> Time
     #   resp.member_data_source_configurations[0].features[0].additional_configuration #=> Array
-    #   resp.member_data_source_configurations[0].features[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT", "EC2_AGENT_MANAGEMENT"
+    #   resp.member_data_source_configurations[0].features[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT", "EC2_AGENT_MANAGEMENT", "RDS_DATA_RISK"
     #   resp.member_data_source_configurations[0].features[0].additional_configuration[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.member_data_source_configurations[0].features[0].additional_configuration[0].updated_at #=> Time
+    #   resp.member_data_source_configurations[0].features[0].additional_configuration[0].managed_by #=> String, one of "GUARDDUTY_POLICY"
+    #   resp.member_data_source_configurations[0].features[0].managed_by #=> String, one of "GUARDDUTY_POLICY"
     #   resp.unprocessed_accounts #=> Array
     #   resp.unprocessed_accounts[0].account_id #=> String
     #   resp.unprocessed_accounts[0].result #=> String
@@ -5550,7 +5568,7 @@ module Aws::GuardDuty
     #   resp.organization_details.organization_statistics.count_by_feature[0].name #=> String, one of "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "RUNTIME_MONITORING", "AI_PROTECTION"
     #   resp.organization_details.organization_statistics.count_by_feature[0].enabled_accounts_count #=> Integer
     #   resp.organization_details.organization_statistics.count_by_feature[0].additional_configuration #=> Array
-    #   resp.organization_details.organization_statistics.count_by_feature[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT", "EC2_AGENT_MANAGEMENT"
+    #   resp.organization_details.organization_statistics.count_by_feature[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT", "EC2_AGENT_MANAGEMENT", "RDS_DATA_RISK"
     #   resp.organization_details.organization_statistics.count_by_feature[0].additional_configuration[0].enabled_accounts_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetOrganizationStatistics AWS API Documentation
@@ -5835,7 +5853,7 @@ module Aws::GuardDuty
     #       account_ids: ["AccountId"],
     #       data_sources: ["FLOW_LOGS"], # accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_LOGS, KUBERNETES_AUDIT_LOGS, EC2_MALWARE_SCAN
     #       resources: ["String"],
-    #       features: ["FLOW_LOGS"], # accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS, LAMBDA_NETWORK_LOGS, EKS_RUNTIME_MONITORING, EC2_RUNTIME_MONITORING, FARGATE_RUNTIME_MONITORING, RDS_DBI_PROTECTION_PROVISIONED, RDS_DBI_PROTECTION_SERVERLESS, AI_PROTECTION
+    #       features: ["FLOW_LOGS"], # accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS, LAMBDA_NETWORK_LOGS, EKS_RUNTIME_MONITORING, EC2_RUNTIME_MONITORING, FARGATE_RUNTIME_MONITORING, RDS_DBI_PROTECTION_PROVISIONED, RDS_DBI_PROTECTION_SERVERLESS, RDS_DBI_PROTECTION_LIMITLESS, RDS_DATA_ACTIVITY_DBI_PROTECTION_PROVISIONED, RDS_DATA_ACTIVITY_DBI_PROTECTION_SERVERLESS, RDS_DATA_ACTIVITY_DBI_PROTECTION_LIMITLESS, AI_PROTECTION
     #     },
     #     unit: "String",
     #     max_results: 1,
@@ -5849,7 +5867,7 @@ module Aws::GuardDuty
     #   resp.usage_statistics.sum_by_account[0].total.amount #=> String
     #   resp.usage_statistics.sum_by_account[0].total.unit #=> String
     #   resp.usage_statistics.top_accounts_by_feature #=> Array
-    #   resp.usage_statistics.top_accounts_by_feature[0].feature #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "EC2_RUNTIME_MONITORING", "FARGATE_RUNTIME_MONITORING", "RDS_DBI_PROTECTION_PROVISIONED", "RDS_DBI_PROTECTION_SERVERLESS", "AI_PROTECTION"
+    #   resp.usage_statistics.top_accounts_by_feature[0].feature #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "EC2_RUNTIME_MONITORING", "FARGATE_RUNTIME_MONITORING", "RDS_DBI_PROTECTION_PROVISIONED", "RDS_DBI_PROTECTION_SERVERLESS", "RDS_DBI_PROTECTION_LIMITLESS", "RDS_DATA_ACTIVITY_DBI_PROTECTION_PROVISIONED", "RDS_DATA_ACTIVITY_DBI_PROTECTION_SERVERLESS", "RDS_DATA_ACTIVITY_DBI_PROTECTION_LIMITLESS", "AI_PROTECTION"
     #   resp.usage_statistics.top_accounts_by_feature[0].accounts #=> Array
     #   resp.usage_statistics.top_accounts_by_feature[0].accounts[0].account_id #=> String
     #   resp.usage_statistics.top_accounts_by_feature[0].accounts[0].total.amount #=> String
@@ -5867,7 +5885,7 @@ module Aws::GuardDuty
     #   resp.usage_statistics.top_resources[0].total.amount #=> String
     #   resp.usage_statistics.top_resources[0].total.unit #=> String
     #   resp.usage_statistics.sum_by_feature #=> Array
-    #   resp.usage_statistics.sum_by_feature[0].feature #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "EC2_RUNTIME_MONITORING", "FARGATE_RUNTIME_MONITORING", "RDS_DBI_PROTECTION_PROVISIONED", "RDS_DBI_PROTECTION_SERVERLESS", "AI_PROTECTION"
+    #   resp.usage_statistics.sum_by_feature[0].feature #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "EC2_RUNTIME_MONITORING", "FARGATE_RUNTIME_MONITORING", "RDS_DBI_PROTECTION_PROVISIONED", "RDS_DBI_PROTECTION_SERVERLESS", "RDS_DBI_PROTECTION_LIMITLESS", "RDS_DATA_ACTIVITY_DBI_PROTECTION_PROVISIONED", "RDS_DATA_ACTIVITY_DBI_PROTECTION_SERVERLESS", "RDS_DATA_ACTIVITY_DBI_PROTECTION_LIMITLESS", "AI_PROTECTION"
     #   resp.usage_statistics.sum_by_feature[0].total.amount #=> String
     #   resp.usage_statistics.sum_by_feature[0].total.unit #=> String
     #   resp.next_token #=> String
@@ -6231,7 +6249,7 @@ module Aws::GuardDuty
     #   resp.rules[0].name #=> String
     #   resp.rules[0].description #=> String
     #   resp.rules[0].severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW"
-    #   resp.rules[0].data_source #=> String, one of "CloudTrailManagementEvent"
+    #   resp.rules[0].data_source #=> String, one of "CloudTrailManagementEvent", "RuntimeMonitoring"
     #   resp.rules[0].tactic #=> String
     #   resp.rules[0].technique #=> String
     #   resp.rules[0].service #=> String
@@ -7659,7 +7677,7 @@ module Aws::GuardDuty
     #         status: "ENABLED", # accepts ENABLED, DISABLED
     #         additional_configuration: [
     #           {
-    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT, ECS_FARGATE_AGENT_MANAGEMENT, EC2_AGENT_MANAGEMENT
+    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT, ECS_FARGATE_AGENT_MANAGEMENT, EC2_AGENT_MANAGEMENT, RDS_DATA_RISK
     #             status: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #         ],
@@ -9354,7 +9372,7 @@ module Aws::GuardDuty
     #         status: "ENABLED", # accepts ENABLED, DISABLED
     #         additional_configuration: [
     #           {
-    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT, ECS_FARGATE_AGENT_MANAGEMENT, EC2_AGENT_MANAGEMENT
+    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT, ECS_FARGATE_AGENT_MANAGEMENT, EC2_AGENT_MANAGEMENT, RDS_DATA_RISK
     #             status: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #         ],
@@ -9484,7 +9502,7 @@ module Aws::GuardDuty
     #         auto_enable: "NEW", # accepts NEW, NONE, ALL
     #         additional_configuration: [
     #           {
-    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT, ECS_FARGATE_AGENT_MANAGEMENT, EC2_AGENT_MANAGEMENT
+    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT, ECS_FARGATE_AGENT_MANAGEMENT, EC2_AGENT_MANAGEMENT, RDS_DATA_RISK
     #             auto_enable: "NEW", # accepts NEW, NONE, ALL
     #           },
     #         ],
@@ -9533,6 +9551,7 @@ module Aws::GuardDuty
     #     destination_properties: {
     #       destination_arn: "String",
     #       kms_key_arn: "String",
+    #       expected_bucket_owner: "AccountId",
     #     },
     #   })
     #
@@ -9735,7 +9754,7 @@ module Aws::GuardDuty
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.163.0'
+      context[:gem_version] = '1.170.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -667,6 +667,7 @@ module Aws::PinpointSMSVoiceV2
     AvailablePhoneNumberList.member = Shapes::ShapeRef.new(shape: PhoneNumber)
 
     CarrierLookupRequest.add_member(:phone_number, Shapes::ShapeRef.new(shape: CarrierLookupInputPhoneNumberType, required: true, location_name: "PhoneNumber"))
+    CarrierLookupRequest.add_member(:enable_cleansing, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableCleansing"))
     CarrierLookupRequest.struct_class = Types::CarrierLookupRequest
 
     CarrierLookupResult.add_member(:e164_phone_number, Shapes::ShapeRef.new(shape: E164PhoneNumberType, required: true, location_name: "E164PhoneNumber"))
@@ -677,6 +678,7 @@ module Aws::PinpointSMSVoiceV2
     CarrierLookupResult.add_member(:mnc, Shapes::ShapeRef.new(shape: MNCType, location_name: "MNC"))
     CarrierLookupResult.add_member(:carrier, Shapes::ShapeRef.new(shape: String, location_name: "Carrier"))
     CarrierLookupResult.add_member(:phone_number_type, Shapes::ShapeRef.new(shape: PhoneNumberType, required: true, location_name: "PhoneNumberType"))
+    CarrierLookupResult.add_member(:original_phone_number, Shapes::ShapeRef.new(shape: CarrierLookupInputPhoneNumberType, location_name: "OriginalPhoneNumber"))
     CarrierLookupResult.struct_class = Types::CarrierLookupResult
 
     CarrierStatusInformation.add_member(:carrier_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CarrierName"))
@@ -1742,6 +1744,7 @@ module Aws::PinpointSMSVoiceV2
     PhoneNumberInformation.add_member(:pool_id, Shapes::ShapeRef.new(shape: String, location_name: "PoolId"))
     PhoneNumberInformation.add_member(:registration_id, Shapes::ShapeRef.new(shape: String, location_name: "RegistrationId"))
     PhoneNumberInformation.add_member(:messaging_limits, Shapes::ShapeRef.new(shape: MessagingLimits, location_name: "MessagingLimits"))
+    PhoneNumberInformation.add_member(:pricing_tier, Shapes::ShapeRef.new(shape: String, location_name: "PricingTier"))
     PhoneNumberInformation.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTimestamp"))
     PhoneNumberInformation.struct_class = Types::PhoneNumberInformation
 
@@ -2436,6 +2439,7 @@ module Aws::PinpointSMSVoiceV2
     SenderIdInformation.add_member(:registered, Shapes::ShapeRef.new(shape: PrimitiveBoolean, required: true, location_name: "Registered"))
     SenderIdInformation.add_member(:registration_id, Shapes::ShapeRef.new(shape: String, location_name: "RegistrationId"))
     SenderIdInformation.add_member(:messaging_limits, Shapes::ShapeRef.new(shape: MessagingLimits, location_name: "MessagingLimits"))
+    SenderIdInformation.add_member(:pricing_tier, Shapes::ShapeRef.new(shape: String, location_name: "PricingTier"))
     SenderIdInformation.struct_class = Types::SenderIdInformation
 
     SenderIdInformationList.member = Shapes::ShapeRef.new(shape: SenderIdInformation)

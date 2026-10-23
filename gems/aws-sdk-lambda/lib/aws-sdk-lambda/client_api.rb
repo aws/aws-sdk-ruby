@@ -760,6 +760,7 @@ module Aws::Lambda
 
     ChainedInvokeOptions.add_member(:function_name, Shapes::ShapeRef.new(shape: NamespacedFunctionName, required: true, location_name: "FunctionName"))
     ChainedInvokeOptions.add_member(:tenant_id, Shapes::ShapeRef.new(shape: TenantId, location_name: "TenantId"))
+    ChainedInvokeOptions.add_member(:x_amzn_trace_id, Shapes::ShapeRef.new(shape: XAmznTraceId, location_name: "XAmznTraceId"))
     ChainedInvokeOptions.struct_class = Types::ChainedInvokeOptions
 
     ChainedInvokeStartedDetails.add_member(:function_name, Shapes::ShapeRef.new(shape: NamespacedFunctionName, required: true, location_name: "FunctionName"))
@@ -3129,6 +3130,7 @@ module Aws::Lambda
         o.http_request_uri = "/2021-11-15/functions/{FunctionName}/response-streaming-invocations"
         o.input = Shapes::ShapeRef.new(shape: InvokeWithResponseStreamRequest)
         o.output = Shapes::ShapeRef.new(shape: InvokeWithResponseStreamResponse)
+        o.errors << Shapes::ShapeRef.new(shape: CodeArtifactUserDeletedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotReadyException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSecurityGroupIDException)
@@ -3156,11 +3158,13 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: ENILimitReachedException)
         o.errors << Shapes::ShapeRef.new(shape: SnapStartNotReadyException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: CodeArtifactUserPendingException)
         o.errors << Shapes::ShapeRef.new(shape: SnapStartException)
         o.errors << Shapes::ShapeRef.new(shape: RecursiveInvocationException)
         o.errors << Shapes::ShapeRef.new(shape: S3FilesMountFailureException)
         o.errors << Shapes::ShapeRef.new(shape: EFSMountTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: S3FilesMountTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: CodeArtifactUserFailedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestContentException)
         o.errors << Shapes::ShapeRef.new(shape: SnapStartRegenerationFailureException)

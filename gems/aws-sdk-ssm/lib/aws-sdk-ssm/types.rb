@@ -4971,12 +4971,26 @@ module Aws::SSM
     #   calls from attempting to overwrite a policy.
     #   @return [String]
     #
+    # @!attribute [rw] deletion_mode
+    #   Specifies the intended outcome of the operation. Applies only to the
+    #   `Document` resource type. The operation ignores this parameter for
+    #   other resource types. Optional. Defaults to `RemoveSharing`.
+    #
+    #   * `RemoveSharing` – Deletes the resource policy and removes sharing
+    #     of the document.
+    #
+    #   * `RollbackMigration` – Reverts the document to Custom sharing,
+    #     preserving existing consumer access, instead of removing the
+    #     policy.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteResourcePolicyRequest AWS API Documentation
     #
     class DeleteResourcePolicyRequest < Struct.new(
       :resource_arn,
       :policy_id,
-      :policy_hash)
+      :policy_hash,
+      :deletion_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20485,8 +20499,8 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] document_format
-    #   Specify the document format for the new document version. Systems
-    #   Manager supports JSON and YAML documents. JSON is the default
+    #   Specify the document format for the new document version. The
+    #   document format can be JSON, YAML, or TEXT. JSON is the default
     #   format.
     #   @return [String]
     #

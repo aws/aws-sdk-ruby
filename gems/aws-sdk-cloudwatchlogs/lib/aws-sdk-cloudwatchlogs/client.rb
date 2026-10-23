@@ -201,12 +201,19 @@ module Aws::CloudWatchLogs
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -2419,6 +2426,10 @@ module Aws::CloudWatchLogs
     #   Optionally specify the maximum number of deliveries to return in the
     #   response.
     #
+    # @option params [Array<String>] :delivery_source_names
+    #   An array of delivery source names that filters the results to
+    #   deliveries associated with any specified delivery source.
+    #
     # @return [Types::DescribeDeliveriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeDeliveriesResponse#deliveries #deliveries} => Array&lt;Types::Delivery&gt;
@@ -2431,6 +2442,7 @@ module Aws::CloudWatchLogs
     #   resp = client.describe_deliveries({
     #     next_token: "NextToken",
     #     limit: 1,
+    #     delivery_source_names: ["DeliverySourceName"],
     #   })
     #
     # @example Response structure
@@ -2470,6 +2482,10 @@ module Aws::CloudWatchLogs
     #   Optionally specify the maximum number of delivery destinations to
     #   return in the response.
     #
+    # @option params [Array<String>] :names
+    #   An array of delivery destination names that filters the results to
+    #   delivery destinations with any specified name.
+    #
     # @return [Types::DescribeDeliveryDestinationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeDeliveryDestinationsResponse#delivery_destinations #delivery_destinations} => Array&lt;Types::DeliveryDestination&gt;
@@ -2482,6 +2498,7 @@ module Aws::CloudWatchLogs
     #   resp = client.describe_delivery_destinations({
     #     next_token: "NextToken",
     #     limit: 1,
+    #     names: ["DeliveryDestinationName"],
     #   })
     #
     # @example Response structure
@@ -2492,6 +2509,7 @@ module Aws::CloudWatchLogs
     #   resp.delivery_destinations[0].delivery_destination_type #=> String, one of "S3", "CWL", "FH", "XRAY"
     #   resp.delivery_destinations[0].output_format #=> String, one of "json", "plain", "w3c", "raw", "parquet"
     #   resp.delivery_destinations[0].delivery_destination_configuration.destination_resource_arn #=> String
+    #   resp.delivery_destinations[0].role_arn #=> String
     #   resp.delivery_destinations[0].tags #=> Hash
     #   resp.delivery_destinations[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
@@ -2516,6 +2534,10 @@ module Aws::CloudWatchLogs
     #   Optionally specify the maximum number of delivery sources to return in
     #   the response.
     #
+    # @option params [Array<String>] :resource_arns
+    #   An array of Amazon Resource Names (ARNs) that filters the results to
+    #   delivery sources associated with any specified ARN.
+    #
     # @return [Types::DescribeDeliverySourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeDeliverySourcesResponse#delivery_sources #delivery_sources} => Array&lt;Types::DeliverySource&gt;
@@ -2528,6 +2550,7 @@ module Aws::CloudWatchLogs
     #   resp = client.describe_delivery_sources({
     #     next_token: "NextToken",
     #     limit: 1,
+    #     resource_arns: ["Arn"],
     #   })
     #
     # @example Response structure
@@ -3999,6 +4022,7 @@ module Aws::CloudWatchLogs
     #   resp.delivery_destination.delivery_destination_type #=> String, one of "S3", "CWL", "FH", "XRAY"
     #   resp.delivery_destination.output_format #=> String, one of "json", "plain", "w3c", "raw", "parquet"
     #   resp.delivery_destination.delivery_destination_configuration.destination_resource_arn #=> String
+    #   resp.delivery_destination.role_arn #=> String
     #   resp.delivery_destination.tags #=> Hash
     #   resp.delivery_destination.tags["TagKey"] #=> String
     #
@@ -5875,7 +5899,10 @@ module Aws::CloudWatchLogs
     # Creates an account-level data protection policy, subscription filter
     # policy, field index policy, transformer policy, or metric extraction
     # policy that applies to all log groups, a subset of log groups, or a
-    # data source name and type combination in the account.
+    # data source name and type combination in the account. Account-level
+    # policies are Region-specific: a policy applies only to log groups in
+    # the Region where you create it. To apply a policy across multiple
+    # Regions, create the policy separately in each Region.
     #
     # `PutAccountPolicy` is an account-wide administrative operation
     # intended for CloudWatch Logs administrators. Because it affects all
@@ -6712,6 +6739,12 @@ module Aws::CloudWatchLogs
     #   The delivery destination type determines the format and configuration
     #   options available for log delivery.
     #
+    # @option params [String] :role_arn
+    #   The ARN of an IAM role in your account that CloudWatch Logs assumes to
+    #   deliver to this delivery destination. The trust policy of the role
+    #   must allow CloudWatch Logs to assume it. This parameter is supported
+    #   only for X-Ray trace delivery destinations.
+    #
     # @option params [Hash<String,String>] :tags
     #   An optional list of key-value pairs to associate with the resource.
     #
@@ -6735,6 +6768,7 @@ module Aws::CloudWatchLogs
     #       destination_resource_arn: "Arn", # required
     #     },
     #     delivery_destination_type: "S3", # accepts S3, CWL, FH, XRAY
+    #     role_arn: "Arn",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -6747,6 +6781,7 @@ module Aws::CloudWatchLogs
     #   resp.delivery_destination.delivery_destination_type #=> String, one of "S3", "CWL", "FH", "XRAY"
     #   resp.delivery_destination.output_format #=> String, one of "json", "plain", "w3c", "raw", "parquet"
     #   resp.delivery_destination.delivery_destination_configuration.destination_resource_arn #=> String
+    #   resp.delivery_destination.role_arn #=> String
     #   resp.delivery_destination.tags #=> Hash
     #   resp.delivery_destination.tags["TagKey"] #=> String
     #
@@ -6888,24 +6923,22 @@ module Aws::CloudWatchLogs
     #   Services Security Hub, use
     #   `arn:aws:securityhub:us-east-1:111122223333:hubv2/*`
     #
+    #   For the `INSIGHTS_QUERY_LOGS` log type, use a wildcard log group ARN,
+    #   such as `arn:aws:logs:us-east-1:111122223333:log-group:*`. Amazon Web
+    #   Services does not support a specific log group ARN for this log type.
+    #
     # @option params [required, String] :log_type
     #   Defines the type of log that the source is sending.
+    #
+    #   * For Amazon Web Services Amplify, the valid values are `ACCESS_LOGS`
+    #     and `WAF_LOGS`.
     #
     #   * For Application Load Balancer, the valid values are
     #     `ALB_ACCESS_LOGS`, `ALB_CONNECTION_LOGS`, and
     #     `ALB_HEALTH_CHECK_LOGS`.
     #
-    #   * For Amazon Bedrock Agents, the valid values are `APPLICATION_LOGS`
-    #     and `EVENT_LOGS`.
-    #
-    #   * For Amazon Bedrock Knowledge Bases, the valid values are
+    #   * For Amazon Bedrock AgentCore Gateway, the valid values are
     #     `APPLICATION_LOGS` and `TRACES`.
-    #
-    #   * For Amazon Bedrock AgentCore Runtime, the valid values are
-    #     `APPLICATION_LOGS`, `USAGE_LOGS` and `TRACES`.
-    #
-    #   * For Amazon Bedrock AgentCore Tools, the valid values are
-    #     `APPLICATION_LOGS`, `USAGE_LOGS` and `TRACES`.
     #
     #   * For Amazon Bedrock AgentCore Identity, the valid values are
     #     `APPLICATION_LOGS` and `TRACES`.
@@ -6913,24 +6946,29 @@ module Aws::CloudWatchLogs
     #   * For Amazon Bedrock AgentCore Memory, the valid values are
     #     `APPLICATION_LOGS` and `TRACES`.
     #
-    #   * For Amazon Bedrock AgentCore Gateway, the valid values are
+    #   * For Amazon Bedrock AgentCore Payments, the valid values are
     #     `APPLICATION_LOGS` and `TRACES`.
     #
-    #   * For Amazon Bedrock AgentCore Payments, the valid values are
+    #   * For Amazon Bedrock AgentCore Runtime, the valid values are
+    #     `APPLICATION_LOGS`, `USAGE_LOGS`, and `TRACES`.
+    #
+    #   * For Amazon Bedrock AgentCore Tools, the valid values are
+    #     `APPLICATION_LOGS`, `USAGE_LOGS`, and `TRACES`.
+    #
+    #   * For Amazon Bedrock Agents, the valid values are `APPLICATION_LOGS`
+    #     and `EVENT_LOGS`.
+    #
+    #   * For Amazon Bedrock Knowledge Bases, the valid values are
     #     `APPLICATION_LOGS` and `TRACES`.
     #
     #   * For CloudFront, the valid value is `ACCESS_LOGS`.
     #
-    #   * For DevOps Agent, the valid value is `APPLICATION_LOGS`.
+    #   * For query execution logs from CloudWatch Logs Insights, the valid
+    #     value is `INSIGHTS_QUERY_LOGS`.
     #
     #   * For Amazon CodeWhisperer, the valid value is `EVENT_LOGS`.
     #
-    #   * For Elemental MediaPackage, the valid values are
-    #     `EGRESS_ACCESS_LOGS` and `INGRESS_ACCESS_LOGS`.
-    #
-    #   * For Elemental MediaTailor, the valid values are
-    #     `AD_DECISION_SERVER_LOGS`, `MANIFEST_SERVICE_LOGS`, and
-    #     `TRANSCODE_LOGS`.
+    #   * For DevOps Agent, the valid value is `APPLICATION_LOGS`.
     #
     #   * For Amazon EKS Auto Mode, the valid values are
     #     `AUTO_MODE_BLOCK_STORAGE_LOGS`, `AUTO_MODE_COMPUTE_LOGS`,
@@ -6943,7 +6981,22 @@ module Aws::CloudWatchLogs
     #     `EKS_CAPABILITY_ARGOCD_REPOSERVER_LOGS`,
     #     `EKS_CAPABILITY_ARGOCD_SERVER_LOGS`, and `EKS_CAPABILITY_KRO_LOGS`.
     #
+    #   * For Amazon Web Services Elemental Inference, the valid value is
+    #     `APPLICATION_LOGS`.
+    #
+    #   * For Elemental MediaPackage, the valid values are
+    #     `EGRESS_ACCESS_LOGS` and `INGRESS_ACCESS_LOGS`.
+    #
+    #   * For Elemental MediaTailor, the valid values are
+    #     `AD_DECISION_SERVER_LOGS`, `MANIFEST_SERVICE_LOGS`, and
+    #     `TRANSCODE_LOGS`.
+    #
+    #   * For Amazon ECS, the valid value is `ACTION_LOGS`.
+    #
     #   * For Entity Resolution, the valid value is `WORKFLOW_LOGS`.
+    #
+    #   * For Amazon EventBridge Event Bus (Custom), the valid values are
+    #     `INFO_LOGS` and `ERROR_LOGS`.
     #
     #   * For IAM Identity Center, the valid value is `ERROR_LOGS`.
     #
@@ -6953,33 +7006,43 @@ module Aws::CloudWatchLogs
     #   * For Network Load Balancer, the valid value is `NLB_ACCESS_LOGS`.
     #
     #   * For PCS, the valid values are `PCS_SCHEDULER_LOGS`,
-    #     `PCS_JOBCOMP_LOGS`, and `PCS_SCHEDULER_AUDIT_LOGS`.
-    #
-    #   * For Quick, the valid values are `AGENT_HOURS_LOGS`, `CHAT_LOGS`,
-    #     `FEEDBACK_LOGS`, and `INDEX_USAGE_LOGS`.
-    #
-    #   * For Amazon Web Services RTB Fabric, the valid values is
-    #     `APPLICATION_LOGS`.
+    #     `PCS_JOBCOMP_LOGS`, `PCS_SCHEDULER_AUDIT_LOGS`, and
+    #     `PCS_SCALING_LOGS`.
     #
     #   * For Amazon Q, the valid values are `EVENT_LOGS` and `SYNC_JOB_LOGS`.
     #
+    #   * For Amazon Q in Connect AI agents, the valid value is `EVENT_LOGS`.
+    #
+    #   * For Quick, the valid values are `AGENT_HOURS_LOGS`,
+    #     `AGENT_METADATA_LOGS`, `CHAT_LOGS`, `DLP_LOGS`, `FEEDBACK_LOGS`,
+    #     `INDEX_USAGE_LOGS`, and `KB_FILE_SYNC_LOGS`.
+    #
+    #   * For Route 53 Global Resolver, the valid value is
+    #     `GLOBAL_RESOLVER_LOGS`.
+    #
+    #   * For Amazon Web Services RTB Fabric, the valid value is
+    #     `APPLICATION_LOGS`.
+    #
     #   * For Amazon S3, the valid value is `S3_SERVER_ACCESS_LOGS`.
     #
-    #   * For Amazon Web Services Security Hub CSPM, the valid value is
+    #   * For Amazon Web Services Security Hub, the valid value is
     #     `SECURITY_FINDING_LOGS`.
     #
-    #   * For Amazon Web Services Security Hub, the valid value is
+    #   * For Amazon Web Services Security Hub CSPM, the valid value is
     #     `SECURITY_FINDING_LOGS`.
     #
     #   * For Amazon SES mail manager, the valid values are `APPLICATION_LOGS`
     #     and `TRAFFIC_POLICY_DEBUG_LOGS`.
     #
+    #   * For Amazon Web Services Shield Advanced, the valid value is
+    #     `FLOW_LOGS`.
+    #
+    #   * For Amazon VPC Route Server, the valid value is `EVENT_LOGS`.
+    #
     #   * For Amazon WorkMail, the valid values are `ACCESS_CONTROL_LOGS`,
     #     `AUTHENTICATION_LOGS`, `WORKMAIL_AVAILABILITY_PROVIDER_LOGS`,
     #     `WORKMAIL_MAILBOX_ACCESS_LOGS`, and
     #     `WORKMAIL_PERSONAL_ACCESS_TOKEN_LOGS`.
-    #
-    #   * For Amazon VPC Route Server, the valid value is `EVENT_LOGS`.
     #
     # @option params [Hash<String,String>] :tags
     #   An optional list of key-value pairs to associate with the resource.
@@ -7770,7 +7833,7 @@ module Aws::CloudWatchLogs
     #
     # * **Supported principals** - Policy only applies when operations are
     #   invoked by Amazon Web Services service principals (not IAM users,
-    #   roles, or cross-account principals
+    #   roles, or cross-account principals)
     #
     # * **Policy limits** - An account can have a maximum of 10 policies
     #   without resourceARN and one per LogGroup resourceARN
@@ -9674,7 +9737,7 @@ module Aws::CloudWatchLogs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.164.0'
+      context[:gem_version] = '1.168.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

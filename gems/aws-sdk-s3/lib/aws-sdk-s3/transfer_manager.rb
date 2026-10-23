@@ -160,11 +160,14 @@ module Aws
       #   * `:errors` - Array of errors for failed downloads (only present when failures occur)
       def download_directory(destination, bucket:, **options)
         Aws::Plugins::UserAgent.metric('S3_TRANSFER', 'S3_TRANSFER_DOWNLOAD_DIRECTORY') do
-          executor = @executor || DefaultExecutor.new(max_threads: options.delete(:thread_count))
-          downloader = DirectoryDownloader.new(client: @client, executor: executor, logger: @logger)
-          result = downloader.download(destination, bucket: bucket, **options)
-          executor.shutdown unless @executor
-          result
+          thread_count = options.delete(:thread_count)
+          executor = @executor || DefaultExecutor.new(max_threads: thread_count)
+          begin
+            downloader = DirectoryDownloader.new(client: @client, executor: executor, logger: @logger)
+            downloader.download(destination, bucket: bucket, **options)
+          ensure
+            executor.shutdown unless @executor
+          end
         end
       end
 
@@ -245,11 +248,15 @@ module Aws
       # @see Client#head_object
       def download_file(destination, bucket:, key:, **options)
         download_opts = options.merge(bucket: bucket, key: key)
-        executor = @executor || DefaultExecutor.new(max_threads: download_opts.delete(:thread_count))
-        downloader = FileDownloader.new(client: @client, executor: executor)
-        downloader.download(destination, download_opts)
-        executor.shutdown unless @executor
-        true
+        thread_count = download_opts.delete(:thread_count)
+        executor = @executor || DefaultExecutor.new(max_threads: thread_count)
+        begin
+          downloader = FileDownloader.new(client: @client, executor: executor)
+          downloader.download(destination, download_opts)
+          true
+        ensure
+          executor.shutdown unless @executor
+        end
       end
 
       # Uploads all files under the given directory to the provided S3 bucket.
@@ -360,11 +367,14 @@ module Aws
       #   * `:errors` - Array of error objects for failed uploads (only present when failures occur)
       def upload_directory(source, bucket:, **options)
         Aws::Plugins::UserAgent.metric('S3_TRANSFER', 'S3_TRANSFER_UPLOAD_DIRECTORY') do
-          executor = @executor || DefaultExecutor.new(max_threads: options.delete(:thread_count))
-          uploader = DirectoryUploader.new(client: @client, executor: executor, logger: @logger)
-          result = uploader.upload(source, bucket, **options.merge(http_chunk_size: resolve_http_chunk_size(options)))
-          executor.shutdown unless @executor
-          result
+          thread_count = options.delete(:thread_count)
+          executor = @executor || DefaultExecutor.new(max_threads: thread_count)
+          begin
+            uploader = DirectoryUploader.new(client: @client, executor: executor, logger: @logger)
+            uploader.upload(source, bucket, **options.merge(http_chunk_size: resolve_http_chunk_size(options)))
+          ensure
+            executor.shutdown unless @executor
+          end
         end
       end
 
@@ -443,18 +453,21 @@ module Aws
       def upload_file(source, bucket:, key:, **options)
         upload_opts = options.merge(bucket: bucket, key: key)
         http_chunk_size = resolve_http_chunk_size(upload_opts)
-
-        executor = @executor || DefaultExecutor.new(max_threads: upload_opts.delete(:thread_count))
-        uploader = FileUploader.new(
-          multipart_threshold: upload_opts.delete(:multipart_threshold),
-          http_chunk_size: http_chunk_size,
-          client: @client,
-          executor: executor
-        )
-        response = uploader.upload(source, upload_opts)
-        yield response if block_given?
-        executor.shutdown unless @executor
-        true
+        thread_count = upload_opts.delete(:thread_count)
+        executor = @executor || DefaultExecutor.new(max_threads: thread_count)
+        begin
+          uploader = FileUploader.new(
+            multipart_threshold: upload_opts.delete(:multipart_threshold),
+            http_chunk_size: http_chunk_size,
+            client: @client,
+            executor: executor
+          )
+          response = uploader.upload(source, upload_opts)
+          yield response if block_given?
+          true
+        ensure
+          executor.shutdown unless @executor
+        end
       end
 
       # Uploads a stream in a streaming fashion to S3.
@@ -491,6 +504,9 @@ module Aws
       # @option options [Integer] :thread_count (10)
       #   The number of parallel multipart uploads. Only used when no custom executor is provided (creates
       #   {DefaultExecutor} with the given thread count). An additional thread is used internally for task coordination.
+      #   This also bounds how many parts are buffered ahead of the upload, limiting memory usage to roughly
+      #   `2 * :thread_count * :part_size`. When a custom `:executor` is provided, it is responsible for applying
+      #   its own backpressure.
       #
       # @option options [Boolean] :tempfile (false)
       #   Normally read data is stored in memory when building the parts in order to complete the underlying
@@ -511,16 +527,20 @@ module Aws
       # @see Client#upload_part
       def upload_stream(bucket:, key:, **options, &block)
         upload_opts = options.merge(bucket: bucket, key: key)
-        executor = @executor || DefaultExecutor.new(max_threads: upload_opts.delete(:thread_count))
-        uploader = MultipartStreamUploader.new(
-          client: @client,
-          executor: executor,
-          tempfile: upload_opts.delete(:tempfile),
-          part_size: upload_opts.delete(:part_size)
-        )
-        uploader.upload(upload_opts, &block)
-        executor.shutdown unless @executor
-        true
+        thread_count = upload_opts.delete(:thread_count) || DefaultExecutor::DEFAULT_MAX_THREADS
+        executor = @executor || DefaultExecutor.new(max_threads: thread_count, max_queue: thread_count)
+        begin
+          uploader = MultipartStreamUploader.new(
+            client: @client,
+            executor: executor,
+            tempfile: upload_opts.delete(:tempfile),
+            part_size: upload_opts.delete(:part_size)
+          )
+          uploader.upload(upload_opts, &block)
+          true
+        ensure
+          executor.shutdown unless @executor
+        end
       end
 
       private

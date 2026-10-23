@@ -189,6 +189,10 @@ module Aws::BedrockAgentCore
         @event_emitter.on(:runtime_client_error, block) if block_given?
       end
 
+      def on_hook_event_event(&block)
+        @event_emitter.on(:hook_event, block) if block_given?
+      end
+
       def on_error_event(&block)
         @event_emitter.on(:error, block) if block_given?
       end
@@ -211,6 +215,7 @@ module Aws::BedrockAgentCore
         on_internal_server_exception_event(&block)
         on_validation_exception_event(&block)
         on_runtime_client_error_event(&block)
+        on_hook_event_event(&block)
         on_error_event(&block)
         on_initial_response_event(&block)
         on_unknown_event(&block)

@@ -199,12 +199,19 @@ module Aws::PCS
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -1496,6 +1503,7 @@ module Aws::PCS
     #   * {Types::RegisterComputeNodeGroupInstanceResponse#compute_node_group_id #compute_node_group_id} => String
     #   * {Types::RegisterComputeNodeGroupInstanceResponse#compute_node_group_name #compute_node_group_name} => String
     #   * {Types::RegisterComputeNodeGroupInstanceResponse#node_lifecycle_actions #node_lifecycle_actions} => Types::NodeLifecycleActions
+    #   * {Types::RegisterComputeNodeGroupInstanceResponse#scheduler_version #scheduler_version} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1536,6 +1544,7 @@ module Aws::PCS
     #   resp.node_lifecycle_actions.stages.node_ready[0].on_error #=> String, one of "TERMINATE", "STOP_SEQUENCE", "CONTINUE"
     #   resp.node_lifecycle_actions.stages.node_ready[0].execution_policy #=> String, one of "FIRST_BOOT_ONLY", "EVERY_BOOT"
     #   resp.node_lifecycle_actions.script_caching_policy #=> String, one of "CACHE_ONCE", "REFRESH_ON_REBOOT"
+    #   resp.scheduler_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/RegisterComputeNodeGroupInstance AWS API Documentation
     #
@@ -2059,7 +2068,7 @@ module Aws::PCS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pcs'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

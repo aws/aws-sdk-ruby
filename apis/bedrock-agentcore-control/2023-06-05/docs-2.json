@@ -139,6 +139,7 @@
     "ListTagsForResource": "<p>Lists the tags associated with the specified resource.</p> <note> <p>This feature is currently available only for AgentCore Runtime, Browser, Browser Profile, Code Interpreter tool, and Gateway.</p> </note>",
     "ListWorkloadIdentities": "<p>Lists all workload identities in your account.</p>",
     "PutResourcePolicy": "<p>Creates or updates a resource-based policy for a resource with the specified resourceArn.</p> <note> <p>This feature is currently available only for AgentCore Runtime and Gateway.</p> </note>",
+    "RotatePaymentConnectorCredentials": "<p>Replaces the service-managed credentials of a payment connector with newly issued credentials.</p> <p>Use this operation only for payment connectors with a <code>provisionMode</code> of <code>QUICK_CREATE</code>. For payment connectors with a <code>provisionMode</code> of <code>MANUAL</code>, call <code>UpdatePaymentCredentialProvider</code> instead after rotating credentials with the payment provider directly.</p> <p>The rotation finishes before the response is returned, and only one rotation runs at a time for a given payment connector. When it succeeds, the new credential is in effect and the payment connector stays in the <code>READY</code> state. When it fails, an error is returned, the payment connector and its existing credential are left unchanged, and you can retry the request.</p> <p>Rotation replaces the credential on the connector's credential provider, so every payment connector that uses that provider is affected. Replace any copy of the previous credential that you use outside AgentCore.</p>",
     "SetTokenVaultCMK": "<p>Sets the customer master key (CMK) for a token vault.</p>",
     "StartPolicyGeneration": "<p>Initiates the AI-powered generation of Dogwood policies from natural language descriptions within the AgentCore Policy system. This feature enables both technical and non-technical users to create policies by describing their authorization requirements in plain English, which is then automatically translated into formal Dogwood policy statements. The generation process analyzes the natural language input along with the Gateway's tool context to produce validated policy options. Generated policy assets are automatically deleted after 7 days, so you should review and create policies from the generated assets within this timeframe. Once created, policies are permanent and not subject to this expiration. Generated policies should be reviewed and tested in log-only mode before deploying to production. Use this when you want to describe policy intent naturally rather than learning Dogwood syntax, though generated policies may require refinement for complex scenarios.</p>",
     "SubmitRegistryRecordForApproval": "<p>Submits a registry record for approval. This transitions the record from <code>DRAFT</code> status to <code>PENDING_APPROVAL</code> status. If the registry has auto-approval enabled, the record is automatically approved.</p>",
@@ -154,7 +155,7 @@
     "UpdateDataset": "<p> Updates a dataset's metadata. Synchronous operation. Only provided fields are updated; omitted fields remain unchanged. To modify dataset content, use <code>AddDatasetExamples</code>, <code>UpdateDatasetExamples</code>, or <code>DeleteDatasetExamples</code>. </p>",
     "UpdateDatasetExamples": "<p> Updates multiple existing examples in-place on DRAFT. All examples are validated against the dataset's schema type before any writes occur. If any example fails validation, the entire batch is rejected (all-or-nothing semantics). </p>",
     "UpdateEvaluator": "<p> Updates a custom evaluator's configuration, description, or evaluation level. Built-in evaluators cannot be updated. The evaluator must not be locked for modification. </p>",
-    "UpdateGateway": "<p>Updates an existing gateway.</p>",
+    "UpdateGateway": "<p>Updates an existing gateway.</p> <p>Replaces the entire gateway configuration. Any optional field that you omit, including fields in <code>protocolConfiguration</code>, is reset. For information about retrieving the current configuration, see <a href=\"https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_GetGateway.html\">GetGateway</a>.</p>",
     "UpdateGatewayRateLimit": "<p>Updates the entries of a gateway rate limit. The dimension keys are immutable after creation.</p>",
     "UpdateGatewayRule": "<p>Updates a gateway rule's priority, conditions, actions, or description.</p>",
     "UpdateGatewayTarget": "<p>Updates an existing gateway target.</p> <p>You cannot update a target that is in a pending authorization state (<code>CREATE_PENDING_AUTH</code>, <code>UPDATE_PENDING_AUTH</code>, or <code>SYNCHRONIZE_PENDING_AUTH</code>). Wait for the authorization to complete or fail before updating the target.</p>",
@@ -772,6 +773,7 @@
         "FilterValue$booleanValue": "<p> The boolean value for true/false filtering conditions. </p>",
         "GetEvaluatorResponse$lockedForModification": "<p> Whether the evaluator is locked for modification due to being referenced by active online evaluation configurations. </p>",
         "InterceptorInputConfiguration$passRequestHeaders": "<p>Indicates whether to pass request headers as input into the interceptor. When set to true, request headers will be passed.</p>",
+        "MCPGatewayConfiguration$disableMcpListToolsPagination": "<p>Specifies whether the gateway disables pagination for the Model Context Protocol (MCP) <code>tools/list</code> operation. When set to <code>true</code>, the gateway returns the complete list of tools in a single response without a pagination cursor. When set to <code>false</code> or omitted, the gateway returns tools in paginated responses. For information about changing this value on an existing gateway, see <a href=\"https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_UpdateGateway.html\">UpdateGateway</a>.</p>",
         "ProviderPrefix$strip": "<p>Whether clients can omit the provider prefix from model IDs. If <code>true</code>, the gateway accepts model IDs without the prefix and restores the full prefixed form before forwarding to the provider. The default is <code>false</code>.</p>",
         "RecordingConfig$enabled": "<p>Indicates whether recording is enabled for the browser. When set to true, browser sessions are recorded.</p>",
         "RootVolumeConfiguration$encrypted": "<p>Specifies whether to encrypt the volume. Encrypted volumes can be attached only to instances that support Amazon EBS encryption. If you create a volume from a snapshot, you cannot specify an encryption value.</p>",
@@ -1062,6 +1064,7 @@
     "CategoricalScaleDefinitions": {
       "base": null,
       "refs": {
+        "DimensionRatingScale$categorical": "<p> The categorical rating scale with named categories and definitions for qualitative evaluation of the dimension. </p>",
         "RatingScale$categorical": "<p> The categorical rating scale with named categories and definitions for qualitative evaluation. </p>"
       }
     },
@@ -1077,10 +1080,45 @@
         "Certificates$member": null
       }
     },
+    "CertificateBucketOwnerAccountId": {
+      "base": null,
+      "refs": {
+        "S3CertificateConfiguration$bucketOwnerAccountId": "<p>The account ID of the Amazon S3 bucket owner. This ID is used for cross-account access to the bucket.</p>"
+      }
+    },
+    "CertificateConfiguration": {
+      "base": "<p>A reference to a private certificate authority (CA) certificate that the gateway uses to verify TLS connections to the target endpoint. Use this when the target presents a certificate issued by a private CA that is not trusted by default. Specify exactly one certificate source. The configuration is a reference only and never contains the certificate content.</p>",
+      "refs": {
+        "CertificateConfigurationList$member": null
+      }
+    },
+    "CertificateConfigurationList": {
+      "base": null,
+      "refs": {
+        "CreateGatewayTargetRequest$certificateConfigurations": "<p>The private certificate authority (CA) configurations for the gateway target. Use this to have the gateway trust a private CA when it establishes TLS connections to the target endpoint. Provide each certificate by reference to an Amazon S3 object or an Amazon Web Services Secrets Manager secret. You can specify only one certificate authority configuration in this list.</p>",
+        "CreateGatewayTargetResponse$certificateConfigurations": "<p>The private certificate authority (CA) configurations for the gateway target.</p>",
+        "GatewayTarget$certificateConfigurations": "<p>The private certificate authority (CA) configurations for the gateway target.</p>",
+        "GetGatewayTargetResponse$certificateConfigurations": "<p>The private certificate authority (CA) configurations for the gateway target.</p>",
+        "UpdateGatewayTargetRequest$certificateConfigurations": "<p>The private certificate authority (CA) configurations for the gateway target. Use this to have the gateway trust a private CA when it establishes TLS connections to the target endpoint. Provide each certificate by reference to an Amazon S3 object or an Amazon Web Services Secrets Manager secret. You can specify only one certificate authority configuration in this list. To remove a previously configured certificate authority, omit this field on update.</p>",
+        "UpdateGatewayTargetResponse$certificateConfigurations": "<p>The private certificate authority (CA) configurations for the gateway target.</p>"
+      }
+    },
     "CertificateLocation": {
       "base": "<p>The location from which to retrieve a certificate.</p>",
       "refs": {
         "Certificate$location": "<p>The location of the certificate.</p>"
+      }
+    },
+    "CertificateS3Uri": {
+      "base": null,
+      "refs": {
+        "S3CertificateConfiguration$uri": "<p>The URI of the Amazon S3 object that contains the PEM-encoded certificate.</p>"
+      }
+    },
+    "CertificateSecretArn": {
+      "base": null,
+      "refs": {
+        "SecretsManagerCertificateConfiguration$secretArn": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that contains the PEM-encoded certificate.</p>"
       }
     },
     "Certificates": {
@@ -1090,6 +1128,18 @@
         "CreateCodeInterpreterRequest$certificates": "<p>A list of certificates to install in the code interpreter.</p>",
         "GetBrowserResponse$certificates": "<p>The list of certificates configured for the browser.</p>",
         "GetCodeInterpreterResponse$certificates": "<p>The list of certificates configured for the code interpreter.</p>"
+      }
+    },
+    "CircuitBreakerConfiguration": {
+      "base": "<p>Specifies whether the circuit breaker monitors failures for the targets in a fallback chain.</p>",
+      "refs": {
+        "Fallback$circuitBreaker": "<p>Specifies whether the gateway temporarily stops sending your requests to a failing target. The circuit breaker tracks each combination of target and model separately. With the circuit breaker enabled, the gateway skips one or more targets and models that fail repeatedly, and your requests go to the next target in the chain. The gateway always tries the last remaining target in the chain. The gateway enables the circuit breaker by default.</p>"
+      }
+    },
+    "CircuitBreakerMode": {
+      "base": null,
+      "refs": {
+        "CircuitBreakerConfiguration$mode": "<p>Specifies whether you want the circuit breaker turned on. To turn it off, set this value to <code>DISABLED</code>. The default is <code>ENABLED</code>.</p>"
       }
     },
     "ClaimMatchOperatorType": {
@@ -1158,7 +1208,7 @@
         "CreatePaymentConnectorRequest$clientToken": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
         "CreatePaymentManagerRequest$clientToken": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
         "CreatePolicyEngineRequest$clientToken": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request with the same client token, the service returns the same response without creating a duplicate policy engine.</p>",
-        "CreatePolicyRequest$clientToken": "<p>A unique, case-sensitive identifier to ensure the idempotency of the request. The AWS SDK automatically generates this token, so you don't need to provide it in most cases. If you retry a request with the same client token, the service returns the same response without creating a duplicate policy.</p>",
+        "CreatePolicyRequest$clientToken": "<p>A unique, case-sensitive identifier to ensure the idempotency of the request. The Amazon Web Services SDK automatically generates this token, so you don't need to provide it in most cases. If you retry a request with the same client token, the service returns the same response without creating a duplicate policy.</p>",
         "CreateRegistryRecordRequest$clientToken": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
         "CreateRegistryRequest$clientToken": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
         "DeleteAgentRuntimeEndpointRequest$clientToken": "<p>A unique, case-sensitive identifier to ensure idempotency of the request.</p>",
@@ -1172,7 +1222,8 @@
         "DeleteHarnessRequest$clientToken": "<p>A unique, case-sensitive identifier to ensure idempotency of the request.</p>",
         "DeletePaymentConnectorRequest$clientToken": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
         "DeletePaymentManagerRequest$clientToken": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
-        "StartPolicyGenerationRequest$clientToken": "<p>A unique, case-sensitive identifier to ensure the idempotency of the request. The AWS SDK automatically generates this token, so you don't need to provide it in most cases. If you retry a request with the same client token, the service returns the same response without starting a duplicate generation.</p>",
+        "RotatePaymentConnectorCredentialsRequest$clientToken": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+        "StartPolicyGenerationRequest$clientToken": "<p>A unique, case-sensitive identifier to ensure the idempotency of the request. The Amazon Web Services SDK automatically generates this token, so you don't need to provide it in most cases. If you retry a request with the same client token, the service returns the same response without starting a duplicate generation.</p>",
         "UpdateAgentRuntimeEndpointRequest$clientToken": "<p>A unique, case-sensitive identifier to ensure idempotency of the request.</p>",
         "UpdateAgentRuntimeRequest$clientToken": "<p>A unique, case-sensitive identifier to ensure idempotency of the request.</p>",
         "UpdateCapacityProviderInput$clientToken": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
@@ -1334,6 +1385,24 @@
         "PaymentProviderConfigurationOutput$coinbaseCdpConfiguration": "<p>The Coinbase CDP configuration.</p>"
       }
     },
+    "CoinbaseCdpRotationTargets": {
+      "base": "<p>Specifies the service-managed Coinbase CDP secrets to rotate.</p>",
+      "refs": {
+        "CredentialRotationConfig$coinbaseCDP": "<p>The credentials to rotate for a Coinbase CDP payment connector.</p>"
+      }
+    },
+    "CoinbaseCdpSecret": {
+      "base": null,
+      "refs": {
+        "CoinbaseCdpSecrets$member": null
+      }
+    },
+    "CoinbaseCdpSecrets": {
+      "base": null,
+      "refs": {
+        "CoinbaseCdpRotationTargets$secrets": "<p>The secrets to rotate. Specify at least one value. Each secret that you specify is rotated independently.</p> <ul> <li> <p> <code>API_KEY</code> - The API key that the payment connector uses to call Coinbase CDP. Rotate it as routine maintenance, or if you suspect that it is compromised.</p> </li> <li> <p> <code>WALLET_SECRET</code> - The wallet secret that signs transactions. Rotate it only if it is lost or compromised. Coinbase CDP allows one wallet secret per project, so it is replaced in place and signing can be briefly interrupted.</p> </li> </ul>"
+      }
+    },
     "ComponentConfiguration": {
       "base": "<p>The configuration for a component within a configuration bundle. The component type is inferred from the component identifier ARN.</p>",
       "refs": {
@@ -1374,12 +1443,20 @@
         "GetCapacityProviderOutput$computeConfiguration": "<p>The compute configuration for the capacity provider.</p>"
       }
     },
+    "ConcreteModelId": {
+      "base": null,
+      "refs": {
+        "FallbackTarget$model": "<p>The model ID to send to this fallback target. If you don't specify a model, the gateway sends the model from the original request.</p>",
+        "StaticRoute$model": "<p>The model ID to send to the target. Supported only for inference targets. If you don't specify a model, the gateway sends the model from the original request.</p>",
+        "TargetTrafficSplitEntry$model": "<p>The model ID to send to the target for this variant. Supported only for inference targets. If you don't specify a model, the gateway sends the model from the original request.</p>"
+      }
+    },
     "ConcurrentModificationException": {
       "base": "<p>Exception thrown when a resource is modified concurrently by multiple requests.</p>",
       "refs": {}
     },
     "Condition": {
-      "base": "<p>A condition that determines when a gateway rule applies. Conditions can match on principals or request paths.</p>",
+      "base": "<p>A condition that determines when a gateway rule applies. Conditions can match on principals, request paths, or the requested model.</p>",
       "refs": {
         "Conditions$member": null
       }
@@ -1407,6 +1484,7 @@
         "ConfigurationBundleSummary$bundleArn": "<p>The Amazon Resource Name (ARN) of the configuration bundle.</p>",
         "ConfigurationBundleVersionSummary$bundleArn": "<p>The Amazon Resource Name (ARN) of the configuration bundle.</p>",
         "CreateConfigurationBundleResponse$bundleArn": "<p>The Amazon Resource Name (ARN) of the created configuration bundle.</p>",
+        "DeleteConfigurationBundleResponse$bundleArn": "<p>The Amazon Resource Name (ARN) of the deleted configuration bundle.</p>",
         "GetConfigurationBundleResponse$bundleArn": "<p>The Amazon Resource Name (ARN) of the configuration bundle.</p>",
         "GetConfigurationBundleVersionResponse$bundleArn": "<p>The Amazon Resource Name (ARN) of the configuration bundle.</p>",
         "UpdateConfigurationBundleResponse$bundleArn": "<p>The Amazon Resource Name (ARN) of the updated configuration bundle.</p>"
@@ -2069,6 +2147,12 @@
         "UpdateOauth2CredentialProviderResponse$credentialProviderVendor": "<p>The vendor of the OAuth2 credential provider.</p>"
       }
     },
+    "CredentialRotationConfig": {
+      "base": "<p>Specifies the service-managed credentials to rotate. Provide the member that matches the payment connector's <code>type</code>.</p>",
+      "refs": {
+        "RotatePaymentConnectorCredentialsRequest$credentialsToRotate": "<p>The credentials to rotate. Specify the member that matches the payment connector's <code>type</code>. Each credential that you select is rotated independently.</p>"
+      }
+    },
     "CredentialsProviderConfiguration": {
       "base": "<p>The credential provider configuration for a payment connector. Specifies the payment provider type and its associated credential provider.</p>",
       "refs": {
@@ -2396,6 +2480,7 @@
         "GetGatewayTargetResponse$lastSynchronizedAt": "<p>The last synchronization of the target.</p>",
         "GetPaymentConnectorResponse$createdAt": "<p>The timestamp when the payment connector was created.</p>",
         "GetPaymentConnectorResponse$lastUpdatedAt": "<p>The timestamp when the payment connector was last updated.</p>",
+        "GetPaymentConnectorResponse$credentialsUpdatedAt": "<p>The timestamp when the payment connector's current service-managed credentials took effect. It is first set when the credentials are provisioned and is updated by each rotation. This field is present only for payment connectors with a <code>provisionMode</code> of <code>QUICK_CREATE</code>.</p>",
         "GetPaymentManagerResponse$createdAt": "<p>The timestamp when the payment manager was created.</p>",
         "GetPaymentManagerResponse$lastUpdatedAt": "<p>The timestamp when the payment manager was last updated.</p>",
         "GetPolicyEngineResponse$createdAt": "<p>The timestamp when the policy engine was originally created.</p>",
@@ -2441,6 +2526,7 @@
         "RegistryRecordSummary$updatedAt": "<p>The timestamp when the registry record was last updated.</p>",
         "RegistrySummary$createdAt": "<p>The timestamp when the registry was created.</p>",
         "RegistrySummary$updatedAt": "<p>The timestamp when the registry was last updated.</p>",
+        "RotatePaymentConnectorCredentialsResponse$lastUpdatedAt": "<p>The timestamp when the payment connector was last updated, which is when the rotation completed.</p>",
         "StartPolicyGenerationResponse$createdAt": "<p>The timestamp when the policy generation request was created.</p>",
         "StartPolicyGenerationResponse$updatedAt": "<p>The timestamp when the policy generation was last updated.</p>",
         "SubmitRegistryRecordForApprovalResponse$updatedAt": "<p>The timestamp when the record was last updated.</p>",
@@ -2693,7 +2779,7 @@
     "DeleteMemoryInputClientTokenString": {
       "base": null,
       "refs": {
-        "DeleteMemoryInput$clientToken": "<p>A client token is used for keeping track of idempotent requests. It can contain a session id which can be around 250 chars, combined with a unique AWS identifier.</p>"
+        "DeleteMemoryInput$clientToken": "<p>A client token is used for keeping track of idempotent requests. It can contain a session id which can be around 250 chars, combined with a unique Amazon Web Services identifier.</p>"
       }
     },
     "DeleteMemoryOutput": {
@@ -2883,7 +2969,7 @@
       }
     },
     "DimensionKey": {
-      "base": "<p>A dimension key specifying the scope dimension for rate limiting.</p> <p>Allowed values: <code>targetName</code>, <code>toolName</code>, <code>qualifiedModelId</code>, or context-path expressions: <code>$.context.iam.principal</code>, <code>$.context.iam.sourceIdentity</code>, <code>$.context.jwt.&lt;claim&gt;</code> where <code>&lt;claim&gt;</code> is a JWT claim name (for example, <code>$.context.jwt.sub</code>). Validated server-side to enforce allowed prefixes and patterns.</p>",
+      "base": "<p>A dimension key specifying the scope dimension for rate limiting.</p> <p>Allowed values: <code>targetName</code>, <code>toolName</code>, <code>qualifiedModelId</code>, or trusted context-path expressions: <code>$.context.iam.principal</code>, <code>$.context.iam.sourceIdentity</code>, <code>$.context.jwt.&lt;claim&gt;</code> where <code>&lt;claim&gt;</code> is a JWT claim name (for example, <code>$.context.jwt.sub</code>).</p> <p>For caller-supplied custom context, you can use only fixed field pointers: <code>$.context.request.header.&lt;HTTP-header-name&gt;</code> and <code>$.context.request.body.&lt;simple-dotted-field-path&gt;</code>. These pointers aren't general JSONPath expressions. The server rejects recursion, filters, bracket notation, and wildcards. It also validates each value to enforce allowed prefixes and patterns.</p>",
       "refs": {
         "DimensionKeys$member": null,
         "LimitEntryDimensionsMap$key": null
@@ -2898,6 +2984,12 @@
         "GatewayRateLimitDetail$dimensionKeys": "<p>The ordered list of dimension key names that define the scope of this rate limit.</p>",
         "GetGatewayRateLimitResponse$dimensionKeys": "<p>The ordered list of dimension key names that define the scope of this rate limit.</p>",
         "UpdateGatewayRateLimitResponse$dimensionKeys": "<p>The ordered list of dimension key names that define the scope of this rate limit.</p>"
+      }
+    },
+    "DimensionRatingScale": {
+      "base": "<p> The rating scale for one dimension of an LLM-as-a-judge evaluator, supporting either a numerical or a categorical scale. </p>",
+      "refs": {
+        "EvaluationDimension$dimensionRatingScale": "<p> The rating scale for this dimension, which can be numerical or categorical. A dimension's rating scale cannot itself be multi-dimensional. </p>"
       }
     },
     "DimensionValue": {
@@ -3180,6 +3272,12 @@
         "CustomReflectionConfiguration$episodicReflectionOverride": "<p>The configuration for a reflection strategy to override the default one.</p>"
       }
     },
+    "ErrorStatusCodePattern": {
+      "base": null,
+      "refs": {
+        "FallbackTriggersStatusCodesList$member": null
+      }
+    },
     "EvaluationConfigDescription": {
       "base": null,
       "refs": {
@@ -3195,6 +3293,30 @@
         "CreateOnlineEvaluationConfigRequest$onlineEvaluationConfigName": "<p> The name of the online evaluation configuration. Must be unique within your account. </p>",
         "GetOnlineEvaluationConfigResponse$onlineEvaluationConfigName": "<p> The name of the online evaluation configuration. </p>",
         "OnlineEvaluationConfigSummary$onlineEvaluationConfigName": "<p> The name of the online evaluation configuration. </p>"
+      }
+    },
+    "EvaluationDimension": {
+      "base": "<p> A single dimension of an LLM-as-a-judge evaluator, defining what the evaluator model should judge for that dimension and how it should be scored. </p>",
+      "refs": {
+        "EvaluationDimensions$member": null
+      }
+    },
+    "EvaluationDimensionInstruction": {
+      "base": "<p> The instruction to the evaluator model for one dimension of an LLM-as-a-judge evaluator, describing what the model should judge for that dimension. </p>",
+      "refs": {
+        "EvaluationDimension$dimensionInstruction": "<p> The instruction to the evaluator model for this dimension, describing what the model should judge when scoring the dimension. </p>"
+      }
+    },
+    "EvaluationDimensionName": {
+      "base": "<p> The name of a dimension in an LLM-as-a-judge evaluator. </p>",
+      "refs": {
+        "EvaluationDimension$dimensionName": "<p> The name of the dimension. This name is unique within the evaluator and identifies the dimension's results. </p>"
+      }
+    },
+    "EvaluationDimensions": {
+      "base": "<p> The list of dimensions for an LLM-as-a-judge evaluator that uses a multi-dimensional rating scale. The service enforces a lower limit than the model's maximum; see the AgentCore Evaluation quotas for the current effective limit. </p>",
+      "refs": {
+        "RatingScale$multiDimensional": "<p> A list of dimensions that lets an LLM-as-a-judge evaluator score several dimensions of the same target in a single evaluation. Each dimension has its own instruction and rating scale, and produces its own result. </p>"
       }
     },
     "EvaluatorArn": {
@@ -3359,6 +3481,62 @@
       "base": "<p>The extraction type for a metadata field, determining how the value is obtained during memory processing.</p>",
       "refs": {
         "MetadataSchemaEntry$extractionType": "<p>Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event.</p>"
+      }
+    },
+    "Fallback": {
+      "base": "<p>The fallback configuration for a route to an inference target. Defines an ordered list of fallback targets to try when a request to the route's target fails, and the conditions that trigger a fallback. A fallback can occur only before the gateway sends the first byte of the response to the caller. After a streaming response starts, the gateway doesn't fall back.</p>",
+      "refs": {
+        "StaticRoute$fallback": "<p>The fallback configuration for this route. Supported only for inference targets.</p>",
+        "TargetTrafficSplitEntry$fallback": "<p>The fallback configuration for this variant. Supported only for inference targets.</p>"
+      }
+    },
+    "FallbackError": {
+      "base": null,
+      "refs": {
+        "FallbackTriggersErrorsList$member": null
+      }
+    },
+    "FallbackFirstByteTimeoutMillisecondsInteger": {
+      "base": null,
+      "refs": {
+        "Fallback$firstByteTimeoutMilliseconds": "<p>The maximum time, in milliseconds, from sending the request to the route's target until the first byte of the response body arrives. If the time expires, the gateway abandons the request and treats it as a <code>FIRST_BYTE_TIMEOUT</code> error. If you don't specify a value, no timeout is enforced.</p>"
+      }
+    },
+    "FallbackTarget": {
+      "base": "<p>Specifies a target to send the request to when the previous target in the fallback chain fails. Includes the target name, the model to send, and the conditions that trigger a fallback from this target to the next one.</p>",
+      "refs": {
+        "FallbackTargetFallbackList$member": null
+      }
+    },
+    "FallbackTargetFallbackList": {
+      "base": null,
+      "refs": {
+        "Fallback$targetFallback": "<p>The ordered list of fallback targets. The gateway tries each target in order until a response doesn't match that target's triggers, and returns that response to the caller. If every target fails, the gateway returns the last response. You can specify up to two fallback targets. Each combination of target and model, including the route's target, can appear only once.</p>"
+      }
+    },
+    "FallbackTargetFirstByteTimeoutMillisecondsInteger": {
+      "base": null,
+      "refs": {
+        "FallbackTarget$firstByteTimeoutMilliseconds": "<p>The maximum time, in milliseconds, from sending the request to this target until the first byte of the response body arrives. This setting isn't inherited from the route. If you don't specify a value, no timeout is enforced.</p>"
+      }
+    },
+    "FallbackTriggers": {
+      "base": "<p>The conditions that trigger a fallback to the next target. A fallback occurs if the response matches any of the specified status codes or errors.</p>",
+      "refs": {
+        "Fallback$triggerOn": "<p>The status codes and errors from the route's target that cause the gateway to send the request to the first fallback target. If you omit <code>triggerOn</code>, the gateway falls back on <code>5XX</code> status codes and on the <code>CONNECTION_ERROR</code>, <code>FIRST_BYTE_TIMEOUT</code>, and <code>UNROUTABLE</code> errors. If you specify <code>triggerOn</code>, only the status codes and errors that you list trigger a fallback.</p>",
+        "FallbackTarget$triggerOn": "<p>The status codes and errors from this target that cause the gateway to send the request to the next fallback target. This setting isn't inherited from the route. If you omit it, the gateway uses the default triggers: <code>5XX</code> status codes and the <code>CONNECTION_ERROR</code>, <code>FIRST_BYTE_TIMEOUT</code>, and <code>UNROUTABLE</code> errors.</p>"
+      }
+    },
+    "FallbackTriggersErrorsList": {
+      "base": null,
+      "refs": {
+        "FallbackTriggers$errors": "<p>The errors that trigger a fallback. You can specify the following:</p> <ul> <li> <p> <code>CONNECTION_ERROR</code> – The gateway couldn't connect to the target because the connection was refused, reset, or timed out. The request didn't reach the target.</p> </li> <li> <p> <code>FIRST_BYTE_TIMEOUT</code> – The target accepted the connection but didn't return the first byte of the response within <code>firstByteTimeoutMilliseconds</code>. The gateway abandons the request before any of the response reaches you.</p> </li> <li> <p> <code>UNROUTABLE</code> – The gateway couldn't route the request to the target, for example because the target doesn't exist or doesn't support the request path. These errors don't count toward the circuit breaker.</p> </li> </ul>"
+      }
+    },
+    "FallbackTriggersStatusCodesList": {
+      "base": null,
+      "refs": {
+        "FallbackTriggers$statusCodes": "<p>The HTTP status codes returned by the target that trigger a fallback. You can specify the following:</p> <ul> <li> <p>An exact status code – A three-digit code, such as <code>429</code>.</p> </li> <li> <p>A class of status codes – The first digit followed by <code>XX</code>, such as <code>5XX</code>, which matches every code from 500 to 599.</p> </li> </ul> <p>Only 4XX and 5XX codes are supported. Throttling by the gateway itself doesn't trigger a fallback.</p>"
       }
     },
     "FilesystemConfiguration": {
@@ -4102,6 +4280,18 @@
         "UpdateHarnessResponse$harness": "<p>The updated harness.</p>"
       }
     },
+    "HarnessAfterInvocationHook": {
+      "base": "<p>The configuration for a hook that runs after an invocation completes.</p>",
+      "refs": {
+        "HarnessHook$afterInvocation": "<p>A hook that runs after an invocation completes.</p>"
+      }
+    },
+    "HarnessAfterToolCallHook": {
+      "base": "<p>The configuration for a hook that runs after a tool call completes.</p>",
+      "refs": {
+        "HarnessHook$afterToolCall": "<p>A hook that runs after a tool call completes.</p>"
+      }
+    },
     "HarnessAgentCoreBrowserConfig": {
       "base": "<p>Configuration for AgentCore Browser.</p>",
       "refs": {
@@ -4196,6 +4386,18 @@
         "HarnessModelConfiguration$bedrockModelConfig": "<p>Configuration for an Amazon Bedrock model.</p>"
       }
     },
+    "HarnessBeforeInvocationHook": {
+      "base": "<p>The configuration for a hook that runs before an invocation begins.</p>",
+      "refs": {
+        "HarnessHook$beforeInvocation": "<p>A hook that runs before an invocation begins.</p>"
+      }
+    },
+    "HarnessBeforeToolCallHook": {
+      "base": "<p>The configuration for a hook that runs before the agent calls a tool.</p>",
+      "refs": {
+        "HarnessHook$beforeToolCall": "<p>A hook that runs before the agent calls a tool.</p>"
+      }
+    },
     "HarnessBrowserArn": {
       "base": "<p>Browser ARN for Harness tool configuration. Accepts both managed (aws.browser.v1) and custom browser ARNs.</p>",
       "refs": {
@@ -4281,6 +4483,12 @@
         "UpdateHarnessRequest$environment": "<p>The compute environment configuration for the harness. If not specified, the existing value is retained.</p>"
       }
     },
+    "HarnessEventBridgeBusArn": {
+      "base": "<p>The ARN of an Amazon EventBridge event bus.</p>",
+      "refs": {
+        "HarnessHookEventBridgeTarget$arn": "<p>The ARN of the Amazon EventBridge event bus to send hook events to.</p>"
+      }
+    },
     "HarnessGatewayOutboundAuth": {
       "base": "<p>Authentication method for calling a Gateway.</p>",
       "refs": {
@@ -4291,6 +4499,68 @@
       "base": "<p>Configuration for a Google Gemini model provider. Requires an API key stored in AgentCore Identity.</p>",
       "refs": {
         "HarnessModelConfiguration$geminiModelConfig": "<p>Configuration for a Google Gemini model.</p>"
+      }
+    },
+    "HarnessHook": {
+      "base": "<p>A lifecycle hook configuration. Specify one hook type.</p>",
+      "refs": {
+        "HarnessHooks$member": null
+      }
+    },
+    "HarnessHookEventBridgeTarget": {
+      "base": "<p>The configuration for an Amazon EventBridge hook target.</p>",
+      "refs": {
+        "HarnessHookTarget$eventBridge": "<p>An Amazon EventBridge hook target that sends the hook event without waiting for a response.</p>"
+      }
+    },
+    "HarnessHookFailureMode": {
+      "base": "<p>The behavior when a synchronous hook target fails.</p>",
+      "refs": {
+        "HarnessHookLambdaTarget$failureMode": "<p>The behavior when the Lambda function times out, returns an error, or returns an invalid response. The default is <code>DENY</code>.</p>"
+      }
+    },
+    "HarnessHookLambdaTarget": {
+      "base": "<p>The configuration for an Amazon Web Services Lambda hook target.</p>",
+      "refs": {
+        "HarnessHookTarget$lambda": "<p>A Lambda hook target that invokes an Amazon Web Services Lambda function synchronously and waits for its response.</p>"
+      }
+    },
+    "HarnessHookLambdaTargetTimeoutSecondsInteger": {
+      "base": null,
+      "refs": {
+        "HarnessHookLambdaTarget$timeoutSeconds": "<p>The maximum number of seconds to wait for the Lambda function response. The default is 60 seconds.</p>"
+      }
+    },
+    "HarnessHookName": {
+      "base": "<p>The name of a lifecycle hook.</p>",
+      "refs": {
+        "HarnessAfterInvocationHook$name": "<p>The name of the hook.</p>",
+        "HarnessAfterToolCallHook$name": "<p>The name of the hook.</p>",
+        "HarnessBeforeInvocationHook$name": "<p>The name of the hook.</p>",
+        "HarnessBeforeToolCallHook$name": "<p>The name of the hook.</p>"
+      }
+    },
+    "HarnessHookSnsTarget": {
+      "base": "<p>The configuration for an Amazon SNS hook target.</p>",
+      "refs": {
+        "HarnessHookTarget$sns": "<p>An Amazon SNS hook target that publishes the hook event without waiting for a response.</p>"
+      }
+    },
+    "HarnessHookTarget": {
+      "base": "<p>The target that receives lifecycle hook events. Specify one target type.</p>",
+      "refs": {
+        "HarnessAfterInvocationHook$target": "<p>The target that receives the hook event.</p>",
+        "HarnessAfterToolCallHook$target": "<p>The target that receives the hook event.</p>",
+        "HarnessBeforeInvocationHook$target": "<p>The target that receives the hook event.</p>",
+        "HarnessBeforeToolCallHook$target": "<p>The target that receives the hook event.</p>"
+      }
+    },
+    "HarnessHooks": {
+      "base": "<p>The lifecycle hooks configured to run at defined points in the agent loop.</p>",
+      "refs": {
+        "CreateHarnessRequest$hooks": "<p>The lifecycle hooks to run at defined points in the agent loop.</p>",
+        "Harness$hooks": "<p>The lifecycle hooks configured for the harness.</p>",
+        "UpdateHarnessRequest$hooks": "<p>The lifecycle hooks to run at defined points in the agent loop. If specified, this replaces all existing hooks. If not specified, the existing hooks are retained.</p>"
       }
     },
     "HarnessId": {
@@ -4321,6 +4591,12 @@
       "base": null,
       "refs": {
         "HarnessInlineFunctionConfig$description": "<p>Description of what the tool does, provided to the model.</p>"
+      }
+    },
+    "HarnessLambdaFunctionArn": {
+      "base": "<p>The ARN of an Amazon Web Services Lambda function.</p>",
+      "refs": {
+        "HarnessHookLambdaTarget$arn": "<p>The ARN of the Lambda function to invoke.</p>"
       }
     },
     "HarnessLiteLlmApiBase": {
@@ -4385,6 +4661,12 @@
         "HarnessVersionSummary$harnessName": "<p>The name of the harness.</p>"
       }
     },
+    "HarnessOpenAiApiBase": {
+      "base": null,
+      "refs": {
+        "HarnessOpenAiModelConfig$apiBase": "<p>Optional custom endpoint URL for an OpenAI-compatible endpoint.</p>"
+      }
+    },
     "HarnessOpenAiApiFormat": {
       "base": null,
       "refs": {
@@ -4416,9 +4698,9 @@
       }
     },
     "HarnessSkillAwsSkillsSource": {
-      "base": "<p>Passed to show that AWS Skills should be included.</p>",
+      "base": "<p>Passed to show that Amazon Web Services Skills should be included.</p>",
       "refs": {
-        "HarnessSkill$awsSkills": "<p>AWS Skills baked into the harness's underlying Runtime.</p>"
+        "HarnessSkill$awsSkills": "<p>Amazon Web Services Skills baked into the harness's underlying Runtime.</p>"
       }
     },
     "HarnessSkillGitAuth": {
@@ -4469,6 +4751,12 @@
       "base": "<p>Configuration for sliding window truncation strategy.</p>",
       "refs": {
         "HarnessTruncationStrategyConfiguration$slidingWindow": "<p>Configuration for sliding window truncation.</p>"
+      }
+    },
+    "HarnessSnsTopicArn": {
+      "base": "<p>The ARN of an Amazon SNS topic.</p>",
+      "refs": {
+        "HarnessHookSnsTarget$arn": "<p>The ARN of the Amazon SNS topic to publish hook events to.</p>"
       }
     },
     "HarnessStatus": {
@@ -5061,7 +5349,7 @@
         "GetPaymentManagerResponse$kmsKeyArn": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt sensitive payment manager data at rest, if configured.</p>",
         "GetPolicyEngineResponse$encryptionKeyArn": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the policy engine data.</p>",
         "GetPolicyEngineSummaryResponse$encryptionKeyArn": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the policy engine data.</p>",
-        "HarnessManagedMemoryConfiguration$encryptionKeyArn": "<p>Customer-managed KMS key. Defaults to AWS-owned key. Not updatable after creation.</p>",
+        "HarnessManagedMemoryConfiguration$encryptionKeyArn": "<p>Customer-managed KMS key. Defaults to Amazon Web Services-owned key. Not updatable after creation.</p>",
         "KmsConfiguration$kmsKeyArn": "<p>The Amazon Resource Name (ARN) of the KMS key.</p>",
         "KmsKeySourceType$kmsKeyArn": "<p>The Amazon Resource Name (ARN) of the KMS key used to sign the JWT client assertion. The key must be an asymmetric key with key usage SIGN_VERIFY and a key spec compatible with the configured signing algorithm.</p>",
         "PaymentManagerSummary$kmsKeyArn": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt sensitive payment manager data at rest, if configured.</p>",
@@ -5692,6 +5980,30 @@
         "PrivateEndpoint$managedVpcResource": "<p>Configuration for connecting to a private resource using a managed VPC Lattice resource. The gateway creates and manages the VPC Lattice resources on your behalf.</p>"
       }
     },
+    "MatchModelEntry": {
+      "base": "<p>A model ID or pattern to match against the requested model, and the operator to use for the comparison.</p>",
+      "refs": {
+        "MatchModelsAnyOfList$member": null
+      }
+    },
+    "MatchModels": {
+      "base": "<p>A condition that matches inference requests based on the requested model.</p>",
+      "refs": {
+        "Condition$matchModels": "<p>A condition that matches on the model requested in an inference request.</p>"
+      }
+    },
+    "MatchModelsAnyOfList": {
+      "base": null,
+      "refs": {
+        "MatchModels$anyOf": "<p>A list of model entries. The condition is met if the requested model matches any of the entries.</p>"
+      }
+    },
+    "MatchOperator": {
+      "base": null,
+      "refs": {
+        "MatchModelEntry$operator": "<p>The operator to use when comparing the requested model to the value:</p> <ul> <li> <p> <code>StringEquals</code> – Requires an exact match.</p> </li> <li> <p> <code>StringLike</code> – Supports wildcard patterns using <code>*</code> and <code>?</code>. This is the default.</p> </li> </ul>"
+      }
+    },
     "MatchPathPattern": {
       "base": null,
       "refs": {
@@ -5829,7 +6141,7 @@
     "McpToolSchemaConfiguration": {
       "base": "<p>The MCP tool schema configuration for an MCP server target. The tool schema must be aligned with the MCP specification.</p>",
       "refs": {
-        "McpServerTargetConfiguration$mcpToolSchema": "<p>The tool schema configuration for the MCP server target. Supported only when the credential provider is configured with an authorization code grant type. Dynamic tool discovery/synchronization will be disabled when target is configured with mcpToolSchema.</p>"
+        "McpServerTargetConfiguration$mcpToolSchema": "<p>A static tool list for the MCP server target. It is supported for all credential providers. Dynamic tool discovery/synchronization will be disabled when a target is configured with mcpToolSchema.</p>"
       }
     },
     "McpVersion": {
@@ -6062,6 +6374,7 @@
     "ModelPattern": {
       "base": null,
       "refs": {
+        "MatchModelEntry$value": "<p>The model ID or pattern to match. With the <code>StringLike</code> operator, you can use <code>*</code> and <code>?</code> as wildcards, for example <code>anthropic.claude-*</code>.</p>",
         "ModelEntry$model": "<p>The model ID or glob pattern that identifies the model (for example, <code>anthropic.claude-opus-*</code> or <code>openai.gpt-oss-*</code>).</p>"
       }
     },
@@ -6354,6 +6667,7 @@
     "NumericalScaleDefinitions": {
       "base": null,
       "refs": {
+        "DimensionRatingScale$numerical": "<p> The numerical rating scale with defined score values and descriptions for quantitative evaluation of the dimension. </p>",
         "RatingScale$numerical": "<p> The numerical rating scale with defined score values and descriptions for quantitative evaluation. </p>"
       }
     },
@@ -6385,7 +6699,7 @@
       "base": "<p>An OAuth credential provider for gateway authentication. This structure contains the configuration for authenticating with the target endpoint using OAuth.</p>",
       "refs": {
         "CredentialProvider$oauthCredentialProvider": "<p>The OAuth credential provider. This provider uses OAuth authentication to access the target endpoint.</p>",
-        "HarnessGatewayOutboundAuth$oauth": "<p>Use OAuth credentials for outbound authentication to the gateway.</p>"
+        "HarnessGatewayOutboundAuth$oauth": "<p>Use OAuth credentials for outbound authentication to the gateway.</p> <p>The <code>AUTHORIZATION_CODE</code> grant type is not supported for outbound authentication from a harness to an AgentCore Gateway, even when <code>defaultReturnUrl</code> is specified.</p>"
       }
     },
     "OAuthCredentialProviderArn": {
@@ -6639,6 +6953,8 @@
         "GetPaymentConnectorRequest$paymentConnectorId": "<p>The unique identifier of the payment connector to retrieve.</p>",
         "GetPaymentConnectorResponse$paymentConnectorId": "<p>The unique identifier of the payment connector.</p>",
         "PaymentConnectorSummary$paymentConnectorId": "<p>The unique identifier of the payment connector.</p>",
+        "RotatePaymentConnectorCredentialsRequest$paymentConnectorId": "<p>The unique identifier of the payment connector whose credentials you want to rotate.</p>",
+        "RotatePaymentConnectorCredentialsResponse$paymentConnectorId": "<p>The unique identifier of the payment connector.</p>",
         "UpdatePaymentConnectorRequest$paymentConnectorId": "<p>The unique identifier of the payment connector to update.</p>",
         "UpdatePaymentConnectorResponse$paymentConnectorId": "<p>The unique identifier of the updated payment connector.</p>"
       }
@@ -6656,7 +6972,9 @@
     "PaymentConnectorProvisionMode": {
       "base": null,
       "refs": {
-        "CreatePaymentConnectorRequest$provisionMode": "<p>The provision mode for creating the payment connector. If you don't specify a value, the default is <code>MANUAL</code>.</p> <ul> <li> <p> <code>MANUAL</code> - You provide the credential provider configurations directly.</p> </li> <li> <p> <code>QUICK_CREATE</code> - The service orchestrates OAuth consent and provisions the credential provider for you.</p> </li> </ul>"
+        "CreatePaymentConnectorRequest$provisionMode": "<p>The provision mode for creating the payment connector. If you don't specify a value, the default is <code>MANUAL</code>.</p> <ul> <li> <p> <code>MANUAL</code> - You provide the credential provider configurations directly.</p> </li> <li> <p> <code>QUICK_CREATE</code> - The service orchestrates OAuth consent and provisions the credential provider for you.</p> </li> </ul>",
+        "GetPaymentConnectorResponse$provisionMode": "<p>Specifies how the payment connector was provisioned. Payment connectors that were created before this field was available return <code>MANUAL</code>.</p> <ul> <li> <p> <code>MANUAL</code> - You provided the credential provider configurations, so you own the credentials. Rotate them with the payment provider, then call <code>UpdatePaymentCredentialProvider</code>.</p> </li> <li> <p> <code>QUICK_CREATE</code> - AgentCore provisioned the credential provider for you, so the credentials are service-managed. You can rotate them with <code>RotatePaymentConnectorCredentials</code>.</p> </li> </ul>",
+        "PaymentConnectorSummary$provisionMode": "<p>Specifies how the payment connector was provisioned. Payment connectors that were created before this field was available return <code>MANUAL</code>.</p> <ul> <li> <p> <code>MANUAL</code> - You provided the credential provider configurations, so you own the credentials.</p> </li> <li> <p> <code>QUICK_CREATE</code> - AgentCore provisioned the credential provider for you, so the credentials are service-managed and you can rotate them with <code>RotatePaymentConnectorCredentials</code>.</p> </li> </ul>"
       }
     },
     "PaymentConnectorStatus": {
@@ -6666,6 +6984,7 @@
         "DeletePaymentConnectorResponse$status": "<p>The current status of the payment connector, set to <code>DELETING</code> when deletion is initiated. Possible values include <code>CREATING</code>, <code>READY</code>, <code>UPDATING</code>, <code>DELETING</code>, <code>CREATE_FAILED</code>, <code>UPDATE_FAILED</code>, and <code>DELETE_FAILED</code>.</p>",
         "GetPaymentConnectorResponse$status": "<p>The current status of the payment connector. Possible values include <code>CREATING</code>, <code>READY</code>, <code>UPDATING</code>, <code>DELETING</code>, <code>CREATE_FAILED</code>, <code>UPDATE_FAILED</code>, and <code>DELETE_FAILED</code>.</p>",
         "PaymentConnectorSummary$status": "<p>The current status of the payment connector. Possible values include <code>CREATING</code>, <code>READY</code>, <code>UPDATING</code>, <code>DELETING</code>, <code>CREATE_FAILED</code>, <code>UPDATE_FAILED</code>, and <code>DELETE_FAILED</code>.</p>",
+        "RotatePaymentConnectorCredentialsResponse$status": "<p>The current status of the payment connector, which is <code>READY</code> after a successful rotation.</p>",
         "UpdatePaymentConnectorResponse$status": "<p>The current status of the updated payment connector. Possible values include <code>CREATING</code>, <code>READY</code>, <code>UPDATING</code>, <code>DELETING</code>, <code>CREATE_FAILED</code>, <code>UPDATE_FAILED</code>, and <code>DELETE_FAILED</code>.</p>"
       }
     },
@@ -6760,6 +7079,8 @@
         "GetPaymentManagerResponse$paymentManagerId": "<p>The unique identifier of the payment manager.</p>",
         "ListPaymentConnectorsRequest$paymentManagerId": "<p>The unique identifier of the payment manager whose connectors to list.</p>",
         "PaymentManagerSummary$paymentManagerId": "<p>The unique identifier of the payment manager.</p>",
+        "RotatePaymentConnectorCredentialsRequest$paymentManagerId": "<p>The unique identifier of the parent payment manager.</p>",
+        "RotatePaymentConnectorCredentialsResponse$paymentManagerId": "<p>The unique identifier of the parent payment manager.</p>",
         "UpdatePaymentConnectorRequest$paymentManagerId": "<p>The unique identifier of the parent payment manager.</p>",
         "UpdatePaymentConnectorResponse$paymentManagerId": "<p>The unique identifier of the parent payment manager.</p>",
         "UpdatePaymentManagerRequest$paymentManagerId": "<p>The unique identifier of the payment manager to update.</p>",
@@ -7262,6 +7583,30 @@
         "ReasoningConfiguration$effort": "<p> The level of reasoning effort the model applies when generating a response. For supported values, see the model provider's documentation. </p>"
       }
     },
+    "RecordExpiryAction": {
+      "base": "<p>The action to apply to a strategy's record expiry (long-term memory time-to-live) configuration. <code>REMOVE</code> removes a previously configured time-to-live; newer records no longer have a time-to-live set and do not expire.</p>",
+      "refs": {
+        "RecordExpirySpecification$action": "<p>The action to apply to the existing record expiry (long-term memory time-to-live) configuration. Set to <code>REMOVE</code> to remove a previously configured time-to-live so that newer records no longer expire. This value is not applicable on create paths.</p>"
+      }
+    },
+    "RecordExpiryDurationDays": {
+      "base": null,
+      "refs": {
+        "MemoryStrategy$recordExpiryDurationDays": "<p>The effective record expiry (long-term memory time-to-live), in days, for memory records generated by this strategy. New records expire this many days after they are created. If not set, records generated by this strategy do not expire.</p>",
+        "RecordExpirySpecification$recordExpiryDurationDays": "<p>The duration, in days, after which memory records generated by this strategy expire. The minimum is 31 days.</p>"
+      }
+    },
+    "RecordExpirySpecification": {
+      "base": "<p>Specifies the record expiry (long-term memory time-to-live) for a memory strategy. Provide exactly one of <code>recordExpiryDurationDays</code> or <code>action</code>. Set <code>recordExpiryDurationDays</code> to configure or update the time-to-live, or set <code>action</code> to <code>REMOVE</code> to remove a previously configured time-to-live.</p>",
+      "refs": {
+        "CustomMemoryStrategyInput$recordExpirySpecification": "<p>The record expiry (long-term memory time-to-live) configuration for memory records generated by this strategy. Set <code>recordExpiryDurationDays</code> to the number of days after which records expire. If not specified, records generated by this strategy do not expire.</p>",
+        "EpisodicMemoryStrategyInput$recordExpirySpecification": "<p>The record expiry (long-term memory time-to-live) configuration for memory records generated by this strategy. Set <code>recordExpiryDurationDays</code> to the number of days after which records expire. If not specified, records generated by this strategy do not expire.</p>",
+        "ModifyMemoryStrategyInput$recordExpirySpecification": "<p>Updates or removes the record expiry (long-term memory time-to-live) for this strategy. Set <code>recordExpiryDurationDays</code> to configure or update the number of days after which records expire, or set <code>action</code> to <code>REMOVE</code> to remove a previously configured time-to-live so that newer records no longer expire. The change applies only to records created after the update.</p>",
+        "SemanticMemoryStrategyInput$recordExpirySpecification": "<p>The record expiry (long-term memory time-to-live) configuration for memory records generated by this strategy. Set <code>recordExpiryDurationDays</code> to the number of days after which records expire. If not specified, records generated by this strategy do not expire.</p>",
+        "SummaryMemoryStrategyInput$recordExpirySpecification": "<p>The record expiry (long-term memory time-to-live) configuration for memory records generated by this strategy. Set <code>recordExpiryDurationDays</code> to the number of days after which records expire. If not specified, records generated by this strategy do not expire.</p>",
+        "UserPreferenceMemoryStrategyInput$recordExpirySpecification": "<p>The record expiry (long-term memory time-to-live) configuration for memory records generated by this strategy. Set <code>recordExpiryDurationDays</code> to the number of days after which records expire. If not specified, records generated by this strategy do not expire.</p>"
+      }
+    },
     "RecordIdentifier": {
       "base": null,
       "refs": {
@@ -7713,6 +8058,14 @@
         "RootVolumeConfiguration$throughput": "<p>The throughput to provision, in MiB/s. Valid only for <code>gp3</code> volumes. Valid range: 125–2,000 MiB/s.</p>"
       }
     },
+    "RotatePaymentConnectorCredentialsRequest": {
+      "base": null,
+      "refs": {}
+    },
+    "RotatePaymentConnectorCredentialsResponse": {
+      "base": null,
+      "refs": {}
+    },
     "RouteToTargetAction": {
       "base": "<p>An action that routes requests to a gateway target, either statically or with weighted traffic splitting.</p>",
       "refs": {
@@ -7768,6 +8121,12 @@
       "base": null,
       "refs": {
         "S3Configuration$uri": "<p>The URI of the Amazon S3 object. This URI specifies the location of the object in Amazon S3.</p>"
+      }
+    },
+    "S3CertificateConfiguration": {
+      "base": "<p>A reference to a PEM-encoded private CA certificate stored as an Amazon S3 object.</p>",
+      "refs": {
+        "CertificateConfiguration$s3": "<p>The Amazon S3 location of the PEM-encoded private CA certificate.</p>"
       }
     },
     "S3Configuration": {
@@ -8027,6 +8386,12 @@
         "UpdateApiKeyCredentialProviderRequest$apiKeySecretSource": "<p>The source type of the API key secret. Use <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if you manage the secret yourself in Amazon Web Services Secrets Manager.</p>",
         "UpdateApiKeyCredentialProviderResponse$apiKeySecretSource": "<p>The source type of the API key secret. Either <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if managed by the user in Amazon Web Services Secrets Manager.</p>",
         "UpdateOauth2CredentialProviderResponse$clientSecretSource": "<p>The source type of the client secret. Either <code>MANAGED</code> if the secret is managed by the service, or <code>EXTERNAL</code> if managed by the user in Amazon Web Services Secrets Manager.</p>"
+      }
+    },
+    "SecretsManagerCertificateConfiguration": {
+      "base": "<p>A reference to a PEM-encoded private CA certificate stored in an Amazon Web Services Secrets Manager secret.</p>",
+      "refs": {
+        "CertificateConfiguration$secretsManager": "<p>The Amazon Web Services Secrets Manager location of the PEM-encoded private CA certificate.</p>"
       }
     },
     "SecretsManagerLocation": {
@@ -8763,6 +9128,7 @@
       "refs": {
         "CreateGatewayTargetRequest$name": "<p>The name of the gateway target. The name must be unique within the gateway.</p>",
         "CreateGatewayTargetResponse$name": "<p>The name of the target.</p>",
+        "FallbackTarget$targetName": "<p>The name of the gateway target to fall back to. The target must be an inference target.</p>",
         "GatewayTarget$name": "<p>The name of the gateway target.</p>",
         "GetGatewayTargetResponse$name": "<p>The name of the gateway target.</p>",
         "StaticRoute$targetName": "<p>The name of the target to route requests to.</p>",
@@ -9323,7 +9689,7 @@
     "UpdateMemoryInputClientTokenString": {
       "base": null,
       "refs": {
-        "UpdateMemoryInput$clientToken": "<p>A client token is used for keeping track of idempotent requests. It can contain a session id which can be around 250 chars, combined with a unique AWS identifier.</p>"
+        "UpdateMemoryInput$clientToken": "<p>A client token is used for keeping track of idempotent requests. It can contain a session id which can be around 250 chars, combined with a unique Amazon Web Services identifier.</p>"
       }
     },
     "UpdateMemoryInputEventExpiryDurationInteger": {

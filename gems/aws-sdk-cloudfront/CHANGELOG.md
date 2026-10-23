@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.160.0 (2026-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.159.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.158.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.157.0 (2026-10-14)
+------------------
+
+* Feature - This release adds a new "IpAddressType" field to "VPCOriginEndpointConfig", allowing customers to specify whether their VPC origin accepts IPv4-only or dualstack connections.
+
+1.156.0 (2026-10-01)
+------------------
+
+* Feature - Added always-amz-auth as a supported signing behavior for Origin Access Control (OAC), enabling CloudFront to authenticate requests to Lambda-Web origins.
+
+1.155.0 (2026-09-23)
+------------------
+
+* Feature - CloudFront signers now support SHA-256 signatures via the `:hash_algorithm` option (`'SHA1'` or `'SHA256'`, defaults to `'SHA1'`). Signers also validate that the private key is RSA or ECDSA (P-256), and custom policies are now minified before signing.
+
 1.154.0 (2026-09-11)
 ------------------
 

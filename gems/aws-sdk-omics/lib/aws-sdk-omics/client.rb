@@ -199,12 +199,19 @@ module Aws::Omics
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -970,6 +977,7 @@ module Aws::Omics
     #       vpc_config: {
     #         security_group_ids: ["SecurityGroupId"],
     #         subnet_ids: ["SubnetId"],
+    #         vpc_owner_account_id: "AwsAccountId",
     #       },
     #     },
     #     tags: {
@@ -989,6 +997,7 @@ module Aws::Omics
     #   resp.run_configurations.vpc_config.subnet_ids #=> Array
     #   resp.run_configurations.vpc_config.subnet_ids[0] #=> String
     #   resp.run_configurations.vpc_config.vpc_id #=> String
+    #   resp.run_configurations.vpc_config.vpc_owner_account_id #=> String
     #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "DELETED", "FAILED"
     #   resp.creation_time #=> Time
     #   resp.tags #=> Hash
@@ -1842,10 +1851,11 @@ module Aws::Omics
     #     container_registry_map: {
     #       registry_mappings: [
     #         {
-    #           upstream_registry_url: "Uri",
-    #           ecr_repository_prefix: "EcrRepositoryPrefix",
+    #           upstream_registry_url: "Uri", # required
+    #           ecr_repository_prefix: "EcrRepositoryPrefix", # required
     #           upstream_repository_prefix: "UpstreamRepositoryPrefix",
     #           ecr_account_id: "AwsAccountId",
+    #           credential_arn: "SecretArn",
     #         },
     #       ],
     #       image_mappings: [
@@ -2091,10 +2101,11 @@ module Aws::Omics
     #     container_registry_map: {
     #       registry_mappings: [
     #         {
-    #           upstream_registry_url: "Uri",
-    #           ecr_repository_prefix: "EcrRepositoryPrefix",
+    #           upstream_registry_url: "Uri", # required
+    #           ecr_repository_prefix: "EcrRepositoryPrefix", # required
     #           upstream_repository_prefix: "UpstreamRepositoryPrefix",
     #           ecr_account_id: "AwsAccountId",
+    #           credential_arn: "SecretArn",
     #         },
     #       ],
     #       image_mappings: [
@@ -3017,6 +3028,7 @@ module Aws::Omics
     #   resp.run_configurations.vpc_config.subnet_ids #=> Array
     #   resp.run_configurations.vpc_config.subnet_ids[0] #=> String
     #   resp.run_configurations.vpc_config.vpc_id #=> String
+    #   resp.run_configurations.vpc_config.vpc_owner_account_id #=> String
     #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "DELETED", "FAILED"
     #   resp.creation_time #=> Time
     #   resp.tags #=> Hash
@@ -3669,6 +3681,7 @@ module Aws::Omics
     #   resp.vpc_config.subnet_ids #=> Array
     #   resp.vpc_config.subnet_ids[0] #=> String
     #   resp.vpc_config.vpc_id #=> String
+    #   resp.vpc_config.vpc_owner_account_id #=> String
     #   resp.session_policy #=> String
     #
     #
@@ -4215,6 +4228,7 @@ module Aws::Omics
     #   resp.container_registry_map.registry_mappings[0].ecr_repository_prefix #=> String
     #   resp.container_registry_map.registry_mappings[0].upstream_repository_prefix #=> String
     #   resp.container_registry_map.registry_mappings[0].ecr_account_id #=> String
+    #   resp.container_registry_map.registry_mappings[0].credential_arn #=> String
     #   resp.container_registry_map.image_mappings #=> Array
     #   resp.container_registry_map.image_mappings[0].source_image #=> String
     #   resp.container_registry_map.image_mappings[0].destination_image #=> String
@@ -4342,6 +4356,7 @@ module Aws::Omics
     #   resp.container_registry_map.registry_mappings[0].ecr_repository_prefix #=> String
     #   resp.container_registry_map.registry_mappings[0].upstream_repository_prefix #=> String
     #   resp.container_registry_map.registry_mappings[0].ecr_account_id #=> String
+    #   resp.container_registry_map.registry_mappings[0].credential_arn #=> String
     #   resp.container_registry_map.image_mappings #=> Array
     #   resp.container_registry_map.image_mappings[0].source_image #=> String
     #   resp.container_registry_map.image_mappings[0].destination_image #=> String
@@ -7424,7 +7439,7 @@ module Aws::Omics
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-omics'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -35,6 +35,7 @@ require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/telemetry'
 require 'aws-sdk-core/plugins/sign'
 require 'aws-sdk-core/plugins/protocols/json_rpc'
+require 'aws-sdk-core/plugins/event_stream_configuration'
 
 module Aws::HealthLake
   # An API client for HealthLake.  To construct a client, you need to configure a `:region` and `:credentials`.
@@ -85,6 +86,7 @@ module Aws::HealthLake
     add_plugin(Aws::Plugins::Telemetry)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
+    add_plugin(Aws::Plugins::EventStreamConfiguration)
     add_plugin(Aws::HealthLake::Plugins::Endpoints)
 
     # @overload initialize(options)
@@ -199,12 +201,19 @@ module Aws::HealthLake
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -239,9 +248,15 @@ module Aws::HealthLake
     #   @option options [Boolean] :endpoint_discovery (false)
     #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
+    #   @option options [Proc] :event_stream_handler
+    #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
+    #
     #   @option options [Boolean] :ignore_configured_endpoint_urls
     #     Setting to true disables use of endpoint URLs provided via environment
     #     variables and the shared configuration file.
+    #
+    #   @option options [Proc] :input_event_stream_handler
+    #     When an EventStream or Proc object is provided, it can be used for sending events for the event stream.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -258,6 +273,9 @@ module Aws::HealthLake
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
     #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
+    #   @option options [Proc] :output_event_stream_handler
+    #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -2136,9 +2154,6 @@ module Aws::HealthLake
     # @option params [required, String] :profile_id
     #   The unique identifier of the profile to update via the agent.
     #
-    # @option params [required, String] :source_format
-    #   The source data format for the transformation.
-    #
     # @option params [required, Types::AgentInputMessage] :input_message
     #   The message to send to the agent.
     #
@@ -2148,14 +2163,137 @@ module Aws::HealthLake
     #
     # @return [Types::UpdateProfileWithAgentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::UpdateProfileWithAgentResponse#agent_response #agent_response} => Types::AgentOutputMessage
-    #   * {Types::UpdateProfileWithAgentResponse#conversation_id #conversation_id} => String
+    #   * {Types::UpdateProfileWithAgentResponse#agent_response #agent_response} => Types::AgentOutputMessageStream
+    #
+    # @example EventStream Operation Example
+    #
+    #   # You can process the event once it arrives immediately, or wait until the
+    #   # full response is complete and iterate through the eventstream enumerator.
+    #
+    #   # To interact with event immediately, you need to register update_profile_with_agent
+    #   # with callbacks. Callbacks can be registered for specific events or for all
+    #   # events, including error events.
+    #
+    #   # Callbacks can be passed into the `:event_stream_handler` option or within a
+    #   # block statement attached to the #update_profile_with_agent call directly. Hybrid
+    #   # pattern of both is also supported.
+    #
+    #   # `:event_stream_handler` option takes in either a Proc object or
+    #   # Aws::HealthLake::EventStreams::AgentOutputMessageStream object.
+    #
+    #   # Usage pattern a): Callbacks with a block attached to #update_profile_with_agent
+    #   # Example for registering callbacks for all event types and an error event
+    #   client.update_profile_with_agent(
+    #     # params input
+    #   ) do |stream|
+    #     stream.on_error_event do |event|
+    #       # catch unmodeled error event in the stream
+    #       raise event
+    #       # => Aws::Errors::EventError
+    #       # event.event_type => :error
+    #       # event.error_code => String
+    #       # event.error_message => String
+    #     end
+    #
+    #     stream.on_event do |event|
+    #       # process all events arrive
+    #       puts event.event_type
+    #       # ...
+    #     end
+    #   end
+    #
+    #   # Usage pattern b): Pass in `:event_stream_handler` for #update_profile_with_agent
+    #   #  1) Create a Aws::HealthLake::EventStreams::AgentOutputMessageStream object
+    #   #  Example for registering callbacks with specific events
+    #
+    #   handler = Aws::HealthLake::EventStreams::AgentOutputMessageStream.new
+    #   handler.on_text_message_event_event do |event|
+    #     event # => Aws::HealthLake::Types::TextMessageEvent
+    #   end
+    #   handler.on_progress_event_event do |event|
+    #     event # => Aws::HealthLake::Types::ProgressEvent
+    #   end
+    #   handler.on_heartbeat_event_event do |event|
+    #     event # => Aws::HealthLake::Types::HeartbeatEvent
+    #   end
+    #   handler.on_error_event_event do |event|
+    #     event # => Aws::HealthLake::Types::ErrorEvent
+    #   end
+    #   handler.on_end_of_output_event_event do |event|
+    #     event # => Aws::HealthLake::Types::EndOfOutputEvent
+    #   end
+    #
+    #   client.update_profile_with_agent(
+    #     # params inputs
+    #     event_stream_handler: handler
+    #   )
+    #
+    #   #  2) Use a Ruby Proc object
+    #   #  Example for registering callbacks with specific events
+    #   handler = Proc.new do |stream|
+    #     stream.on_text_message_event_event do |event|
+    #       event # => Aws::HealthLake::Types::TextMessageEvent
+    #     end
+    #     stream.on_progress_event_event do |event|
+    #       event # => Aws::HealthLake::Types::ProgressEvent
+    #     end
+    #     stream.on_heartbeat_event_event do |event|
+    #       event # => Aws::HealthLake::Types::HeartbeatEvent
+    #     end
+    #     stream.on_error_event_event do |event|
+    #       event # => Aws::HealthLake::Types::ErrorEvent
+    #     end
+    #     stream.on_end_of_output_event_event do |event|
+    #       event # => Aws::HealthLake::Types::EndOfOutputEvent
+    #     end
+    #   end
+    #
+    #   client.update_profile_with_agent(
+    #     # params inputs
+    #     event_stream_handler: handler
+    #   )
+    #
+    #   #  Usage pattern c): Hybrid pattern of a) and b)
+    #   handler = Aws::HealthLake::EventStreams::AgentOutputMessageStream.new
+    #   handler.on_text_message_event_event do |event|
+    #     event # => Aws::HealthLake::Types::TextMessageEvent
+    #   end
+    #   handler.on_progress_event_event do |event|
+    #     event # => Aws::HealthLake::Types::ProgressEvent
+    #   end
+    #   handler.on_heartbeat_event_event do |event|
+    #     event # => Aws::HealthLake::Types::HeartbeatEvent
+    #   end
+    #   handler.on_error_event_event do |event|
+    #     event # => Aws::HealthLake::Types::ErrorEvent
+    #   end
+    #   handler.on_end_of_output_event_event do |event|
+    #     event # => Aws::HealthLake::Types::EndOfOutputEvent
+    #   end
+    #
+    #   client.update_profile_with_agent(
+    #     # params input
+    #     event_stream_handler: handler
+    #   ) do |stream|
+    #     stream.on_error_event do |event|
+    #       # catch unmodeled error event in the stream
+    #       raise event
+    #       # => Aws::Errors::EventError
+    #       # event.event_type => :error
+    #       # event.error_code => String
+    #       # event.error_message => String
+    #     end
+    #   end
+    #
+    #   # You can also iterate through events after the response complete.
+    #   # Events are available at
+    #   resp.agent_response # => Enumerator
+    #   # For parameter input example, please refer to following request syntax.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_profile_with_agent({
     #     profile_id: "ProfileIdString", # required
-    #     source_format: "CCDA", # required, accepts CCDA, CSV
     #     input_message: { # required
     #       body: "AgentMessageString", # required
     #       type: "normal", # required, accepts normal, confirmation_response
@@ -2165,18 +2303,52 @@ module Aws::HealthLake
     #
     # @example Response structure
     #
-    #   resp.agent_response.body #=> String
-    #   resp.agent_response.type #=> String, one of "INITIAL_GREETING", "normal", "confirmation", "complete", "error", "options", "choices"
-    #   resp.agent_response.options_list #=> Array
-    #   resp.agent_response.options_list[0] #=> String
-    #   resp.conversation_id #=> String
+    #   # All events are available at resp.agent_response:
+    #   resp.agent_response #=> Enumerator
+    #   resp.agent_response.event_types #=> [:text_message_event, :progress_event, :heartbeat_event, :error_event, :end_of_output_event]
+    #
+    #   # For :text_message_event event available at #on_text_message_event_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   # For :progress_event event available at #on_progress_event_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   # For :heartbeat_event event available at #on_heartbeat_event_event callback and response eventstream enumerator:
+    #    #=> EmptyStruct
+    #   # For :error_event event available at #on_error_event_event callback and response eventstream enumerator:
+    #   event.error #=> String, one of "InternalServerException", "ResourceNotFoundException", "ValidationException", "AccessDeniedException", "ThrottlingException"
+    #   event.message #=> String
+    #
+    #   # For :end_of_output_event event available at #on_end_of_output_event_event callback and response eventstream enumerator:
+    #   event.final_response_message #=> String
+    #   event.options #=> Array
+    #   event.options[0] #=> String
+    #   event.conversation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/UpdateProfileWithAgent AWS API Documentation
     #
     # @overload update_profile_with_agent(params = {})
     # @param [Hash] params ({})
     def update_profile_with_agent(params = {}, options = {})
+      params = params.dup
+      event_stream_handler = case handler = params.delete(:event_stream_handler)
+        when EventStreams::AgentOutputMessageStream then handler
+        when Proc then EventStreams::AgentOutputMessageStream.new.tap(&handler)
+        when nil then EventStreams::AgentOutputMessageStream.new
+        else
+          msg = "expected :event_stream_handler to be a block or "\
+                "instance of Aws::HealthLake::EventStreams::AgentOutputMessageStream"\
+                ", got `#{handler.inspect}` instead"
+          raise ArgumentError, msg
+        end
+
+      yield(event_stream_handler) if block_given?
+
       req = build_request(:update_profile_with_agent, params)
+
+      req.context[:event_stream_handler] = event_stream_handler
+      req.handlers.add(Aws::Binary::DecodeHandler, priority: 95)
+
       req.send_request(options)
     end
 
@@ -2198,7 +2370,7 @@ module Aws::HealthLake
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-healthlake'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

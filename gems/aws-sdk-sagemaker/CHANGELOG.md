@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.403.0 (2026-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.402.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.401.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.400.0 (2026-10-13)
+------------------
+
+* Feature - Adds Amazon Athena, Cleanup, ForEach, and Amazon EMR Serverless step metadata, ForEach iteration context, and the CompletedWithFailures execution status to SageMaker Pipelines.
+
+1.399.0 (2026-10-12)
+------------------
+
+* Feature - Amazon SageMaker Training Session is a managed service for training on shared GPU infrastructure. It provides full lifecycle management of training sessions and exposes low-level primitive APIs for operations like forward-backward passes, optimizer steps, and state management.
+
+1.398.0 (2026-10-01)
+------------------
+
+* Feature - Release support for c8a.16xlarge and m8a.16xlarge instance types for SageMaker HyperPod
+
+1.397.0 (2026-09-30)
+------------------
+
+* Feature - This feature enables customers to modify their accounting database via API.
+
+1.396.0 (2026-09-29)
+------------------
+
+* Feature - Adds support for cpu flex type instances on SageMaker Training and Processing. Also contains minor updates to DescribeTrainingPlan to support ARN inputs.
+
+1.395.0 (2026-09-21)
+------------------
+
+* Feature - Add support for r6i, m8i, c8i, r8i instance types in Training and Processing
+
 1.394.0 (2026-09-18)
 ------------------
 

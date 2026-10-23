@@ -90,6 +90,7 @@ module Aws::ElastiCache
     CompleteMigrationMessage = Shapes::StructureShape.new(name: 'CompleteMigrationMessage')
     CompleteMigrationResponse = Shapes::StructureShape.new(name: 'CompleteMigrationResponse')
     ConfigureShard = Shapes::StructureShape.new(name: 'ConfigureShard')
+    ConnectionType = Shapes::StringShape.new(name: 'ConnectionType')
     CopyServerlessCacheSnapshotRequest = Shapes::StructureShape.new(name: 'CopyServerlessCacheSnapshotRequest')
     CopyServerlessCacheSnapshotResponse = Shapes::StructureShape.new(name: 'CopyServerlessCacheSnapshotResponse')
     CopySnapshotMessage = Shapes::StructureShape.new(name: 'CopySnapshotMessage')
@@ -241,6 +242,8 @@ module Aws::ElastiCache
     LogDeliveryConfigurationStatus = Shapes::StringShape.new(name: 'LogDeliveryConfigurationStatus')
     LogFormat = Shapes::StringShape.new(name: 'LogFormat')
     LogType = Shapes::StringShape.new(name: 'LogType')
+    MigrationHealthFault = Shapes::StructureShape.new(name: 'MigrationHealthFault', error: {"code" => "MigrationHealthFault", "httpStatusCode" => 400, "senderFault" => true})
+    MigrationSummary = Shapes::StructureShape.new(name: 'MigrationSummary')
     ModifyCacheClusterMessage = Shapes::StructureShape.new(name: 'ModifyCacheClusterMessage')
     ModifyCacheClusterResult = Shapes::StructureShape.new(name: 'ModifyCacheClusterResult')
     ModifyCacheParameterGroupMessage = Shapes::StructureShape.new(name: 'ModifyCacheParameterGroupMessage')
@@ -295,6 +298,8 @@ module Aws::ElastiCache
     PendingModifiedValues = Shapes::StructureShape.new(name: 'PendingModifiedValues')
     PreferredAvailabilityZoneList = Shapes::ListShape.new(name: 'PreferredAvailabilityZoneList')
     PreferredOutpostArnList = Shapes::ListShape.new(name: 'PreferredOutpostArnList')
+    PrepareMigrationRequest = Shapes::StructureShape.new(name: 'PrepareMigrationRequest')
+    PrepareMigrationResponse = Shapes::StructureShape.new(name: 'PrepareMigrationResponse')
     ProcessedUpdateAction = Shapes::StructureShape.new(name: 'ProcessedUpdateAction')
     ProcessedUpdateActionList = Shapes::ListShape.new(name: 'ProcessedUpdateActionList')
     PurchaseReservedCacheNodesOfferingMessage = Shapes::StructureShape.new(name: 'PurchaseReservedCacheNodesOfferingMessage')
@@ -337,14 +342,17 @@ module Aws::ElastiCache
     RevokeCacheSecurityGroupIngressMessage = Shapes::StructureShape.new(name: 'RevokeCacheSecurityGroupIngressMessage')
     RevokeCacheSecurityGroupIngressResult = Shapes::StructureShape.new(name: 'RevokeCacheSecurityGroupIngressResult')
     ScaleConfig = Shapes::StructureShape.new(name: 'ScaleConfig')
+    SecretManagerAuthConfig = Shapes::StructureShape.new(name: 'SecretManagerAuthConfig')
     SecurityGroupIdsList = Shapes::ListShape.new(name: 'SecurityGroupIdsList')
     SecurityGroupMembership = Shapes::StructureShape.new(name: 'SecurityGroupMembership')
     SecurityGroupMembershipList = Shapes::ListShape.new(name: 'SecurityGroupMembershipList')
     ServerlessCache = Shapes::StructureShape.new(name: 'ServerlessCache')
     ServerlessCacheAlreadyExistsFault = Shapes::StructureShape.new(name: 'ServerlessCacheAlreadyExistsFault', error: {"code" => "ServerlessCacheAlreadyExistsFault", "httpStatusCode" => 400, "senderFault" => true})
+    ServerlessCacheAlreadyUnderMigrationFault = Shapes::StructureShape.new(name: 'ServerlessCacheAlreadyUnderMigrationFault', error: {"code" => "ServerlessCacheAlreadyUnderMigrationFault", "httpStatusCode" => 400, "senderFault" => true})
     ServerlessCacheConfiguration = Shapes::StructureShape.new(name: 'ServerlessCacheConfiguration')
     ServerlessCacheList = Shapes::ListShape.new(name: 'ServerlessCacheList')
     ServerlessCacheNotFoundFault = Shapes::StructureShape.new(name: 'ServerlessCacheNotFoundFault', error: {"code" => "ServerlessCacheNotFoundFault", "httpStatusCode" => 404, "senderFault" => true})
+    ServerlessCacheNotUnderMigrationFault = Shapes::StructureShape.new(name: 'ServerlessCacheNotUnderMigrationFault', error: {"code" => "ServerlessCacheNotUnderMigrationFault", "httpStatusCode" => 400, "senderFault" => true})
     ServerlessCacheQuotaForCustomerExceededFault = Shapes::StructureShape.new(name: 'ServerlessCacheQuotaForCustomerExceededFault', error: {"code" => "ServerlessCacheQuotaForCustomerExceededFault", "httpStatusCode" => 400, "senderFault" => true})
     ServerlessCacheSnapshot = Shapes::StructureShape.new(name: 'ServerlessCacheSnapshot')
     ServerlessCacheSnapshotAlreadyExistsFault = Shapes::StructureShape.new(name: 'ServerlessCacheSnapshotAlreadyExistsFault', error: {"code" => "ServerlessCacheSnapshotAlreadyExistsFault", "httpStatusCode" => 400, "senderFault" => true})
@@ -369,9 +377,13 @@ module Aws::ElastiCache
     SnapshotList = Shapes::ListShape.new(name: 'SnapshotList')
     SnapshotNotFoundFault = Shapes::StructureShape.new(name: 'SnapshotNotFoundFault', error: {"code" => "SnapshotNotFoundFault", "httpStatusCode" => 404, "senderFault" => true})
     SnapshotQuotaExceededFault = Shapes::StructureShape.new(name: 'SnapshotQuotaExceededFault', error: {"code" => "SnapshotQuotaExceededFault", "httpStatusCode" => 400, "senderFault" => true})
+    SourceAuthenticationConfiguration = Shapes::StructureShape.new(name: 'SourceAuthenticationConfiguration')
+    SourceTlsConfiguration = Shapes::StructureShape.new(name: 'SourceTlsConfiguration')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
     StartMigrationMessage = Shapes::StructureShape.new(name: 'StartMigrationMessage')
     StartMigrationResponse = Shapes::StructureShape.new(name: 'StartMigrationResponse')
+    StopMigrationRequest = Shapes::StructureShape.new(name: 'StopMigrationRequest')
+    StopMigrationResponse = Shapes::StructureShape.new(name: 'StopMigrationResponse')
     StorageEncryptionType = Shapes::StringShape.new(name: 'StorageEncryptionType')
     String = Shapes::StringShape.new(name: 'String')
     Subnet = Shapes::StructureShape.new(name: 'Subnet')
@@ -393,6 +405,7 @@ module Aws::ElastiCache
     TestMigrationMessage = Shapes::StructureShape.new(name: 'TestMigrationMessage')
     TestMigrationResponse = Shapes::StructureShape.new(name: 'TestMigrationResponse')
     TimeRangeFilter = Shapes::StructureShape.new(name: 'TimeRangeFilter')
+    TlsMode = Shapes::StringShape.new(name: 'TlsMode')
     TransitEncryptionMode = Shapes::StringShape.new(name: 'TransitEncryptionMode')
     UGReplicationGroupIdList = Shapes::ListShape.new(name: 'UGReplicationGroupIdList')
     UGServerlessCacheIdList = Shapes::ListShape.new(name: 'UGServerlessCacheIdList')
@@ -668,11 +681,13 @@ module Aws::ElastiCache
 
     ClusterQuotaForCustomerExceededFault.struct_class = Types::ClusterQuotaForCustomerExceededFault
 
-    CompleteMigrationMessage.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationGroupId"))
+    CompleteMigrationMessage.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationGroupId"))
+    CompleteMigrationMessage.add_member(:serverless_cache_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerlessCacheName"))
     CompleteMigrationMessage.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location_name: "Force"))
     CompleteMigrationMessage.struct_class = Types::CompleteMigrationMessage
 
     CompleteMigrationResponse.add_member(:replication_group, Shapes::ShapeRef.new(shape: ReplicationGroup, location_name: "ReplicationGroup"))
+    CompleteMigrationResponse.add_member(:serverless_cache, Shapes::ShapeRef.new(shape: ServerlessCache, location_name: "ServerlessCache"))
     CompleteMigrationResponse.struct_class = Types::CompleteMigrationResponse
 
     ConfigureShard.add_member(:node_group_id, Shapes::ShapeRef.new(shape: AllowedNodeGroupId, required: true, location_name: "NodeGroupId"))
@@ -764,6 +779,7 @@ module Aws::ElastiCache
     CreateGlobalReplicationGroupMessage.add_member(:global_replication_group_id_suffix, Shapes::ShapeRef.new(shape: String, required: true, location_name: "GlobalReplicationGroupIdSuffix"))
     CreateGlobalReplicationGroupMessage.add_member(:global_replication_group_description, Shapes::ShapeRef.new(shape: String, location_name: "GlobalReplicationGroupDescription"))
     CreateGlobalReplicationGroupMessage.add_member(:primary_replication_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "PrimaryReplicationGroupId"))
+    CreateGlobalReplicationGroupMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateGlobalReplicationGroupMessage.struct_class = Types::CreateGlobalReplicationGroupMessage
 
     CreateGlobalReplicationGroupResult.add_member(:global_replication_group, Shapes::ShapeRef.new(shape: GlobalReplicationGroup, location_name: "GlobalReplicationGroup"))
@@ -828,6 +844,7 @@ module Aws::ElastiCache
     CreateServerlessCacheRequest.add_member(:snapshot_retention_limit, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "SnapshotRetentionLimit"))
     CreateServerlessCacheRequest.add_member(:daily_snapshot_time, Shapes::ShapeRef.new(shape: String, location_name: "DailySnapshotTime"))
     CreateServerlessCacheRequest.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
+    CreateServerlessCacheRequest.add_member(:connection_type, Shapes::ShapeRef.new(shape: ConnectionType, location_name: "ConnectionType"))
     CreateServerlessCacheRequest.struct_class = Types::CreateServerlessCacheRequest
 
     CreateServerlessCacheResponse.add_member(:serverless_cache, Shapes::ShapeRef.new(shape: ServerlessCache, location_name: "ServerlessCache"))
@@ -1316,6 +1333,13 @@ module Aws::ElastiCache
 
     LogDeliveryConfigurationRequestList.member = Shapes::ShapeRef.new(shape: LogDeliveryConfigurationRequest, location_name: "LogDeliveryConfigurationRequest")
 
+    MigrationHealthFault.struct_class = Types::MigrationHealthFault
+
+    MigrationSummary.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    MigrationSummary.add_member(:migration_endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "MigrationEndpoint"))
+    MigrationSummary.add_member(:cutover_mode, Shapes::ShapeRef.new(shape: String, location_name: "CutoverMode"))
+    MigrationSummary.struct_class = Types::MigrationSummary
+
     ModifyCacheClusterMessage.add_member(:cache_cluster_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CacheClusterId"))
     ModifyCacheClusterMessage.add_member(:num_cache_nodes, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NumCacheNodes"))
     ModifyCacheClusterMessage.add_member(:cache_node_ids_to_remove, Shapes::ShapeRef.new(shape: CacheNodeIdsList, location_name: "CacheNodeIdsToRemove"))
@@ -1575,6 +1599,15 @@ module Aws::ElastiCache
 
     PreferredOutpostArnList.member = Shapes::ShapeRef.new(shape: String, location_name: "PreferredOutpostArn")
 
+    PrepareMigrationRequest.add_member(:serverless_cache_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServerlessCacheName"))
+    PrepareMigrationRequest.add_member(:customer_node_endpoint_list, Shapes::ShapeRef.new(shape: CustomerNodeEndpointList, required: true, location_name: "CustomerNodeEndpointList"))
+    PrepareMigrationRequest.add_member(:source_authentication_configuration, Shapes::ShapeRef.new(shape: SourceAuthenticationConfiguration, location_name: "SourceAuthenticationConfiguration"))
+    PrepareMigrationRequest.add_member(:source_tls_configuration, Shapes::ShapeRef.new(shape: SourceTlsConfiguration, location_name: "SourceTlsConfiguration"))
+    PrepareMigrationRequest.struct_class = Types::PrepareMigrationRequest
+
+    PrepareMigrationResponse.add_member(:serverless_cache, Shapes::ShapeRef.new(shape: ServerlessCache, location_name: "ServerlessCache"))
+    PrepareMigrationResponse.struct_class = Types::PrepareMigrationResponse
+
     ProcessedUpdateAction.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationGroupId"))
     ProcessedUpdateAction.add_member(:cache_cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "CacheClusterId"))
     ProcessedUpdateAction.add_member(:service_update_name, Shapes::ShapeRef.new(shape: String, location_name: "ServiceUpdateName"))
@@ -1764,6 +1797,9 @@ module Aws::ElastiCache
     ScaleConfig.add_member(:scale_interval_minutes, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "ScaleIntervalMinutes"))
     ScaleConfig.struct_class = Types::ScaleConfig
 
+    SecretManagerAuthConfig.add_member(:secret_arn, Shapes::ShapeRef.new(shape: String, location_name: "SecretArn"))
+    SecretManagerAuthConfig.struct_class = Types::SecretManagerAuthConfig
+
     SecurityGroupIdsList.member = Shapes::ShapeRef.new(shape: String, location_name: "SecurityGroupId")
 
     SecurityGroupMembership.add_member(:security_group_id, Shapes::ShapeRef.new(shape: String, location_name: "SecurityGroupId"))
@@ -1791,9 +1827,13 @@ module Aws::ElastiCache
     ServerlessCache.add_member(:snapshot_retention_limit, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "SnapshotRetentionLimit"))
     ServerlessCache.add_member(:daily_snapshot_time, Shapes::ShapeRef.new(shape: String, location_name: "DailySnapshotTime"))
     ServerlessCache.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
+    ServerlessCache.add_member(:connection_type, Shapes::ShapeRef.new(shape: ConnectionType, location_name: "ConnectionType"))
+    ServerlessCache.add_member(:migration, Shapes::ShapeRef.new(shape: MigrationSummary, location_name: "Migration"))
     ServerlessCache.struct_class = Types::ServerlessCache
 
     ServerlessCacheAlreadyExistsFault.struct_class = Types::ServerlessCacheAlreadyExistsFault
+
+    ServerlessCacheAlreadyUnderMigrationFault.struct_class = Types::ServerlessCacheAlreadyUnderMigrationFault
 
     ServerlessCacheConfiguration.add_member(:serverless_cache_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerlessCacheName"))
     ServerlessCacheConfiguration.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
@@ -1803,6 +1843,8 @@ module Aws::ElastiCache
     ServerlessCacheList.member = Shapes::ShapeRef.new(shape: ServerlessCache)
 
     ServerlessCacheNotFoundFault.struct_class = Types::ServerlessCacheNotFoundFault
+
+    ServerlessCacheNotUnderMigrationFault.struct_class = Types::ServerlessCacheNotUnderMigrationFault
 
     ServerlessCacheQuotaForCustomerExceededFault.struct_class = Types::ServerlessCacheQuotaForCustomerExceededFault
 
@@ -1897,12 +1939,29 @@ module Aws::ElastiCache
 
     SnapshotQuotaExceededFault.struct_class = Types::SnapshotQuotaExceededFault
 
-    StartMigrationMessage.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationGroupId"))
-    StartMigrationMessage.add_member(:customer_node_endpoint_list, Shapes::ShapeRef.new(shape: CustomerNodeEndpointList, required: true, location_name: "CustomerNodeEndpointList"))
+    SourceAuthenticationConfiguration.add_member(:secret_manager_config, Shapes::ShapeRef.new(shape: SecretManagerAuthConfig, location_name: "SecretManagerConfig"))
+    SourceAuthenticationConfiguration.struct_class = Types::SourceAuthenticationConfiguration
+
+    SourceTlsConfiguration.add_member(:source_tls_mode, Shapes::ShapeRef.new(shape: TlsMode, location_name: "SourceTlsMode"))
+    SourceTlsConfiguration.add_member(:source_tls_certificate, Shapes::ShapeRef.new(shape: String, location_name: "SourceTlsCertificate"))
+    SourceTlsConfiguration.struct_class = Types::SourceTlsConfiguration
+
+    StartMigrationMessage.add_member(:serverless_cache_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerlessCacheName"))
+    StartMigrationMessage.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationGroupId"))
+    StartMigrationMessage.add_member(:customer_node_endpoint_list, Shapes::ShapeRef.new(shape: CustomerNodeEndpointList, location_name: "CustomerNodeEndpointList"))
+    StartMigrationMessage.add_member(:auto_cutover, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AutoCutover"))
+    StartMigrationMessage.add_member(:clear_target_cache_data, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ClearTargetCacheData"))
     StartMigrationMessage.struct_class = Types::StartMigrationMessage
 
     StartMigrationResponse.add_member(:replication_group, Shapes::ShapeRef.new(shape: ReplicationGroup, location_name: "ReplicationGroup"))
+    StartMigrationResponse.add_member(:serverless_cache, Shapes::ShapeRef.new(shape: ServerlessCache, location_name: "ServerlessCache"))
     StartMigrationResponse.struct_class = Types::StartMigrationResponse
+
+    StopMigrationRequest.add_member(:serverless_cache_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServerlessCacheName"))
+    StopMigrationRequest.struct_class = Types::StopMigrationRequest
+
+    StopMigrationResponse.add_member(:serverless_cache, Shapes::ShapeRef.new(shape: ServerlessCache, location_name: "ServerlessCache"))
+    StopMigrationResponse.struct_class = Types::StopMigrationResponse
 
     Subnet.add_member(:subnet_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SubnetIdentifier"))
     Subnet.add_member(:subnet_availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "SubnetAvailabilityZone"))
@@ -2095,6 +2154,8 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: InvalidServerlessCacheSnapshotStateFault)
         o.errors << Shapes::ShapeRef.new(shape: TagQuotaPerResourceExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InvalidARNFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: GlobalReplicationGroupNotFoundFault)
       end)
 
       api.add_operation(:authorize_cache_security_group_ingress, Seahorse::Model::Operation.new.tap do |o|
@@ -2139,6 +2200,13 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: ReplicationGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidReplicationGroupStateFault)
         o.errors << Shapes::ShapeRef.new(shape: ReplicationGroupNotUnderMigrationFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidCacheClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerlessCacheNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidServerlessCacheStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServerlessCacheNotUnderMigrationFault)
+        o.errors << Shapes::ShapeRef.new(shape: MigrationHealthFault)
       end)
 
       api.add_operation(:copy_serverless_cache_snapshot, Seahorse::Model::Operation.new.tap do |o|
@@ -2245,6 +2313,7 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: InvalidReplicationGroupStateFault)
         o.errors << Shapes::ShapeRef.new(shape: GlobalReplicationGroupAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: TagQuotaPerResourceExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
       end)
 
@@ -2947,6 +3016,8 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: ServerlessCacheSnapshotNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidServerlessCacheSnapshotStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidARNFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: GlobalReplicationGroupNotFoundFault)
       end)
 
       api.add_operation(:modify_cache_cluster, Seahorse::Model::Operation.new.tap do |o|
@@ -3092,6 +3163,18 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
 
+      api.add_operation(:prepare_migration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PrepareMigration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PrepareMigrationRequest)
+        o.output = Shapes::ShapeRef.new(shape: PrepareMigrationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerlessCacheNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidServerlessCacheStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServerlessCacheAlreadyUnderMigrationFault)
+      end)
+
       api.add_operation(:purchase_reserved_cache_nodes_offering, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PurchaseReservedCacheNodesOffering"
         o.http_method = "POST"
@@ -3149,6 +3232,8 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: InvalidServerlessCacheSnapshotStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidARNFault)
         o.errors << Shapes::ShapeRef.new(shape: TagNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: GlobalReplicationGroupNotFoundFault)
       end)
 
       api.add_operation(:reset_cache_parameter_group, Seahorse::Model::Operation.new.tap do |o|
@@ -3186,7 +3271,25 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: ReplicationGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidReplicationGroupStateFault)
         o.errors << Shapes::ShapeRef.new(shape: ReplicationGroupAlreadyUnderMigrationFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidCacheClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerlessCacheNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidServerlessCacheStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServerlessCacheNotUnderMigrationFault)
+        o.errors << Shapes::ShapeRef.new(shape: MigrationHealthFault)
+      end)
+
+      api.add_operation(:stop_migration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopMigration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopMigrationRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopMigrationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerlessCacheNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidServerlessCacheStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServerlessCacheNotUnderMigrationFault)
       end)
 
       api.add_operation(:test_failover, Seahorse::Model::Operation.new.tap do |o|
@@ -3215,7 +3318,9 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: ReplicationGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidReplicationGroupStateFault)
         o.errors << Shapes::ShapeRef.new(shape: ReplicationGroupAlreadyUnderMigrationFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidCacheClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
     end
 

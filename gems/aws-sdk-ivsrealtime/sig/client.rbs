@@ -27,6 +27,7 @@ module Aws
                       ?convert_params: bool,
                       ?correct_clock_skew: bool,
                       ?defaults_mode: String,
+                      ?disable_clock_skew_correction: bool,
                       ?disable_host_prefix_injection: bool,
                       ?disable_request_compression: bool,
                       ?endpoint: String,
@@ -465,6 +466,15 @@ module Aws
                                     resource_arn: ::String
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _RevokeConnectionTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RevokeConnectionTokenResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#revoke_connection_token-instance_method
+      def revoke_connection_token: (
+                                     token_id: ::String
+                                   ) -> _RevokeConnectionTokenResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RevokeConnectionTokenResponseSuccess
 
       interface _StartCompositionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartCompositionResponse]

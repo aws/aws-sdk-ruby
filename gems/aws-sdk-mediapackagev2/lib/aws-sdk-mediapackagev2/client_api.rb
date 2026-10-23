@@ -33,6 +33,8 @@ module Aws::MediaPackageV2
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConflictExceptionType = Shapes::StringShape.new(name: 'ConflictExceptionType')
     ContainerType = Shapes::StringShape.new(name: 'ContainerType')
+    ContentKeyPeriodConfiguration = Shapes::StructureShape.new(name: 'ContentKeyPeriodConfiguration')
+    ContentKeyPeriodTiming = Shapes::StringShape.new(name: 'ContentKeyPeriodTiming')
     CreateChannelGroupRequest = Shapes::StructureShape.new(name: 'CreateChannelGroupRequest')
     CreateChannelGroupResponse = Shapes::StructureShape.new(name: 'CreateChannelGroupResponse')
     CreateChannelRequest = Shapes::StructureShape.new(name: 'CreateChannelRequest')
@@ -188,6 +190,7 @@ module Aws::MediaPackageV2
     ManifestName = Shapes::StringShape.new(name: 'ManifestName')
     MssManifestLayout = Shapes::StringShape.new(name: 'MssManifestLayout')
     MultiviewConfiguration = Shapes::StructureShape.new(name: 'MultiviewConfiguration')
+    MultiviewFilterConfiguration = Shapes::StructureShape.new(name: 'MultiviewFilterConfiguration')
     MultiviewLayoutList = Shapes::ListShape.new(name: 'MultiviewLayoutList')
     MultiviewLayoutType = Shapes::StringShape.new(name: 'MultiviewLayoutType')
     MultiviewSourceList = Shapes::ListShape.new(name: 'MultiviewSourceList')
@@ -231,6 +234,7 @@ module Aws::MediaPackageV2
     SpekeKeyProviderResourceIdString = Shapes::StringShape.new(name: 'SpekeKeyProviderResourceIdString')
     SpekeKeyProviderRoleArnString = Shapes::StringShape.new(name: 'SpekeKeyProviderRoleArnString')
     SpekeKeyProviderUrlString = Shapes::StringShape.new(name: 'SpekeKeyProviderUrlString')
+    SpekeVersion = Shapes::StringShape.new(name: 'SpekeVersion')
     StartTag = Shapes::StructureShape.new(name: 'StartTag')
     StreamNameOutputMode = Shapes::StringShape.new(name: 'StreamNameOutputMode')
     String = Shapes::StringShape.new(name: 'String')
@@ -303,6 +307,9 @@ module Aws::MediaPackageV2
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ConflictException.add_member(:conflict_exception_type, Shapes::ShapeRef.new(shape: ConflictExceptionType, location_name: "ConflictExceptionType"))
     ConflictException.struct_class = Types::ConflictException
+
+    ContentKeyPeriodConfiguration.add_member(:content_key_period_timing, Shapes::ShapeRef.new(shape: ContentKeyPeriodTiming, location_name: "ContentKeyPeriodTiming"))
+    ContentKeyPeriodConfiguration.struct_class = Types::ContentKeyPeriodConfiguration
 
     CreateChannelGroupRequest.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ChannelGroupName"))
     CreateChannelGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "header", location_name: "x-amzn-client-token", metadata: {"idempotencyToken" => true}))
@@ -585,6 +592,7 @@ module Aws::MediaPackageV2
     FilterConfiguration.add_member(:end, Shapes::ShapeRef.new(shape: Timestamp, location_name: "End"))
     FilterConfiguration.add_member(:time_delay_seconds, Shapes::ShapeRef.new(shape: FilterConfigurationTimeDelaySecondsInteger, location_name: "TimeDelaySeconds"))
     FilterConfiguration.add_member(:clip_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ClipStartTime"))
+    FilterConfiguration.add_member(:multiview, Shapes::ShapeRef.new(shape: MultiviewFilterConfiguration, location_name: "Multiview"))
     FilterConfiguration.struct_class = Types::FilterConfiguration
 
     ForceEndpointErrorConfiguration.add_member(:endpoint_error_conditions, Shapes::ShapeRef.new(shape: EndpointErrorConditions, location_name: "EndpointErrorConditions"))
@@ -888,6 +896,10 @@ module Aws::MediaPackageV2
     MultiviewConfiguration.add_member(:available_layouts, Shapes::ShapeRef.new(shape: MultiviewLayoutList, required: true, location_name: "AvailableLayouts"))
     MultiviewConfiguration.struct_class = Types::MultiviewConfiguration
 
+    MultiviewFilterConfiguration.add_member(:layout, Shapes::ShapeRef.new(shape: MultiviewLayoutType, required: true, location_name: "Layout"))
+    MultiviewFilterConfiguration.add_member(:sources, Shapes::ShapeRef.new(shape: MultiviewSourceList, required: true, location_name: "Sources"))
+    MultiviewFilterConfiguration.struct_class = Types::MultiviewFilterConfiguration
+
     MultiviewLayoutList.member = Shapes::ShapeRef.new(shape: MultiviewLayoutType)
 
     MultiviewSourceList.member = Shapes::ShapeRef.new(shape: ResourceName)
@@ -994,6 +1006,8 @@ module Aws::MediaPackageV2
     SpekeKeyProvider.add_member(:role_arn, Shapes::ShapeRef.new(shape: SpekeKeyProviderRoleArnString, required: true, location_name: "RoleArn"))
     SpekeKeyProvider.add_member(:url, Shapes::ShapeRef.new(shape: SpekeKeyProviderUrlString, required: true, location_name: "Url"))
     SpekeKeyProvider.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: SpekeKeyProviderCertificateArnString, location_name: "CertificateArn"))
+    SpekeKeyProvider.add_member(:speke_version, Shapes::ShapeRef.new(shape: SpekeVersion, location_name: "SpekeVersion"))
+    SpekeKeyProvider.add_member(:content_key_period_configuration, Shapes::ShapeRef.new(shape: ContentKeyPeriodConfiguration, location_name: "ContentKeyPeriodConfiguration"))
     SpekeKeyProvider.struct_class = Types::SpekeKeyProvider
 
     SpekeKeyProviderDrmSystemsList.member = Shapes::ShapeRef.new(shape: DrmSystem)

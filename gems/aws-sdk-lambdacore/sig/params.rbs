@@ -13,7 +13,7 @@ module Aws
         subnet_ids: Array[::String]?,
         security_group_ids: Array[::String]?,
         network_protocol: ("IPv4" | "DualStack")?,
-        associated_compute_resource_types: Array[("MicroVm")]?
+        associated_compute_resource_types: Array[("MicroVm" | "WebFunction")]?
       }?
     }
 

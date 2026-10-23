@@ -121,7 +121,8 @@ module Aws
       output_tags: Hash[::String, ::String]?,
       router_integration_state: ("ENABLED" | "DISABLED")?,
       router_integration_transit_encryption: Params::flow_transit_encryption?,
-      ndi_output_timecode_source: ("EMBEDDED_TIMECODE" | "UTC_SYSTEM_TIME")?
+      ndi_output_timecode_source: ("EMBEDDED_TIMECODE" | "UTC_SYSTEM_TIME")?,
+      ndi_audio_reference_level: ::Integer?
     }
 
       type media_stream_output_configuration_request = {
@@ -170,7 +171,8 @@ module Aws
         }?
       }?,
       ndi_source_settings: {
-        source_name: ::String?
+        source_name: ::String?,
+        audio_reference_level: ::Integer?
       }?,
       source_tags: Hash[::String, ::String]?,
       router_integration_state: ("ENABLED" | "DISABLED")?,
@@ -443,6 +445,20 @@ module Aws
       }?
     }
 
+      type rtmp_push_router_output_configuration = {
+      destination_address: ::String,
+      destination_port: ::Integer,
+      application_name: ::String,
+      stream_name: ::String,
+      tls_encryption: {
+        encryption_type: ("PUBLIC")?,
+        encryption_configuration: {
+          public: {
+          }?
+        }
+      }?
+    }
+
       type srt_caller_router_output_configuration = {
       destination_address: ::String,
       destination_port: ::Integer,
@@ -462,6 +478,7 @@ module Aws
         destination_port: ::Integer
       }?,
       srt_listener: Params::srt_listener_router_output_configuration?,
+      rtmp_push: Params::rtmp_push_router_output_configuration?,
       srt_caller: Params::srt_caller_router_output_configuration?,
       rtp: {
         destination_address: ::String,
@@ -473,7 +490,7 @@ module Aws
       type standard_router_output_configuration = {
       network_interface_arn: ::String,
       protocol_configuration: Params::router_output_protocol_configuration,
-      protocol: ("RTP" | "RIST" | "SRT_CALLER" | "SRT_LISTENER")?
+      protocol: ("RTP" | "RIST" | "SRT_CALLER" | "SRT_LISTENER" | "RTMP_PUSH")?
     }
 
       type media_connect_flow_router_output_configuration = {

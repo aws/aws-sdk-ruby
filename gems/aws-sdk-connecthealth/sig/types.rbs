@@ -321,7 +321,7 @@ module Aws::ConnectHealth
       attr_accessor session_id: ::String
       attr_accessor domain_id: ::String
       attr_accessor subscription_id: ::String
-      attr_accessor language_code: ("en-US")
+      attr_accessor language_code: ("en-US" | "multi")
       attr_accessor media_sample_rate_hertz: ::Integer
       attr_accessor media_encoding: ("pcm" | "flac")
       attr_accessor channel_definitions: ::Array[Types::MedicalScribeChannelDefinition]
@@ -437,7 +437,7 @@ module Aws::ConnectHealth
       attr_accessor session_id: ::String
       attr_accessor domain_id: ::String
       attr_accessor subscription_id: ::String
-      attr_accessor language_code: ("en-US")
+      attr_accessor language_code: ("en-US" | "multi")
       attr_accessor media_sample_rate_hertz: ::Integer
       attr_accessor media_encoding: ("pcm" | "flac")
       attr_accessor input_stream: Types::MedicalScribeInputStream
@@ -449,7 +449,7 @@ module Aws::ConnectHealth
       attr_accessor domain_id: ::String
       attr_accessor subscription_id: ::String
       attr_accessor request_id: ::String
-      attr_accessor language_code: ("en-US")
+      attr_accessor language_code: ("en-US" | "multi")
       attr_accessor media_sample_rate_hertz: ::Integer
       attr_accessor media_encoding: ("pcm" | "flac")
       attr_accessor response_stream: Types::MedicalScribeOutputStream

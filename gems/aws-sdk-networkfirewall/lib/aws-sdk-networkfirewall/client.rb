@@ -199,12 +199,19 @@ module Aws::NetworkFirewall
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -1324,6 +1331,21 @@ module Aws::NetworkFirewall
     #         },
     #       },
     #       enable_tls_session_holding: false,
+    #       route_53_resolved_ip_validation: {
+    #         action: "REJECT", # required, accepts REJECT, DROP, ALERT
+    #         dns_firewall_rule_group_id: "DNSFirewallRuleGroupId", # required
+    #         dns_expiry_exception_policy: "REJECT", # required, accepts REJECT, DROP, CONTINUE
+    #         bypass_destination_validation_ip_ranges: [
+    #           {
+    #             address_definition: "AddressDefinition", # required
+    #           },
+    #         ],
+    #         source_ip_ranges: [
+    #           {
+    #             address_definition: "AddressDefinition", # required
+    #           },
+    #         ],
+    #       },
     #     },
     #     description: "Description",
     #     tags: [
@@ -1346,7 +1368,8 @@ module Aws::NetworkFirewall
     #   resp.firewall_policy_response.firewall_policy_arn #=> String
     #   resp.firewall_policy_response.firewall_policy_id #=> String
     #   resp.firewall_policy_response.description #=> String
-    #   resp.firewall_policy_response.firewall_policy_status #=> String, one of "ACTIVE", "DELETING", "ERROR"
+    #   resp.firewall_policy_response.firewall_policy_status #=> String, one of "ACTIVE", "DELETING", "ERROR", "UPDATING"
+    #   resp.firewall_policy_response.status_message #=> String
     #   resp.firewall_policy_response.tags #=> Array
     #   resp.firewall_policy_response.tags[0].key #=> String
     #   resp.firewall_policy_response.tags[0].value #=> String
@@ -1356,6 +1379,10 @@ module Aws::NetworkFirewall
     #   resp.firewall_policy_response.number_of_associations #=> Integer
     #   resp.firewall_policy_response.encryption_configuration.key_id #=> String
     #   resp.firewall_policy_response.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
+    #   resp.firewall_policy_response.errors #=> Array
+    #   resp.firewall_policy_response.errors[0].code #=> String, one of "DNS_FIREWALL_RULE_GROUP_UNAVAILABLE", "ROUTE53_RESOLVED_IP_VALIDATION_MISSING"
+    #   resp.firewall_policy_response.errors[0].message #=> String
+    #   resp.firewall_policy_response.errors[0].resource_id #=> String
     #   resp.firewall_policy_response.last_modified_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateFirewallPolicy AWS API Documentation
@@ -1997,7 +2024,7 @@ module Aws::NetworkFirewall
     #         rules_string: "RulesString",
     #         rules_source_list: {
     #           targets: ["CollectionMember_String"], # required
-    #           target_types: ["TLS_SNI"], # required, accepts TLS_SNI, HTTP_HOST
+    #           target_types: ["TLS_SNI"], # required, accepts TLS_SNI, HTTP_HOST, AWS_ROUTE_53_RESOLVED_DOMAIN
     #           generated_rules_type: "ALLOWLIST", # required, accepts ALLOWLIST, DENYLIST, REJECTLIST, ALERTLIST
     #         },
     #         stateful_rules: [
@@ -2113,7 +2140,7 @@ module Aws::NetworkFirewall
     #   resp.rule_group_response.description #=> String
     #   resp.rule_group_response.type #=> String, one of "STATELESS", "STATEFUL", "STATEFUL_DOMAIN"
     #   resp.rule_group_response.capacity #=> Integer
-    #   resp.rule_group_response.rule_group_status #=> String, one of "ACTIVE", "DELETING", "ERROR"
+    #   resp.rule_group_response.rule_group_status #=> String, one of "ACTIVE", "DELETING", "ERROR", "UPDATING"
     #   resp.rule_group_response.tags #=> Array
     #   resp.rule_group_response.tags[0].key #=> String
     #   resp.rule_group_response.tags[0].value #=> String
@@ -2292,7 +2319,7 @@ module Aws::NetworkFirewall
     #   resp.tls_inspection_configuration_response.tls_inspection_configuration_arn #=> String
     #   resp.tls_inspection_configuration_response.tls_inspection_configuration_name #=> String
     #   resp.tls_inspection_configuration_response.tls_inspection_configuration_id #=> String
-    #   resp.tls_inspection_configuration_response.tls_inspection_configuration_status #=> String, one of "ACTIVE", "DELETING", "ERROR"
+    #   resp.tls_inspection_configuration_response.tls_inspection_configuration_status #=> String, one of "ACTIVE", "DELETING", "ERROR", "UPDATING"
     #   resp.tls_inspection_configuration_response.description #=> String
     #   resp.tls_inspection_configuration_response.tags #=> Array
     #   resp.tls_inspection_configuration_response.tags[0].key #=> String
@@ -2581,7 +2608,8 @@ module Aws::NetworkFirewall
     #   resp.firewall_policy_response.firewall_policy_arn #=> String
     #   resp.firewall_policy_response.firewall_policy_id #=> String
     #   resp.firewall_policy_response.description #=> String
-    #   resp.firewall_policy_response.firewall_policy_status #=> String, one of "ACTIVE", "DELETING", "ERROR"
+    #   resp.firewall_policy_response.firewall_policy_status #=> String, one of "ACTIVE", "DELETING", "ERROR", "UPDATING"
+    #   resp.firewall_policy_response.status_message #=> String
     #   resp.firewall_policy_response.tags #=> Array
     #   resp.firewall_policy_response.tags[0].key #=> String
     #   resp.firewall_policy_response.tags[0].value #=> String
@@ -2591,6 +2619,10 @@ module Aws::NetworkFirewall
     #   resp.firewall_policy_response.number_of_associations #=> Integer
     #   resp.firewall_policy_response.encryption_configuration.key_id #=> String
     #   resp.firewall_policy_response.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
+    #   resp.firewall_policy_response.errors #=> Array
+    #   resp.firewall_policy_response.errors[0].code #=> String, one of "DNS_FIREWALL_RULE_GROUP_UNAVAILABLE", "ROUTE53_RESOLVED_IP_VALIDATION_MISSING"
+    #   resp.firewall_policy_response.errors[0].message #=> String
+    #   resp.firewall_policy_response.errors[0].resource_id #=> String
     #   resp.firewall_policy_response.last_modified_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteFirewallPolicy AWS API Documentation
@@ -2909,7 +2941,7 @@ module Aws::NetworkFirewall
     #   resp.rule_group_response.description #=> String
     #   resp.rule_group_response.type #=> String, one of "STATELESS", "STATEFUL", "STATEFUL_DOMAIN"
     #   resp.rule_group_response.capacity #=> Integer
-    #   resp.rule_group_response.rule_group_status #=> String, one of "ACTIVE", "DELETING", "ERROR"
+    #   resp.rule_group_response.rule_group_status #=> String, one of "ACTIVE", "DELETING", "ERROR", "UPDATING"
     #   resp.rule_group_response.tags #=> Array
     #   resp.rule_group_response.tags[0].key #=> String
     #   resp.rule_group_response.tags[0].value #=> String
@@ -2967,7 +2999,7 @@ module Aws::NetworkFirewall
     #   resp.tls_inspection_configuration_response.tls_inspection_configuration_arn #=> String
     #   resp.tls_inspection_configuration_response.tls_inspection_configuration_name #=> String
     #   resp.tls_inspection_configuration_response.tls_inspection_configuration_id #=> String
-    #   resp.tls_inspection_configuration_response.tls_inspection_configuration_status #=> String, one of "ACTIVE", "DELETING", "ERROR"
+    #   resp.tls_inspection_configuration_response.tls_inspection_configuration_status #=> String, one of "ACTIVE", "DELETING", "ERROR", "UPDATING"
     #   resp.tls_inspection_configuration_response.description #=> String
     #   resp.tls_inspection_configuration_response.tags #=> Array
     #   resp.tls_inspection_configuration_response.tags[0].key #=> String
@@ -3279,7 +3311,8 @@ module Aws::NetworkFirewall
     #   resp.firewall_policy_response.firewall_policy_arn #=> String
     #   resp.firewall_policy_response.firewall_policy_id #=> String
     #   resp.firewall_policy_response.description #=> String
-    #   resp.firewall_policy_response.firewall_policy_status #=> String, one of "ACTIVE", "DELETING", "ERROR"
+    #   resp.firewall_policy_response.firewall_policy_status #=> String, one of "ACTIVE", "DELETING", "ERROR", "UPDATING"
+    #   resp.firewall_policy_response.status_message #=> String
     #   resp.firewall_policy_response.tags #=> Array
     #   resp.firewall_policy_response.tags[0].key #=> String
     #   resp.firewall_policy_response.tags[0].value #=> String
@@ -3289,6 +3322,10 @@ module Aws::NetworkFirewall
     #   resp.firewall_policy_response.number_of_associations #=> Integer
     #   resp.firewall_policy_response.encryption_configuration.key_id #=> String
     #   resp.firewall_policy_response.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
+    #   resp.firewall_policy_response.errors #=> Array
+    #   resp.firewall_policy_response.errors[0].code #=> String, one of "DNS_FIREWALL_RULE_GROUP_UNAVAILABLE", "ROUTE53_RESOLVED_IP_VALIDATION_MISSING"
+    #   resp.firewall_policy_response.errors[0].message #=> String
+    #   resp.firewall_policy_response.errors[0].resource_id #=> String
     #   resp.firewall_policy_response.last_modified_time #=> Time
     #   resp.firewall_policy.stateless_rule_group_references #=> Array
     #   resp.firewall_policy.stateless_rule_group_references[0].resource_arn #=> String
@@ -3316,6 +3353,18 @@ module Aws::NetworkFirewall
     #   resp.firewall_policy.policy_variables.rule_variables["RuleVariableName"].definition #=> Array
     #   resp.firewall_policy.policy_variables.rule_variables["RuleVariableName"].definition[0] #=> String
     #   resp.firewall_policy.enable_tls_session_holding #=> Boolean
+    #   resp.firewall_policy.route_53_resolved_ip_validation.action #=> String, one of "REJECT", "DROP", "ALERT"
+    #   resp.firewall_policy.route_53_resolved_ip_validation.dns_firewall_rule_group_id #=> String
+    #   resp.firewall_policy.route_53_resolved_ip_validation.dns_expiry_exception_policy #=> String, one of "REJECT", "DROP", "CONTINUE"
+    #   resp.firewall_policy.route_53_resolved_ip_validation.bypass_destination_validation_ip_ranges #=> Array
+    #   resp.firewall_policy.route_53_resolved_ip_validation.bypass_destination_validation_ip_ranges[0].address_definition #=> String
+    #   resp.firewall_policy.route_53_resolved_ip_validation.source_ip_ranges #=> Array
+    #   resp.firewall_policy.route_53_resolved_ip_validation.source_ip_ranges[0].address_definition #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * firewall_policy_active
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeFirewallPolicy AWS API Documentation
     #
@@ -3332,11 +3381,19 @@ module Aws::NetworkFirewall
     #   The Amazon Resource Name (ARN) of the firewall.
     #
     # @option params [String] :availability_zone
-    #   The ID of the Availability Zone where the firewall is located. For
+    #   The name of the Availability Zone where the firewall is located. For
     #   example, `us-east-2a`.
     #
     #   Defines the scope a flow operation. You can use up to 20 filters to
     #   configure a single flow operation.
+    #
+    # @option params [String] :availability_zone_id
+    #   The ID of the Availability Zone where the firewall is located. For
+    #   example, `use2-az1`. Availability Zone IDs are the same in every
+    #   Amazon Web Services account, so use this parameter when you coordinate
+    #   resources across accounts. Specify either `AvailabilityZone` or
+    #   `AvailabilityZoneId`, not both. If you specify both, the request
+    #   fails.
     #
     # @option params [String] :vpc_endpoint_association_arn
     #   The Amazon Resource Name (ARN) of a VPC endpoint association.
@@ -3354,6 +3411,7 @@ module Aws::NetworkFirewall
     #
     #   * {Types::DescribeFlowOperationResponse#firewall_arn #firewall_arn} => String
     #   * {Types::DescribeFlowOperationResponse#availability_zone #availability_zone} => String
+    #   * {Types::DescribeFlowOperationResponse#availability_zone_id #availability_zone_id} => String
     #   * {Types::DescribeFlowOperationResponse#vpc_endpoint_association_arn #vpc_endpoint_association_arn} => String
     #   * {Types::DescribeFlowOperationResponse#vpc_endpoint_id #vpc_endpoint_id} => String
     #   * {Types::DescribeFlowOperationResponse#flow_operation_id #flow_operation_id} => String
@@ -3368,6 +3426,7 @@ module Aws::NetworkFirewall
     #   resp = client.describe_flow_operation({
     #     firewall_arn: "ResourceArn", # required
     #     availability_zone: "AvailabilityZone",
+    #     availability_zone_id: "AvailabilityZoneId",
     #     vpc_endpoint_association_arn: "ResourceArn",
     #     vpc_endpoint_id: "VpcEndpointId",
     #     flow_operation_id: "FlowOperationId", # required
@@ -3377,6 +3436,7 @@ module Aws::NetworkFirewall
     #
     #   resp.firewall_arn #=> String
     #   resp.availability_zone #=> String
+    #   resp.availability_zone_id #=> String
     #   resp.vpc_endpoint_association_arn #=> String
     #   resp.vpc_endpoint_id #=> String
     #   resp.flow_operation_id #=> String
@@ -3774,7 +3834,7 @@ module Aws::NetworkFirewall
     #   resp.rule_group.rules_source.rules_source_list.targets #=> Array
     #   resp.rule_group.rules_source.rules_source_list.targets[0] #=> String
     #   resp.rule_group.rules_source.rules_source_list.target_types #=> Array
-    #   resp.rule_group.rules_source.rules_source_list.target_types[0] #=> String, one of "TLS_SNI", "HTTP_HOST"
+    #   resp.rule_group.rules_source.rules_source_list.target_types[0] #=> String, one of "TLS_SNI", "HTTP_HOST", "AWS_ROUTE_53_RESOLVED_DOMAIN"
     #   resp.rule_group.rules_source.rules_source_list.generated_rules_type #=> String, one of "ALLOWLIST", "DENYLIST", "REJECTLIST", "ALERTLIST"
     #   resp.rule_group.rules_source.stateful_rules #=> Array
     #   resp.rule_group.rules_source.stateful_rules[0].action #=> String, one of "PASS", "DROP", "ALERT", "REJECT"
@@ -3820,7 +3880,7 @@ module Aws::NetworkFirewall
     #   resp.rule_group_response.description #=> String
     #   resp.rule_group_response.type #=> String, one of "STATELESS", "STATEFUL", "STATEFUL_DOMAIN"
     #   resp.rule_group_response.capacity #=> Integer
-    #   resp.rule_group_response.rule_group_status #=> String, one of "ACTIVE", "DELETING", "ERROR"
+    #   resp.rule_group_response.rule_group_status #=> String, one of "ACTIVE", "DELETING", "ERROR", "UPDATING"
     #   resp.rule_group_response.tags #=> Array
     #   resp.rule_group_response.tags[0].key #=> String
     #   resp.rule_group_response.tags[0].value #=> String
@@ -4034,7 +4094,7 @@ module Aws::NetworkFirewall
     #   resp.tls_inspection_configuration_response.tls_inspection_configuration_arn #=> String
     #   resp.tls_inspection_configuration_response.tls_inspection_configuration_name #=> String
     #   resp.tls_inspection_configuration_response.tls_inspection_configuration_id #=> String
-    #   resp.tls_inspection_configuration_response.tls_inspection_configuration_status #=> String, one of "ACTIVE", "DELETING", "ERROR"
+    #   resp.tls_inspection_configuration_response.tls_inspection_configuration_status #=> String, one of "ACTIVE", "DELETING", "ERROR", "UPDATING"
     #   resp.tls_inspection_configuration_response.description #=> String
     #   resp.tls_inspection_configuration_response.tags #=> Array
     #   resp.tls_inspection_configuration_response.tags[0].key #=> String
@@ -4668,11 +4728,19 @@ module Aws::NetworkFirewall
     #   subsequent call to get the next batch of objects.
     #
     # @option params [String] :availability_zone
-    #   The ID of the Availability Zone where the firewall is located. For
+    #   The name of the Availability Zone where the firewall is located. For
     #   example, `us-east-2a`.
     #
     #   Defines the scope a flow operation. You can use up to 20 filters to
     #   configure a single flow operation.
+    #
+    # @option params [String] :availability_zone_id
+    #   The ID of the Availability Zone where the firewall is located. For
+    #   example, `use2-az1`. Availability Zone IDs are the same in every
+    #   Amazon Web Services account, so use this parameter when you coordinate
+    #   resources across accounts. Specify either `AvailabilityZone` or
+    #   `AvailabilityZoneId`, not both. If you specify both, the request
+    #   fails.
     #
     # @option params [String] :vpc_endpoint_id
     #   A unique identifier for the primary endpoint associated with a
@@ -4685,6 +4753,7 @@ module Aws::NetworkFirewall
     #
     #   * {Types::ListFlowOperationResultsResponse#firewall_arn #firewall_arn} => String
     #   * {Types::ListFlowOperationResultsResponse#availability_zone #availability_zone} => String
+    #   * {Types::ListFlowOperationResultsResponse#availability_zone_id #availability_zone_id} => String
     #   * {Types::ListFlowOperationResultsResponse#vpc_endpoint_association_arn #vpc_endpoint_association_arn} => String
     #   * {Types::ListFlowOperationResultsResponse#vpc_endpoint_id #vpc_endpoint_id} => String
     #   * {Types::ListFlowOperationResultsResponse#flow_operation_id #flow_operation_id} => String
@@ -4704,6 +4773,7 @@ module Aws::NetworkFirewall
     #     next_token: "PaginationToken",
     #     max_results: 1,
     #     availability_zone: "AvailabilityZone",
+    #     availability_zone_id: "AvailabilityZoneId",
     #     vpc_endpoint_id: "VpcEndpointId",
     #     vpc_endpoint_association_arn: "ResourceArn",
     #   })
@@ -4712,6 +4782,7 @@ module Aws::NetworkFirewall
     #
     #   resp.firewall_arn #=> String
     #   resp.availability_zone #=> String
+    #   resp.availability_zone_id #=> String
     #   resp.vpc_endpoint_association_arn #=> String
     #   resp.vpc_endpoint_id #=> String
     #   resp.flow_operation_id #=> String
@@ -4755,11 +4826,19 @@ module Aws::NetworkFirewall
     #   The Amazon Resource Name (ARN) of the firewall.
     #
     # @option params [String] :availability_zone
-    #   The ID of the Availability Zone where the firewall is located. For
+    #   The name of the Availability Zone where the firewall is located. For
     #   example, `us-east-2a`.
     #
     #   Defines the scope a flow operation. You can use up to 20 filters to
     #   configure a single flow operation.
+    #
+    # @option params [String] :availability_zone_id
+    #   The ID of the Availability Zone where the firewall is located. For
+    #   example, `use2-az1`. Availability Zone IDs are the same in every
+    #   Amazon Web Services account, so use this parameter when you coordinate
+    #   resources across accounts. Specify either `AvailabilityZone` or
+    #   `AvailabilityZoneId`, not both. If you specify both, the request
+    #   fails.
     #
     # @option params [String] :vpc_endpoint_association_arn
     #   The Amazon Resource Name (ARN) of a VPC endpoint association.
@@ -4797,6 +4876,7 @@ module Aws::NetworkFirewall
     #   resp = client.list_flow_operations({
     #     firewall_arn: "ResourceArn", # required
     #     availability_zone: "AvailabilityZone",
+    #     availability_zone_id: "AvailabilityZoneId",
     #     vpc_endpoint_association_arn: "ResourceArn",
     #     vpc_endpoint_id: "VpcEndpointId",
     #     flow_operation_type: "FLOW_FLUSH", # accepts FLOW_FLUSH, FLOW_CAPTURE
@@ -5402,11 +5482,19 @@ module Aws::NetworkFirewall
     #   The Amazon Resource Name (ARN) of the firewall.
     #
     # @option params [String] :availability_zone
-    #   The ID of the Availability Zone where the firewall is located. For
+    #   The name of the Availability Zone where the firewall is located. For
     #   example, `us-east-2a`.
     #
     #   Defines the scope a flow operation. You can use up to 20 filters to
     #   configure a single flow operation.
+    #
+    # @option params [String] :availability_zone_id
+    #   The ID of the Availability Zone where the firewall is located. For
+    #   example, `use2-az1`. Availability Zone IDs are the same in every
+    #   Amazon Web Services account, so use this parameter when you coordinate
+    #   resources across accounts. Specify either `AvailabilityZone` or
+    #   `AvailabilityZoneId`, not both. If you specify both, the request
+    #   fails.
     #
     # @option params [String] :vpc_endpoint_association_arn
     #   The Amazon Resource Name (ARN) of a VPC endpoint association.
@@ -5440,6 +5528,7 @@ module Aws::NetworkFirewall
     #   resp = client.start_flow_capture({
     #     firewall_arn: "ResourceArn", # required
     #     availability_zone: "AvailabilityZone",
+    #     availability_zone_id: "AvailabilityZoneId",
     #     vpc_endpoint_association_arn: "ResourceArn",
     #     vpc_endpoint_id: "VpcEndpointId",
     #     minimum_flow_age_in_seconds: 1,
@@ -5487,11 +5576,19 @@ module Aws::NetworkFirewall
     #   The Amazon Resource Name (ARN) of the firewall.
     #
     # @option params [String] :availability_zone
-    #   The ID of the Availability Zone where the firewall is located. For
+    #   The name of the Availability Zone where the firewall is located. For
     #   example, `us-east-2a`.
     #
     #   Defines the scope a flow operation. You can use up to 20 filters to
     #   configure a single flow operation.
+    #
+    # @option params [String] :availability_zone_id
+    #   The ID of the Availability Zone where the firewall is located. For
+    #   example, `use2-az1`. Availability Zone IDs are the same in every
+    #   Amazon Web Services account, so use this parameter when you coordinate
+    #   resources across accounts. Specify either `AvailabilityZone` or
+    #   `AvailabilityZoneId`, not both. If you specify both, the request
+    #   fails.
     #
     # @option params [String] :vpc_endpoint_association_arn
     #   The Amazon Resource Name (ARN) of a VPC endpoint association.
@@ -5520,6 +5617,7 @@ module Aws::NetworkFirewall
     #   resp = client.start_flow_flush({
     #     firewall_arn: "ResourceArn", # required
     #     availability_zone: "AvailabilityZone",
+    #     availability_zone_id: "AvailabilityZoneId",
     #     vpc_endpoint_association_arn: "ResourceArn",
     #     vpc_endpoint_id: "VpcEndpointId",
     #     minimum_flow_age_in_seconds: 1,
@@ -6226,6 +6324,21 @@ module Aws::NetworkFirewall
     #         },
     #       },
     #       enable_tls_session_holding: false,
+    #       route_53_resolved_ip_validation: {
+    #         action: "REJECT", # required, accepts REJECT, DROP, ALERT
+    #         dns_firewall_rule_group_id: "DNSFirewallRuleGroupId", # required
+    #         dns_expiry_exception_policy: "REJECT", # required, accepts REJECT, DROP, CONTINUE
+    #         bypass_destination_validation_ip_ranges: [
+    #           {
+    #             address_definition: "AddressDefinition", # required
+    #           },
+    #         ],
+    #         source_ip_ranges: [
+    #           {
+    #             address_definition: "AddressDefinition", # required
+    #           },
+    #         ],
+    #       },
     #     },
     #     description: "Description",
     #     dry_run: false,
@@ -6242,7 +6355,8 @@ module Aws::NetworkFirewall
     #   resp.firewall_policy_response.firewall_policy_arn #=> String
     #   resp.firewall_policy_response.firewall_policy_id #=> String
     #   resp.firewall_policy_response.description #=> String
-    #   resp.firewall_policy_response.firewall_policy_status #=> String, one of "ACTIVE", "DELETING", "ERROR"
+    #   resp.firewall_policy_response.firewall_policy_status #=> String, one of "ACTIVE", "DELETING", "ERROR", "UPDATING"
+    #   resp.firewall_policy_response.status_message #=> String
     #   resp.firewall_policy_response.tags #=> Array
     #   resp.firewall_policy_response.tags[0].key #=> String
     #   resp.firewall_policy_response.tags[0].value #=> String
@@ -6252,6 +6366,10 @@ module Aws::NetworkFirewall
     #   resp.firewall_policy_response.number_of_associations #=> Integer
     #   resp.firewall_policy_response.encryption_configuration.key_id #=> String
     #   resp.firewall_policy_response.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
+    #   resp.firewall_policy_response.errors #=> Array
+    #   resp.firewall_policy_response.errors[0].code #=> String, one of "DNS_FIREWALL_RULE_GROUP_UNAVAILABLE", "ROUTE53_RESOLVED_IP_VALIDATION_MISSING"
+    #   resp.firewall_policy_response.errors[0].message #=> String
+    #   resp.firewall_policy_response.errors[0].resource_id #=> String
     #   resp.firewall_policy_response.last_modified_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateFirewallPolicy AWS API Documentation
@@ -7080,7 +7198,7 @@ module Aws::NetworkFirewall
     #         rules_string: "RulesString",
     #         rules_source_list: {
     #           targets: ["CollectionMember_String"], # required
-    #           target_types: ["TLS_SNI"], # required, accepts TLS_SNI, HTTP_HOST
+    #           target_types: ["TLS_SNI"], # required, accepts TLS_SNI, HTTP_HOST, AWS_ROUTE_53_RESOLVED_DOMAIN
     #           generated_rules_type: "ALLOWLIST", # required, accepts ALLOWLIST, DENYLIST, REJECTLIST, ALERTLIST
     #         },
     #         stateful_rules: [
@@ -7189,7 +7307,7 @@ module Aws::NetworkFirewall
     #   resp.rule_group_response.description #=> String
     #   resp.rule_group_response.type #=> String, one of "STATELESS", "STATEFUL", "STATEFUL_DOMAIN"
     #   resp.rule_group_response.capacity #=> Integer
-    #   resp.rule_group_response.rule_group_status #=> String, one of "ACTIVE", "DELETING", "ERROR"
+    #   resp.rule_group_response.rule_group_status #=> String, one of "ACTIVE", "DELETING", "ERROR", "UPDATING"
     #   resp.rule_group_response.tags #=> Array
     #   resp.rule_group_response.tags[0].key #=> String
     #   resp.rule_group_response.tags[0].value #=> String
@@ -7418,7 +7536,7 @@ module Aws::NetworkFirewall
     #   resp.tls_inspection_configuration_response.tls_inspection_configuration_arn #=> String
     #   resp.tls_inspection_configuration_response.tls_inspection_configuration_name #=> String
     #   resp.tls_inspection_configuration_response.tls_inspection_configuration_id #=> String
-    #   resp.tls_inspection_configuration_response.tls_inspection_configuration_status #=> String, one of "ACTIVE", "DELETING", "ERROR"
+    #   resp.tls_inspection_configuration_response.tls_inspection_configuration_status #=> String, one of "ACTIVE", "DELETING", "ERROR", "UPDATING"
     #   resp.tls_inspection_configuration_response.description #=> String
     #   resp.tls_inspection_configuration_response.tags #=> Array
     #   resp.tls_inspection_configuration_response.tags[0].key #=> String
@@ -7464,14 +7582,127 @@ module Aws::NetworkFirewall
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-networkfirewall'
-      context[:gem_version] = '1.99.0'
+      context[:gem_version] = '1.102.0'
       Seahorse::Client::Request.new(handlers, context)
+    end
+
+    # Polls an API operation until a resource enters a desired state.
+    #
+    # ## Basic Usage
+    #
+    # A waiter will call an API operation until:
+    #
+    # * It is successful
+    # * It enters a terminal state
+    # * It makes the maximum number of attempts
+    #
+    # In between attempts, the waiter will sleep.
+    #
+    #     # polls in a loop, sleeping between attempts
+    #     client.wait_until(waiter_name, params)
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. You can pass
+    # configuration as the final arguments hash.
+    #
+    #     # poll for ~25 seconds
+    #     client.wait_until(waiter_name, params, {
+    #       max_attempts: 5,
+    #       delay: 5,
+    #     })
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     client.wait_until(waiter_name, params, {
+    #
+    #       # disable max attempts
+    #       max_attempts: nil,
+    #
+    #       # poll for 1 hour, instead of a number of attempts
+    #       before_wait: -> (attempts, response) do
+    #         throw :failure if Time.now - started_at > 3600
+    #       end
+    #     })
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is unsuccessful, it will raise an error.
+    # All of the failure errors extend from
+    # {Aws::Waiters::Errors::WaiterFailed}.
+    #
+    #     begin
+    #       client.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    # ## Valid Waiters
+    #
+    # The following table lists the valid waiter names, the operations they call,
+    # and the default `:delay` and `:max_attempts` values.
+    #
+    # | waiter_name            | params                            | :delay   | :max_attempts |
+    # | ---------------------- | --------------------------------- | -------- | ------------- |
+    # | firewall_policy_active | {Client#describe_firewall_policy} | 15       | 40            |
+    #
+    # @raise [Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    # @raise [Errors::TooManyAttemptsError] Raised when the configured
+    #   maximum number of attempts have been made, and the waiter is not
+    #   yet successful.
+    #
+    # @raise [Errors::UnexpectedError] Raised when an error is encounted
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [Errors::NoSuchWaiterError] Raised when you request to wait
+    #   for an unknown state.
+    #
+    # @return [Boolean] Returns `true` if the waiter was successful.
+    # @param [Symbol] waiter_name
+    # @param [Hash] params ({})
+    # @param [Hash] options ({})
+    # @option options [Integer] :max_attempts
+    # @option options [Integer] :delay
+    # @option options [Proc] :before_attempt
+    # @option options [Proc] :before_wait
+    def wait_until(waiter_name, params = {}, options = {})
+      w = waiter(waiter_name, options)
+      yield(w.waiter) if block_given? # deprecated
+      w.wait(params)
     end
 
     # @api private
     # @deprecated
     def waiter_names
-      []
+      waiters.keys
+    end
+
+    private
+
+    # @param [Symbol] waiter_name
+    # @param [Hash] options ({})
+    def waiter(waiter_name, options = {})
+      waiter_class = waiters[waiter_name]
+      if waiter_class
+        waiter_class.new(options.merge(client: self))
+      else
+        raise Aws::Waiters::Errors::NoSuchWaiterError.new(waiter_name, waiters.keys)
+      end
+    end
+
+    def waiters
+      {
+        firewall_policy_active: Waiters::FirewallPolicyActive
+      }
     end
 
     class << self

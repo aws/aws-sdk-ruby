@@ -1577,13 +1577,19 @@ module Aws::Budgets
     #   The filter that's based on CostCategoryValues.
     #   @return [Types::CostCategoryValues]
     #
+    # @!attribute [rw] product_attributes
+    #   The filter that limits results based on the values of specific
+    #   product attributes.
+    #   @return [Types::ProductAttributeValues]
+    #
     class Expression < Struct.new(
       :or,
       :and,
       :not,
       :dimensions,
       :tags,
-      :cost_categories)
+      :cost_categories,
+      :product_attributes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1865,6 +1871,59 @@ module Aws::Budgets
     class NotificationWithSubscribers < Struct.new(
       :notification,
       :subscribers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The product attribute values used for filtering the costs by key and
+    # value pairs. Product attributes are supported for Amazon Bedrock only.
+    #
+    # @!attribute [rw] key
+    #   The name of the product attribute to filter on. Valid values are the
+    #   following:
+    #
+    #   * `feature` – The feature that was used, such as `On-demand
+    #     Inference`.
+    #
+    #   * `inferenceType` – The type of inference usage, such as `Input
+    #     tokens` or `Output tokens`.
+    #
+    #   * `model` – The model, such as `Claude Sonnet 5` or `Claude Haiku
+    #     4.5`.
+    #
+    #   * `provider` – The model provider, such as `Anthropic`, `Cohere`, or
+    #     `Amazon`.
+    #
+    #   Keys are case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The specific values of the product attribute, such as `Claude Sonnet
+    #   5` for the `model` key. Values are matched exactly.
+    #
+    #   `Values` is required unless `MatchOptions` is `ABSENT`. To match
+    #   costs that have no value for the key, set `MatchOptions` to `ABSENT`
+    #   and omit `Values`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] match_options
+    #   The match options for the `ProductAttributes` filter. Valid values:
+    #
+    #   * `ABSENT` – Matches costs that have no value for the attribute.
+    #
+    #   * `CASE_SENSITIVE` – Requires an exact case match.
+    #
+    #   * `EQUALS` – Matches costs where the attribute equals the specified
+    #     value.
+    #
+    #   Specify either `EQUALS` or `ABSENT`. You can add `CASE_SENSITIVE` to
+    #   `EQUALS`, but you can't use it by itself or with `ABSENT`.
+    #   @return [Array<String>]
+    #
+    class ProductAttributeValues < Struct.new(
+      :key,
+      :values,
+      :match_options)
       SENSITIVE = []
       include Aws::Structure
     end

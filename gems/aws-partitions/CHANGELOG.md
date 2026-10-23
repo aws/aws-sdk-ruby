@@ -1,6 +1,63 @@
 Unreleased Changes
 ------------------
 
+1.1298.0 (2026-10-22)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Continuum`.
+
+1.1297.0 (2026-10-21)
+------------------
+
+* Feature - Updated the partitions source data that determines the AWS service regions and endpoints.
+
+1.1296.0 (2026-10-14)
+------------------
+
+* Feature - Updated the partitions source data that determines the AWS service regions and endpoints.
+
+1.1295.0 (2026-10-13)
+------------------
+
+* Feature - Updated the partitions source data that determines the AWS service regions and endpoints.
+
+1.1294.0 (2026-10-12)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::SageMakerTrainingSessionRuntime`.
+
+1.1293.0 (2026-10-06)
+------------------
+
+* Feature - Updated the partitions source data that determines the AWS service regions and endpoints.
+
+1.1292.0 (2026-10-01)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::LambdaWeb`.
+
+* Feature - Added support for enumerating regions for `Aws::EndUserMessaging`.
+
+1.1291.0 (2026-09-30)
+------------------
+
+* Feature - Updated the partitions source data that determines the AWS service regions and endpoints.
+
+1.1290.0 (2026-09-24)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::EventBridgeV2`.
+
+1.1289.0 (2026-09-23)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::NetworkSecurityManager`.
+
+1.1288.0 (2026-09-22)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::CloudWatchOmni`.
+
 1.1287.0 (2026-09-14)
 ------------------
 

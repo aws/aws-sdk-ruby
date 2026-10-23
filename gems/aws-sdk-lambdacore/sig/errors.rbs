@@ -11,27 +11,27 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class InvalidParameterValueException < ::Aws::Errors::ServiceError
+      class InvalidParameterValueException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class NetworkConnectorLimitExceededException < ::Aws::Errors::ServiceError
+      class NetworkConnectorLimitExceededException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class ResourceConflictException < ::Aws::Errors::ServiceError
+      class ResourceConflictException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class ServiceException < ::Aws::Errors::ServiceError
+      class ServiceException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class TooManyRequestsException < ::Aws::Errors::ServiceError
+      class TooManyRequestsException < ServiceError
         def retry_after_seconds: () -> ::String
         def type: () -> ::String
         def message: () -> ::String

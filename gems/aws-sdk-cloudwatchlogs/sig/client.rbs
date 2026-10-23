@@ -27,6 +27,7 @@ module Aws
                       ?convert_params: bool,
                       ?correct_clock_skew: bool,
                       ?defaults_mode: String,
+                      ?disable_clock_skew_correction: bool,
                       ?disable_host_prefix_injection: bool,
                       ?disable_request_compression: bool,
                       ?endpoint: String,
@@ -434,7 +435,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#describe_deliveries-instance_method
       def describe_deliveries: (
                                  ?next_token: ::String,
-                                 ?limit: ::Integer
+                                 ?limit: ::Integer,
+                                 ?delivery_source_names: Array[::String]
                                ) -> _DescribeDeliveriesResponseSuccess
                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDeliveriesResponseSuccess
 
@@ -446,7 +448,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#describe_delivery_destinations-instance_method
       def describe_delivery_destinations: (
                                             ?next_token: ::String,
-                                            ?limit: ::Integer
+                                            ?limit: ::Integer,
+                                            ?names: Array[::String]
                                           ) -> _DescribeDeliveryDestinationsResponseSuccess
                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDeliveryDestinationsResponseSuccess
 
@@ -458,7 +461,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#describe_delivery_sources-instance_method
       def describe_delivery_sources: (
                                        ?next_token: ::String,
-                                       ?limit: ::Integer
+                                       ?limit: ::Integer,
+                                       ?resource_arns: Array[::String]
                                      ) -> _DescribeDeliverySourcesResponseSuccess
                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDeliverySourcesResponseSuccess
 
@@ -1168,6 +1172,7 @@ module Aws
                                         destination_resource_arn: ::String
                                       },
                                       ?delivery_destination_type: ("S3" | "CWL" | "FH" | "XRAY"),
+                                      ?role_arn: ::String,
                                       ?tags: Hash[::String, ::String]
                                     ) -> _PutDeliveryDestinationResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDeliveryDestinationResponseSuccess

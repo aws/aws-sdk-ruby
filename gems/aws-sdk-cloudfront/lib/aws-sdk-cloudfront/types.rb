@@ -11532,6 +11532,15 @@ module Aws::CloudFront
     #     [cache policy][2] for all cache behaviors that use origins
     #     associated with this origin access control.**
     #
+    #   * `always-amz-auth` – CloudFront signs all origin requests with
+    #     Amazon authentication headers. If the viewer request contains the
+    #     `Authorization` header, then CloudFront also forwards that header
+    #     to the origin. This value is only valid with Lambda-Web origins.
+    #     **WARNING: To forward the `Authorization` header from the viewer
+    #     request, you *must* add the `Authorization` header to a [cache
+    #     policy][2] for all cache behaviors that use origins associated
+    #     with this origin access control.**
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html#oac-advanced-settings
@@ -11645,6 +11654,11 @@ module Aws::CloudFront
     #     the viewer request contains the `Authorization` header, CloudFront
     #     doesn't sign the origin request, but instead passes along the
     #     `Authorization` header that it received in the viewer request.
+    #
+    #   * `always-amz-auth` – CloudFront signs all origin requests with
+    #     Amazon authentication headers, and forwards the viewer's
+    #     `Authorization` header to the origin if one is present. This value
+    #     is only valid with Lambda-Web origins.
     #   @return [String]
     #
     # @!attribute [rw] origin_access_control_origin_type
@@ -17429,6 +17443,12 @@ module Aws::CloudFront
     #   your origin.
     #   @return [Types::OriginSslProtocols]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type of the CloudFront VPC origin endpoint
+    #   configuration. Valid values are `ipv4` and `dualstack`. IPv6-only is
+    #   not supported for VPC origins.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/VpcOriginEndpointConfig AWS API Documentation
     #
     class VpcOriginEndpointConfig < Struct.new(
@@ -17437,7 +17457,8 @@ module Aws::CloudFront
       :http_port,
       :https_port,
       :origin_protocol_policy,
-      :origin_ssl_protocols)
+      :origin_ssl_protocols,
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17519,6 +17540,11 @@ module Aws::CloudFront
     #   The VPC origin summary origin endpoint ARN.
     #   @return [String]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type of the CloudFront VPC origin. Valid values are
+    #   `ipv4` and `dualstack`. IPv6-only is not supported for VPC origins.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/VpcOriginSummary AWS API Documentation
     #
     class VpcOriginSummary < Struct.new(
@@ -17529,7 +17555,8 @@ module Aws::CloudFront
       :last_modified_time,
       :arn,
       :account_id,
-      :origin_endpoint_arn)
+      :origin_endpoint_arn,
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1558,6 +1558,16 @@ module Aws::OpenSearchService
     #   The IAM principal who initiated the configuration change.
     #   @return [String]
     #
+    # @!attribute [rw] validation_failures
+    #   The validation failures that occurred as a result of the
+    #   configuration change.
+    #   @return [Array<Types::ValidationFailure>]
+    #
+    # @!attribute [rw] accepted_warnings
+    #   The list of advisory warning codes that were accepted for the
+    #   configuration change.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ChangeProgressStatusDetails AWS API Documentation
     #
     class ChangeProgressStatusDetails < Struct.new(
@@ -1570,7 +1580,9 @@ module Aws::OpenSearchService
       :change_progress_stages,
       :last_updated_time,
       :config_change_status,
-      :initiated_by)
+      :initiated_by,
+      :validation_failures,
+      :accepted_warnings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4078,6 +4090,10 @@ module Aws::OpenSearchService
     #
     #   * **Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08:** TLS security policy
     #     that supports TLS version 1.3 with FIPS
+    #
+    #   * **Policy-Min-TLS-1-2-FIPS-PQ-2026-10:** TLS security policy that
+    #     supports TLS version 1.2 to TLS version 1.3 with FIPS and
+    #     post-quantum cipher suites
     #   @return [String]
     #
     # @!attribute [rw] custom_endpoint_enabled
@@ -4587,8 +4603,13 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] validation_failures
-    #   Any validation failures that occurred as a result of the dry run.
+    #   The validation failures that occurred as a result of the dry run.
     #   @return [Array<Types::ValidationFailure>]
+    #
+    # @!attribute [rw] accepted_warnings
+    #   The list of advisory warning codes that were accepted for the
+    #   configuration change.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DryRunProgressStatus AWS API Documentation
     #
@@ -4597,7 +4618,8 @@ module Aws::OpenSearchService
       :dry_run_status,
       :creation_date,
       :update_date,
-      :validation_failures)
+      :validation_failures,
+      :accepted_warnings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4730,11 +4752,21 @@ module Aws::OpenSearchService
     #   `1a2a3a4-1a2a-3a4a-5a6a-1a2a3a4a5a6a`.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_mode
+    #   The type of encryption at rest applied to the domain's data. Valid
+    #   values are `DISK` and `NATIVE`. `DISK` is the default and uses
+    #   volume-level encryption. `NATIVE` uses engine-native, index-level
+    #   encryption and requires encryption at rest to be enabled and
+    #   OpenSearch version 3.3 or later. After the mode is set to `NATIVE`,
+    #   it can't be changed back to `DISK`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/EncryptionAtRestOptions AWS API Documentation
     #
     class EncryptionAtRestOptions < Struct.new(
       :enabled,
-      :kms_key_id)
+      :kms_key_id,
+      :encryption_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9460,6 +9492,22 @@ module Aws::OpenSearchService
     #   after the domain is created. For valid values, see `EngineMode`.
     #   @return [String]
     #
+    # @!attribute [rw] accepted_warnings
+    #   A list of advisory warning codes to accept for this configuration
+    #   change. By default, any advisory warning blocks the change. Include
+    #   the code of each warning you want to accept so the change can
+    #   proceed. You can find warning codes in the `ValidationFailures` list
+    #   returned by `DescribeDomainChangeProgress` and
+    #   `DescribeDryRunProgress`. Critical validation failures cannot be
+    #   accepted and always block the change. If you omit this parameter or
+    #   pass an empty list, all warnings block the change. For more
+    #   information, see [Validating a domain update][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-configuration-changes#validation-check
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateDomainConfigRequest AWS API Documentation
     #
     class UpdateDomainConfigRequest < Struct.new(
@@ -9487,7 +9535,8 @@ module Aws::OpenSearchService
       :deployment_strategy_options,
       :automated_snapshot_pause_options,
       :use_case,
-      :engine_mode)
+      :engine_mode,
+      :accepted_warnings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10057,11 +10106,16 @@ module Aws::OpenSearchService
     #   A message corresponding to the failure.
     #   @return [String]
     #
+    # @!attribute [rw] severity
+    #   The severity of the validation failure.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ValidationFailure AWS API Documentation
     #
     class ValidationFailure < Struct.new(
       :code,
-      :message)
+      :message,
+      :severity)
       SENSITIVE = []
       include Aws::Structure
     end

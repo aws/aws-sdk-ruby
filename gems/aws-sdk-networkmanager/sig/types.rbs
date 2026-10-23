@@ -99,6 +99,8 @@ module Aws::NetworkManager
       attr_accessor attachment_policy_rule_number: ::Integer
       attr_accessor segment_name: ::String
       attr_accessor network_function_group_name: ::String
+      attr_accessor nat_gateway_support: ("ENABLED" | "ENABLING" | "DISABLED" | "DISABLING" | "PENDING_ATTACHMENT_ACCEPTANCE")
+      attr_accessor nat_system_route_support: bool
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor proposed_segment_change: Types::ProposedSegmentChange
       attr_accessor proposed_network_function_group_change: Types::ProposedNetworkFunctionGroupChange
@@ -109,10 +111,18 @@ module Aws::NetworkManager
     end
 
     class AttachmentError
-      attr_accessor code: ("VPC_NOT_FOUND" | "SUBNET_NOT_FOUND" | "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE" | "SUBNET_NO_FREE_ADDRESSES" | "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE" | "SUBNET_NO_IPV6_CIDRS" | "VPN_CONNECTION_NOT_FOUND" | "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED" | "DIRECT_CONNECT_GATEWAY_NOT_FOUND" | "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS" | "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF" | "VPN_EXISTING_ASSOCIATIONS" | "VPC_UNSUPPORTED_FEATURES")
+      attr_accessor code: ("VPC_NOT_FOUND" | "SUBNET_NOT_FOUND" | "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE" | "SUBNET_NO_FREE_ADDRESSES" | "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE" | "SUBNET_NO_IPV6_CIDRS" | "SECURITY_GROUP_REFERENCING_UNSUPPORTED_AVAILABILITY_ZONE" | "VPN_CONNECTION_NOT_FOUND" | "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED" | "DIRECT_CONNECT_GATEWAY_NOT_FOUND" | "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS" | "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF" | "VPN_EXISTING_ASSOCIATIONS" | "VPN_STATIC_ROUTES_NAT_UNSUPPORTED" | "VPC_UNSUPPORTED_FEATURES" | "DIRECT_CONNECT_GATEWAY_TOPOLOGY_RESTRICTIONS" | "CREATION_FAILED" | "UPDATE_FAILED" | "DELETION_FAILED")
       attr_accessor message: ::String
       attr_accessor resource_arn: ::String
       attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class AttachmentNatConfiguration
+      attr_accessor attachment_id: ::String
+      attr_accessor nat_gateway_support: ("ENABLED" | "ENABLING" | "DISABLED" | "DISABLING" | "PENDING_ATTACHMENT_ACCEPTANCE")
+      attr_accessor nat_system_route_support: bool
+      attr_accessor nat_gateway_rules: ::Array[Types::NatRule]
       SENSITIVE: []
     end
 
@@ -195,7 +205,7 @@ module Aws::NetworkManager
     end
 
     class ConnectPeerError
-      attr_accessor code: ("EDGE_LOCATION_NO_FREE_IPS" | "EDGE_LOCATION_PEER_DUPLICATE" | "SUBNET_NOT_FOUND" | "IP_OUTSIDE_SUBNET_CIDR_RANGE" | "INVALID_INSIDE_CIDR_BLOCK" | "NO_ASSOCIATED_CIDR_BLOCK")
+      attr_accessor code: ("EDGE_LOCATION_NO_FREE_IPS" | "EDGE_LOCATION_PEER_DUPLICATE" | "SUBNET_NOT_FOUND" | "IP_OUTSIDE_SUBNET_CIDR_RANGE" | "INVALID_INSIDE_CIDR_BLOCK" | "NO_ASSOCIATED_CIDR_BLOCK" | "CREATION_FAILED" | "DELETION_FAILED")
       attr_accessor message: ::String
       attr_accessor resource_arn: ::String
       attr_accessor request_id: ::String
@@ -399,6 +409,8 @@ module Aws::NetworkManager
       attr_accessor edge_location: ::String
       attr_accessor transport_attachment_id: ::String
       attr_accessor routing_policy_label: ::String
+      attr_accessor nat_gateway_support: ("ENABLE" | "DISABLE")
+      attr_accessor nat_gateway_rules: ::Array[Types::NatRuleRequest]
       attr_accessor options: Types::ConnectAttachmentOptions
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor client_token: ::String
@@ -496,6 +508,9 @@ module Aws::NetworkManager
       attr_accessor direct_connect_gateway_arn: ::String
       attr_accessor routing_policy_label: ::String
       attr_accessor edge_locations: ::Array[::String]
+      attr_accessor nat_gateway_support: ("ENABLE" | "DISABLE")
+      attr_accessor nat_system_route_support: bool
+      attr_accessor nat_gateway_rules: ::Array[Types::NatRuleRequest]
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor client_token: ::String
       SENSITIVE: []
@@ -550,6 +565,9 @@ module Aws::NetworkManager
       attr_accessor core_network_id: ::String
       attr_accessor vpn_connection_arn: ::String
       attr_accessor routing_policy_label: ::String
+      attr_accessor nat_gateway_support: ("ENABLE" | "DISABLE")
+      attr_accessor nat_system_route_support: bool
+      attr_accessor nat_gateway_rules: ::Array[Types::NatRuleRequest]
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor client_token: ::String
       SENSITIVE: []
@@ -593,6 +611,8 @@ module Aws::NetworkManager
       attr_accessor subnet_arns: ::Array[::String]
       attr_accessor options: Types::VpcOptions
       attr_accessor routing_policy_label: ::String
+      attr_accessor nat_gateway_support: ("ENABLE" | "DISABLE")
+      attr_accessor nat_gateway_rules: ::Array[Types::NatRuleRequest]
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor client_token: ::String
       SENSITIVE: []
@@ -1076,17 +1096,21 @@ module Aws::NetworkManager
       attr_accessor supernet_of_matches: ::Array[::String]
       attr_accessor prefix_list_ids: ::Array[::String]
       attr_accessor states: ::Array[("ACTIVE" | "BLACKHOLE")]
-      attr_accessor types: ::Array[("PROPAGATED" | "STATIC")]
+      attr_accessor types: ::Array[("PROPAGATED" | "STATIC" | "SYSTEM")]
       attr_accessor destination_filters: ::Hash[::String, ::Array[::String]]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class GetNetworkRoutesResponse
       attr_accessor route_table_arn: ::String
       attr_accessor core_network_segment_edge: Types::CoreNetworkSegmentEdgeIdentifier
+      attr_accessor core_network_network_function_group: Types::CoreNetworkNetworkFunctionGroupIdentifier
       attr_accessor route_table_type: ("TRANSIT_GATEWAY_ROUTE_TABLE" | "CORE_NETWORK_SEGMENT" | "NETWORK_FUNCTION_GROUP")
       attr_accessor route_table_timestamp: ::Time
       attr_accessor network_routes: ::Array[Types::NetworkRoute]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -1251,6 +1275,21 @@ module Aws::NetworkManager
       SENSITIVE: []
     end
 
+    class ListAttachmentNatConfigurationsRequest
+      attr_accessor core_network_id: ::String
+      attr_accessor attachment_id: ::String
+      attr_accessor filters: ::Hash[::String, ::Array[::String]]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAttachmentNatConfigurationsResponse
+      attr_accessor attachment_nat_configurations: ::Array[Types::AttachmentNatConfiguration]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListAttachmentRoutingPolicyAssociationsRequest
       attr_accessor core_network_id: ::String
       attr_accessor attachment_id: ::String
@@ -1327,6 +1366,10 @@ module Aws::NetworkManager
       attr_accessor segment_name: ::String
       attr_accessor edge_location: ::String
       attr_accessor next_hop_filters: ::Hash[::String, ::Array[::String]]
+      attr_accessor exact_prefix_matches: ::Array[::String]
+      attr_accessor longest_prefix_matches: ::Array[::String]
+      attr_accessor subnet_of_matches: ::Array[::String]
+      attr_accessor supernet_of_matches: ::Array[::String]
       attr_accessor local_preference_matches: ::Array[::String]
       attr_accessor exact_as_path_matches: ::Array[::String]
       attr_accessor med_matches: ::Array[::String]
@@ -1399,6 +1442,21 @@ module Aws::NetworkManager
       SENSITIVE: []
     end
 
+    class NatRule
+      attr_accessor rule_number: ::Integer
+      attr_accessor match_source_cidr: ::String
+      attr_accessor nat_cidr: ::String
+      attr_accessor state: ("CREATING" | "MODIFYING" | "DELETING" | "ACTIVATED" | "ACTIVATING" | "DEACTIVATED" | "DEACTIVATING" | "FAILED" | "PENDING_ATTACHMENT_ACCEPTANCE")
+      SENSITIVE: []
+    end
+
+    class NatRuleRequest
+      attr_accessor rule_number: ::Integer
+      attr_accessor match_source_cidr: ::String
+      attr_accessor nat_cidr: ::String
+      SENSITIVE: []
+    end
+
     class NetworkFunctionGroup
       attr_accessor name: ::String
       SENSITIVE: []
@@ -1440,7 +1498,7 @@ module Aws::NetworkManager
       attr_accessor destinations: ::Array[Types::NetworkRouteDestination]
       attr_accessor prefix_list_id: ::String
       attr_accessor state: ("ACTIVE" | "BLACKHOLE")
-      attr_accessor type: ("PROPAGATED" | "STATIC")
+      attr_accessor type: ("PROPAGATED" | "STATIC" | "SYSTEM")
       SENSITIVE: []
     end
 
@@ -1499,7 +1557,7 @@ module Aws::NetworkManager
     end
 
     class PeeringError
-      attr_accessor code: ("TRANSIT_GATEWAY_NOT_FOUND" | "TRANSIT_GATEWAY_PEERS_LIMIT_EXCEEDED" | "MISSING_PERMISSIONS" | "INTERNAL_ERROR" | "EDGE_LOCATION_PEER_DUPLICATE" | "INVALID_TRANSIT_GATEWAY_STATE")
+      attr_accessor code: ("TRANSIT_GATEWAY_NOT_FOUND" | "TRANSIT_GATEWAY_PEERS_LIMIT_EXCEEDED" | "MISSING_PERMISSIONS" | "INTERNAL_ERROR" | "EDGE_LOCATION_PEER_DUPLICATE" | "INVALID_TRANSIT_GATEWAY_STATE" | "TRANSIT_GATEWAY_ENCRYPTION_NOT_SUPPORTED" | "CREATION_FAILED" | "DELETION_FAILED")
       attr_accessor message: ::String
       attr_accessor resource_arn: ::String
       attr_accessor request_id: ::String
@@ -1823,6 +1881,23 @@ module Aws::NetworkManager
     end
 
     class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAttachmentNatConfigurationRequest
+      attr_accessor attachment_id: ::String
+      attr_accessor nat_gateway_support: ("ENABLE" | "DISABLE")
+      attr_accessor nat_system_route_support: bool
+      attr_accessor nat_gateway_rules: ::Array[Types::NatRuleRequest]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAttachmentNatConfigurationResponse
+      attr_accessor attachment_id: ::String
+      attr_accessor nat_gateway_support: ("ENABLED" | "ENABLING" | "DISABLED" | "DISABLING" | "PENDING_ATTACHMENT_ACCEPTANCE")
+      attr_accessor nat_system_route_support: bool
+      attr_accessor nat_gateway_rules: ::Array[Types::NatRule]
+      SENSITIVE: []
     end
 
     class UpdateConnectionRequest

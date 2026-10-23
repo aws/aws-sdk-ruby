@@ -25,6 +25,8 @@ module Aws::LambdaCore
     GetNetworkConnectorRequest = Shapes::StructureShape.new(name: 'GetNetworkConnectorRequest')
     GetNetworkConnectorResponse = Shapes::StructureShape.new(name: 'GetNetworkConnectorResponse')
     InvalidParameterValueException = Shapes::StructureShape.new(name: 'InvalidParameterValueException')
+    ListNetworkConnectorVersionsRequest = Shapes::StructureShape.new(name: 'ListNetworkConnectorVersionsRequest')
+    ListNetworkConnectorVersionsResponse = Shapes::StructureShape.new(name: 'ListNetworkConnectorVersionsResponse')
     ListNetworkConnectorsRequest = Shapes::StructureShape.new(name: 'ListNetworkConnectorsRequest')
     ListNetworkConnectorsResponse = Shapes::StructureShape.new(name: 'ListNetworkConnectorsResponse')
     MaxHundredListItems = Shapes::IntegerShape.new(name: 'MaxHundredListItems')
@@ -50,6 +52,8 @@ module Aws::LambdaCore
     NetworkConnectorTags = Shapes::MapShape.new(name: 'NetworkConnectorTags')
     NetworkConnectorType = Shapes::StringShape.new(name: 'NetworkConnectorType')
     NetworkConnectorVersion = Shapes::IntegerShape.new(name: 'NetworkConnectorVersion')
+    NetworkConnectorVersionSummary = Shapes::StructureShape.new(name: 'NetworkConnectorVersionSummary')
+    NetworkConnectorVersionsList = Shapes::ListShape.new(name: 'NetworkConnectorVersionsList')
     NetworkConnectorVpcEgressConfiguration = Shapes::StructureShape.new(name: 'NetworkConnectorVpcEgressConfiguration')
     NetworkConnectorsList = Shapes::ListShape.new(name: 'NetworkConnectorsList')
     NetworkProtocol = Shapes::StringShape.new(name: 'NetworkProtocol')
@@ -74,6 +78,8 @@ module Aws::LambdaCore
     CreateNetworkConnectorResponse.add_member(:arn, Shapes::ShapeRef.new(shape: NetworkConnectorArn, required: true, location_name: "Arn"))
     CreateNetworkConnectorResponse.add_member(:name, Shapes::ShapeRef.new(shape: NetworkConnectorName, required: true, location_name: "Name"))
     CreateNetworkConnectorResponse.add_member(:id, Shapes::ShapeRef.new(shape: NetworkConnectorId, required: true, location_name: "Id"))
+    CreateNetworkConnectorResponse.add_member(:version_arn, Shapes::ShapeRef.new(shape: NetworkConnectorArn, location_name: "VersionArn"))
+    CreateNetworkConnectorResponse.add_member(:version, Shapes::ShapeRef.new(shape: NetworkConnectorVersion, location_name: "Version"))
     CreateNetworkConnectorResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: NetworkConnectorConfiguration, location_name: "Configuration"))
     CreateNetworkConnectorResponse.add_member(:operator_role, Shapes::ShapeRef.new(shape: NetworkConnectorRoleArn, location_name: "OperatorRole"))
     CreateNetworkConnectorResponse.add_member(:state, Shapes::ShapeRef.new(shape: NetworkConnectorState, location_name: "State"))
@@ -85,6 +91,8 @@ module Aws::LambdaCore
     DeleteNetworkConnectorResponse.add_member(:arn, Shapes::ShapeRef.new(shape: NetworkConnectorArn, required: true, location_name: "Arn"))
     DeleteNetworkConnectorResponse.add_member(:name, Shapes::ShapeRef.new(shape: NetworkConnectorName, required: true, location_name: "Name"))
     DeleteNetworkConnectorResponse.add_member(:id, Shapes::ShapeRef.new(shape: NetworkConnectorId, required: true, location_name: "Id"))
+    DeleteNetworkConnectorResponse.add_member(:version_arn, Shapes::ShapeRef.new(shape: NetworkConnectorArn, location_name: "VersionArn"))
+    DeleteNetworkConnectorResponse.add_member(:version, Shapes::ShapeRef.new(shape: NetworkConnectorVersion, location_name: "Version"))
     DeleteNetworkConnectorResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: NetworkConnectorConfiguration, location_name: "Configuration"))
     DeleteNetworkConnectorResponse.add_member(:operator_role, Shapes::ShapeRef.new(shape: NetworkConnectorRoleArn, location_name: "OperatorRole"))
     DeleteNetworkConnectorResponse.add_member(:state, Shapes::ShapeRef.new(shape: NetworkConnectorState, location_name: "State"))
@@ -96,7 +104,10 @@ module Aws::LambdaCore
     GetNetworkConnectorResponse.add_member(:arn, Shapes::ShapeRef.new(shape: NetworkConnectorArn, required: true, location_name: "Arn"))
     GetNetworkConnectorResponse.add_member(:name, Shapes::ShapeRef.new(shape: NetworkConnectorName, required: true, location_name: "Name"))
     GetNetworkConnectorResponse.add_member(:id, Shapes::ShapeRef.new(shape: NetworkConnectorId, required: true, location_name: "Id"))
+    GetNetworkConnectorResponse.add_member(:version_arn, Shapes::ShapeRef.new(shape: NetworkConnectorArn, location_name: "VersionArn"))
     GetNetworkConnectorResponse.add_member(:version, Shapes::ShapeRef.new(shape: NetworkConnectorVersion, location_name: "Version"))
+    GetNetworkConnectorResponse.add_member(:latest_version_arn, Shapes::ShapeRef.new(shape: NetworkConnectorArn, location_name: "LatestVersionArn"))
+    GetNetworkConnectorResponse.add_member(:latest_version, Shapes::ShapeRef.new(shape: NetworkConnectorVersion, location_name: "LatestVersion"))
     GetNetworkConnectorResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: NetworkConnectorConfiguration, location_name: "Configuration"))
     GetNetworkConnectorResponse.add_member(:operator_role, Shapes::ShapeRef.new(shape: NetworkConnectorRoleArn, location_name: "OperatorRole"))
     GetNetworkConnectorResponse.add_member(:state, Shapes::ShapeRef.new(shape: NetworkConnectorState, location_name: "State"))
@@ -111,6 +122,16 @@ module Aws::LambdaCore
     InvalidParameterValueException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
     InvalidParameterValueException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InvalidParameterValueException.struct_class = Types::InvalidParameterValueException
+
+    ListNetworkConnectorVersionsRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: NetworkConnectorIdentifier, required: true, location: "uri", location_name: "Identifier"))
+    ListNetworkConnectorVersionsRequest.add_member(:state, Shapes::ShapeRef.new(shape: NetworkConnectorState, location: "querystring", location_name: "State"))
+    ListNetworkConnectorVersionsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "Marker"))
+    ListNetworkConnectorVersionsRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: MaxHundredListItems, location: "querystring", location_name: "MaxItems"))
+    ListNetworkConnectorVersionsRequest.struct_class = Types::ListNetworkConnectorVersionsRequest
+
+    ListNetworkConnectorVersionsResponse.add_member(:network_connector_versions, Shapes::ShapeRef.new(shape: NetworkConnectorVersionsList, required: true, location_name: "NetworkConnectorVersions"))
+    ListNetworkConnectorVersionsResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: String, location_name: "NextMarker"))
+    ListNetworkConnectorVersionsResponse.struct_class = Types::ListNetworkConnectorVersionsResponse
 
     ListNetworkConnectorsRequest.add_member(:state, Shapes::ShapeRef.new(shape: NetworkConnectorState, location: "querystring", location_name: "State"))
     ListNetworkConnectorsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "Marker"))
@@ -141,10 +162,25 @@ module Aws::LambdaCore
     NetworkConnectorSummary.add_member(:type, Shapes::ShapeRef.new(shape: NetworkConnectorType, required: true, location_name: "Type"))
     NetworkConnectorSummary.add_member(:state, Shapes::ShapeRef.new(shape: NetworkConnectorState, location_name: "State"))
     NetworkConnectorSummary.add_member(:last_modified, Shapes::ShapeRef.new(shape: CoreTimestamp, location_name: "LastModified"))
+    NetworkConnectorSummary.add_member(:latest_version_arn, Shapes::ShapeRef.new(shape: NetworkConnectorArn, location_name: "LatestVersionArn"))
+    NetworkConnectorSummary.add_member(:latest_version, Shapes::ShapeRef.new(shape: NetworkConnectorVersion, location_name: "LatestVersion"))
     NetworkConnectorSummary.struct_class = Types::NetworkConnectorSummary
 
     NetworkConnectorTags.key = Shapes::ShapeRef.new(shape: NetworkConnectorTagKey)
     NetworkConnectorTags.value = Shapes::ShapeRef.new(shape: NetworkConnectorTagValue)
+
+    NetworkConnectorVersionSummary.add_member(:arn, Shapes::ShapeRef.new(shape: NetworkConnectorArn, required: true, location_name: "Arn"))
+    NetworkConnectorVersionSummary.add_member(:version_arn, Shapes::ShapeRef.new(shape: NetworkConnectorArn, required: true, location_name: "VersionArn"))
+    NetworkConnectorVersionSummary.add_member(:name, Shapes::ShapeRef.new(shape: NetworkConnectorName, required: true, location_name: "Name"))
+    NetworkConnectorVersionSummary.add_member(:id, Shapes::ShapeRef.new(shape: NetworkConnectorId, required: true, location_name: "Id"))
+    NetworkConnectorVersionSummary.add_member(:version, Shapes::ShapeRef.new(shape: NetworkConnectorVersion, required: true, location_name: "Version"))
+    NetworkConnectorVersionSummary.add_member(:state, Shapes::ShapeRef.new(shape: NetworkConnectorState, required: true, location_name: "State"))
+    NetworkConnectorVersionSummary.add_member(:state_reason, Shapes::ShapeRef.new(shape: String, location_name: "StateReason"))
+    NetworkConnectorVersionSummary.add_member(:state_reason_code, Shapes::ShapeRef.new(shape: NetworkConnectorStateReasonCode, location_name: "StateReasonCode"))
+    NetworkConnectorVersionSummary.add_member(:last_modified, Shapes::ShapeRef.new(shape: CoreTimestamp, location_name: "LastModified"))
+    NetworkConnectorVersionSummary.struct_class = Types::NetworkConnectorVersionSummary
+
+    NetworkConnectorVersionsList.member = Shapes::ShapeRef.new(shape: NetworkConnectorVersionSummary)
 
     NetworkConnectorVpcEgressConfiguration.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: NetworkConnectorSubnetIds, location_name: "SubnetIds"))
     NetworkConnectorVpcEgressConfiguration.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: NetworkConnectorSecurityGroupIds, location_name: "SecurityGroupIds"))
@@ -181,6 +217,8 @@ module Aws::LambdaCore
     UpdateNetworkConnectorResponse.add_member(:arn, Shapes::ShapeRef.new(shape: NetworkConnectorArn, required: true, location_name: "Arn"))
     UpdateNetworkConnectorResponse.add_member(:name, Shapes::ShapeRef.new(shape: NetworkConnectorName, required: true, location_name: "Name"))
     UpdateNetworkConnectorResponse.add_member(:id, Shapes::ShapeRef.new(shape: NetworkConnectorId, required: true, location_name: "Id"))
+    UpdateNetworkConnectorResponse.add_member(:version_arn, Shapes::ShapeRef.new(shape: NetworkConnectorArn, location_name: "VersionArn"))
+    UpdateNetworkConnectorResponse.add_member(:version, Shapes::ShapeRef.new(shape: NetworkConnectorVersion, location_name: "Version"))
     UpdateNetworkConnectorResponse.add_member(:operator_role, Shapes::ShapeRef.new(shape: NetworkConnectorRoleArn, location_name: "OperatorRole"))
     UpdateNetworkConnectorResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: NetworkConnectorConfiguration, location_name: "Configuration"))
     UpdateNetworkConnectorResponse.add_member(:state, Shapes::ShapeRef.new(shape: NetworkConnectorState, location_name: "State"))
@@ -246,6 +284,24 @@ module Aws::LambdaCore
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:list_network_connector_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListNetworkConnectorVersions"
+        o.http_method = "GET"
+        o.http_request_uri = "/2026-04-04/network-connectors/{Identifier}/versions"
+        o.input = Shapes::ShapeRef.new(shape: ListNetworkConnectorVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListNetworkConnectorVersionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_items",
+          tokens: {
+            "next_marker" => "marker"
+          }
+        )
+      end)
+
       api.add_operation(:list_network_connectors, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListNetworkConnectors"
         o.http_method = "GET"
@@ -271,6 +327,7 @@ module Aws::LambdaCore
         o.output = Shapes::ShapeRef.new(shape: UpdateNetworkConnectorResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: NetworkConnectorLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

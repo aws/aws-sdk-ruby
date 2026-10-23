@@ -8,6 +8,22 @@
 module Aws
   module NetworkFirewall
     module Params
+      type route_53_resolved_ip_validation = {
+      action: ("REJECT" | "DROP" | "ALERT"),
+      dns_firewall_rule_group_id: ::String,
+      dns_expiry_exception_policy: ("REJECT" | "DROP" | "CONTINUE"),
+      bypass_destination_validation_ip_ranges: Array[
+        {
+          address_definition: ::String
+        }
+      ]?,
+      source_ip_ranges: Array[
+        {
+          address_definition: ::String
+        }
+      ]?
+    }
+
       type firewall_policy = {
       stateless_rule_group_references: Array[
         {
@@ -37,7 +53,8 @@ module Aws
             definition: Array[::String]
           }]?
       }?,
-      enable_tls_session_holding: bool?
+      enable_tls_session_holding: bool?,
+      route_53_resolved_ip_validation: Params::route_53_resolved_ip_validation?
     }
 
       type custom_action = {
@@ -111,7 +128,7 @@ module Aws
       rules_string: ::String?,
       rules_source_list: {
         targets: Array[::String],
-        target_types: Array[("TLS_SNI" | "HTTP_HOST")],
+        target_types: Array[("TLS_SNI" | "HTTP_HOST" | "AWS_ROUTE_53_RESOLVED_DOMAIN")],
         generated_rules_type: ("ALLOWLIST" | "DENYLIST" | "REJECTLIST" | "ALERTLIST")
       }?,
       stateful_rules: Array[

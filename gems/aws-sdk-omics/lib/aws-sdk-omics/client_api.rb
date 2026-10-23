@@ -510,6 +510,7 @@ module Aws::Omics
     SchemaItemKeyString = Shapes::StringShape.new(name: 'SchemaItemKeyString')
     SchemaValueType = Shapes::StringShape.new(name: 'SchemaValueType')
     ScratchStorageMode = Shapes::StringShape.new(name: 'ScratchStorageMode')
+    SecretArn = Shapes::StringShape.new(name: 'SecretArn')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     Separator = Shapes::StringShape.new(name: 'Separator')
@@ -2242,10 +2243,11 @@ module Aws::Omics
     ReferenceStoreFilter.add_member(:created_before, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdBefore"))
     ReferenceStoreFilter.struct_class = Types::ReferenceStoreFilter
 
-    RegistryMapping.add_member(:upstream_registry_url, Shapes::ShapeRef.new(shape: Uri, location_name: "upstreamRegistryUrl"))
-    RegistryMapping.add_member(:ecr_repository_prefix, Shapes::ShapeRef.new(shape: EcrRepositoryPrefix, location_name: "ecrRepositoryPrefix"))
+    RegistryMapping.add_member(:upstream_registry_url, Shapes::ShapeRef.new(shape: Uri, required: true, location_name: "upstreamRegistryUrl"))
+    RegistryMapping.add_member(:ecr_repository_prefix, Shapes::ShapeRef.new(shape: EcrRepositoryPrefix, required: true, location_name: "ecrRepositoryPrefix"))
     RegistryMapping.add_member(:upstream_repository_prefix, Shapes::ShapeRef.new(shape: UpstreamRepositoryPrefix, location_name: "upstreamRepositoryPrefix"))
     RegistryMapping.add_member(:ecr_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "ecrAccountId"))
+    RegistryMapping.add_member(:credential_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "credentialArn"))
     RegistryMapping.struct_class = Types::RegistryMapping
 
     RegistryMappingsList.member = Shapes::ShapeRef.new(shape: RegistryMapping)
@@ -2805,11 +2807,13 @@ module Aws::Omics
 
     VpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: VpcConfigSecurityGroupIdsList, location_name: "securityGroupIds"))
     VpcConfig.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: VpcConfigSubnetIdsList, location_name: "subnetIds"))
+    VpcConfig.add_member(:vpc_owner_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "vpcOwnerAccountId"))
     VpcConfig.struct_class = Types::VpcConfig
 
     VpcConfigResponse.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "securityGroupIds"))
     VpcConfigResponse.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, location_name: "subnetIds"))
     VpcConfigResponse.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "vpcId"))
+    VpcConfigResponse.add_member(:vpc_owner_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "vpcOwnerAccountId"))
     VpcConfigResponse.struct_class = Types::VpcConfigResponse
 
     VpcConfigSecurityGroupIdsList.member = Shapes::ShapeRef.new(shape: SecurityGroupId)

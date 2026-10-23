@@ -1951,6 +1951,11 @@ module Aws::PCS
     #   ready to accept jobs.
     #   @return [Types::NodeLifecycleActions]
     #
+    # @!attribute [rw] scheduler_version
+    #   The scheduler version that the cluster is running. A compute node
+    #   uses this value to run the matching scheduler version.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/RegisterComputeNodeGroupInstanceResponse AWS API Documentation
     #
     class RegisterComputeNodeGroupInstanceResponse < Struct.new(
@@ -1960,7 +1965,8 @@ module Aws::PCS
       :cluster_name,
       :compute_node_group_id,
       :compute_node_group_name,
-      :node_lifecycle_actions)
+      :node_lifecycle_actions,
+      :scheduler_version)
       SENSITIVE = [:shared_secret]
       include Aws::Structure
     end

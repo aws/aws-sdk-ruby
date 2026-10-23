@@ -11,159 +11,159 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AWSOrganizationsNotInUseException < ::Aws::Errors::ServiceError
+      class AWSOrganizationsNotInUseException < ServiceError
         def message: () -> ::String
       end
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
         def message: () -> ::String
       end
-      class AccessDeniedForDependencyException < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-        def reason: () -> ::String
-      end
-      class AccountAlreadyClosedException < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-      end
-      class AccountAlreadyRegisteredException < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-      end
-      class AccountNotFoundException < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-      end
-      class AccountNotRegisteredException < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-      end
-      class AccountOwnerNotVerifiedException < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-      end
-      class AlreadyInOrganizationException < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-      end
-      class ChildNotFoundException < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-      end
-      class ConcurrentModificationException < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-      end
-      class ConflictException < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-      end
-      class ConstraintViolationException < ::Aws::Errors::ServiceError
+      class AccessDeniedForDependencyException < ServiceError
         def message: () -> ::String
         def reason: () -> ::String
       end
-      class CreateAccountStatusNotFoundException < ::Aws::Errors::ServiceError
+      class AccountAlreadyClosedException < ServiceError
         def message: () -> ::String
       end
-      class DestinationParentNotFoundException < ::Aws::Errors::ServiceError
+      class AccountAlreadyRegisteredException < ServiceError
         def message: () -> ::String
       end
-      class DuplicateAccountException < ::Aws::Errors::ServiceError
+      class AccountNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class DuplicateHandshakeException < ::Aws::Errors::ServiceError
+      class AccountNotRegisteredException < ServiceError
         def message: () -> ::String
       end
-      class DuplicateOrganizationalUnitException < ::Aws::Errors::ServiceError
+      class AccountOwnerNotVerifiedException < ServiceError
         def message: () -> ::String
       end
-      class DuplicatePolicyAttachmentException < ::Aws::Errors::ServiceError
+      class AlreadyInOrganizationException < ServiceError
         def message: () -> ::String
       end
-      class DuplicatePolicyException < ::Aws::Errors::ServiceError
+      class ChildNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class EffectivePolicyNotFoundException < ::Aws::Errors::ServiceError
+      class ConcurrentModificationException < ServiceError
         def message: () -> ::String
       end
-      class FinalizingOrganizationException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
         def message: () -> ::String
       end
-      class HandshakeAlreadyInStateException < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-      end
-      class HandshakeConstraintViolationException < ::Aws::Errors::ServiceError
+      class ConstraintViolationException < ServiceError
         def message: () -> ::String
         def reason: () -> ::String
       end
-      class HandshakeNotFoundException < ::Aws::Errors::ServiceError
+      class CreateAccountStatusNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class InvalidHandshakeTransitionException < ::Aws::Errors::ServiceError
+      class DestinationParentNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class InvalidInputException < ::Aws::Errors::ServiceError
+      class DuplicateAccountException < ServiceError
+        def message: () -> ::String
+      end
+      class DuplicateHandshakeException < ServiceError
+        def message: () -> ::String
+      end
+      class DuplicateOrganizationalUnitException < ServiceError
+        def message: () -> ::String
+      end
+      class DuplicatePolicyAttachmentException < ServiceError
+        def message: () -> ::String
+      end
+      class DuplicatePolicyException < ServiceError
+        def message: () -> ::String
+      end
+      class EffectivePolicyNotFoundException < ServiceError
+        def message: () -> ::String
+      end
+      class FinalizingOrganizationException < ServiceError
+        def message: () -> ::String
+      end
+      class HandshakeAlreadyInStateException < ServiceError
+        def message: () -> ::String
+      end
+      class HandshakeConstraintViolationException < ServiceError
         def message: () -> ::String
         def reason: () -> ::String
       end
-      class InvalidResponsibilityTransferTransitionException < ::Aws::Errors::ServiceError
+      class HandshakeNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class MalformedPolicyDocumentException < ::Aws::Errors::ServiceError
+      class InvalidHandshakeTransitionException < ServiceError
         def message: () -> ::String
       end
-      class MasterCannotLeaveOrganizationException < ::Aws::Errors::ServiceError
+      class InvalidInputException < ServiceError
+        def message: () -> ::String
+        def reason: () -> ::String
+      end
+      class InvalidResponsibilityTransferTransitionException < ServiceError
         def message: () -> ::String
       end
-      class OrganizationNotEmptyException < ::Aws::Errors::ServiceError
+      class MalformedPolicyDocumentException < ServiceError
         def message: () -> ::String
       end
-      class OrganizationalUnitNotEmptyException < ::Aws::Errors::ServiceError
+      class MasterCannotLeaveOrganizationException < ServiceError
         def message: () -> ::String
       end
-      class OrganizationalUnitNotFoundException < ::Aws::Errors::ServiceError
+      class OrganizationNotEmptyException < ServiceError
         def message: () -> ::String
       end
-      class ParentNotFoundException < ::Aws::Errors::ServiceError
+      class OrganizationalUnitNotEmptyException < ServiceError
         def message: () -> ::String
       end
-      class PolicyChangesInProgressException < ::Aws::Errors::ServiceError
+      class OrganizationalUnitNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class PolicyInUseException < ::Aws::Errors::ServiceError
+      class ParentNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class PolicyNotAttachedException < ::Aws::Errors::ServiceError
+      class PolicyChangesInProgressException < ServiceError
         def message: () -> ::String
       end
-      class PolicyNotFoundException < ::Aws::Errors::ServiceError
+      class PolicyInUseException < ServiceError
         def message: () -> ::String
       end
-      class PolicyTypeAlreadyEnabledException < ::Aws::Errors::ServiceError
+      class PolicyNotAttachedException < ServiceError
         def message: () -> ::String
       end
-      class PolicyTypeNotAvailableForOrganizationException < ::Aws::Errors::ServiceError
+      class PolicyNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class PolicyTypeNotEnabledException < ::Aws::Errors::ServiceError
+      class PolicyTypeAlreadyEnabledException < ServiceError
         def message: () -> ::String
       end
-      class ResourcePolicyNotFoundException < ::Aws::Errors::ServiceError
+      class PolicyTypeNotAvailableForOrganizationException < ServiceError
         def message: () -> ::String
       end
-      class ResponsibilityTransferAlreadyInStatusException < ::Aws::Errors::ServiceError
+      class PolicyTypeNotEnabledException < ServiceError
         def message: () -> ::String
       end
-      class ResponsibilityTransferNotFoundException < ::Aws::Errors::ServiceError
+      class ResourcePolicyNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class RootNotFoundException < ::Aws::Errors::ServiceError
+      class ResponsibilityTransferAlreadyInStatusException < ServiceError
         def message: () -> ::String
       end
-      class ServiceException < ::Aws::Errors::ServiceError
+      class ResponsibilityTransferNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class SourceParentNotFoundException < ::Aws::Errors::ServiceError
+      class RootNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class TargetNotFoundException < ::Aws::Errors::ServiceError
+      class ServiceException < ServiceError
         def message: () -> ::String
       end
-      class TooManyRequestsException < ::Aws::Errors::ServiceError
+      class SourceParentNotFoundException < ServiceError
+        def message: () -> ::String
+      end
+      class TargetNotFoundException < ServiceError
+        def message: () -> ::String
+      end
+      class TooManyRequestsException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class UnsupportedAPIEndpointException < ::Aws::Errors::ServiceError
+      class UnsupportedAPIEndpointException < ServiceError
         def message: () -> ::String
       end
     end

@@ -988,6 +988,7 @@ module Aws::WorkSpaces
       attr_accessor platform: ("WINDOWS")
       attr_accessor os_version: ("Windows_10" | "Windows_11")
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor image_validation_mode: ("CUSTOMER_MANAGED" | "SERVICE_MANAGED")
       SENSITIVE: []
     end
 

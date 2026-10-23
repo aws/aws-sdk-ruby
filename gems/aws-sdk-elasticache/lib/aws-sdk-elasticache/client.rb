@@ -199,12 +199,19 @@ module Aws::ElastiCache
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -476,10 +483,9 @@ module Aws::ElastiCache
 
     # A tag is a key-value pair where the key and value are case-sensitive.
     # You can use tags to categorize and track all your ElastiCache
-    # resources, with the exception of global replication group. When you
-    # add or remove tags on replication groups, those actions will be
-    # replicated to all nodes in the replication group. For more
-    # information, see [Resource-level permissions][1].
+    # resources. When you add or remove tags on replication groups, those
+    # actions will be replicated to all nodes in the replication group. For
+    # more information, see [Resource-level permissions][1].
     #
     # For example, you can use cost-allocation tags to your ElastiCache
     # resources, Amazon generates a cost allocation report as a
@@ -748,10 +754,13 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # Complete the migration of data.
+    # Completes the migration of data.
     #
-    # @option params [required, String] :replication_group_id
+    # @option params [String] :replication_group_id
     #   The ID of the replication group to which data is being migrated.
+    #
+    # @option params [String] :serverless_cache_name
+    #   The name of the serverless cache to which data is being migrated.
     #
     # @option params [Boolean] :force
     #   Forces the migration to stop without ensuring that data is in sync. It
@@ -762,11 +771,13 @@ module Aws::ElastiCache
     # @return [Types::CompleteMigrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CompleteMigrationResponse#replication_group #replication_group} => Types::ReplicationGroup
+    #   * {Types::CompleteMigrationResponse#serverless_cache #serverless_cache} => Types::ServerlessCache
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.complete_migration({
-    #     replication_group_id: "String", # required
+    #     replication_group_id: "String",
+    #     serverless_cache_name: "String",
     #     force: false,
     #   })
     #
@@ -850,6 +861,38 @@ module Aws::ElastiCache
     #   resp.replication_group.engine #=> String
     #   resp.replication_group.durability #=> String, one of "default", "async", "sync", "disabled"
     #   resp.replication_group.effective_durability #=> String, one of "async", "sync", "disabled"
+    #   resp.serverless_cache.serverless_cache_name #=> String
+    #   resp.serverless_cache.description #=> String
+    #   resp.serverless_cache.create_time #=> Time
+    #   resp.serverless_cache.status #=> String
+    #   resp.serverless_cache.engine #=> String
+    #   resp.serverless_cache.major_engine_version #=> String
+    #   resp.serverless_cache.full_engine_version #=> String
+    #   resp.serverless_cache.cache_usage_limits.data_storage.maximum #=> Integer
+    #   resp.serverless_cache.cache_usage_limits.data_storage.minimum #=> Integer
+    #   resp.serverless_cache.cache_usage_limits.data_storage.unit #=> String, one of "GB"
+    #   resp.serverless_cache.cache_usage_limits.ecpu_per_second.maximum #=> Integer
+    #   resp.serverless_cache.cache_usage_limits.ecpu_per_second.minimum #=> Integer
+    #   resp.serverless_cache.kms_key_id #=> String
+    #   resp.serverless_cache.storage_encryption_type #=> String, one of "none", "sse-elasticache", "sse-kms"
+    #   resp.serverless_cache.security_group_ids #=> Array
+    #   resp.serverless_cache.security_group_ids[0] #=> String
+    #   resp.serverless_cache.endpoint.address #=> String
+    #   resp.serverless_cache.endpoint.port #=> Integer
+    #   resp.serverless_cache.reader_endpoint.address #=> String
+    #   resp.serverless_cache.reader_endpoint.port #=> Integer
+    #   resp.serverless_cache.arn #=> String
+    #   resp.serverless_cache.user_group_id #=> String
+    #   resp.serverless_cache.subnet_ids #=> Array
+    #   resp.serverless_cache.subnet_ids[0] #=> String
+    #   resp.serverless_cache.snapshot_retention_limit #=> Integer
+    #   resp.serverless_cache.daily_snapshot_time #=> String
+    #   resp.serverless_cache.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
+    #   resp.serverless_cache.connection_type #=> String, one of "vpc", "public"
+    #   resp.serverless_cache.migration.status #=> String
+    #   resp.serverless_cache.migration.migration_endpoint.address #=> String
+    #   resp.serverless_cache.migration.migration_endpoint.port #=> Integer
+    #   resp.serverless_cache.migration.cutover_mode #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CompleteMigration AWS API Documentation
     #
@@ -2097,6 +2140,11 @@ module Aws::ElastiCache
     #   updates to the secondary cluster. This value is stored as a lowercase
     #   string.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
+    #
     # @return [Types::CreateGlobalReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateGlobalReplicationGroupResult#global_replication_group #global_replication_group} => Types::GlobalReplicationGroup
@@ -2107,6 +2155,12 @@ module Aws::ElastiCache
     #     global_replication_group_id_suffix: "String", # required
     #     global_replication_group_description: "String",
     #     primary_replication_group_id: "String", # required
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -3017,6 +3071,13 @@ module Aws::ElastiCache
     #   IPv6-only subnets. If not specified, defaults to `ipv4`, unless all
     #   provided subnets are IPv6-only, in which case it defaults to `ipv6`.
     #
+    # @option params [String] :connection_type
+    #   The connection type for the serverless cache. Must be either `vpc` \|
+    #   `public`. Use `vpc` to access the cache through a VPC endpoint, or
+    #   `public` to access the cache over the internet. If not specified,
+    #   defaults to `vpc`. This value cannot be changed after the serverless
+    #   cache is created. Setting this to `public` requires Valkey 9 or above.
+    #
     # @return [Types::CreateServerlessCacheResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateServerlessCacheResponse#serverless_cache #serverless_cache} => Types::ServerlessCache
@@ -3053,6 +3114,7 @@ module Aws::ElastiCache
     #     snapshot_retention_limit: 1,
     #     daily_snapshot_time: "String",
     #     network_type: "ipv4", # accepts ipv4, ipv6, dual_stack
+    #     connection_type: "vpc", # accepts vpc, public
     #   })
     #
     # @example Response structure
@@ -3084,6 +3146,11 @@ module Aws::ElastiCache
     #   resp.serverless_cache.snapshot_retention_limit #=> Integer
     #   resp.serverless_cache.daily_snapshot_time #=> String
     #   resp.serverless_cache.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
+    #   resp.serverless_cache.connection_type #=> String, one of "vpc", "public"
+    #   resp.serverless_cache.migration.status #=> String
+    #   resp.serverless_cache.migration.migration_endpoint.address #=> String
+    #   resp.serverless_cache.migration.migration_endpoint.port #=> Integer
+    #   resp.serverless_cache.migration.cutover_mode #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateServerlessCache AWS API Documentation
     #
@@ -4348,6 +4415,11 @@ module Aws::ElastiCache
     #   resp.serverless_cache.snapshot_retention_limit #=> Integer
     #   resp.serverless_cache.daily_snapshot_time #=> String
     #   resp.serverless_cache.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
+    #   resp.serverless_cache.connection_type #=> String, one of "vpc", "public"
+    #   resp.serverless_cache.migration.status #=> String
+    #   resp.serverless_cache.migration.migration_endpoint.address #=> String
+    #   resp.serverless_cache.migration.migration_endpoint.port #=> Integer
+    #   resp.serverless_cache.migration.cutover_mode #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteServerlessCache AWS API Documentation
     #
@@ -7930,6 +8002,11 @@ module Aws::ElastiCache
     #   resp.serverless_caches[0].snapshot_retention_limit #=> Integer
     #   resp.serverless_caches[0].daily_snapshot_time #=> String
     #   resp.serverless_caches[0].network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
+    #   resp.serverless_caches[0].connection_type #=> String, one of "vpc", "public"
+    #   resp.serverless_caches[0].migration.status #=> String
+    #   resp.serverless_caches[0].migration.migration_endpoint.address #=> String
+    #   resp.serverless_caches[0].migration.migration_endpoint.port #=> Integer
+    #   resp.serverless_caches[0].migration.cutover_mode #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeServerlessCaches AWS API Documentation
     #
@@ -8880,10 +8957,9 @@ module Aws::ElastiCache
     #
     # A tag is a key-value pair where the key and value are case-sensitive.
     # You can use tags to categorize and track all your ElastiCache
-    # resources, with the exception of global replication group. When you
-    # add or remove tags on replication groups, those actions will be
-    # replicated to all nodes in the replication group. For more
-    # information, see [Resource-level permissions][1].
+    # resources. When you add or remove tags on replication groups, those
+    # actions will be replicated to all nodes in the replication group. For
+    # more information, see [Resource-level permissions][1].
     #
     # If the cluster is not in the *available* state, `ListTagsForResource`
     # returns an error.
@@ -10472,6 +10548,11 @@ module Aws::ElastiCache
     #   resp.serverless_cache.snapshot_retention_limit #=> Integer
     #   resp.serverless_cache.daily_snapshot_time #=> String
     #   resp.serverless_cache.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
+    #   resp.serverless_cache.connection_type #=> String, one of "vpc", "public"
+    #   resp.serverless_cache.migration.status #=> String
+    #   resp.serverless_cache.migration.migration_endpoint.address #=> String
+    #   resp.serverless_cache.migration.migration_endpoint.port #=> Integer
+    #   resp.serverless_cache.migration.cutover_mode #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyServerlessCache AWS API Documentation
     #
@@ -10616,6 +10697,92 @@ module Aws::ElastiCache
     # @param [Hash] params ({})
     def modify_user_group(params = {}, options = {})
       req = build_request(:modify_user_group, params)
+      req.send_request(options)
+    end
+
+    # Prepares the serverless cache for data migration by validating the
+    # configuration and setting up the migration resources.
+    #
+    # @option params [required, String] :serverless_cache_name
+    #   The name of the serverless cache to prepare for migration.
+    #
+    # @option params [required, Array<Types::CustomerNodeEndpoint>] :customer_node_endpoint_list
+    #   The list of endpoints from which to migrate data. For serverless cache
+    #   migrations, the list should have only one element.
+    #
+    # @option params [Types::SourceAuthenticationConfiguration] :source_authentication_configuration
+    #   The authentication configuration for connecting to the source during
+    #   migration.
+    #
+    # @option params [Types::SourceTlsConfiguration] :source_tls_configuration
+    #   The TLS configuration for connecting to the source during migration.
+    #
+    # @return [Types::PrepareMigrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PrepareMigrationResponse#serverless_cache #serverless_cache} => Types::ServerlessCache
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.prepare_migration({
+    #     serverless_cache_name: "String", # required
+    #     customer_node_endpoint_list: [ # required
+    #       {
+    #         address: "String",
+    #         port: 1,
+    #       },
+    #     ],
+    #     source_authentication_configuration: {
+    #       secret_manager_config: {
+    #         secret_arn: "String",
+    #       },
+    #     },
+    #     source_tls_configuration: {
+    #       source_tls_mode: "none", # accepts none, verify-ca
+    #       source_tls_certificate: "String",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.serverless_cache.serverless_cache_name #=> String
+    #   resp.serverless_cache.description #=> String
+    #   resp.serverless_cache.create_time #=> Time
+    #   resp.serverless_cache.status #=> String
+    #   resp.serverless_cache.engine #=> String
+    #   resp.serverless_cache.major_engine_version #=> String
+    #   resp.serverless_cache.full_engine_version #=> String
+    #   resp.serverless_cache.cache_usage_limits.data_storage.maximum #=> Integer
+    #   resp.serverless_cache.cache_usage_limits.data_storage.minimum #=> Integer
+    #   resp.serverless_cache.cache_usage_limits.data_storage.unit #=> String, one of "GB"
+    #   resp.serverless_cache.cache_usage_limits.ecpu_per_second.maximum #=> Integer
+    #   resp.serverless_cache.cache_usage_limits.ecpu_per_second.minimum #=> Integer
+    #   resp.serverless_cache.kms_key_id #=> String
+    #   resp.serverless_cache.storage_encryption_type #=> String, one of "none", "sse-elasticache", "sse-kms"
+    #   resp.serverless_cache.security_group_ids #=> Array
+    #   resp.serverless_cache.security_group_ids[0] #=> String
+    #   resp.serverless_cache.endpoint.address #=> String
+    #   resp.serverless_cache.endpoint.port #=> Integer
+    #   resp.serverless_cache.reader_endpoint.address #=> String
+    #   resp.serverless_cache.reader_endpoint.port #=> Integer
+    #   resp.serverless_cache.arn #=> String
+    #   resp.serverless_cache.user_group_id #=> String
+    #   resp.serverless_cache.subnet_ids #=> Array
+    #   resp.serverless_cache.subnet_ids[0] #=> String
+    #   resp.serverless_cache.snapshot_retention_limit #=> Integer
+    #   resp.serverless_cache.daily_snapshot_time #=> String
+    #   resp.serverless_cache.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
+    #   resp.serverless_cache.connection_type #=> String, one of "vpc", "public"
+    #   resp.serverless_cache.migration.status #=> String
+    #   resp.serverless_cache.migration.migration_endpoint.address #=> String
+    #   resp.serverless_cache.migration.migration_endpoint.port #=> Integer
+    #   resp.serverless_cache.migration.cutover_mode #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/PrepareMigration AWS API Documentation
+    #
+    # @overload prepare_migration(params = {})
+    # @param [Hash] params ({})
+    def prepare_migration(params = {}, options = {})
+      req = build_request(:prepare_migration, params)
       req.send_request(options)
     end
 
@@ -10935,10 +11102,10 @@ module Aws::ElastiCache
     # Removes the tags identified by the `TagKeys` list from the named
     # resource. A tag is a key-value pair where the key and value are
     # case-sensitive. You can use tags to categorize and track all your
-    # ElastiCache resources, with the exception of global replication group.
-    # When you add or remove tags on replication groups, those actions will
-    # be replicated to all nodes in the replication group. For more
-    # information, see [Resource-level permissions][1].
+    # ElastiCache resources. When you add or remove tags on replication
+    # groups, those actions will be replicated to all nodes in the
+    # replication group. For more information, see [Resource-level
+    # permissions][1].
     #
     #
     #
@@ -11153,30 +11320,47 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # Start the migration of data.
+    # Starts the migration of data.
     #
-    # @option params [required, String] :replication_group_id
+    # @option params [String] :serverless_cache_name
+    #   The name of the serverless cache to which data is being migrated.
+    #
+    # @option params [String] :replication_group_id
     #   The ID of the replication group to which data should be migrated.
     #
-    # @option params [required, Array<Types::CustomerNodeEndpoint>] :customer_node_endpoint_list
-    #   List of endpoints from which data should be migrated. For Valkey or
-    #   Redis OSS (cluster mode disabled), the list should have only one
-    #   element.
+    # @option params [Array<Types::CustomerNodeEndpoint>] :customer_node_endpoint_list
+    #   The list of endpoints from which to migrate data. For Valkey or Redis
+    #   OSS (cluster mode disabled), the list should have only one element.
+    #   For serverless cache migrations, ElastiCache uses the endpoint that
+    #   you provided in `PrepareMigration`.
+    #
+    # @option params [Boolean] :auto_cutover
+    #   Specifies whether ElastiCache automatically attempts to complete the
+    #   migration after data sync is established.
+    #
+    # @option params [Boolean] :clear_target_cache_data
+    #   Specifies whether ElastiCache deletes existing data in the serverless
+    #   cache before migration begins. After `StopMigration`, `StartMigration`
+    #   requires this option to restart the data sync.
     #
     # @return [Types::StartMigrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartMigrationResponse#replication_group #replication_group} => Types::ReplicationGroup
+    #   * {Types::StartMigrationResponse#serverless_cache #serverless_cache} => Types::ServerlessCache
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_migration({
-    #     replication_group_id: "String", # required
-    #     customer_node_endpoint_list: [ # required
+    #     serverless_cache_name: "String",
+    #     replication_group_id: "String",
+    #     customer_node_endpoint_list: [
     #       {
     #         address: "String",
     #         port: 1,
     #       },
     #     ],
+    #     auto_cutover: false,
+    #     clear_target_cache_data: false,
     #   })
     #
     # @example Response structure
@@ -11259,6 +11443,38 @@ module Aws::ElastiCache
     #   resp.replication_group.engine #=> String
     #   resp.replication_group.durability #=> String, one of "default", "async", "sync", "disabled"
     #   resp.replication_group.effective_durability #=> String, one of "async", "sync", "disabled"
+    #   resp.serverless_cache.serverless_cache_name #=> String
+    #   resp.serverless_cache.description #=> String
+    #   resp.serverless_cache.create_time #=> Time
+    #   resp.serverless_cache.status #=> String
+    #   resp.serverless_cache.engine #=> String
+    #   resp.serverless_cache.major_engine_version #=> String
+    #   resp.serverless_cache.full_engine_version #=> String
+    #   resp.serverless_cache.cache_usage_limits.data_storage.maximum #=> Integer
+    #   resp.serverless_cache.cache_usage_limits.data_storage.minimum #=> Integer
+    #   resp.serverless_cache.cache_usage_limits.data_storage.unit #=> String, one of "GB"
+    #   resp.serverless_cache.cache_usage_limits.ecpu_per_second.maximum #=> Integer
+    #   resp.serverless_cache.cache_usage_limits.ecpu_per_second.minimum #=> Integer
+    #   resp.serverless_cache.kms_key_id #=> String
+    #   resp.serverless_cache.storage_encryption_type #=> String, one of "none", "sse-elasticache", "sse-kms"
+    #   resp.serverless_cache.security_group_ids #=> Array
+    #   resp.serverless_cache.security_group_ids[0] #=> String
+    #   resp.serverless_cache.endpoint.address #=> String
+    #   resp.serverless_cache.endpoint.port #=> Integer
+    #   resp.serverless_cache.reader_endpoint.address #=> String
+    #   resp.serverless_cache.reader_endpoint.port #=> Integer
+    #   resp.serverless_cache.arn #=> String
+    #   resp.serverless_cache.user_group_id #=> String
+    #   resp.serverless_cache.subnet_ids #=> Array
+    #   resp.serverless_cache.subnet_ids[0] #=> String
+    #   resp.serverless_cache.snapshot_retention_limit #=> Integer
+    #   resp.serverless_cache.daily_snapshot_time #=> String
+    #   resp.serverless_cache.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
+    #   resp.serverless_cache.connection_type #=> String, one of "vpc", "public"
+    #   resp.serverless_cache.migration.status #=> String
+    #   resp.serverless_cache.migration.migration_endpoint.address #=> String
+    #   resp.serverless_cache.migration.migration_endpoint.port #=> Integer
+    #   resp.serverless_cache.migration.cutover_mode #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/StartMigration AWS API Documentation
     #
@@ -11266,6 +11482,68 @@ module Aws::ElastiCache
     # @param [Hash] params ({})
     def start_migration(params = {}, options = {})
       req = build_request(:start_migration, params)
+      req.send_request(options)
+    end
+
+    # Stops an ongoing data sync between the source and the serverless
+    # cache. The migration remains open and the data sync can be restarted.
+    # This operation is valid only while the migration is syncing; during
+    # cutover it returns `InvalidServerlessCacheStateFault`.
+    #
+    # @option params [required, String] :serverless_cache_name
+    #   The name of the serverless cache for which to stop the data sync.
+    #
+    # @return [Types::StopMigrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopMigrationResponse#serverless_cache #serverless_cache} => Types::ServerlessCache
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_migration({
+    #     serverless_cache_name: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.serverless_cache.serverless_cache_name #=> String
+    #   resp.serverless_cache.description #=> String
+    #   resp.serverless_cache.create_time #=> Time
+    #   resp.serverless_cache.status #=> String
+    #   resp.serverless_cache.engine #=> String
+    #   resp.serverless_cache.major_engine_version #=> String
+    #   resp.serverless_cache.full_engine_version #=> String
+    #   resp.serverless_cache.cache_usage_limits.data_storage.maximum #=> Integer
+    #   resp.serverless_cache.cache_usage_limits.data_storage.minimum #=> Integer
+    #   resp.serverless_cache.cache_usage_limits.data_storage.unit #=> String, one of "GB"
+    #   resp.serverless_cache.cache_usage_limits.ecpu_per_second.maximum #=> Integer
+    #   resp.serverless_cache.cache_usage_limits.ecpu_per_second.minimum #=> Integer
+    #   resp.serverless_cache.kms_key_id #=> String
+    #   resp.serverless_cache.storage_encryption_type #=> String, one of "none", "sse-elasticache", "sse-kms"
+    #   resp.serverless_cache.security_group_ids #=> Array
+    #   resp.serverless_cache.security_group_ids[0] #=> String
+    #   resp.serverless_cache.endpoint.address #=> String
+    #   resp.serverless_cache.endpoint.port #=> Integer
+    #   resp.serverless_cache.reader_endpoint.address #=> String
+    #   resp.serverless_cache.reader_endpoint.port #=> Integer
+    #   resp.serverless_cache.arn #=> String
+    #   resp.serverless_cache.user_group_id #=> String
+    #   resp.serverless_cache.subnet_ids #=> Array
+    #   resp.serverless_cache.subnet_ids[0] #=> String
+    #   resp.serverless_cache.snapshot_retention_limit #=> Integer
+    #   resp.serverless_cache.daily_snapshot_time #=> String
+    #   resp.serverless_cache.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
+    #   resp.serverless_cache.connection_type #=> String, one of "vpc", "public"
+    #   resp.serverless_cache.migration.status #=> String
+    #   resp.serverless_cache.migration.migration_endpoint.address #=> String
+    #   resp.serverless_cache.migration.migration_endpoint.port #=> Integer
+    #   resp.serverless_cache.migration.cutover_mode #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/StopMigration AWS API Documentation
+    #
+    # @overload stop_migration(params = {})
+    # @param [Hash] params ({})
+    def stop_migration(params = {}, options = {})
+      req = build_request(:stop_migration, params)
       req.send_request(options)
     end
 
@@ -11573,7 +11851,7 @@ module Aws::ElastiCache
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.150.0'
+      context[:gem_version] = '1.155.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

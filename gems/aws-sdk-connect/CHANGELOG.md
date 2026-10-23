@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.289.0 (2026-10-22)
+------------------
+
+* Feature - Adds support for customer queryable replication errors.
+
+1.288.0 (2026-10-21)
+------------------
+
+* Feature - Added support for AWS-managed security profiles.
+
+1.287.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.286.0 (2026-10-19)
+------------------
+
+* Feature - Amazon Connect GetAttachedFile API now supports an optional UrlContentDisposition parameter. Set it to INLINE to get a pre-signed URL that displays the file in the browser, so agents can preview email attachments without downloading them. ATTACHMENT (download) remains the default.
+
+1.285.0 (2026-10-13)
+------------------
+
+* Feature - New APIs to support aliases and versions for ContactFlow.
+
+1.284.0 (2026-09-30)
+------------------
+
+* Feature - Amazon Connect Rules can now trigger in-app notifications to users as a rule action. Notification character limit was increased to 500 visible characters.
+
+1.283.0 (2026-09-28)
+------------------
+
+* Feature - This release adds ConnectionTypes and ChatStreamingConfiguration to StartChatContact, and ConnectionCredentials, Websocket, and StreamingId to its response, so customers can request connection information and chat streaming in the same call that starts the chat.
+
+1.282.0 (2026-09-25)
+------------------
+
+* Feature - Agent Privacy During Hold is a new privacy capability for Amazon Connect Voice that prevents agent audio from being captured in call recordings or Contact Lens conversational analytics during hold. When enabled, agents are automatically muted on entering hold and unmuted on resuming the contact
+
 1.281.0 (2026-09-18)
 ------------------
 

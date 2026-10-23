@@ -113,7 +113,9 @@ module Aws::Kinesis
     #   @return [Types::S3TablesDestinationDescription]
     #
     # @!attribute [rw] encryption_configuration
-    #   The server-side encryption configuration for the channel.
+    #   The Amazon Web Services KMS key configuration that Amazon Kinesis
+    #   Data Streams uses to encrypt data delivered to the channel's
+    #   destination.
     #   @return [Types::ChannelEncryptionConfiguration]
     #
     # @!attribute [rw] logging_configuration
@@ -179,7 +181,8 @@ module Aws::Kinesis
     # in UpdateChannel.
     #
     # @!attribute [rw] cloud_watch_logs
-    #   The updated Amazon CloudWatch Logs settings for the channel.
+    #   The updated Amazon CloudWatch Logs settings, including whether
+    #   logging is enabled and the target log group and log stream.
     #   @return [Types::CloudWatchLogsUpdateInput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ChannelLoggingUpdateInput AWS API Documentation
@@ -488,15 +491,14 @@ module Aws::Kinesis
     #
     # @!attribute [rw] s3_destination_configuration
     #   The configuration for delivery to a general purpose Amazon S3
-    #   bucket. You must specify either `S3DestinationConfiguration` or
-    #   `S3TablesDestinationConfiguration`, but not both.
+    #   bucket. Specify this parameter when
+    #   `S3TablesDestinationConfiguration` is not specified.
     #   @return [Types::S3DestinationConfiguration]
     #
     # @!attribute [rw] s3_tables_destination_configuration
     #   The configuration for delivery to streaming tables on Apache Iceberg
-    #   in Amazon S3 Tables. You must specify either
-    #   `S3DestinationConfiguration` or `S3TablesDestinationConfiguration`,
-    #   but not both.
+    #   in Amazon S3 Tables. Specify this parameter when
+    #   `S3DestinationConfiguration` is not specified.
     #   @return [Types::S3TablesDestinationConfiguration]
     #
     # @!attribute [rw] encryption_configuration
@@ -529,7 +531,9 @@ module Aws::Kinesis
     end
 
     # @!attribute [rw] channel_description
-    #   The configuration and current status of the channel.
+    #   The configuration and current status of the channel, including its
+    #   ARN, destination configuration, and lifecycle state. Immediately
+    #   after creation, the state is `CREATING`.
     #   @return [Types::ChannelDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/CreateChannelOutput AWS API Documentation
@@ -580,6 +584,25 @@ module Aws::Kinesis
     #   you can write to, and read from a stream.
     #   @return [Integer]
     #
+    # @!attribute [rw] record_distribution_strategy
+    #   The record distribution strategy for the stream, which determines
+    #   how Amazon Kinesis Data Streams distributes records across shards.
+    #   Specify one of the following values:
+    #
+    #   * `AUTO` – Amazon Kinesis Data Streams distributes records evenly
+    #     across shards and ignores any partition key and `ExplicitHashKey`
+    #     that producers supply. Use this value for stateless workloads that
+    #     do not require partition-key ordering.
+    #
+    #   * `USER_PARTITION_KEY` – Producers must supply a partition key,
+    #     which Amazon Kinesis Data Streams uses to determine shard
+    #     placement. This is the default.
+    #
+    #   The record distribution strategy is only supported for streams that
+    #   use the on-demand capacity mode. If you do not specify this
+    #   parameter, the stream uses `USER_PARTITION_KEY`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/CreateStreamInput AWS API Documentation
     #
     class CreateStreamInput < Struct.new(
@@ -588,7 +611,8 @@ module Aws::Kinesis
       :stream_mode_details,
       :tags,
       :warm_throughput_mi_bps,
-      :max_record_size_in_ki_b)
+      :max_record_size_in_ki_b,
+      :record_distribution_strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -780,7 +804,8 @@ module Aws::Kinesis
     end
 
     # @!attribute [rw] channel_description
-    #   The configuration and current status of the channel.
+    #   The configuration and current status of the channel, including its
+    #   ARN, source stream, destination configuration, and lifecycle state.
     #   @return [Types::ChannelDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeChannelOutput AWS API Documentation
@@ -1618,8 +1643,7 @@ module Aws::Kinesis
     #
     # @!attribute [rw] next_token
     #   The pagination token returned by a previous call. Specify this token
-    #   to retrieve the next page of results. This value is `null` when
-    #   there are no more results to return.
+    #   to retrieve the next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListChannelsInput AWS API Documentation
@@ -2226,6 +2250,15 @@ module Aws::Kinesis
     #   values and to map associated data records to shards. As a result of
     #   this hashing mechanism, all data records with the same partition key
     #   map to the same shard within the stream.
+    #
+    #   If the stream uses the `USER_PARTITION_KEY` record distribution
+    #   strategy (the default), a partition key is required. If the stream
+    #   uses the `AUTO` record distribution strategy, the partition key is
+    #   optional and any value you provide is ignored, along with any
+    #   `ExplicitHashKey` you provide. In that case, Amazon Kinesis Data
+    #   Streams distributes the record across shards using service-managed
+    #   algorithms. For more information, see
+    #   `UpdateStreamRecordDistributionStrategy`.
     #   @return [String]
     #
     # @!attribute [rw] explicit_hash_key
@@ -2397,6 +2430,15 @@ module Aws::Kinesis
     #   values and to map associated data records to shards. As a result of
     #   this hashing mechanism, all data records with the same partition key
     #   map to the same shard within the stream.
+    #
+    #   If the stream uses the `USER_PARTITION_KEY` record distribution
+    #   strategy (the default), a partition key is required for each record.
+    #   If the stream uses the `AUTO` record distribution strategy, the
+    #   partition key is optional and any value you provide is ignored,
+    #   along with any `ExplicitHashKey` you provide. In that case, Amazon
+    #   Kinesis Data Streams distributes records across shards using
+    #   service-managed algorithms. For more information, see
+    #   `UpdateStreamRecordDistributionStrategy`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutRecordsRequestEntry AWS API Documentation
@@ -2493,6 +2535,12 @@ module Aws::Kinesis
     #
     # @!attribute [rw] partition_key
     #   Identifies which shard in the stream the data record is assigned to.
+    #
+    #   For a stream that uses the `AUTO` record distribution strategy, this
+    #   value is not returned if the producer did not provide a partition
+    #   key when writing the record. If the producer provided a partition
+    #   key, the original value is returned even though it was not used to
+    #   determine shard placement.
     #   @return [String]
     #
     # @!attribute [rw] encryption_type
@@ -2538,8 +2586,7 @@ module Aws::Kinesis
     # @!attribute [rw] gsr_schema_arn
     #   The Amazon Resource Name (ARN) of the Amazon Web Services Glue
     #   Schema Registry schema used to validate records. Required when the
-    #   channel destination is a streaming table (Amazon S3 Tables), for
-    #   both the `JSON` and `GSR_JSON` record formats.
+    #   channel destination is a streaming table.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/RecordConfiguration AWS API Documentation
@@ -2667,8 +2714,8 @@ module Aws::Kinesis
     # Used in CreateChannel.
     #
     # @!attribute [rw] data_freshness_in_seconds
-    #   The maximum age, in seconds, of undelivered data. Valid range is 300
-    #   to 900 seconds (5 to 15 minutes). The default value is 300 seconds.
+    #   The maximum age, in seconds, of undelivered data before the channel
+    #   delivers it to the destination. The default value is 300 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] dead_letter_queue_s3_configuration
@@ -2722,8 +2769,8 @@ module Aws::Kinesis
     # Used in UpdateChannel. Only `DataFreshnessInSeconds` can be updated.
     #
     # @!attribute [rw] data_freshness_in_seconds
-    #   The maximum age, in seconds, of undelivered data. Valid range is 300
-    #   to 900 seconds (5 to 15 minutes).
+    #   The maximum age, in seconds, of undelivered data before the channel
+    #   delivers it to the destination.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/S3DestinationUpdateInput AWS API Documentation
@@ -2755,8 +2802,8 @@ module Aws::Kinesis
     # @!attribute [rw] storage_class
     #   The Amazon S3 storage class for delivered objects. Valid values:
     #
-    #   * `STANDARD` - Default storage class for frequently accessed data.
-    #     (default)
+    #   * `STANDARD` - The default storage class, for frequently accessed
+    #     data.
     #
     #   * `INTELLIGENT_TIERING` - Automatically moves objects to the most
     #     cost-effective access tier based on usage patterns.
@@ -2832,8 +2879,8 @@ module Aws::Kinesis
     # Used in CreateChannel.
     #
     # @!attribute [rw] data_freshness_in_seconds
-    #   The maximum age, in seconds, of undelivered data. Valid range is 300
-    #   to 900 seconds (5 to 15 minutes). The default value is 300 seconds.
+    #   The maximum age, in seconds, of undelivered data before the channel
+    #   delivers it to the destination. The default value is 300 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] dead_letter_queue_s3_configuration
@@ -2886,8 +2933,8 @@ module Aws::Kinesis
     # UpdateChannel. Only `DataFreshnessInSeconds` can be updated.
     #
     # @!attribute [rw] data_freshness_in_seconds
-    #   The maximum age, in seconds, of undelivered data. Valid range is 300
-    #   to 900 seconds (5 to 15 minutes).
+    #   The maximum age, in seconds, of undelivered data before the channel
+    #   delivers it to the destination.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/S3TablesDestinationUpdateInput AWS API Documentation
@@ -3416,6 +3463,15 @@ module Aws::Kinesis
     #   The number of channels associated with the stream.
     #   @return [Integer]
     #
+    # @!attribute [rw] record_distribution_strategy
+    #   The record distribution strategy that the stream currently uses. A
+    #   value of `AUTO` indicates that Amazon Kinesis Data Streams
+    #   distributes records across shards using service-managed algorithms.
+    #   A value of `USER_PARTITION_KEY` indicates that shard placement is
+    #   determined by the partition key that producers supply. This field is
+    #   only present for streams that use the on-demand capacity mode.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StreamDescriptionSummary AWS API Documentation
     #
     class StreamDescriptionSummary < Struct.new(
@@ -3433,7 +3489,8 @@ module Aws::Kinesis
       :consumer_count,
       :warm_throughput,
       :max_record_size_in_ki_b,
-      :channel_count)
+      :channel_count,
+      :record_distribution_strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3710,12 +3767,16 @@ module Aws::Kinesis
     #
     # @!attribute [rw] s3_destination_configuration
     #   The updated configuration for a general purpose Amazon S3
-    #   destination. Only `DataFreshnessInSeconds` can be updated.
+    #   destination. Specify this parameter when the channel delivers to a
+    #   general purpose Amazon S3 bucket. Only `DataFreshnessInSeconds` can
+    #   be updated.
     #   @return [Types::S3DestinationUpdateInput]
     #
     # @!attribute [rw] s3_tables_destination_configuration
-    #   The updated configuration for a streaming table destination. Only
-    #   `DataFreshnessInSeconds` can be updated.
+    #   The updated configuration for a streaming table destination. Specify
+    #   this parameter when the channel delivers to streaming tables on
+    #   Apache Iceberg in Amazon S3 Tables. Only `DataFreshnessInSeconds`
+    #   can be updated.
     #   @return [Types::S3TablesDestinationUpdateInput]
     #
     # @!attribute [rw] logging_configuration
@@ -3734,7 +3795,9 @@ module Aws::Kinesis
     end
 
     # @!attribute [rw] channel_description
-    #   The configuration and current status of the updated channel.
+    #   The configuration and current status of the channel after the
+    #   update, including its ARN, destination configuration, and lifecycle
+    #   state. Immediately after the request, the state is `UPDATING`.
     #   @return [Types::ChannelDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateChannelOutput AWS API Documentation
@@ -3873,6 +3936,37 @@ module Aws::Kinesis
       :stream_id,
       :stream_mode_details,
       :warm_throughput_mi_bps)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] stream_arn
+    #   The Amazon Resource Name (ARN) of the stream to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_id
+    #   Not Implemented. Reserved for future use.
+    #   @return [String]
+    #
+    # @!attribute [rw] record_distribution_strategy
+    #   The record distribution strategy to apply to the stream. Specify one
+    #   of the following values:
+    #
+    #   * `AUTO` – Amazon Kinesis Data Streams distributes records evenly
+    #     across shards and ignores any partition key and `ExplicitHashKey`
+    #     that producers supply.
+    #
+    #   * `USER_PARTITION_KEY` – Producers must supply a partition key,
+    #     which Amazon Kinesis Data Streams uses to determine shard
+    #     placement. This is the default.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateStreamRecordDistributionStrategyInput AWS API Documentation
+    #
+    class UpdateStreamRecordDistributionStrategyInput < Struct.new(
+      :stream_arn,
+      :stream_id,
+      :record_distribution_strategy)
       SENSITIVE = []
       include Aws::Structure
     end

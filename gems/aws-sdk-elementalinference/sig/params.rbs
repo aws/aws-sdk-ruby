@@ -35,7 +35,8 @@ module Aws
       }?,
       subtitling: Params::subtitling_config?,
       contextual_metadata: {
-        summary_generation: ("ENABLED" | "DISABLED")?
+        summary_generation: ("ENABLED" | "DISABLED")?,
+        extended_analysis: ("ENABLED" | "DISABLED")?
       }?
     }
 

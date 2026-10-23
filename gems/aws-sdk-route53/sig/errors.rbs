@@ -11,212 +11,212 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class CidrBlockInUseException < ::Aws::Errors::ServiceError
+      class CidrBlockInUseException < ServiceError
         def message: () -> ::String
       end
-      class CidrCollectionAlreadyExistsException < ::Aws::Errors::ServiceError
+      class CidrCollectionAlreadyExistsException < ServiceError
         def message: () -> ::String
       end
-      class CidrCollectionInUseException < ::Aws::Errors::ServiceError
+      class CidrCollectionInUseException < ServiceError
         def message: () -> ::String
       end
-      class CidrCollectionVersionMismatchException < ::Aws::Errors::ServiceError
+      class CidrCollectionVersionMismatchException < ServiceError
         def message: () -> ::String
       end
-      class ConcurrentModification < ::Aws::Errors::ServiceError
+      class ConcurrentModification < ServiceError
         def message: () -> ::String
       end
-      class ConflictingDomainExists < ::Aws::Errors::ServiceError
+      class ConflictingDomainExists < ServiceError
         def message: () -> ::String
       end
-      class ConflictingTypes < ::Aws::Errors::ServiceError
+      class ConflictingTypes < ServiceError
         def message: () -> ::String
       end
-      class DNSSECNotFound < ::Aws::Errors::ServiceError
+      class DNSSECNotFound < ServiceError
         def message: () -> ::String
       end
-      class DelegationSetAlreadyCreated < ::Aws::Errors::ServiceError
+      class DelegationSetAlreadyCreated < ServiceError
         def message: () -> ::String
       end
-      class DelegationSetAlreadyReusable < ::Aws::Errors::ServiceError
+      class DelegationSetAlreadyReusable < ServiceError
         def message: () -> ::String
       end
-      class DelegationSetInUse < ::Aws::Errors::ServiceError
+      class DelegationSetInUse < ServiceError
         def message: () -> ::String
       end
-      class DelegationSetNotAvailable < ::Aws::Errors::ServiceError
+      class DelegationSetNotAvailable < ServiceError
         def message: () -> ::String
       end
-      class DelegationSetNotReusable < ::Aws::Errors::ServiceError
+      class DelegationSetNotReusable < ServiceError
         def message: () -> ::String
       end
-      class HealthCheckAlreadyExists < ::Aws::Errors::ServiceError
+      class HealthCheckAlreadyExists < ServiceError
         def message: () -> ::String
       end
-      class HealthCheckInUse < ::Aws::Errors::ServiceError
+      class HealthCheckInUse < ServiceError
         def message: () -> ::String
       end
-      class HealthCheckVersionMismatch < ::Aws::Errors::ServiceError
+      class HealthCheckVersionMismatch < ServiceError
         def message: () -> ::String
       end
-      class HostedZoneAlreadyExists < ::Aws::Errors::ServiceError
+      class HostedZoneAlreadyExists < ServiceError
         def message: () -> ::String
       end
-      class HostedZoneNotEmpty < ::Aws::Errors::ServiceError
+      class HostedZoneNotEmpty < ServiceError
         def message: () -> ::String
       end
-      class HostedZoneNotFound < ::Aws::Errors::ServiceError
+      class HostedZoneNotFound < ServiceError
         def message: () -> ::String
       end
-      class HostedZoneNotPrivate < ::Aws::Errors::ServiceError
+      class HostedZoneNotPrivate < ServiceError
         def message: () -> ::String
       end
-      class HostedZonePartiallyDelegated < ::Aws::Errors::ServiceError
+      class HostedZonePartiallyDelegated < ServiceError
         def message: () -> ::String
       end
-      class IncompatibleVersion < ::Aws::Errors::ServiceError
+      class IncompatibleVersion < ServiceError
         def message: () -> ::String
       end
-      class InsufficientCloudWatchLogsResourcePolicy < ::Aws::Errors::ServiceError
+      class InsufficientCloudWatchLogsResourcePolicy < ServiceError
         def message: () -> ::String
       end
-      class InvalidArgument < ::Aws::Errors::ServiceError
+      class InvalidArgument < ServiceError
         def message: () -> ::String
       end
-      class InvalidChangeBatch < ::Aws::Errors::ServiceError
+      class InvalidChangeBatch < ServiceError
         def messages: () -> ::String
         def message: () -> ::String
       end
-      class InvalidDomainName < ::Aws::Errors::ServiceError
+      class InvalidDomainName < ServiceError
         def message: () -> ::String
       end
-      class InvalidInput < ::Aws::Errors::ServiceError
+      class InvalidInput < ServiceError
         def message: () -> ::String
       end
-      class InvalidKMSArn < ::Aws::Errors::ServiceError
+      class InvalidKMSArn < ServiceError
         def message: () -> ::String
       end
-      class InvalidKeySigningKeyName < ::Aws::Errors::ServiceError
+      class InvalidKeySigningKeyName < ServiceError
         def message: () -> ::String
       end
-      class InvalidKeySigningKeyStatus < ::Aws::Errors::ServiceError
+      class InvalidKeySigningKeyStatus < ServiceError
         def message: () -> ::String
       end
-      class InvalidPaginationToken < ::Aws::Errors::ServiceError
+      class InvalidPaginationToken < ServiceError
         def message: () -> ::String
       end
-      class InvalidSigningStatus < ::Aws::Errors::ServiceError
+      class InvalidSigningStatus < ServiceError
         def message: () -> ::String
       end
-      class InvalidTrafficPolicyDocument < ::Aws::Errors::ServiceError
+      class InvalidTrafficPolicyDocument < ServiceError
         def message: () -> ::String
       end
-      class InvalidVPCId < ::Aws::Errors::ServiceError
+      class InvalidVPCId < ServiceError
         def message: () -> ::String
       end
-      class KeySigningKeyAlreadyExists < ::Aws::Errors::ServiceError
+      class KeySigningKeyAlreadyExists < ServiceError
         def message: () -> ::String
       end
-      class KeySigningKeyInParentDSRecord < ::Aws::Errors::ServiceError
+      class KeySigningKeyInParentDSRecord < ServiceError
         def message: () -> ::String
       end
-      class KeySigningKeyInUse < ::Aws::Errors::ServiceError
+      class KeySigningKeyInUse < ServiceError
         def message: () -> ::String
       end
-      class KeySigningKeyWithActiveStatusNotFound < ::Aws::Errors::ServiceError
+      class KeySigningKeyWithActiveStatusNotFound < ServiceError
         def message: () -> ::String
       end
-      class LastVPCAssociation < ::Aws::Errors::ServiceError
+      class LastVPCAssociation < ServiceError
         def message: () -> ::String
       end
-      class LimitsExceeded < ::Aws::Errors::ServiceError
+      class LimitsExceeded < ServiceError
         def message: () -> ::String
       end
-      class NoSuchChange < ::Aws::Errors::ServiceError
+      class NoSuchChange < ServiceError
         def message: () -> ::String
       end
-      class NoSuchCidrCollectionException < ::Aws::Errors::ServiceError
+      class NoSuchCidrCollectionException < ServiceError
         def message: () -> ::String
       end
-      class NoSuchCidrLocationException < ::Aws::Errors::ServiceError
+      class NoSuchCidrLocationException < ServiceError
         def message: () -> ::String
       end
-      class NoSuchCloudWatchLogsLogGroup < ::Aws::Errors::ServiceError
+      class NoSuchCloudWatchLogsLogGroup < ServiceError
         def message: () -> ::String
       end
-      class NoSuchDelegationSet < ::Aws::Errors::ServiceError
+      class NoSuchDelegationSet < ServiceError
         def message: () -> ::String
       end
-      class NoSuchGeoLocation < ::Aws::Errors::ServiceError
+      class NoSuchGeoLocation < ServiceError
         def message: () -> ::String
       end
-      class NoSuchHealthCheck < ::Aws::Errors::ServiceError
+      class NoSuchHealthCheck < ServiceError
         def message: () -> ::String
       end
-      class NoSuchHostedZone < ::Aws::Errors::ServiceError
+      class NoSuchHostedZone < ServiceError
         def message: () -> ::String
       end
-      class NoSuchKeySigningKey < ::Aws::Errors::ServiceError
+      class NoSuchKeySigningKey < ServiceError
         def message: () -> ::String
       end
-      class NoSuchQueryLoggingConfig < ::Aws::Errors::ServiceError
+      class NoSuchQueryLoggingConfig < ServiceError
         def message: () -> ::String
       end
-      class NoSuchTrafficPolicy < ::Aws::Errors::ServiceError
+      class NoSuchTrafficPolicy < ServiceError
         def message: () -> ::String
       end
-      class NoSuchTrafficPolicyInstance < ::Aws::Errors::ServiceError
+      class NoSuchTrafficPolicyInstance < ServiceError
         def message: () -> ::String
       end
-      class NotAuthorizedException < ::Aws::Errors::ServiceError
+      class NotAuthorizedException < ServiceError
         def message: () -> ::String
       end
-      class PriorRequestNotComplete < ::Aws::Errors::ServiceError
+      class PriorRequestNotComplete < ServiceError
         def message: () -> ::String
       end
-      class PublicZoneVPCAssociation < ::Aws::Errors::ServiceError
+      class PublicZoneVPCAssociation < ServiceError
         def message: () -> ::String
       end
-      class QueryLoggingConfigAlreadyExists < ::Aws::Errors::ServiceError
+      class QueryLoggingConfigAlreadyExists < ServiceError
         def message: () -> ::String
       end
-      class ThrottlingException < ::Aws::Errors::ServiceError
+      class ThrottlingException < ServiceError
         def message: () -> ::String
       end
-      class TooManyHealthChecks < ::Aws::Errors::ServiceError
+      class TooManyHealthChecks < ServiceError
         def message: () -> ::String
       end
-      class TooManyHostedZones < ::Aws::Errors::ServiceError
+      class TooManyHostedZones < ServiceError
         def message: () -> ::String
       end
-      class TooManyKeySigningKeys < ::Aws::Errors::ServiceError
+      class TooManyKeySigningKeys < ServiceError
         def message: () -> ::String
       end
-      class TooManyTrafficPolicies < ::Aws::Errors::ServiceError
+      class TooManyTrafficPolicies < ServiceError
         def message: () -> ::String
       end
-      class TooManyTrafficPolicyInstances < ::Aws::Errors::ServiceError
+      class TooManyTrafficPolicyInstances < ServiceError
         def message: () -> ::String
       end
-      class TooManyTrafficPolicyVersionsForCurrentPolicy < ::Aws::Errors::ServiceError
+      class TooManyTrafficPolicyVersionsForCurrentPolicy < ServiceError
         def message: () -> ::String
       end
-      class TooManyVPCAssociationAuthorizations < ::Aws::Errors::ServiceError
+      class TooManyVPCAssociationAuthorizations < ServiceError
         def message: () -> ::String
       end
-      class TrafficPolicyAlreadyExists < ::Aws::Errors::ServiceError
+      class TrafficPolicyAlreadyExists < ServiceError
         def message: () -> ::String
       end
-      class TrafficPolicyInUse < ::Aws::Errors::ServiceError
+      class TrafficPolicyInUse < ServiceError
         def message: () -> ::String
       end
-      class TrafficPolicyInstanceAlreadyExists < ::Aws::Errors::ServiceError
+      class TrafficPolicyInstanceAlreadyExists < ServiceError
         def message: () -> ::String
       end
-      class VPCAssociationAuthorizationNotFound < ::Aws::Errors::ServiceError
+      class VPCAssociationAuthorizationNotFound < ServiceError
         def message: () -> ::String
       end
-      class VPCAssociationNotFound < ::Aws::Errors::ServiceError
+      class VPCAssociationNotFound < ServiceError
         def message: () -> ::String
       end
     end

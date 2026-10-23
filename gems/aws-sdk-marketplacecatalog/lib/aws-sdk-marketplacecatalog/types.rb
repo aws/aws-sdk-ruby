@@ -1373,6 +1373,11 @@ module Aws::MarketplaceCatalog
     #   An object that contains summary information about the offer set.
     #   @return [Types::OfferSetSummary]
     #
+    # @!attribute [rw] express_private_offer_configuration_summary
+    #   An object that contains summary information about the express
+    #   private offer configuration.
+    #   @return [Types::ExpressPrivateOfferConfigurationSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/EntitySummary AWS API Documentation
     #
     class EntitySummary < Struct.new(
@@ -1389,7 +1394,8 @@ module Aws::MarketplaceCatalog
       :offer_summary,
       :resale_authorization_summary,
       :machine_learning_product_summary,
-      :offer_set_summary)
+      :offer_set_summary,
+      :express_private_offer_configuration_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1432,6 +1438,10 @@ module Aws::MarketplaceCatalog
     #   A filter for offer sets.
     #   @return [Types::OfferSetFilters]
     #
+    # @!attribute [rw] express_private_offer_configuration_filters
+    #   A filter for express private offer configurations.
+    #   @return [Types::ExpressPrivateOfferConfigurationFilters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/EntityTypeFilters AWS API Documentation
     #
     class EntityTypeFilters < Struct.new(
@@ -1443,6 +1453,7 @@ module Aws::MarketplaceCatalog
       :resale_authorization_filters,
       :machine_learning_product_filters,
       :offer_set_filters,
+      :express_private_offer_configuration_filters,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -1456,6 +1467,7 @@ module Aws::MarketplaceCatalog
       class ResaleAuthorizationFilters < EntityTypeFilters; end
       class MachineLearningProductFilters < EntityTypeFilters; end
       class OfferSetFilters < EntityTypeFilters; end
+      class ExpressPrivateOfferConfigurationFilters < EntityTypeFilters; end
       class Unknown < EntityTypeFilters; end
     end
 
@@ -1495,6 +1507,10 @@ module Aws::MarketplaceCatalog
     #   A sort for offer sets.
     #   @return [Types::OfferSetSort]
     #
+    # @!attribute [rw] express_private_offer_configuration_sort
+    #   A sort for express private offer configurations.
+    #   @return [Types::ExpressPrivateOfferConfigurationSort]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/EntityTypeSort AWS API Documentation
     #
     class EntityTypeSort < Struct.new(
@@ -1506,6 +1522,7 @@ module Aws::MarketplaceCatalog
       :resale_authorization_sort,
       :machine_learning_product_sort,
       :offer_set_sort,
+      :express_private_offer_configuration_sort,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -1519,6 +1536,7 @@ module Aws::MarketplaceCatalog
       class ResaleAuthorizationSort < EntityTypeSort; end
       class MachineLearningProductSort < EntityTypeSort; end
       class OfferSetSort < EntityTypeSort; end
+      class ExpressPrivateOfferConfigurationSort < EntityTypeSort; end
       class Unknown < EntityTypeSort; end
     end
 
@@ -1558,6 +1576,129 @@ module Aws::MarketplaceCatalog
     class ErrorScope < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter for the `EntityId` of an express private offer
+    # configuration.
+    #
+    # @!attribute [rw] value_list
+    #   A list of `EntityId` values to filter on.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ExpressPrivateOfferConfigurationEntityIdFilter AWS API Documentation
+    #
+    class ExpressPrivateOfferConfigurationEntityIdFilter < Struct.new(
+      :value_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter fields for the express private offer configuration entity.
+    #
+    # @!attribute [rw] entity_id
+    #   You can filter on the `EntityId` of an express private offer
+    #   configuration.
+    #   @return [Types::ExpressPrivateOfferConfigurationEntityIdFilter]
+    #
+    # @!attribute [rw] product_id
+    #   You can filter on the `ProductId` of an express private offer
+    #   configuration.
+    #   @return [Types::ExpressPrivateOfferConfigurationProductIdFilter]
+    #
+    # @!attribute [rw] state
+    #   The state of the express private offer configuration to filter on.
+    #   Valid values are the following:
+    #
+    #   * `ACTIVE` – The configuration is active and you can use it to
+    #     generate offers.
+    #
+    #   * `INACTIVE` – The configuration is deprecated or deleted.
+    #   @return [Types::ExpressPrivateOfferConfigurationStateFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ExpressPrivateOfferConfigurationFilters AWS API Documentation
+    #
+    class ExpressPrivateOfferConfigurationFilters < Struct.new(
+      :entity_id,
+      :product_id,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter for the `ProductId` of an express private offer
+    # configuration.
+    #
+    # @!attribute [rw] value_list
+    #   A list of `ProductId` values to filter on.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ExpressPrivateOfferConfigurationProductIdFilter AWS API Documentation
+    #
+    class ExpressPrivateOfferConfigurationProductIdFilter < Struct.new(
+      :value_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The sort fields for express private offer configurations.
+    #
+    # @!attribute [rw] sort_by
+    #   The field to sort by. Valid values are `EntityId`,
+    #   `LastModifiedDate`, `ProductId`, and `State`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sorting order. Valid values are `ASCENDING` and `DESCENDING`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ExpressPrivateOfferConfigurationSort AWS API Documentation
+    #
+    class ExpressPrivateOfferConfigurationSort < Struct.new(
+      :sort_by,
+      :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter for the `State` of an express private offer configuration.
+    #
+    # @!attribute [rw] value_list
+    #   A list of `State` values to filter on. Valid values are `ACTIVE` and
+    #   `INACTIVE`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ExpressPrivateOfferConfigurationStateFilter AWS API Documentation
+    #
+    class ExpressPrivateOfferConfigurationStateFilter < Struct.new(
+      :value_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summarized information about an express private offer configuration.
+    #
+    # @!attribute [rw] product_id
+    #   The product ID associated with the express private offer
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the express private offer configuration. Valid values
+    #   are the following:
+    #
+    #   * `ACTIVE` – The configuration is active and you can use it to
+    #     generate offers.
+    #
+    #   * `INACTIVE` – The configuration is deprecated or deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ExpressPrivateOfferConfigurationSummary AWS API Documentation
+    #
+    class ExpressPrivateOfferConfigurationSummary < Struct.new(
+      :product_id,
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end

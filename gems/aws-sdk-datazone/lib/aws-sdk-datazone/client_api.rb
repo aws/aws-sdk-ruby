@@ -144,12 +144,14 @@ module Aws::DataZone
     BatchPutAttributeOutput = Shapes::StructureShape.new(name: 'BatchPutAttributeOutput')
     BatchPutAttributesMetadataInput = Shapes::StructureShape.new(name: 'BatchPutAttributesMetadataInput')
     BatchPutAttributesMetadataOutput = Shapes::StructureShape.new(name: 'BatchPutAttributesMetadataOutput')
+    BlueprintCategory = Shapes::StringShape.new(name: 'BlueprintCategory')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BusinessNameGenerationConfiguration = Shapes::StructureShape.new(name: 'BusinessNameGenerationConfiguration')
     CancelMetadataGenerationRunInput = Shapes::StructureShape.new(name: 'CancelMetadataGenerationRunInput')
     CancelMetadataGenerationRunOutput = Shapes::StructureShape.new(name: 'CancelMetadataGenerationRunOutput')
     CancelSubscriptionInput = Shapes::StructureShape.new(name: 'CancelSubscriptionInput')
     CancelSubscriptionOutput = Shapes::StructureShape.new(name: 'CancelSubscriptionOutput')
+    CedarDesignationPolicy = Shapes::StringShape.new(name: 'CedarDesignationPolicy')
     CellInformation = Shapes::StructureShape.new(name: 'CellInformation')
     CellOrder = Shapes::ListShape.new(name: 'CellOrder')
     ChangeAction = Shapes::StringShape.new(name: 'ChangeAction')
@@ -216,6 +218,8 @@ module Aws::DataZone
     CreateDataSourceInputEnvironmentIdentifierString = Shapes::StringShape.new(name: 'CreateDataSourceInputEnvironmentIdentifierString')
     CreateDataSourceInputProjectIdentifierString = Shapes::StringShape.new(name: 'CreateDataSourceInputProjectIdentifierString')
     CreateDataSourceOutput = Shapes::StructureShape.new(name: 'CreateDataSourceOutput')
+    CreateDesignationInput = Shapes::StructureShape.new(name: 'CreateDesignationInput')
+    CreateDesignationOutput = Shapes::StructureShape.new(name: 'CreateDesignationOutput')
     CreateDomainInput = Shapes::StructureShape.new(name: 'CreateDomainInput')
     CreateDomainOutput = Shapes::StructureShape.new(name: 'CreateDomainOutput')
     CreateDomainUnitInput = Shapes::StructureShape.new(name: 'CreateDomainUnitInput')
@@ -327,6 +331,8 @@ module Aws::DataZone
     DeleteDataProductOutput = Shapes::StructureShape.new(name: 'DeleteDataProductOutput')
     DeleteDataSourceInput = Shapes::StructureShape.new(name: 'DeleteDataSourceInput')
     DeleteDataSourceOutput = Shapes::StructureShape.new(name: 'DeleteDataSourceOutput')
+    DeleteDesignationInput = Shapes::StructureShape.new(name: 'DeleteDesignationInput')
+    DeleteDesignationOutput = Shapes::StructureShape.new(name: 'DeleteDesignationOutput')
     DeleteDomainInput = Shapes::StructureShape.new(name: 'DeleteDomainInput')
     DeleteDomainOutput = Shapes::StructureShape.new(name: 'DeleteDomainOutput')
     DeleteDomainUnitInput = Shapes::StructureShape.new(name: 'DeleteDomainUnitInput')
@@ -375,6 +381,11 @@ module Aws::DataZone
     DeploymentStatus = Shapes::StringShape.new(name: 'DeploymentStatus')
     DeploymentType = Shapes::StringShape.new(name: 'DeploymentType')
     Description = Shapes::StringShape.new(name: 'Description')
+    DesignationId = Shapes::StringShape.new(name: 'DesignationId')
+    DesignationName = Shapes::StringShape.new(name: 'DesignationName')
+    DesignationSummaries = Shapes::ListShape.new(name: 'DesignationSummaries')
+    DesignationSummary = Shapes::StructureShape.new(name: 'DesignationSummary')
+    DesignationType = Shapes::StringShape.new(name: 'DesignationType')
     DetailedGlossaryTerm = Shapes::StructureShape.new(name: 'DetailedGlossaryTerm')
     DetailedGlossaryTerms = Shapes::ListShape.new(name: 'DetailedGlossaryTerms')
     DisassociateEnvironmentRoleInput = Shapes::StructureShape.new(name: 'DisassociateEnvironmentRoleInput')
@@ -513,6 +524,8 @@ module Aws::DataZone
     GetDataSourceOutput = Shapes::StructureShape.new(name: 'GetDataSourceOutput')
     GetDataSourceRunInput = Shapes::StructureShape.new(name: 'GetDataSourceRunInput')
     GetDataSourceRunOutput = Shapes::StructureShape.new(name: 'GetDataSourceRunOutput')
+    GetDesignationInput = Shapes::StructureShape.new(name: 'GetDesignationInput')
+    GetDesignationOutput = Shapes::StructureShape.new(name: 'GetDesignationOutput')
     GetDomainInput = Shapes::StructureShape.new(name: 'GetDomainInput')
     GetDomainOutput = Shapes::StructureShape.new(name: 'GetDomainOutput')
     GetDomainUnitInput = Shapes::StructureShape.new(name: 'GetDomainUnitInput')
@@ -735,6 +748,9 @@ module Aws::DataZone
     ListDataSourceRunsOutput = Shapes::StructureShape.new(name: 'ListDataSourceRunsOutput')
     ListDataSourcesInput = Shapes::StructureShape.new(name: 'ListDataSourcesInput')
     ListDataSourcesOutput = Shapes::StructureShape.new(name: 'ListDataSourcesOutput')
+    ListDesignationsInput = Shapes::StructureShape.new(name: 'ListDesignationsInput')
+    ListDesignationsMaxResults = Shapes::IntegerShape.new(name: 'ListDesignationsMaxResults')
+    ListDesignationsOutput = Shapes::StructureShape.new(name: 'ListDesignationsOutput')
     ListDomainUnitsForParentInput = Shapes::StructureShape.new(name: 'ListDomainUnitsForParentInput')
     ListDomainUnitsForParentOutput = Shapes::StructureShape.new(name: 'ListDomainUnitsForParentOutput')
     ListDomainsInput = Shapes::StructureShape.new(name: 'ListDomainsInput')
@@ -867,6 +883,7 @@ module Aws::DataZone
     NotebookSummary = Shapes::StructureShape.new(name: 'NotebookSummary')
     NotebookSummaryList = Shapes::ListShape.new(name: 'NotebookSummaryList')
     NotebookType = Shapes::StringShape.new(name: 'NotebookType')
+    NotificationConfig = Shapes::StructureShape.new(name: 'NotificationConfig')
     NotificationOutput = Shapes::StructureShape.new(name: 'NotificationOutput')
     NotificationResource = Shapes::StructureShape.new(name: 'NotificationResource')
     NotificationResourceType = Shapes::StringShape.new(name: 'NotificationResourceType')
@@ -874,6 +891,8 @@ module Aws::DataZone
     NotificationSubjects = Shapes::ListShape.new(name: 'NotificationSubjects')
     NotificationType = Shapes::StringShape.new(name: 'NotificationType')
     NotificationsList = Shapes::ListShape.new(name: 'NotificationsList')
+    NotifyOnState = Shapes::StringShape.new(name: 'NotifyOnState')
+    NotifyOnStates = Shapes::ListShape.new(name: 'NotifyOnStates')
     OAuth2ClientApplication = Shapes::StructureShape.new(name: 'OAuth2ClientApplication')
     OAuth2ClientApplicationAWSManagedClientApplicationReferenceString = Shapes::StringShape.new(name: 'OAuth2ClientApplicationAWSManagedClientApplicationReferenceString')
     OAuth2ClientApplicationUserManagedClientApplicationClientIdString = Shapes::StringShape.new(name: 'OAuth2ClientApplicationUserManagedClientApplicationClientIdString')
@@ -1049,9 +1068,14 @@ module Aws::DataZone
     RunIdentifier = Shapes::StringShape.new(name: 'RunIdentifier')
     RunStatisticsForAssets = Shapes::StructureShape.new(name: 'RunStatisticsForAssets')
     S3AccessGrantLocationId = Shapes::StringShape.new(name: 'S3AccessGrantLocationId')
+    S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
     S3Destination = Shapes::StructureShape.new(name: 'S3Destination')
+    S3File = Shapes::StructureShape.new(name: 'S3File')
+    S3FileList = Shapes::ListShape.new(name: 'S3FileList')
+    S3FilesLocation = Shapes::StructureShape.new(name: 'S3FilesLocation')
     S3Location = Shapes::StringShape.new(name: 'S3Location')
     S3LocationList = Shapes::ListShape.new(name: 'S3LocationList')
+    S3ObjectKey = Shapes::StringShape.new(name: 'S3ObjectKey')
     S3Path = Shapes::StringShape.new(name: 'S3Path')
     S3Permission = Shapes::StringShape.new(name: 'S3Permission')
     S3Permissions = Shapes::ListShape.new(name: 'S3Permissions')
@@ -1263,6 +1287,8 @@ module Aws::DataZone
     UpdateConnectionOutput = Shapes::StructureShape.new(name: 'UpdateConnectionOutput')
     UpdateDataSourceInput = Shapes::StructureShape.new(name: 'UpdateDataSourceInput')
     UpdateDataSourceOutput = Shapes::StructureShape.new(name: 'UpdateDataSourceOutput')
+    UpdateDesignationInput = Shapes::StructureShape.new(name: 'UpdateDesignationInput')
+    UpdateDesignationOutput = Shapes::StructureShape.new(name: 'UpdateDesignationOutput')
     UpdateDomainInput = Shapes::StructureShape.new(name: 'UpdateDomainInput')
     UpdateDomainOutput = Shapes::StructureShape.new(name: 'UpdateDomainOutput')
     UpdateDomainUnitInput = Shapes::StructureShape.new(name: 'UpdateDomainUnitInput')
@@ -2217,6 +2243,25 @@ module Aws::DataZone
     CreateDataSourceOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "updatedAt"))
     CreateDataSourceOutput.struct_class = Types::CreateDataSourceOutput
 
+    CreateDesignationInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    CreateDesignationInput.add_member(:name, Shapes::ShapeRef.new(shape: DesignationName, required: true, location_name: "name"))
+    CreateDesignationInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CreateDesignationInput.add_member(:policy, Shapes::ShapeRef.new(shape: CedarDesignationPolicy, required: true, location_name: "policy"))
+    CreateDesignationInput.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: Boolean, location_name: "deletionProtection"))
+    CreateDesignationInput.struct_class = Types::CreateDesignationInput
+
+    CreateDesignationOutput.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
+    CreateDesignationOutput.add_member(:id, Shapes::ShapeRef.new(shape: DesignationId, required: true, location_name: "id"))
+    CreateDesignationOutput.add_member(:name, Shapes::ShapeRef.new(shape: DesignationName, required: true, location_name: "name"))
+    CreateDesignationOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CreateDesignationOutput.add_member(:designation_type, Shapes::ShapeRef.new(shape: DesignationType, required: true, location_name: "designationType"))
+    CreateDesignationOutput.add_member(:policy, Shapes::ShapeRef.new(shape: CedarDesignationPolicy, required: true, location_name: "policy"))
+    CreateDesignationOutput.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "deletionProtection"))
+    CreateDesignationOutput.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, required: true, location_name: "createdBy"))
+    CreateDesignationOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    CreateDesignationOutput.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastUpdatedAt"))
+    CreateDesignationOutput.struct_class = Types::CreateDesignationOutput
+
     CreateDomainInput.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     CreateDomainInput.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     CreateDomainInput.add_member(:single_sign_on, Shapes::ShapeRef.new(shape: SingleSignOn, location_name: "singleSignOn"))
@@ -2284,6 +2329,7 @@ module Aws::DataZone
     CreateEnvironmentBlueprintInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateEnvironmentBlueprintInput.add_member(:provisioning_properties, Shapes::ShapeRef.new(shape: ProvisioningProperties, required: true, location_name: "provisioningProperties"))
     CreateEnvironmentBlueprintInput.add_member(:user_parameters, Shapes::ShapeRef.new(shape: CustomParameterList, location_name: "userParameters"))
+    CreateEnvironmentBlueprintInput.add_member(:blueprint_category, Shapes::ShapeRef.new(shape: BlueprintCategory, location_name: "blueprintCategory"))
     CreateEnvironmentBlueprintInput.struct_class = Types::CreateEnvironmentBlueprintInput
 
     CreateEnvironmentBlueprintOutput.add_member(:id, Shapes::ShapeRef.new(shape: EnvironmentBlueprintId, required: true, location_name: "id"))
@@ -2294,6 +2340,7 @@ module Aws::DataZone
     CreateEnvironmentBlueprintOutput.add_member(:deployment_properties, Shapes::ShapeRef.new(shape: DeploymentProperties, location_name: "deploymentProperties"))
     CreateEnvironmentBlueprintOutput.add_member(:user_parameters, Shapes::ShapeRef.new(shape: CustomParameterList, location_name: "userParameters"))
     CreateEnvironmentBlueprintOutput.add_member(:glossary_terms, Shapes::ShapeRef.new(shape: GlossaryTerms, location_name: "glossaryTerms"))
+    CreateEnvironmentBlueprintOutput.add_member(:blueprint_category, Shapes::ShapeRef.new(shape: BlueprintCategory, location_name: "blueprintCategory"))
     CreateEnvironmentBlueprintOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     CreateEnvironmentBlueprintOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     CreateEnvironmentBlueprintOutput.struct_class = Types::CreateEnvironmentBlueprintOutput
@@ -2511,6 +2558,7 @@ module Aws::DataZone
     CreateProjectMembershipInput.add_member(:project_identifier, Shapes::ShapeRef.new(shape: ProjectId, required: true, location: "uri", location_name: "projectIdentifier"))
     CreateProjectMembershipInput.add_member(:member, Shapes::ShapeRef.new(shape: Member, required: true, location_name: "member"))
     CreateProjectMembershipInput.add_member(:designation, Shapes::ShapeRef.new(shape: UserDesignation, required: true, location_name: "designation"))
+    CreateProjectMembershipInput.add_member(:user_created_designation_id, Shapes::ShapeRef.new(shape: DesignationId, location_name: "userCreatedDesignationId"))
     CreateProjectMembershipInput.struct_class = Types::CreateProjectMembershipInput
 
     CreateProjectMembershipOutput.struct_class = Types::CreateProjectMembershipOutput
@@ -2910,6 +2958,12 @@ module Aws::DataZone
     DeleteDataSourceOutput.add_member(:retain_permissions_on_revoke_failure, Shapes::ShapeRef.new(shape: Boolean, location_name: "retainPermissionsOnRevokeFailure"))
     DeleteDataSourceOutput.struct_class = Types::DeleteDataSourceOutput
 
+    DeleteDesignationInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    DeleteDesignationInput.add_member(:identifier, Shapes::ShapeRef.new(shape: DesignationId, required: true, location: "uri", location_name: "identifier"))
+    DeleteDesignationInput.struct_class = Types::DeleteDesignationInput
+
+    DeleteDesignationOutput.struct_class = Types::DeleteDesignationOutput
+
     DeleteDomainInput.add_member(:identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "identifier"))
     DeleteDomainInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteDomainInput.add_member(:skip_deletion_check, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "skipDeletionCheck"))
@@ -3066,6 +3120,19 @@ module Aws::DataZone
     DeploymentProperties.add_member(:end_timeout_minutes, Shapes::ShapeRef.new(shape: DeploymentPropertiesEndTimeoutMinutesInteger, location_name: "endTimeoutMinutes"))
     DeploymentProperties.struct_class = Types::DeploymentProperties
 
+    DesignationSummaries.member = Shapes::ShapeRef.new(shape: DesignationSummary)
+
+    DesignationSummary.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
+    DesignationSummary.add_member(:id, Shapes::ShapeRef.new(shape: DesignationId, required: true, location_name: "id"))
+    DesignationSummary.add_member(:name, Shapes::ShapeRef.new(shape: DesignationName, required: true, location_name: "name"))
+    DesignationSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    DesignationSummary.add_member(:designation_type, Shapes::ShapeRef.new(shape: DesignationType, location_name: "designationType"))
+    DesignationSummary.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "deletionProtection"))
+    DesignationSummary.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, required: true, location_name: "createdBy"))
+    DesignationSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    DesignationSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
+    DesignationSummary.struct_class = Types::DesignationSummary
+
     DetailedGlossaryTerm.add_member(:name, Shapes::ShapeRef.new(shape: GlossaryTermName, location_name: "name"))
     DetailedGlossaryTerm.add_member(:short_description, Shapes::ShapeRef.new(shape: ShortDescription, location_name: "shortDescription"))
     DetailedGlossaryTerm.struct_class = Types::DetailedGlossaryTerm
@@ -3194,6 +3261,7 @@ module Aws::DataZone
     EnvironmentBlueprintSummary.add_member(:provisioning_properties, Shapes::ShapeRef.new(shape: ProvisioningProperties, required: true, location_name: "provisioningProperties"))
     EnvironmentBlueprintSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     EnvironmentBlueprintSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
+    EnvironmentBlueprintSummary.add_member(:blueprint_category, Shapes::ShapeRef.new(shape: BlueprintCategory, location_name: "blueprintCategory"))
     EnvironmentBlueprintSummary.struct_class = Types::EnvironmentBlueprintSummary
 
     EnvironmentConfig.add_member(:image_version, Shapes::ShapeRef.new(shape: String, location_name: "imageVersion"))
@@ -3573,6 +3641,22 @@ module Aws::DataZone
     GetDataSourceRunOutput.add_member(:stopped_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "stoppedAt"))
     GetDataSourceRunOutput.struct_class = Types::GetDataSourceRunOutput
 
+    GetDesignationInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    GetDesignationInput.add_member(:identifier, Shapes::ShapeRef.new(shape: DesignationId, required: true, location: "uri", location_name: "identifier"))
+    GetDesignationInput.struct_class = Types::GetDesignationInput
+
+    GetDesignationOutput.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
+    GetDesignationOutput.add_member(:id, Shapes::ShapeRef.new(shape: DesignationId, required: true, location_name: "id"))
+    GetDesignationOutput.add_member(:name, Shapes::ShapeRef.new(shape: DesignationName, required: true, location_name: "name"))
+    GetDesignationOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    GetDesignationOutput.add_member(:designation_type, Shapes::ShapeRef.new(shape: DesignationType, required: true, location_name: "designationType"))
+    GetDesignationOutput.add_member(:policy, Shapes::ShapeRef.new(shape: CedarDesignationPolicy, required: true, location_name: "policy"))
+    GetDesignationOutput.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "deletionProtection"))
+    GetDesignationOutput.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, required: true, location_name: "createdBy"))
+    GetDesignationOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    GetDesignationOutput.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastUpdatedAt"))
+    GetDesignationOutput.struct_class = Types::GetDesignationOutput
+
     GetDomainInput.add_member(:identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "identifier"))
     GetDomainInput.struct_class = Types::GetDomainInput
 
@@ -3654,6 +3738,7 @@ module Aws::DataZone
     GetEnvironmentBlueprintOutput.add_member(:deployment_properties, Shapes::ShapeRef.new(shape: DeploymentProperties, location_name: "deploymentProperties"))
     GetEnvironmentBlueprintOutput.add_member(:user_parameters, Shapes::ShapeRef.new(shape: CustomParameterList, location_name: "userParameters"))
     GetEnvironmentBlueprintOutput.add_member(:glossary_terms, Shapes::ShapeRef.new(shape: GlossaryTerms, location_name: "glossaryTerms"))
+    GetEnvironmentBlueprintOutput.add_member(:blueprint_category, Shapes::ShapeRef.new(shape: BlueprintCategory, location_name: "blueprintCategory"))
     GetEnvironmentBlueprintOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     GetEnvironmentBlueprintOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     GetEnvironmentBlueprintOutput.struct_class = Types::GetEnvironmentBlueprintOutput
@@ -3941,6 +4026,7 @@ module Aws::DataZone
     GetNotebookRunOutput.add_member(:timeout_configuration, Shapes::ShapeRef.new(shape: TimeoutConfig, location_name: "timeoutConfiguration"))
     GetNotebookRunOutput.add_member(:environment_configuration, Shapes::ShapeRef.new(shape: EnvironmentConfig, location_name: "environmentConfiguration"))
     GetNotebookRunOutput.add_member(:storage_configuration, Shapes::ShapeRef.new(shape: StorageConfig, location_name: "storageConfiguration"))
+    GetNotebookRunOutput.add_member(:notification_configuration, Shapes::ShapeRef.new(shape: NotificationConfig, location_name: "notificationConfiguration"))
     GetNotebookRunOutput.add_member(:trigger_source, Shapes::ShapeRef.new(shape: TriggerSource, location_name: "triggerSource"))
     GetNotebookRunOutput.add_member(:error, Shapes::ShapeRef.new(shape: NotebookRunError, location_name: "error"))
     GetNotebookRunOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
@@ -4317,6 +4403,7 @@ module Aws::DataZone
     HyperPodPropertiesOutput.struct_class = Types::HyperPodPropertiesOutput
 
     IamPropertiesInput.add_member(:glue_lineage_sync_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "glueLineageSyncEnabled"))
+    IamPropertiesInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     IamPropertiesInput.struct_class = Types::IamPropertiesInput
 
     IamPropertiesOutput.add_member(:environment_id, Shapes::ShapeRef.new(shape: String, location_name: "environmentId"))
@@ -4603,6 +4690,15 @@ module Aws::DataZone
     ListDataSourcesOutput.add_member(:items, Shapes::ShapeRef.new(shape: DataSourceSummaries, required: true, location_name: "items"))
     ListDataSourcesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListDataSourcesOutput.struct_class = Types::ListDataSourcesOutput
+
+    ListDesignationsInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    ListDesignationsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListDesignationsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListDesignationsMaxResults, location: "querystring", location_name: "maxResults"))
+    ListDesignationsInput.struct_class = Types::ListDesignationsInput
+
+    ListDesignationsOutput.add_member(:items, Shapes::ShapeRef.new(shape: DesignationSummaries, location_name: "items"))
+    ListDesignationsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListDesignationsOutput.struct_class = Types::ListDesignationsOutput
 
     ListDomainUnitsForParentInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     ListDomainUnitsForParentInput.add_member(:parent_domain_unit_identifier, Shapes::ShapeRef.new(shape: DomainUnitId, required: true, location: "querystring", location_name: "parentDomainUnitIdentifier"))
@@ -5151,6 +5247,9 @@ module Aws::DataZone
 
     NotebookSummaryList.member = Shapes::ShapeRef.new(shape: NotebookSummary)
 
+    NotificationConfig.add_member(:notify_on, Shapes::ShapeRef.new(shape: NotifyOnStates, required: true, location_name: "notifyOn"))
+    NotificationConfig.struct_class = Types::NotificationConfig
+
     NotificationOutput.add_member(:identifier, Shapes::ShapeRef.new(shape: TaskId, required: true, location_name: "identifier"))
     NotificationOutput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainIdentifier"))
     NotificationOutput.add_member(:type, Shapes::ShapeRef.new(shape: NotificationType, required: true, location_name: "type"))
@@ -5172,6 +5271,8 @@ module Aws::DataZone
     NotificationSubjects.member = Shapes::ShapeRef.new(shape: String)
 
     NotificationsList.member = Shapes::ShapeRef.new(shape: NotificationOutput)
+
+    NotifyOnStates.member = Shapes::ShapeRef.new(shape: NotifyOnState)
 
     OAuth2ClientApplication.add_member(:user_managed_client_application_client_id, Shapes::ShapeRef.new(shape: OAuth2ClientApplicationUserManagedClientApplicationClientIdString, location_name: "userManagedClientApplicationClientId"))
     OAuth2ClientApplication.add_member(:a_ws_managed_client_application_reference, Shapes::ShapeRef.new(shape: OAuth2ClientApplicationAWSManagedClientApplicationReferenceString, location_name: "aWSManagedClientApplicationReference"))
@@ -5360,17 +5461,20 @@ module Aws::DataZone
 
     ProjectMember.add_member(:member_details, Shapes::ShapeRef.new(shape: MemberDetails, required: true, location_name: "memberDetails"))
     ProjectMember.add_member(:designation, Shapes::ShapeRef.new(shape: UserDesignation, required: true, location_name: "designation"))
+    ProjectMember.add_member(:user_created_designation_id, Shapes::ShapeRef.new(shape: DesignationId, location_name: "userCreatedDesignationId"))
     ProjectMember.struct_class = Types::ProjectMember
 
     ProjectMembers.member = Shapes::ShapeRef.new(shape: ProjectMember)
 
     ProjectMembershipAssignment.add_member(:member, Shapes::ShapeRef.new(shape: Member, required: true, location_name: "member"))
     ProjectMembershipAssignment.add_member(:designation, Shapes::ShapeRef.new(shape: UserDesignation, required: true, location_name: "designation"))
+    ProjectMembershipAssignment.add_member(:user_created_designation_id, Shapes::ShapeRef.new(shape: DesignationId, location_name: "userCreatedDesignationId"))
     ProjectMembershipAssignment.struct_class = Types::ProjectMembershipAssignment
 
     ProjectMembershipAssignments.member = Shapes::ShapeRef.new(shape: ProjectMembershipAssignment)
 
     ProjectPolicyGrantPrincipal.add_member(:project_designation, Shapes::ShapeRef.new(shape: ProjectDesignation, required: true, location_name: "projectDesignation"))
+    ProjectPolicyGrantPrincipal.add_member(:user_created_designation_id, Shapes::ShapeRef.new(shape: DesignationId, location_name: "userCreatedDesignationId"))
     ProjectPolicyGrantPrincipal.add_member(:project_identifier, Shapes::ShapeRef.new(shape: ProjectId, location_name: "projectIdentifier"))
     ProjectPolicyGrantPrincipal.add_member(:project_grant_filter, Shapes::ShapeRef.new(shape: ProjectGrantFilter, location_name: "projectGrantFilter"))
     ProjectPolicyGrantPrincipal.struct_class = Types::ProjectPolicyGrantPrincipal
@@ -5819,6 +5923,15 @@ module Aws::DataZone
     S3Destination.add_member(:uri, Shapes::ShapeRef.new(shape: NotebookS3Uri, location_name: "uri"))
     S3Destination.struct_class = Types::S3Destination
 
+    S3File.add_member(:key, Shapes::ShapeRef.new(shape: S3ObjectKey, required: true, location_name: "key"))
+    S3File.struct_class = Types::S3File
+
+    S3FileList.member = Shapes::ShapeRef.new(shape: S3File)
+
+    S3FilesLocation.add_member(:bucket, Shapes::ShapeRef.new(shape: S3BucketName, required: true, location_name: "bucket"))
+    S3FilesLocation.add_member(:file_list, Shapes::ShapeRef.new(shape: S3FileList, required: true, location_name: "fileList"))
+    S3FilesLocation.struct_class = Types::S3FilesLocation
+
     S3LocationList.member = Shapes::ShapeRef.new(shape: S3Location)
 
     S3Permissions.member = Shapes::ShapeRef.new(shape: S3Permission)
@@ -6018,8 +6131,10 @@ module Aws::DataZone
     SnowflakePropertiesPatch.struct_class = Types::SnowflakePropertiesPatch
 
     SourceLocation.add_member(:s3, Shapes::ShapeRef.new(shape: S3SourceLocation, location_name: "s3"))
+    SourceLocation.add_member(:s3_files, Shapes::ShapeRef.new(shape: S3FilesLocation, location_name: "s3Files"))
     SourceLocation.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     SourceLocation.add_member_subclass(:s3, Types::SourceLocation::S3)
+    SourceLocation.add_member_subclass(:s3_files, Types::SourceLocation::S3Files)
     SourceLocation.add_member_subclass(:unknown, Types::SourceLocation::Unknown)
     SourceLocation.struct_class = Types::SourceLocation
 
@@ -6149,6 +6264,7 @@ module Aws::DataZone
     StartNotebookImportInput.add_member(:source_location, Shapes::ShapeRef.new(shape: SourceLocation, required: true, location_name: "sourceLocation"))
     StartNotebookImportInput.add_member(:name, Shapes::ShapeRef.new(shape: NotebookName, required: true, location_name: "name"))
     StartNotebookImportInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    StartNotebookImportInput.add_member(:type, Shapes::ShapeRef.new(shape: NotebookType, location_name: "type"))
     StartNotebookImportInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     StartNotebookImportInput.struct_class = Types::StartNotebookImportInput
 
@@ -6158,6 +6274,7 @@ module Aws::DataZone
     StartNotebookImportOutput.add_member(:owning_project_id, Shapes::ShapeRef.new(shape: ProjectId, location_name: "owningProjectId"))
     StartNotebookImportOutput.add_member(:name, Shapes::ShapeRef.new(shape: NotebookName, location_name: "name"))
     StartNotebookImportOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    StartNotebookImportOutput.add_member(:type, Shapes::ShapeRef.new(shape: NotebookType, location_name: "type"))
     StartNotebookImportOutput.add_member(:source_location, Shapes::ShapeRef.new(shape: SourceLocation, location_name: "sourceLocation"))
     StartNotebookImportOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
     StartNotebookImportOutput.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
@@ -6170,6 +6287,7 @@ module Aws::DataZone
     StartNotebookRunInput.add_member(:compute_configuration, Shapes::ShapeRef.new(shape: ComputeConfig, location_name: "computeConfiguration"))
     StartNotebookRunInput.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfig, location_name: "networkConfiguration"))
     StartNotebookRunInput.add_member(:timeout_configuration, Shapes::ShapeRef.new(shape: TimeoutConfig, location_name: "timeoutConfiguration"))
+    StartNotebookRunInput.add_member(:notification_configuration, Shapes::ShapeRef.new(shape: NotificationConfig, location_name: "notificationConfiguration"))
     StartNotebookRunInput.add_member(:trigger_source, Shapes::ShapeRef.new(shape: TriggerSource, location_name: "triggerSource"))
     StartNotebookRunInput.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "metadata"))
     StartNotebookRunInput.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "parameters"))
@@ -6190,6 +6308,7 @@ module Aws::DataZone
     StartNotebookRunOutput.add_member(:timeout_configuration, Shapes::ShapeRef.new(shape: TimeoutConfig, location_name: "timeoutConfiguration"))
     StartNotebookRunOutput.add_member(:environment_configuration, Shapes::ShapeRef.new(shape: EnvironmentConfig, location_name: "environmentConfiguration"))
     StartNotebookRunOutput.add_member(:storage_configuration, Shapes::ShapeRef.new(shape: StorageConfig, location_name: "storageConfiguration"))
+    StartNotebookRunOutput.add_member(:notification_configuration, Shapes::ShapeRef.new(shape: NotificationConfig, location_name: "notificationConfiguration"))
     StartNotebookRunOutput.add_member(:trigger_source, Shapes::ShapeRef.new(shape: TriggerSource, location_name: "triggerSource"))
     StartNotebookRunOutput.add_member(:error, Shapes::ShapeRef.new(shape: NotebookRunError, location_name: "error"))
     StartNotebookRunOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
@@ -6618,6 +6737,26 @@ module Aws::DataZone
     UpdateDataSourceOutput.add_member(:retain_permissions_on_revoke_failure, Shapes::ShapeRef.new(shape: Boolean, location_name: "retainPermissionsOnRevokeFailure"))
     UpdateDataSourceOutput.struct_class = Types::UpdateDataSourceOutput
 
+    UpdateDesignationInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    UpdateDesignationInput.add_member(:identifier, Shapes::ShapeRef.new(shape: DesignationId, required: true, location: "uri", location_name: "identifier"))
+    UpdateDesignationInput.add_member(:name, Shapes::ShapeRef.new(shape: DesignationName, location_name: "name"))
+    UpdateDesignationInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateDesignationInput.add_member(:policy, Shapes::ShapeRef.new(shape: CedarDesignationPolicy, location_name: "policy"))
+    UpdateDesignationInput.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: Boolean, location_name: "deletionProtection"))
+    UpdateDesignationInput.struct_class = Types::UpdateDesignationInput
+
+    UpdateDesignationOutput.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
+    UpdateDesignationOutput.add_member(:id, Shapes::ShapeRef.new(shape: DesignationId, required: true, location_name: "id"))
+    UpdateDesignationOutput.add_member(:name, Shapes::ShapeRef.new(shape: DesignationName, required: true, location_name: "name"))
+    UpdateDesignationOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateDesignationOutput.add_member(:designation_type, Shapes::ShapeRef.new(shape: DesignationType, required: true, location_name: "designationType"))
+    UpdateDesignationOutput.add_member(:policy, Shapes::ShapeRef.new(shape: CedarDesignationPolicy, required: true, location_name: "policy"))
+    UpdateDesignationOutput.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "deletionProtection"))
+    UpdateDesignationOutput.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, required: true, location_name: "createdBy"))
+    UpdateDesignationOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    UpdateDesignationOutput.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastUpdatedAt"))
+    UpdateDesignationOutput.struct_class = Types::UpdateDesignationOutput
+
     UpdateDomainInput.add_member(:identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "identifier"))
     UpdateDomainInput.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     UpdateDomainInput.add_member(:single_sign_on, Shapes::ShapeRef.new(shape: SingleSignOn, location_name: "singleSignOn"))
@@ -6676,6 +6815,7 @@ module Aws::DataZone
     UpdateEnvironmentBlueprintInput.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     UpdateEnvironmentBlueprintInput.add_member(:provisioning_properties, Shapes::ShapeRef.new(shape: ProvisioningProperties, location_name: "provisioningProperties"))
     UpdateEnvironmentBlueprintInput.add_member(:user_parameters, Shapes::ShapeRef.new(shape: CustomParameterList, location_name: "userParameters"))
+    UpdateEnvironmentBlueprintInput.add_member(:blueprint_category, Shapes::ShapeRef.new(shape: BlueprintCategory, location_name: "blueprintCategory"))
     UpdateEnvironmentBlueprintInput.struct_class = Types::UpdateEnvironmentBlueprintInput
 
     UpdateEnvironmentBlueprintOutput.add_member(:id, Shapes::ShapeRef.new(shape: EnvironmentBlueprintId, required: true, location_name: "id"))
@@ -6686,6 +6826,7 @@ module Aws::DataZone
     UpdateEnvironmentBlueprintOutput.add_member(:deployment_properties, Shapes::ShapeRef.new(shape: DeploymentProperties, location_name: "deploymentProperties"))
     UpdateEnvironmentBlueprintOutput.add_member(:user_parameters, Shapes::ShapeRef.new(shape: CustomParameterList, location_name: "userParameters"))
     UpdateEnvironmentBlueprintOutput.add_member(:glossary_terms, Shapes::ShapeRef.new(shape: GlossaryTerms, location_name: "glossaryTerms"))
+    UpdateEnvironmentBlueprintOutput.add_member(:blueprint_category, Shapes::ShapeRef.new(shape: BlueprintCategory, location_name: "blueprintCategory"))
     UpdateEnvironmentBlueprintOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     UpdateEnvironmentBlueprintOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     UpdateEnvironmentBlueprintOutput.struct_class = Types::UpdateEnvironmentBlueprintOutput
@@ -7396,6 +7537,22 @@ module Aws::DataZone
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
       end)
 
+      api.add_operation(:create_designation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateDesignation"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/designations"
+        o.input = Shapes::ShapeRef.new(shape: CreateDesignationInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateDesignationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
       api.add_operation(:create_domain, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateDomain"
         o.http_method = "POST"
@@ -7817,6 +7974,21 @@ module Aws::DataZone
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
+      api.add_operation(:delete_designation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDesignation"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/designations/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDesignationInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteDesignationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -8284,6 +8456,20 @@ module Aws::DataZone
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
+      api.add_operation(:get_designation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDesignation"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/designations/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetDesignationInput)
+        o.output = Shapes::ShapeRef.new(shape: GetDesignationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
       end)
@@ -8884,6 +9070,26 @@ module Aws::DataZone
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_designations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDesignations"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/designations"
+        o.input = Shapes::ShapeRef.new(shape: ListDesignationsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListDesignationsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o[:pager] = Aws::Pager.new(
@@ -9846,6 +10052,21 @@ module Aws::DataZone
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
+      api.add_operation(:update_designation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateDesignation"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/designations/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateDesignationInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateDesignationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)

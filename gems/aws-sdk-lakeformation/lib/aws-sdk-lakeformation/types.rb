@@ -182,6 +182,45 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   The name of the row-level security policy to attach.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The resource to which the row-level security policy is attached.
+    #   @return [Types::Resource]
+    #
+    # @!attribute [rw] principal
+    #   The principal to which the row-level security policy applies.
+    #   @return [Types::DataLakePrincipal]
+    #
+    # @!attribute [rw] condition
+    #   A Lake Formation condition, which applies to the row-level security
+    #   policy attachment and contains an expression.
+    #   @return [Types::Condition]
+    #
+    # @!attribute [rw] set_default
+    #   Indicates whether this policy becomes the default row-level security
+    #   policy for the resource. The default policy applies to all
+    #   principals by default.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/AttachRLSPolicyRequest AWS API Documentation
+    #
+    class AttachRLSPolicyRequest < Struct.new(
+      :name,
+      :resource,
+      :principal,
+      :condition,
+      :set_default)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/AttachRLSPolicyResponse AWS API Documentation
+    #
+    class AttachRLSPolicyResponse < Aws::EmptyStructure; end
+
     # A structure used to include auditing information on the privileged
     # API.
     #
@@ -352,6 +391,26 @@ module Aws::LakeFormation
     #
     class CatalogResource < Struct.new(
       :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A column in a table that a row-level security policy's filter
+    # expression can reference.
+    #
+    # @!attribute [rw] name
+    #   The name of the column.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The data type of the column.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/Column AWS API Documentation
+    #
+    class Column < Struct.new(
+      :name,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -629,6 +688,37 @@ module Aws::LakeFormation
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/CreateLakeFormationOptInResponse AWS API Documentation
     #
     class CreateLakeFormationOptInResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] name
+    #   A unique name for the row-level security policy within the Data
+    #   Catalog.
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_columns
+    #   The list of columns that the filter expression references. These
+    #   columns define the shape of the data that the policy can be attached
+    #   to.
+    #   @return [Array<Types::Column>]
+    #
+    # @!attribute [rw] filter_expression
+    #   A filter predicate, written in a SQL-like syntax, that Lake
+    #   Formation evaluates against each row. Only the rows for which the
+    #   expression evaluates to true are returned to the principal.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/CreateRLSPolicyRequest AWS API Documentation
+    #
+    class CreateRLSPolicyRequest < Struct.new(
+      :name,
+      :attachment_columns,
+      :filter_expression)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/CreateRLSPolicyResponse AWS API Documentation
+    #
+    class CreateRLSPolicyResponse < Aws::EmptyStructure; end
 
     # A structure that describes certain columns on certain rows.
     #
@@ -1104,6 +1194,22 @@ module Aws::LakeFormation
     #
     class DeleteObjectsOnCancelResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] name
+    #   The name of the row-level security policy to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DeleteRLSPolicyRequest AWS API Documentation
+    #
+    class DeleteRLSPolicyRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DeleteRLSPolicyResponse AWS API Documentation
+    #
+    class DeleteRLSPolicyResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to
     #   deregister.
@@ -1240,6 +1346,44 @@ module Aws::LakeFormation
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] name
+    #   The name of the row-level security policy to detach.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The resource from which the row-level security policy is detached.
+    #   @return [Types::Resource]
+    #
+    # @!attribute [rw] principal
+    #   The principal for which the row-level security policy is detached.
+    #   @return [Types::DataLakePrincipal]
+    #
+    # @!attribute [rw] condition
+    #   A Lake Formation condition, which applies to the row-level security
+    #   policy attachment and contains an expression.
+    #   @return [Types::Condition]
+    #
+    # @!attribute [rw] remove_default
+    #   Indicates whether to remove this policy as the default row-level
+    #   security policy for the resource.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DetachRLSPolicyRequest AWS API Documentation
+    #
+    class DetachRLSPolicyRequest < Struct.new(
+      :name,
+      :resource,
+      :principal,
+      :condition,
+      :remove_default)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DetachRLSPolicyResponse AWS API Documentation
+    #
+    class DetachRLSPolicyResponse < Aws::EmptyStructure; end
 
     # A structure containing the additional details to be returned in the
     # `AdditionalDetails` attribute of `PrincipalResourcePermissions`.
@@ -1693,6 +1837,31 @@ module Aws::LakeFormation
       :execution_statistics,
       :planning_statistics,
       :query_submission_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the row-level security policy to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetRLSPolicyRequest AWS API Documentation
+    #
+    class GetRLSPolicyRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rls_policy
+    #   An `RLSPolicy` structure containing the definition of the requested
+    #   row-level security policy.
+    #   @return [Types::RLSPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetRLSPolicyResponse AWS API Documentation
+    #
+    class GetRLSPolicyResponse < Struct.new(
+      :rls_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2720,6 +2889,92 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
+    # @!attribute [rw] max_results
+    #   The maximum number of row-level security policies to return in a
+    #   single response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if this is a continuation call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ListRLSPoliciesRequest AWS API Documentation
+    #
+    class ListRLSPoliciesRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rls_policies
+    #   A list of `RLSPolicy` structures.
+    #   @return [Array<Types::RLSPolicy>]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if not all row-level security policies have
+    #   been returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ListRLSPoliciesResponse AWS API Documentation
+    #
+    class ListRLSPoliciesResponse < Struct.new(
+      :rls_policies,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource
+    #   If specified, returns only the attachments for the given resource.
+    #   @return [Types::Resource]
+    #
+    # @!attribute [rw] principal
+    #   If specified, returns only the attachments for the given principal.
+    #   @return [Types::DataLakePrincipal]
+    #
+    # @!attribute [rw] policy_name
+    #   If specified, returns only the attachments for the row-level
+    #   security policy with this name.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of attachments to return in a single response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if this is a continuation call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ListRLSPolicyAttachmentsRequest AWS API Documentation
+    #
+    class ListRLSPolicyAttachmentsRequest < Struct.new(
+      :resource,
+      :principal,
+      :policy_name,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rls_policy_attachments
+    #   A list of `RLSPolicyAttachment` structures.
+    #   @return [Array<Types::RLSPolicyAttachment>]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if not all attachments have been returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ListRLSPolicyAttachmentsResponse AWS API Documentation
+    #
+    class ListRLSPolicyAttachmentsResponse < Struct.new(
+      :rls_policy_attachments,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] filter_condition_list
     #   Any applicable row-level and/or column-level filtering conditions
     #   for the resources.
@@ -3148,6 +3403,103 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
+    # A structure that describes a row-level security policy, including the
+    # columns its filter expression references and the filter expression
+    # itself.
+    #
+    # @!attribute [rw] catalog_id
+    #   The identifier for the Data Catalog that contains the policy. By
+    #   default, the account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the row-level security policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_columns
+    #   The list of columns that the filter expression references.
+    #   @return [Array<Types::Column>]
+    #
+    # @!attribute [rw] filter_expression
+    #   The filter predicate, written in a SQL-like syntax, that determines
+    #   which rows are returned to the principal.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/RLSPolicy AWS API Documentation
+    #
+    class RLSPolicy < Struct.new(
+      :catalog_id,
+      :name,
+      :attachment_columns,
+      :filter_expression)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that describes the attachment of a row-level security
+    # policy to a resource for a principal.
+    #
+    # @!attribute [rw] catalog_id
+    #   The identifier for the Data Catalog that contains the attachment. By
+    #   default, the account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_name
+    #   The name of the attached row-level security policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal
+    #   The principal to which the attached policy applies.
+    #   @return [Types::DataLakePrincipal]
+    #
+    # @!attribute [rw] resource
+    #   The resource to which the policy is attached.
+    #   @return [Types::Resource]
+    #
+    # @!attribute [rw] condition
+    #   A Lake Formation condition, which applies to the row-level security
+    #   policy attachment and contains an expression.
+    #   @return [Types::Condition]
+    #
+    # @!attribute [rw] default_rls_policy
+    #   Indicates whether this attachment is the default row-level security
+    #   policy for the resource.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/RLSPolicyAttachment AWS API Documentation
+    #
+    class RLSPolicyAttachment < Struct.new(
+      :catalog_id,
+      :policy_name,
+      :principal,
+      :resource,
+      :condition,
+      :default_rls_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that identifies a row-level security policy as a resource,
+    # used when granting permissions on the policy.
+    #
+    # @!attribute [rw] catalog_id
+    #   The identifier for the Data Catalog that contains the policy. By
+    #   default, the account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the row-level security policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/RLSPolicyResource AWS API Documentation
+    #
+    class RLSPolicyResource < Struct.new(
+      :catalog_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration for enabling trusted identity propagation with Redshift
     # Connect.
     #
@@ -3337,6 +3689,11 @@ module Aws::LakeFormation
     #   more LF-Tag key:value pairs.
     #   @return [Types::LFTagExpressionResource]
     #
+    # @!attribute [rw] rls_policy
+    #   A row-level security policy resource. Specify this when granting or
+    #   revoking permissions on a row-level security policy.
+    #   @return [Types::RLSPolicyResource]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/Resource AWS API Documentation
     #
     class Resource < Struct.new(
@@ -3348,7 +3705,8 @@ module Aws::LakeFormation
       :data_cells_filter,
       :lf_tag,
       :lf_tag_policy,
-      :lf_tag_expression)
+      :lf_tag_expression,
+      :rls_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4188,6 +4546,28 @@ module Aws::LakeFormation
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/UpdateLakeFormationIdentityCenterConfigurationResponse AWS API Documentation
     #
     class UpdateLakeFormationIdentityCenterConfigurationResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] name
+    #   The name of the row-level security policy to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_expression
+    #   The new filter predicate, written in a SQL-like syntax, that
+    #   replaces the policy's current filter expression.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/UpdateRLSPolicyRequest AWS API Documentation
+    #
+    class UpdateRLSPolicyRequest < Struct.new(
+      :name,
+      :filter_expression)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/UpdateRLSPolicyResponse AWS API Documentation
+    #
+    class UpdateRLSPolicyResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] role_arn
     #   The new role to use for the given resource registered in Lake

@@ -39,6 +39,7 @@ module Aws::ECS
   # * {ConflictException}
   # * {DaemonNotActiveException}
   # * {DaemonNotFoundException}
+  # * {GatewayNotFoundException}
   # * {InvalidParameterException}
   # * {LimitExceededException}
   # * {MissingVersionException}
@@ -239,6 +240,21 @@ module Aws::ECS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ECS::Types::DaemonNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class GatewayNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ECS::Types::GatewayNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

@@ -43,8 +43,9 @@ module Aws::AppIntegrationsService
     end
 
     class AuthConfig
-      attr_accessor auth_type: ("API_KEY")
+      attr_accessor auth_type: ("API_KEY" | "CONNECT_JWT")
       attr_accessor credential_provider_identifier: ::String
+      attr_accessor audience_override: ::String
       SENSITIVE: []
     end
 

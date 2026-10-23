@@ -130,6 +130,7 @@ module Aws::BedrockAgentCore
       attr_accessor memory_id: ::String
       attr_accessor records: ::Array[Types::MemoryRecordCreateInput]
       attr_accessor client_token: ::String
+      attr_accessor record_expiry_specification: Types::RecordExpirySpecification
       SENSITIVE: []
     end
 
@@ -175,6 +176,7 @@ module Aws::BedrockAgentCore
     class BatchUpdateMemoryRecordsInput
       attr_accessor memory_id: ::String
       attr_accessor records: ::Array[Types::MemoryRecordUpdateInput]
+      attr_accessor record_expiry_specification: Types::RecordExpirySpecification
       SENSITIVE: []
     end
 
@@ -797,6 +799,7 @@ module Aws::BedrockAgentCore
       attr_accessor evaluator_arn: ::String
       attr_accessor evaluator_id: ::String
       attr_accessor evaluator_name: ::String
+      attr_accessor evaluation_dimension_name: ::String
       attr_accessor explanation: ::String
       attr_accessor context: Types::Context
       attr_accessor value: ::Float
@@ -841,6 +844,7 @@ module Aws::BedrockAgentCore
 
     class EvaluatorSummary
       attr_accessor evaluator_id: ::String
+      attr_accessor evaluation_dimension_name: ::String
       attr_accessor statistics: Types::EvaluatorStatistics
       attr_accessor total_evaluated: ::Integer
       attr_accessor total_failed: ::Integer
@@ -1051,6 +1055,7 @@ module Aws::BedrockAgentCore
       attr_accessor data_source_config: Types::DataSourceConfig
       attr_accessor output_config: Types::OutputConfig
       attr_accessor evaluation_results: Types::EvaluationJobResults
+      attr_accessor insight_results: ::Array[Types::InsightResult]
       attr_accessor failure_analysis_result: Types::FailureAnalysisResultContent
       attr_accessor user_intent_result: Types::UserIntentClusteringResultContent
       attr_accessor execution_summary_result: Types::ExecutionSummaryClusteringResultContent
@@ -1431,6 +1436,16 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class HarnessHookEvent
+      attr_accessor hook_event_id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("before_tool_call" | "after_tool_call" | "before_invocation" | "after_invocation")
+      attr_accessor decision: ("allow" | "deny")
+      attr_accessor reason: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
     class HarnessInlineFunctionConfig
       attr_accessor description: ::String
       attr_accessor input_schema: untyped
@@ -1461,7 +1476,7 @@ module Aws::BedrockAgentCore
     end
 
     class HarnessMessageStopEvent
-      attr_accessor stop_reason: ("end_turn" | "tool_use" | "tool_result" | "max_tokens" | "stop_sequence" | "content_filtered" | "malformed_model_output" | "malformed_tool_use" | "interrupted" | "partial_turn" | "model_context_window_exceeded" | "max_iterations_exceeded" | "max_output_tokens_exceeded" | "timeout_exceeded")
+      attr_accessor stop_reason: ("end_turn" | "tool_use" | "tool_result" | "max_tokens" | "stop_sequence" | "content_filtered" | "malformed_model_output" | "malformed_tool_use" | "interrupted" | "partial_turn" | "model_context_window_exceeded" | "max_iterations_exceeded" | "max_output_tokens_exceeded" | "timeout_exceeded" | "hook_stopped")
       attr_accessor event_type: untyped
       SENSITIVE: []
     end
@@ -1496,12 +1511,13 @@ module Aws::BedrockAgentCore
     class HarnessOpenAiModelConfig
       attr_accessor model_id: ::String
       attr_accessor api_key_arn: ::String
+      attr_accessor api_base: ::String
       attr_accessor max_tokens: ::Integer
       attr_accessor temperature: ::Float
       attr_accessor top_p: ::Float
       attr_accessor api_format: ("chat_completions" | "responses")
       attr_accessor additional_params: untyped
-      SENSITIVE: []
+      SENSITIVE: [:api_base]
     end
 
     class HarnessReasoningContentBlock
@@ -1767,6 +1783,26 @@ module Aws::BedrockAgentCore
     class Insight
       attr_accessor insight_id: ::String
       SENSITIVE: []
+    end
+
+    class InsightResult
+      attr_accessor type: ("FAILURE")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor affected_session_count: ::Integer
+      attr_accessor sample_sessions: ::Array[Types::SampleSession]
+      attr_accessor root_causes: ::Array[Types::InsightRootCause]
+      SENSITIVE: [:name, :description]
+    end
+
+    class InsightRootCause
+      attr_accessor name: ::String
+      attr_accessor explanation: ::String
+      attr_accessor affected_session_count: ::Integer
+      attr_accessor suggested_fix: ::String
+      attr_accessor sample_sessions: ::Array[Types::SampleSession]
+      SENSITIVE: [:name, :explanation, :suggested_fix]
     end
 
     class InsightsFailureSignal
@@ -2226,7 +2262,9 @@ module Aws::BedrockAgentCore
       attr_accessor memory_strategy_id: ::String
       attr_accessor namespaces: ::Array[::String]
       attr_accessor created_at: ::Time
+      attr_accessor timestamp: ::Time
       attr_accessor metadata: ::Hash[::String, Types::MemoryRecordMetadataValue]
+      attr_accessor expires_at: ::Time
       SENSITIVE: []
     end
 
@@ -2304,6 +2342,7 @@ module Aws::BedrockAgentCore
       attr_accessor namespaces: ::Array[::String]
       attr_accessor created_at: ::Time
       attr_accessor score: ::Float
+      attr_accessor timestamp: ::Time
       attr_accessor metadata: ::Hash[::String, Types::MemoryRecordMetadataValue]
       SENSITIVE: []
     end
@@ -2697,6 +2736,20 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class RecordExpirySpecification
+      attr_accessor record_expiry_duration_days: ::Integer
+      attr_accessor action: ("REMOVE")
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class RecordExpiryDurationDays < RecordExpirySpecification
+      end
+      class Action < RecordExpirySpecification
+      end
+      class Unknown < RecordExpirySpecification
+      end
+    end
+
     class RegistryRecordSummary
       attr_accessor registry_arn: ::String
       attr_accessor record_arn: ::String
@@ -2808,6 +2861,13 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class SampleSession
+      attr_accessor session_id: ::String
+      attr_accessor last_seen_at: ::Time
+      attr_accessor findings: ::Array[Types::SessionFinding]
+      SENSITIVE: []
+    end
+
     class SaveBrowserSessionProfileRequest
       attr_accessor trace_id: ::String
       attr_accessor trace_parent: ::String
@@ -2890,6 +2950,15 @@ module Aws::BedrockAgentCore
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
       SENSITIVE: []
+    end
+
+    class SessionFinding
+      attr_accessor target_id: ::String
+      attr_accessor target_type: ("SPAN_ID" | "TRACE_ID" | "SPAN_NAME")
+      attr_accessor description: ::String
+      attr_accessor category: ::String
+      attr_accessor confidence: ::Float
+      SENSITIVE: [:description]
     end
 
     class SessionLimits
@@ -3449,7 +3518,7 @@ module Aws::BedrockAgentCore
     end
 
     class InvokeHarnessStreamOutput < Enumerator[untyped, untyped]
-      def event_types: () -> [:message_start, :content_block_start, :content_block_delta, :content_block_stop, :message_stop, :metadata, :internal_server_exception, :validation_exception, :runtime_client_error]
+      def event_types: () -> [:message_start, :content_block_start, :content_block_delta, :content_block_stop, :message_stop, :metadata, :internal_server_exception, :validation_exception, :runtime_client_error, :hook_event]
     end
   end
 end

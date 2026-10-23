@@ -959,6 +959,7 @@ module Aws::SSM
       attr_accessor resource_arn: ::String
       attr_accessor policy_id: ::String
       attr_accessor policy_hash: ::String
+      attr_accessor deletion_mode: ("RemoveSharing" | "RollbackMigration")
       SENSITIVE: []
     end
 

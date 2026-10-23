@@ -55,6 +55,7 @@ module Aws::ObservabilityAdmin
       attr_accessor scope: ::String
       attr_accessor source_logs_configuration: Types::SourceLogsConfiguration
       attr_accessor source_metrics_configuration: Types::SourceMetricsConfiguration
+      attr_accessor source_context_graph_configuration: Types::SourceContextGraphConfiguration
       SENSITIVE: []
     end
 
@@ -69,6 +70,7 @@ module Aws::ObservabilityAdmin
       attr_accessor failure_reason: ("TRUSTED_ACCESS_NOT_ENABLED" | "DESTINATION_ACCOUNT_NOT_IN_ORGANIZATION" | "INTERNAL_SERVER_ERROR")
       attr_accessor tag_propagation_status: ("Healthy" | "Unhealthy")
       attr_accessor tag_propagation_failure_reason: ("RoleNotAssumable" | "RoleLacksPermissions")
+      attr_accessor context_graph_status: ("Healthy" | "Unhealthy" | "Provisioning")
       attr_accessor destination_account_id: ::String
       attr_accessor destination_region: ::String
       SENSITIVE: []
@@ -110,6 +112,20 @@ module Aws::ObservabilityAdmin
 
     class CreateCentralizationRuleForOrganizationOutput
       attr_accessor rule_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDatasetIntegrationInput
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateDatasetIntegrationOutput
+      attr_accessor arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -167,8 +183,21 @@ module Aws::ObservabilityAdmin
       SENSITIVE: []
     end
 
+    class DatasetIntegrationSummary
+      attr_accessor arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
     class DeleteCentralizationRuleForOrganizationInput
       attr_accessor rule_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDatasetIntegrationInput
+      attr_accessor arn: ::String
       SENSITIVE: []
     end
 
@@ -200,6 +229,7 @@ module Aws::ObservabilityAdmin
       attr_accessor backup_configuration: Types::LogsBackupConfiguration
       attr_accessor log_group_name_configuration: Types::LogGroupNameConfiguration
       attr_accessor tag_propagation_configuration: Types::TagPropagationConfiguration
+      attr_accessor log_group_deletion_protection: ("ENABLED")
       SENSITIVE: []
     end
 
@@ -251,7 +281,21 @@ module Aws::ObservabilityAdmin
       attr_accessor failure_reason: ("TRUSTED_ACCESS_NOT_ENABLED" | "DESTINATION_ACCOUNT_NOT_IN_ORGANIZATION" | "INTERNAL_SERVER_ERROR")
       attr_accessor tag_propagation_status: ("Healthy" | "Unhealthy")
       attr_accessor tag_propagation_failure_reason: ("RoleNotAssumable" | "RoleLacksPermissions")
+      attr_accessor context_graph_status: ("Healthy" | "Unhealthy" | "Provisioning")
       attr_accessor centralization_rule: Types::CentralizationRule
+      SENSITIVE: []
+    end
+
+    class GetDatasetIntegrationInput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetDatasetIntegrationOutput
+      attr_accessor arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -373,11 +417,23 @@ module Aws::ObservabilityAdmin
       SENSITIVE: []
     end
 
+    class ListDatasetIntegrationsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDatasetIntegrationsOutput
+      attr_accessor dataset_integration_summaries: ::Array[Types::DatasetIntegrationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListResourceTelemetryForOrganizationInput
       attr_accessor account_identifiers: ::Array[::String]
       attr_accessor resource_identifier_prefix: ::String
-      attr_accessor resource_types: ::Array[("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter" | "AWS::BedrockAgentCore::Gateway" | "AWS::BedrockAgentCore::Memory" | "AWS::BedrockAgentCore::WorkloadIdentity" | "AWS::SecurityHub::Hub" | "AWS::CloudFront::Distribution" | "AWS::SecurityHub::HubV2" | "AWS::CloudWatch::OTelEnrichment" | "AWS::MSK::Cluster" | "AWS::S3::Bucket" | "AWS::Bedrock::KnowledgeBase")]
-      attr_accessor telemetry_configuration_state: ::Hash[("Logs" | "Metrics" | "Traces"), ("Enabled" | "Disabled" | "NotApplicable")]
+      attr_accessor resource_types: ::Array[("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter" | "AWS::BedrockAgentCore::Gateway" | "AWS::BedrockAgentCore::Memory" | "AWS::BedrockAgentCore::WorkloadIdentity" | "AWS::BedrockAgentCore::PaymentManager" | "AWS::SecurityHub::Hub" | "AWS::CloudFront::Distribution" | "AWS::SecurityHub::HubV2" | "AWS::CloudWatch::OTelEnrichment" | "AWS::MSK::Cluster" | "AWS::S3::Bucket" | "AWS::Bedrock::KnowledgeBase" | "AWS::XRay::TransactionSearchConfig")]
+      attr_accessor telemetry_configuration_state: ::Hash[("Logs" | "Metrics" | "Traces" | "Insights"), ("Enabled" | "Disabled" | "NotApplicable")]
       attr_accessor resource_tags: ::Hash[::String, ::String]
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
@@ -392,8 +448,8 @@ module Aws::ObservabilityAdmin
 
     class ListResourceTelemetryInput
       attr_accessor resource_identifier_prefix: ::String
-      attr_accessor resource_types: ::Array[("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter" | "AWS::BedrockAgentCore::Gateway" | "AWS::BedrockAgentCore::Memory" | "AWS::BedrockAgentCore::WorkloadIdentity" | "AWS::SecurityHub::Hub" | "AWS::CloudFront::Distribution" | "AWS::SecurityHub::HubV2" | "AWS::CloudWatch::OTelEnrichment" | "AWS::MSK::Cluster" | "AWS::S3::Bucket" | "AWS::Bedrock::KnowledgeBase")]
-      attr_accessor telemetry_configuration_state: ::Hash[("Logs" | "Metrics" | "Traces"), ("Enabled" | "Disabled" | "NotApplicable")]
+      attr_accessor resource_types: ::Array[("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter" | "AWS::BedrockAgentCore::Gateway" | "AWS::BedrockAgentCore::Memory" | "AWS::BedrockAgentCore::WorkloadIdentity" | "AWS::BedrockAgentCore::PaymentManager" | "AWS::SecurityHub::Hub" | "AWS::CloudFront::Distribution" | "AWS::SecurityHub::HubV2" | "AWS::CloudWatch::OTelEnrichment" | "AWS::MSK::Cluster" | "AWS::S3::Bucket" | "AWS::Bedrock::KnowledgeBase" | "AWS::XRay::TransactionSearchConfig")]
+      attr_accessor telemetry_configuration_state: ::Hash[("Logs" | "Metrics" | "Traces" | "Insights"), ("Enabled" | "Disabled" | "NotApplicable")]
       attr_accessor resource_tags: ::Hash[::String, ::String]
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
@@ -560,6 +616,9 @@ module Aws::ObservabilityAdmin
       SENSITIVE: []
     end
 
+    class SourceContextGraphConfiguration < Aws::EmptyStructure
+    end
+
     class SourceLogsConfiguration
       attr_accessor log_group_selection_criteria: ::String
       attr_accessor data_source_selection_criteria: ::String
@@ -609,8 +668,8 @@ module Aws::ObservabilityAdmin
 
     class TelemetryConfiguration
       attr_accessor account_identifier: ::String
-      attr_accessor telemetry_configuration_state: ::Hash[("Logs" | "Metrics" | "Traces"), ("Enabled" | "Disabled" | "NotApplicable")]
-      attr_accessor resource_type: ("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter" | "AWS::BedrockAgentCore::Gateway" | "AWS::BedrockAgentCore::Memory" | "AWS::BedrockAgentCore::WorkloadIdentity" | "AWS::SecurityHub::Hub" | "AWS::CloudFront::Distribution" | "AWS::SecurityHub::HubV2" | "AWS::CloudWatch::OTelEnrichment" | "AWS::MSK::Cluster" | "AWS::S3::Bucket" | "AWS::Bedrock::KnowledgeBase")
+      attr_accessor telemetry_configuration_state: ::Hash[("Logs" | "Metrics" | "Traces" | "Insights"), ("Enabled" | "Disabled" | "NotApplicable")]
+      attr_accessor resource_type: ("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter" | "AWS::BedrockAgentCore::Gateway" | "AWS::BedrockAgentCore::Memory" | "AWS::BedrockAgentCore::WorkloadIdentity" | "AWS::BedrockAgentCore::PaymentManager" | "AWS::SecurityHub::Hub" | "AWS::CloudFront::Distribution" | "AWS::SecurityHub::HubV2" | "AWS::CloudWatch::OTelEnrichment" | "AWS::MSK::Cluster" | "AWS::S3::Bucket" | "AWS::Bedrock::KnowledgeBase" | "AWS::XRay::TransactionSearchConfig")
       attr_accessor resource_identifier: ::String
       attr_accessor resource_tags: ::Hash[::String, ::String]
       attr_accessor last_update_time_stamp: ::Integer
@@ -666,8 +725,8 @@ module Aws::ObservabilityAdmin
     end
 
     class TelemetryRule
-      attr_accessor resource_type: ("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter" | "AWS::BedrockAgentCore::Gateway" | "AWS::BedrockAgentCore::Memory" | "AWS::BedrockAgentCore::WorkloadIdentity" | "AWS::SecurityHub::Hub" | "AWS::CloudFront::Distribution" | "AWS::SecurityHub::HubV2" | "AWS::CloudWatch::OTelEnrichment" | "AWS::MSK::Cluster" | "AWS::S3::Bucket" | "AWS::Bedrock::KnowledgeBase")
-      attr_accessor telemetry_type: ("Logs" | "Metrics" | "Traces")
+      attr_accessor resource_type: ("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter" | "AWS::BedrockAgentCore::Gateway" | "AWS::BedrockAgentCore::Memory" | "AWS::BedrockAgentCore::WorkloadIdentity" | "AWS::BedrockAgentCore::PaymentManager" | "AWS::SecurityHub::Hub" | "AWS::CloudFront::Distribution" | "AWS::SecurityHub::HubV2" | "AWS::CloudWatch::OTelEnrichment" | "AWS::MSK::Cluster" | "AWS::S3::Bucket" | "AWS::Bedrock::KnowledgeBase" | "AWS::XRay::TransactionSearchConfig")
+      attr_accessor telemetry_type: ("Logs" | "Metrics" | "Traces" | "Insights")
       attr_accessor telemetry_source_types: ::Array[("VPC_FLOW_LOGS" | "ROUTE53_RESOLVER_QUERY_LOGS" | "EKS_AUDIT_LOGS" | "EKS_AUTHENTICATOR_LOGS" | "EKS_CONTROLLER_MANAGER_LOGS" | "EKS_SCHEDULER_LOGS" | "EKS_API_LOGS")]
       attr_accessor destination_configuration: Types::TelemetryDestinationConfiguration
       attr_accessor scope: ::String
@@ -683,8 +742,8 @@ module Aws::ObservabilityAdmin
       attr_accessor rule_arn: ::String
       attr_accessor created_time_stamp: ::Integer
       attr_accessor last_update_time_stamp: ::Integer
-      attr_accessor resource_type: ("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter" | "AWS::BedrockAgentCore::Gateway" | "AWS::BedrockAgentCore::Memory" | "AWS::BedrockAgentCore::WorkloadIdentity" | "AWS::SecurityHub::Hub" | "AWS::CloudFront::Distribution" | "AWS::SecurityHub::HubV2" | "AWS::CloudWatch::OTelEnrichment" | "AWS::MSK::Cluster" | "AWS::S3::Bucket" | "AWS::Bedrock::KnowledgeBase")
-      attr_accessor telemetry_type: ("Logs" | "Metrics" | "Traces")
+      attr_accessor resource_type: ("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter" | "AWS::BedrockAgentCore::Gateway" | "AWS::BedrockAgentCore::Memory" | "AWS::BedrockAgentCore::WorkloadIdentity" | "AWS::BedrockAgentCore::PaymentManager" | "AWS::SecurityHub::Hub" | "AWS::CloudFront::Distribution" | "AWS::SecurityHub::HubV2" | "AWS::CloudWatch::OTelEnrichment" | "AWS::MSK::Cluster" | "AWS::S3::Bucket" | "AWS::Bedrock::KnowledgeBase" | "AWS::XRay::TransactionSearchConfig")
+      attr_accessor telemetry_type: ("Logs" | "Metrics" | "Traces" | "Insights")
       attr_accessor telemetry_source_types: ::Array[("VPC_FLOW_LOGS" | "ROUTE53_RESOLVER_QUERY_LOGS" | "EKS_AUDIT_LOGS" | "EKS_AUTHENTICATOR_LOGS" | "EKS_CONTROLLER_MANAGER_LOGS" | "EKS_SCHEDULER_LOGS" | "EKS_API_LOGS")]
       SENSITIVE: []
     end
@@ -720,6 +779,20 @@ module Aws::ObservabilityAdmin
 
     class UpdateCentralizationRuleForOrganizationOutput
       attr_accessor rule_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDatasetIntegrationInput
+      attr_accessor arn: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDatasetIntegrationOutput
+      attr_accessor arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 

@@ -344,6 +344,7 @@ module Aws::EMRServerless
     GetResourceDashboardRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
     GetResourceDashboardRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "querystring", location_name: "resourceId"))
     GetResourceDashboardRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location: "querystring", location_name: "resourceType"))
+    GetResourceDashboardRequest.add_member(:access_system_profile_logs, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "accessSystemProfileLogs"))
     GetResourceDashboardRequest.struct_class = Types::GetResourceDashboardRequest
 
     GetResourceDashboardResponse.add_member(:url, Shapes::ShapeRef.new(shape: Url, location_name: "url"))

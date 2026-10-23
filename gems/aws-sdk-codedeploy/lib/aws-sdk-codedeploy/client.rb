@@ -199,12 +199,19 @@ module Aws::CodeDeploy
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -738,6 +745,8 @@ module Aws::CodeDeploy
     #   resp.deployment_groups_info[0].ecs_services #=> Array
     #   resp.deployment_groups_info[0].ecs_services[0].service_name #=> String
     #   resp.deployment_groups_info[0].ecs_services[0].cluster_name #=> String
+    #   resp.deployment_groups_info[0].ec2_deployment_options.auto_scaling_group_processes_to_suspend #=> Array
+    #   resp.deployment_groups_info[0].ec2_deployment_options.auto_scaling_group_processes_to_suspend[0] #=> String, one of "Terminate", "AZRebalance", "InstanceRefresh", "ScheduledActions"
     #   resp.deployment_groups_info[0].termination_hook_enabled #=> Boolean
     #   resp.error_message #=> String
     #
@@ -1061,6 +1070,8 @@ module Aws::CodeDeploy
     #   resp.deployments_info[0].override_alarm_configuration.ignore_poll_alarm_failure #=> Boolean
     #   resp.deployments_info[0].override_alarm_configuration.alarms #=> Array
     #   resp.deployments_info[0].override_alarm_configuration.alarms[0].name #=> String
+    #   resp.deployments_info[0].ec2_deployment_options.auto_scaling_group_processes_to_suspend #=> Array
+    #   resp.deployments_info[0].ec2_deployment_options.auto_scaling_group_processes_to_suspend[0] #=> String, one of "Terminate", "AZRebalance", "InstanceRefresh", "ScheduledActions"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeployments AWS API Documentation
     #
@@ -1314,6 +1325,10 @@ module Aws::CodeDeploy
     #
     #    </note>
     #
+    # @option params [Types::EC2DeploymentOptions] :ec2_deployment_options
+    #   Options that control how CodeDeploy manages Amazon EC2 Auto Scaling
+    #   groups during a deployment.
+    #
     # @return [Types::CreateDeploymentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDeploymentOutput#deployment_id #deployment_id} => String
@@ -1384,6 +1399,9 @@ module Aws::CodeDeploy
     #           name: "AlarmName",
     #         },
     #       ],
+    #     },
+    #     ec2_deployment_options: {
+    #       auto_scaling_group_processes_to_suspend: ["Terminate"], # accepts Terminate, AZRebalance, InstanceRefresh, ScheduledActions
     #     },
     #   })
     #
@@ -1603,6 +1621,10 @@ module Aws::CodeDeploy
     #   you organize and categorize them. Each tag consists of a key and an
     #   optional value, both of which you define.
     #
+    # @option params [Types::EC2DeploymentOptions] :ec2_deployment_options
+    #   Options that control how CodeDeploy manages Amazon EC2 Auto Scaling
+    #   groups during a deployment.
+    #
     # @option params [Boolean] :termination_hook_enabled
     #   This parameter only applies if you are using CodeDeploy with Amazon
     #   EC2 Auto Scaling. For more information, see [Integrating CodeDeploy
@@ -1751,6 +1773,9 @@ module Aws::CodeDeploy
     #         value: "Value",
     #       },
     #     ],
+    #     ec2_deployment_options: {
+    #       auto_scaling_group_processes_to_suspend: ["Terminate"], # accepts Terminate, AZRebalance, InstanceRefresh, ScheduledActions
+    #     },
     #     termination_hook_enabled: false,
     #   })
     #
@@ -2162,6 +2187,8 @@ module Aws::CodeDeploy
     #   resp.deployment_info.override_alarm_configuration.ignore_poll_alarm_failure #=> Boolean
     #   resp.deployment_info.override_alarm_configuration.alarms #=> Array
     #   resp.deployment_info.override_alarm_configuration.alarms[0].name #=> String
+    #   resp.deployment_info.ec2_deployment_options.auto_scaling_group_processes_to_suspend #=> Array
+    #   resp.deployment_info.ec2_deployment_options.auto_scaling_group_processes_to_suspend[0] #=> String, one of "Terminate", "AZRebalance", "InstanceRefresh", "ScheduledActions"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2324,6 +2351,8 @@ module Aws::CodeDeploy
     #   resp.deployment_group_info.ecs_services #=> Array
     #   resp.deployment_group_info.ecs_services[0].service_name #=> String
     #   resp.deployment_group_info.ecs_services[0].cluster_name #=> String
+    #   resp.deployment_group_info.ec2_deployment_options.auto_scaling_group_processes_to_suspend #=> Array
+    #   resp.deployment_group_info.ec2_deployment_options.auto_scaling_group_processes_to_suspend[0] #=> String, one of "Terminate", "AZRebalance", "InstanceRefresh", "ScheduledActions"
     #   resp.deployment_group_info.termination_hook_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentGroup AWS API Documentation
@@ -3508,6 +3537,10 @@ module Aws::CodeDeploy
     #   group includes only on-premises instances identified by all the tag
     #   groups.
     #
+    # @option params [Types::EC2DeploymentOptions] :ec2_deployment_options
+    #   Options that control how CodeDeploy manages Amazon EC2 Auto Scaling
+    #   groups during a deployment.
+    #
     # @option params [Boolean] :termination_hook_enabled
     #   This parameter only applies if you are using CodeDeploy with Amazon
     #   EC2 Auto Scaling. For more information, see [Integrating CodeDeploy
@@ -3651,6 +3684,9 @@ module Aws::CodeDeploy
     #         ],
     #       ],
     #     },
+    #     ec2_deployment_options: {
+    #       auto_scaling_group_processes_to_suspend: ["Terminate"], # accepts Terminate, AZRebalance, InstanceRefresh, ScheduledActions
+    #     },
     #     termination_hook_enabled: false,
     #   })
     #
@@ -3688,7 +3724,7 @@ module Aws::CodeDeploy
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-codedeploy'
-      context[:gem_version] = '1.106.0'
+      context[:gem_version] = '1.109.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

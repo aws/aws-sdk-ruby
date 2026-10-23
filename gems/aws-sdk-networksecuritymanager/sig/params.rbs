@@ -1,0 +1,105 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module NetworkSecurityManager
+    module Params
+      type policy_configuration = {
+      remediation_enabled: bool,
+      resources_clean_up: bool,
+      waf_config: {
+        existing_customer_web_acl_resolution: ("RETROFIT" | "OVERRIDE_ASSOCIATION" | "NO_REMEDIATION"),
+        conflict_resolution: ("MERGE_WHERE_APPLICABLE")
+      }?
+    }
+
+      type account_filter = {
+      include_all: {
+      }?,
+      include: {
+        account_ids: Array[::String]?,
+        organizational_units: Array[::String]?
+      }?,
+      exclude: {
+        account_ids: Array[::String]?,
+        organizational_units: Array[::String]?
+      }?
+    }
+
+      type scope_configuration = {
+      account_filter: Params::account_filter?,
+      resource_scopes: Hash[("AWS::ApiGateway::Stage" | "AWS::CloudFront::Distribution" | "AWS::EC2::EIP" | "AWS::ElasticLoadBalancingV2::LoadBalancer::application" | "AWS::ElasticLoadBalancing::LoadBalancer"), Params::resource_scope]
+    }
+
+      type resource_logical_expression = {
+      criteria: {
+        tags: Hash[::String, ::String]?,
+        alb_config: {
+          scheme: ("internet-facing" | "internal")?,
+          ip_address_type: ("ipv4" | "dualstack" | "dualstack-without-public-ipv4")?
+        }?
+      }?,
+      and: Array[
+        {
+          criteria: {
+            tags: Hash[::String, ::String]?,
+            alb_config: {
+              scheme: ("internet-facing" | "internal")?,
+              ip_address_type: ("ipv4" | "dualstack" | "dualstack-without-public-ipv4")?
+            }?
+          }?,
+          and: untyped?,
+          or: untyped?,
+          not: untyped?
+        }
+      ]?,
+      or: Array[
+        {
+          criteria: {
+            tags: Hash[::String, ::String]?,
+            alb_config: {
+              scheme: ("internet-facing" | "internal")?,
+              ip_address_type: ("ipv4" | "dualstack" | "dualstack-without-public-ipv4")?
+            }?
+          }?,
+          and: untyped?,
+          or: untyped?,
+          not: untyped?
+        }
+      ]?,
+      not: {
+        criteria: {
+          tags: Hash[::String, ::String]?,
+          alb_config: {
+            scheme: ("internet-facing" | "internal")?,
+            ip_address_type: ("ipv4" | "dualstack" | "dualstack-without-public-ipv4")?
+          }?
+        }?,
+        and: Array[
+          untyped
+        ]?,
+        or: Array[
+          untyped
+        ]?,
+        not: untyped?
+      }?
+    }
+
+      type resource_set = {
+      explicit_arns: Array[::String]?,
+      expression: Params::resource_logical_expression?
+    }
+
+      type resource_scope = {
+      include_all: bool?,
+      include: Params::resource_set?,
+      exclude: Params::resource_set?
+    }
+
+    end
+  end
+end

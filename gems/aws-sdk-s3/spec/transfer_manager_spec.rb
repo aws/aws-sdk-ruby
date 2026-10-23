@@ -22,6 +22,7 @@ module Aws
 
       describe '#download_directory' do
         let(:temp_dir) { Dir.mktmpdir }
+        let(:destination) { File.join(temp_dir, 'victim', 'downloads') }
 
         before do
           client.stub_responses(
@@ -51,6 +52,69 @@ module Aws
             subject.download_directory(temp_dir, bucket: 'bucket', ignore_failure: false)
           end.to raise_error(DirectoryDownloadError)
         end
+
+        it 'shuts down the internally-created executor when download raises' do
+          client.stub_responses(:get_object, 'AccessDenied')
+          executor = nil
+          allow(DefaultExecutor).to receive(:new).and_wrap_original do |orig, *args, **kwargs|
+            instance = orig.call(*args, **kwargs)
+            if executor.nil?
+              executor = instance
+              allow(instance).to receive(:shutdown).and_call_original
+            end
+            instance
+          end
+          expect do
+            subject.download_directory(temp_dir, bucket: 'bucket', ignore_failure: false)
+          end.to raise_error(DirectoryDownloadError)
+          expect(executor).to have_received(:shutdown)
+        end
+
+        context 'with Windows path separators' do
+          before { stub_const('File::ALT_SEPARATOR', '\\') }
+
+          it 'raises for backslash traversal' do
+            client.stub_responses(
+              :list_objects_v2,
+              { contents: [{ key: '..\\..\\escape.txt', size: 100 }], is_truncated: false }
+            )
+
+            expect do
+              subject.download_directory(destination, bucket: 'bucket')
+            end.to raise_error(DirectoryDownloadError, /invalid key/)
+            expect(File.exist?(File.join(temp_dir, 'escape.txt'))).to be(false)
+          end
+
+          it 'reports unsafe keys as failures while downloading safe keys' do
+            invalid_keys = ['.\\report.txt', 'reports/..\\..\\..\\escape.txt']
+            valid_key = 'reports\\data.csv'
+            client.stub_responses(
+              :list_objects_v2,
+              { contents: (invalid_keys + [valid_key]).map { |key| { key: key, size: 100 } }, is_truncated: false }
+            )
+            client.stub_responses(:get_object, ->(context) { { body: context.params[:key] } })
+
+            result = subject.download_directory(destination, bucket: 'bucket', ignore_failure: true)
+
+            expect(result).to include(completed_downloads: 1, failed_downloads: 2)
+            expect(File.read(File.join(destination, valid_key))).to eq(valid_key)
+            expect(File.exist?(File.join(temp_dir, 'escape.txt'))).to be(false)
+          end
+        end
+
+        it 'downloads literal-backslash filenames on POSIX', skip: !File::ALT_SEPARATOR.nil? do
+          keys = ['..\\..\\name.txt', 'dir\\.\\file.txt']
+          client.stub_responses(
+            :list_objects_v2,
+            { contents: keys.map { |key| { key: key, size: 100 } }, is_truncated: false }
+          )
+          client.stub_responses(:get_object, ->(context) { { body: context.params[:key] } })
+
+          result = subject.download_directory(destination, bucket: 'bucket')
+
+          expect(result).to include(completed_downloads: 2, failed_downloads: 0)
+          keys.each { |key| expect(File.read(File.join(destination, key))).to eq(key) }
+        end
       end
 
       describe '#download_file' do
@@ -70,6 +134,19 @@ module Aws
           client.stub_responses(:head_object, 'NoSuchKey')
           expect { subject.download_file(path, bucket: 'bucket', key: 'missing-key') }
             .to raise_error(Aws::S3::Errors::NoSuchKey)
+        end
+
+        it 'shuts down the internally-created executor when download raises' do
+          client.stub_responses(:head_object, 'NoSuchKey')
+          executor = nil
+          allow(DefaultExecutor).to receive(:new).and_wrap_original do |orig, *args, **kwargs|
+            executor = orig.call(*args, **kwargs)
+            allow(executor).to receive(:shutdown).and_call_original
+            executor
+          end
+          expect { subject.download_file(path, bucket: 'bucket', key: 'missing-key') }
+            .to raise_error(Aws::S3::Errors::NoSuchKey)
+          expect(executor).to have_received(:shutdown)
         end
 
         it 'calls progress callback when given' do
@@ -108,6 +185,23 @@ module Aws
             subject.upload_directory(temp_dir, bucket: 'bucket', ignore_failure: false)
           end.to raise_error(DirectoryUploadError)
         end
+
+        it 'shuts down the internally-created executor when upload raises' do
+          client.stub_responses(:put_object, 'AccessDenied')
+          executor = nil
+          allow(DefaultExecutor).to receive(:new).and_wrap_original do |orig, *args, **kwargs|
+            instance = orig.call(*args, **kwargs)
+            if executor.nil?
+              executor = instance
+              allow(instance).to receive(:shutdown).and_call_original
+            end
+            instance
+          end
+          expect do
+            subject.upload_directory(temp_dir, bucket: 'bucket', ignore_failure: false)
+          end.to raise_error(DirectoryUploadError)
+          expect(executor).to have_received(:shutdown)
+        end
       end
 
       describe '#upload_file' do
@@ -133,6 +227,19 @@ module Aws
           client.stub_responses(:put_object, 'AccessDenied')
           expect { subject.upload_file(file, bucket: 'forbidden-bucket', key: 'key') }
             .to raise_error(Aws::S3::Errors::AccessDenied)
+        end
+
+        it 'shuts down the internally-created executor when upload raises' do
+          client.stub_responses(:put_object, 'AccessDenied')
+          executor = nil
+          allow(DefaultExecutor).to receive(:new).and_wrap_original do |orig, *args, **kwargs|
+            executor = orig.call(*args, **kwargs)
+            allow(executor).to receive(:shutdown).and_call_original
+            executor
+          end
+          expect { subject.upload_file(file, bucket: 'forbidden-bucket', key: 'key') }
+            .to raise_error(Aws::S3::Errors::AccessDenied)
+          expect(executor).to have_received(:shutdown)
         end
 
         it 'yields response when block given' do
@@ -242,6 +349,20 @@ module Aws
           expect do
             subject.upload_stream(bucket: 'bucket', key: 'key') { |write_stream| write_stream << seventeen_mb }
           end.to raise_error(Aws::S3::MultipartUploadError, /part failed/)
+        end
+
+        it 'shuts down the internally-created executor when upload raises' do
+          client.stub_responses(:upload_part, RuntimeError.new('part failed'))
+          executor = nil
+          allow(DefaultExecutor).to receive(:new).and_wrap_original do |orig, *args, **kwargs|
+            executor = orig.call(*args, **kwargs)
+            allow(executor).to receive(:shutdown).and_call_original
+            executor
+          end
+          expect do
+            subject.upload_stream(bucket: 'bucket', key: 'key') { |write_stream| write_stream << seventeen_mb }
+          end.to raise_error(Aws::S3::MultipartUploadError, /part failed/)
+          expect(executor).to have_received(:shutdown)
         end
       end
     end

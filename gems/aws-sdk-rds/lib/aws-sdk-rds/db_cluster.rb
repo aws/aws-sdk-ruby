@@ -242,7 +242,13 @@ module Aws::RDS
       data[:hosted_zone_id]
     end
 
-    # Indicates whether the DB cluster is encrypted.
+    # Specifies whether the DB cluster is encrypted with an Amazon Web
+    # Services managed key or a customer managed key.
+    #
+    # If the DB cluster is encrypted with an Amazon Web Services owned key,
+    # this value is `false` and `StorageEncryptionType` is `sse-rds`. In
+    # that case, the data at rest is still encrypted. To determine how the
+    # data at rest is protected, use `StorageEncryptionType`.
     # @return [Boolean]
     def storage_encrypted
       data[:storage_encrypted]

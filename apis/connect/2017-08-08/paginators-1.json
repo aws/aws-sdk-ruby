@@ -70,6 +70,12 @@
       "output_token": "NextToken",
       "result_key": "EvaluationSummaryList"
     },
+    "ListContactFlowAliases": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "ContactFlowAliasSummaryList"
+    },
     "ListContactFlowModuleAliases": {
       "input_token": "NextToken",
       "limit_key": "MaxResults",
@@ -140,6 +146,12 @@
       "limit_key": "MaxResults",
       "output_token": "NextToken",
       "result_key": "SecurityProfiles"
+    },
+    "ListEvaluationFormAIVersions": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "AIVersionSummaries"
     },
     "ListEvaluationFormVersions": {
       "input_token": "NextToken",
@@ -273,6 +285,16 @@
       "input_token": "NextToken",
       "limit_key": "MaxResults",
       "output_token": "NextToken"
+    },
+    "ListReplicationFindings": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "non_aggregate_keys": [
+        "ApproximateDriftedResourceCounts",
+        "ResourceReplicationStatuses"
+      ],
+      "output_token": "NextToken",
+      "result_key": "ReplicationFindingsList"
     },
     "ListRoutingProfileManualAssignmentQueues": {
       "input_token": "NextToken",

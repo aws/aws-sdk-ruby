@@ -640,6 +640,15 @@
       "input":{"shape":"CreateCapacityReservationCancellationQuoteRequest"},
       "output":{"shape":"CreateCapacityReservationCancellationQuoteResult"}
     },
+    "CreateCapacityReservationDateChangeQuote":{
+      "name":"CreateCapacityReservationDateChangeQuote",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateCapacityReservationDateChangeQuoteRequest"},
+      "output":{"shape":"CreateCapacityReservationDateChangeQuoteResult"}
+    },
     "CreateCapacityReservationFleet":{
       "name":"CreateCapacityReservationFleet",
       "http":{
@@ -1608,6 +1617,15 @@
       },
       "input":{"shape":"DeleteClientVpnEndpointRequest"},
       "output":{"shape":"DeleteClientVpnEndpointResult"}
+    },
+    "DeleteClientVpnEndpointAuthorizationPolicy":{
+      "name":"DeleteClientVpnEndpointAuthorizationPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteClientVpnEndpointAuthorizationPolicyRequest"},
+      "output":{"shape":"DeleteClientVpnEndpointAuthorizationPolicyResult"}
     },
     "DeleteClientVpnRoute":{
       "name":"DeleteClientVpnRoute",
@@ -2688,6 +2706,15 @@
       },
       "input":{"shape":"DescribeCapacityReservationCancellationQuotesRequest"},
       "output":{"shape":"DescribeCapacityReservationCancellationQuotesResult"}
+    },
+    "DescribeCapacityReservationDateChangeQuotes":{
+      "name":"DescribeCapacityReservationDateChangeQuotes",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeCapacityReservationDateChangeQuotesRequest"},
+      "output":{"shape":"DescribeCapacityReservationDateChangeQuotesResult"}
     },
     "DescribeCapacityReservationFleets":{
       "name":"DescribeCapacityReservationFleets",
@@ -5012,6 +5039,15 @@
       "input":{"shape":"GetCapacityReservationUsageRequest"},
       "output":{"shape":"GetCapacityReservationUsageResult"}
     },
+    "GetClientVpnEndpointAuthorizationPolicy":{
+      "name":"GetClientVpnEndpointAuthorizationPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetClientVpnEndpointAuthorizationPolicyRequest"},
+      "output":{"shape":"GetClientVpnEndpointAuthorizationPolicyResult"}
+    },
     "GetCoipPoolUsage":{
       "name":"GetCoipPoolUsage",
       "http":{
@@ -5480,6 +5516,15 @@
       "input":{"shape":"GetSubnetCidrReservationsRequest"},
       "output":{"shape":"GetSubnetCidrReservationsResult"}
     },
+    "GetTransitGatewayAttachmentNatConfiguration":{
+      "name":"GetTransitGatewayAttachmentNatConfiguration",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetTransitGatewayAttachmentNatConfigurationRequest"},
+      "output":{"shape":"GetTransitGatewayAttachmentNatConfigurationResult"}
+    },
     "GetTransitGatewayAttachmentPropagations":{
       "name":"GetTransitGatewayAttachmentPropagations",
       "http":{
@@ -5767,6 +5812,15 @@
       },
       "input":{"shape":"ModifyClientVpnEndpointRequest"},
       "output":{"shape":"ModifyClientVpnEndpointResult"}
+    },
+    "ModifyClientVpnEndpointAuthorizationPolicy":{
+      "name":"ModifyClientVpnEndpointAuthorizationPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ModifyClientVpnEndpointAuthorizationPolicyRequest"},
+      "output":{"shape":"ModifyClientVpnEndpointAuthorizationPolicyResult"}
     },
     "ModifyDefaultCreditSpecification":{
       "name":"ModifyDefaultCreditSpecification",
@@ -6192,6 +6246,15 @@
       },
       "input":{"shape":"ModifyTransitGatewayRequest"},
       "output":{"shape":"ModifyTransitGatewayResult"}
+    },
+    "ModifyTransitGatewayAttachmentNatConfiguration":{
+      "name":"ModifyTransitGatewayAttachmentNatConfiguration",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ModifyTransitGatewayAttachmentNatConfigurationRequest"},
+      "output":{"shape":"ModifyTransitGatewayAttachmentNatConfigurationResult"}
     },
     "ModifyTransitGatewayMeteringPolicy":{
       "name":"ModifyTransitGatewayMeteringPolicy",
@@ -8553,6 +8616,39 @@
         "succeeded",
         "failed"
       ]
+    },
+    "AnalysisTransitGatewayPolicyTableEntry":{
+      "type":"structure",
+      "members":{
+        "RuleNumber":{
+          "shape":"Integer",
+          "locationName":"ruleNumber"
+        },
+        "Protocol":{
+          "shape":"String",
+          "locationName":"protocol"
+        },
+        "SourceCidr":{
+          "shape":"String",
+          "locationName":"sourceCidr"
+        },
+        "DestinationCidr":{
+          "shape":"String",
+          "locationName":"destinationCidr"
+        },
+        "SourcePortRange":{
+          "shape":"PortRange",
+          "locationName":"sourcePortRange"
+        },
+        "DestinationPortRange":{
+          "shape":"PortRange",
+          "locationName":"destinationPortRange"
+        },
+        "TargetRouteTableId":{
+          "shape":"String",
+          "locationName":"targetRouteTableId"
+        }
+      }
     },
     "ApplianceModeSupportValue":{
       "type":"string",
@@ -11951,11 +12047,60 @@
           "shape":"InterruptionInfo",
           "locationName":"interruptionInfo"
         },
+        "AdjustmentStatus":{
+          "shape":"CapacityReservationAdjustmentStatus",
+          "locationName":"adjustmentStatus"
+        },
+        "AdjustmentDetails":{
+          "shape":"CapacityReservationAdjustmentDetails",
+          "locationName":"adjustmentDetails"
+        },
+        "OriginalStartDate":{
+          "shape":"MillisecondDateTime",
+          "locationName":"originalStartDate"
+        },
         "ZeroSizePreference":{
           "shape":"ZeroSizePreference",
           "locationName":"zeroSizePreference"
+        },
+        "LaunchStatus":{
+          "shape":"CapacityReservationLaunchStatus",
+          "locationName":"launchStatus"
         }
       }
+    },
+    "CapacityReservationAdjustmentDetails":{
+      "type":"structure",
+      "members":{
+        "StartDate":{
+          "shape":"MillisecondDateTime",
+          "locationName":"startDate"
+        },
+        "EndDate":{
+          "shape":"MillisecondDateTime",
+          "locationName":"endDate"
+        },
+        "CommitmentEndDate":{
+          "shape":"MillisecondDateTime",
+          "locationName":"commitmentEndDate"
+        },
+        "EndDateType":{
+          "shape":"String",
+          "locationName":"endDateType"
+        },
+        "CommitmentDuration":{
+          "shape":"BoxedLong",
+          "locationName":"commitmentDuration"
+        }
+      }
+    },
+    "CapacityReservationAdjustmentStatus":{
+      "type":"string",
+      "enum":[
+        "requested",
+        "applied",
+        "rejected"
+      ]
     },
     "CapacityReservationBillingRequest":{
       "type":"structure",
@@ -12083,6 +12228,10 @@
         "CommitmentEndDate":{
           "shape":"MillisecondDateTime",
           "locationName":"commitmentEndDate"
+        },
+        "CommitmentDuration":{
+          "shape":"BoxedLong",
+          "locationName":"commitmentDuration"
         }
       }
     },
@@ -12282,6 +12431,74 @@
         "RHEL with HA and SQL Server Standard",
         "RHEL with HA and SQL Server Enterprise",
         "Ubuntu Pro"
+      ]
+    },
+    "CapacityReservationLaunchStatus":{
+      "type":"string",
+      "enum":[
+        "launchable",
+        "unlaunchable"
+      ]
+    },
+    "CapacityReservationModificationQuote":{
+      "type":"structure",
+      "members":{
+        "CapacityReservationModificationQuoteId":{
+          "shape":"CapacityReservationModificationQuoteId",
+          "locationName":"capacityReservationModificationQuoteId"
+        },
+        "CapacityReservationId":{
+          "shape":"CapacityReservationId",
+          "locationName":"capacityReservationId"
+        },
+        "CreateTime":{
+          "shape":"MillisecondDateTime",
+          "locationName":"createTime"
+        },
+        "ExpirationTime":{
+          "shape":"MillisecondDateTime",
+          "locationName":"expirationTime"
+        },
+        "QuoteState":{
+          "shape":"CapacityReservationModificationQuoteState",
+          "locationName":"quoteState"
+        },
+        "CurrentConfiguration":{
+          "shape":"ModificationQuoteCurrentConfiguration",
+          "locationName":"currentConfiguration"
+        },
+        "ModificationTerms":{
+          "shape":"ModificationTerms",
+          "locationName":"modificationTerms"
+        },
+        "Tags":{
+          "shape":"TagList",
+          "locationName":"tagSet"
+        }
+      }
+    },
+    "CapacityReservationModificationQuoteId":{"type":"string"},
+    "CapacityReservationModificationQuoteIdSet":{
+      "type":"list",
+      "member":{
+        "shape":"CapacityReservationModificationQuoteId",
+        "locationName":"item"
+      },
+      "max":1000,
+      "min":0
+    },
+    "CapacityReservationModificationQuoteResponseSet":{
+      "type":"list",
+      "member":{
+        "shape":"CapacityReservationModificationQuote",
+        "locationName":"item"
+      }
+    },
+    "CapacityReservationModificationQuoteState":{
+      "type":"string",
+      "enum":[
+        "active",
+        "expired"
       ]
     },
     "CapacityReservationOptions":{
@@ -12790,6 +13007,23 @@
         "federated-authentication"
       ]
     },
+    "ClientVpnAuthorizationPolicyShadowMode":{
+      "type":"string",
+      "enum":[
+        "enabled",
+        "disabled"
+      ]
+    },
+    "ClientVpnAuthorizationPolicyStatus":{
+      "type":"string",
+      "enum":[
+        "creating",
+        "updating",
+        "active",
+        "failed",
+        "deleting"
+      ]
+    },
     "ClientVpnAuthorizationRuleStatus":{
       "type":"structure",
       "members":{
@@ -12888,6 +13122,10 @@
         "PostureComplianceStatuses":{
           "shape":"ValueStringList",
           "locationName":"postureComplianceStatusSet"
+        },
+        "AuthorizationPolicyLastEvaluatedTime":{
+          "shape":"String",
+          "locationName":"authorizationPolicyLastEvaluatedTime"
         }
       }
     },
@@ -12918,6 +13156,14 @@
         "failed-to-terminate",
         "terminating",
         "terminated"
+      ]
+    },
+    "ClientVpnDeviceTrustProviderType":{
+      "type":"string",
+      "enum":[
+        "crowdstrike",
+        "jamf",
+        "jumpcloud"
       ]
     },
     "ClientVpnEndpoint":{
@@ -13036,6 +13282,10 @@
         "TransitGatewayConfiguration":{
           "shape":"TransitGatewayConfigurationDescribeEndpointStructure",
           "locationName":"transitGatewayConfiguration"
+        },
+        "DevicePostureOptions":{
+          "shape":"DevicePostureResponseOptions",
+          "locationName":"devicePostureOptions"
         }
       }
     },
@@ -13160,6 +13410,45 @@
       "type":"list",
       "member":{
         "shape":"SecurityGroupId",
+        "locationName":"item"
+      }
+    },
+    "ClientVpnTrustProvider":{
+      "type":"structure",
+      "members":{
+        "TrustProviderType":{
+          "shape":"ClientVpnDeviceTrustProviderType",
+          "locationName":"trustProviderType"
+        },
+        "TenantId":{
+          "shape":"String",
+          "locationName":"tenantId"
+        },
+        "PublicSigningKeyUrl":{
+          "shape":"String",
+          "locationName":"publicSigningKeyUrl"
+        }
+      }
+    },
+    "ClientVpnTrustProviderRequest":{
+      "type":"structure",
+      "members":{
+        "TrustProviderType":{"shape":"ClientVpnDeviceTrustProviderType"},
+        "TenantId":{"shape":"String"},
+        "PublicSigningKeyUrl":{"shape":"String"}
+      }
+    },
+    "ClientVpnTrustProviderRequestList":{
+      "type":"list",
+      "member":{
+        "shape":"ClientVpnTrustProviderRequest",
+        "locationName":"item"
+      }
+    },
+    "ClientVpnTrustProviderSet":{
+      "type":"list",
+      "member":{
+        "shape":"ClientVpnTrustProvider",
         "locationName":"item"
       }
     },
@@ -13356,7 +13645,8 @@
       "members":{
         "Enabled":{"shape":"Boolean"},
         "CloudwatchLogGroup":{"shape":"String"},
-        "CloudwatchLogStream":{"shape":"String"}
+        "CloudwatchLogStream":{"shape":"String"},
+        "IncludeAuthorizationPolicyContext":{"shape":"Boolean"}
       }
     },
     "ConnectionLogResponseOptions":{
@@ -13364,7 +13654,8 @@
       "members":{
         "Enabled":{"shape":"Boolean"},
         "CloudwatchLogGroup":{"shape":"String"},
-        "CloudwatchLogStream":{"shape":"String"}
+        "CloudwatchLogStream":{"shape":"String"},
+        "IncludeAuthorizationPolicyContext":{"shape":"Boolean"}
       }
     },
     "ConnectionNotification":{
@@ -13937,6 +14228,35 @@
         }
       }
     },
+    "CreateCapacityReservationDateChangeQuoteRequest":{
+      "type":"structure",
+      "required":[
+        "CapacityReservationId",
+        "NewStartDate"
+      ],
+      "members":{
+        "CapacityReservationId":{"shape":"CapacityReservationId"},
+        "NewStartDate":{"shape":"MillisecondDateTime"},
+        "ClientToken":{
+          "shape":"String",
+          "idempotencyToken":true
+        },
+        "TagSpecifications":{
+          "shape":"TagSpecificationList",
+          "locationName":"TagSpecification"
+        },
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "CreateCapacityReservationDateChangeQuoteResult":{
+      "type":"structure",
+      "members":{
+        "CapacityReservationModificationQuote":{
+          "shape":"CapacityReservationModificationQuote",
+          "locationName":"capacityReservationModificationQuote"
+        }
+      }
+    },
     "CreateCapacityReservationFleetRequest":{
       "type":"structure",
       "required":["TotalTargetCapacity"],
@@ -14115,7 +14435,8 @@
         "DisconnectOnSessionTimeout":{"shape":"Boolean"},
         "EndpointIpAddressType":{"shape":"EndpointIpAddressType"},
         "TrafficIpAddressType":{"shape":"TrafficIpAddressType"},
-        "TransitGatewayConfiguration":{"shape":"TransitGatewayConfigurationInputStructure"}
+        "TransitGatewayConfiguration":{"shape":"TransitGatewayConfigurationInputStructure"},
+        "DevicePostureOptions":{"shape":"DevicePostureOptions"}
       }
     },
     "CreateClientVpnEndpointResult":{
@@ -17864,6 +18185,23 @@
         }
       }
     },
+    "DeleteClientVpnEndpointAuthorizationPolicyRequest":{
+      "type":"structure",
+      "required":["ClientVpnEndpointId"],
+      "members":{
+        "ClientVpnEndpointId":{"shape":"ClientVpnEndpointId"},
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "DeleteClientVpnEndpointAuthorizationPolicyResult":{
+      "type":"structure",
+      "members":{
+        "Status":{
+          "shape":"ClientVpnAuthorizationPolicyStatus",
+          "locationName":"status"
+        }
+      }
+    },
     "DeleteClientVpnEndpointRequest":{
       "type":"structure",
       "required":["ClientVpnEndpointId"],
@@ -20511,6 +20849,40 @@
         "CapacityReservationCancellationQuotes":{
           "shape":"CapacityReservationCancellationQuoteResponseSet",
           "locationName":"capacityReservationCancellationQuoteSet"
+        },
+        "NextToken":{
+          "shape":"String",
+          "locationName":"nextToken"
+        }
+      }
+    },
+    "DescribeCapacityReservationDateChangeQuotesRequest":{
+      "type":"structure",
+      "members":{
+        "CapacityReservationModificationQuoteIds":{
+          "shape":"CapacityReservationModificationQuoteIdSet",
+          "locationName":"CapacityReservationModificationQuoteId"
+        },
+        "MaxResults":{"shape":"DescribeCapacityReservationDateChangeQuotesRequestMaxResults"},
+        "NextToken":{"shape":"String"},
+        "DryRun":{"shape":"Boolean"},
+        "Filters":{
+          "shape":"FilterList",
+          "locationName":"Filter"
+        }
+      }
+    },
+    "DescribeCapacityReservationDateChangeQuotesRequestMaxResults":{
+      "type":"integer",
+      "max":1000,
+      "min":1
+    },
+    "DescribeCapacityReservationDateChangeQuotesResult":{
+      "type":"structure",
+      "members":{
+        "CapacityReservationModificationQuotes":{
+          "shape":"CapacityReservationModificationQuoteResponseSet",
+          "locationName":"capacityReservationModificationQuoteSet"
         },
         "NextToken":{
           "shape":"String",
@@ -26275,6 +26647,25 @@
         }
       }
     },
+    "DevicePostureOptions":{
+      "type":"structure",
+      "members":{
+        "TrustProviders":{
+          "shape":"ClientVpnTrustProviderRequestList",
+          "locationName":"TrustProvider"
+        },
+        "Enabled":{"shape":"Boolean"}
+      }
+    },
+    "DevicePostureResponseOptions":{
+      "type":"structure",
+      "members":{
+        "TrustProviders":{
+          "shape":"ClientVpnTrustProviderSet",
+          "locationName":"trustProviderSet"
+        }
+      }
+    },
     "DeviceTrustProviderType":{
       "type":"string",
       "enum":[
@@ -29234,6 +29625,14 @@
           "shape":"TransitGatewayRouteTableRoute",
           "locationName":"transitGatewayRouteTableRoute"
         },
+        "TransitGatewayPolicyTable":{
+          "shape":"AnalysisComponent",
+          "locationName":"transitGatewayPolicyTable"
+        },
+        "TransitGatewayPolicyTableEntry":{
+          "shape":"AnalysisTransitGatewayPolicyTableEntry",
+          "locationName":"transitGatewayPolicyTableEntry"
+        },
         "TransitGatewayAttachment":{
           "shape":"AnalysisComponent",
           "locationName":"transitGatewayAttachment"
@@ -31016,6 +31415,39 @@
         }
       }
     },
+    "GetClientVpnEndpointAuthorizationPolicyRequest":{
+      "type":"structure",
+      "required":["ClientVpnEndpointId"],
+      "members":{
+        "ClientVpnEndpointId":{"shape":"ClientVpnEndpointId"},
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "GetClientVpnEndpointAuthorizationPolicyResult":{
+      "type":"structure",
+      "members":{
+        "ClientVpnEndpointId":{
+          "shape":"String",
+          "locationName":"clientVpnEndpointId"
+        },
+        "PolicyDocument":{
+          "shape":"String",
+          "locationName":"policyDocument"
+        },
+        "Description":{
+          "shape":"String",
+          "locationName":"description"
+        },
+        "ShadowMode":{
+          "shape":"ClientVpnAuthorizationPolicyShadowMode",
+          "locationName":"shadowMode"
+        },
+        "Status":{
+          "shape":"ClientVpnAuthorizationPolicyStatus",
+          "locationName":"status"
+        }
+      }
+    },
     "GetCoipPoolUsageRequest":{
       "type":"structure",
       "required":["PoolId"],
@@ -32430,6 +32862,35 @@
         "NextToken":{
           "shape":"String",
           "locationName":"nextToken"
+        }
+      }
+    },
+    "GetTransitGatewayAttachmentNatConfigurationRequest":{
+      "type":"structure",
+      "required":["TransitGatewayAttachmentId"],
+      "members":{
+        "TransitGatewayAttachmentId":{"shape":"TransitGatewayAttachmentId"},
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "GetTransitGatewayAttachmentNatConfigurationResult":{
+      "type":"structure",
+      "members":{
+        "TransitGatewayAttachmentId":{
+          "shape":"TransitGatewayAttachmentId",
+          "locationName":"transitGatewayAttachmentId"
+        },
+        "NatGatewaySupport":{
+          "shape":"TransitGatewayAttachmentNatGatewaySupportState",
+          "locationName":"natGatewaySupport"
+        },
+        "NatSystemRouteSupport":{
+          "shape":"TransitGatewayAttachmentNatSystemRouteSupportValue",
+          "locationName":"natSystemRouteSupport"
+        },
+        "NatGatewayRules":{
+          "shape":"TransitGatewayNatRuleList",
+          "locationName":"natGatewayRuleSet"
         }
       }
     },
@@ -36979,6 +37440,10 @@
         "ApplicationStatus":{
           "shape":"ApplicationStatusSummary",
           "locationName":"applicationStatus"
+        },
+        "PerformanceStatus":{
+          "shape":"PerformanceStatusSummary",
+          "locationName":"performanceStatus"
         }
       }
     },
@@ -38574,7 +39039,16 @@
         "r9gd.24xlarge",
         "r9gd.48xlarge",
         "r9gd.metal-48xl",
-        "m9g.medium"
+        "m9g.medium",
+        "t8i.nano",
+        "t8i.micro",
+        "t8i.small",
+        "t8i.medium",
+        "i8g.metal-48xl",
+        "r8gb.48xlarge",
+        "r8gb.metal-48xl",
+        "m9gd.medium",
+        "trn2u.48xlarge"
       ]
     },
     "InstanceTypeHypervisor":{
@@ -39759,6 +40233,9 @@
         "enable-in-progress",
         "enable-complete",
         "enable-failed",
+        "disable-in-progress",
+        "disable-complete",
+        "disable-failed",
         "delete-in-progress",
         "delete-complete",
         "delete-failed"
@@ -44162,6 +44639,53 @@
       }
     },
     "MillisecondDateTime":{"type":"timestamp"},
+    "ModificationQuoteCurrentConfiguration":{
+      "type":"structure",
+      "members":{
+        "InstanceCount":{
+          "shape":"Integer",
+          "locationName":"instanceCount"
+        },
+        "ReservationState":{
+          "shape":"String",
+          "locationName":"reservationState"
+        },
+        "StartDate":{
+          "shape":"MillisecondDateTime",
+          "locationName":"startDate"
+        },
+        "OriginalStartDate":{
+          "shape":"MillisecondDateTime",
+          "locationName":"originalStartDate"
+        }
+      }
+    },
+    "ModificationReservationUpdate":{
+      "type":"structure",
+      "members":{
+        "NewCommitmentEndDate":{
+          "shape":"MillisecondDateTime",
+          "locationName":"newCommitmentEndDate"
+        },
+        "NewStartDate":{
+          "shape":"MillisecondDateTime",
+          "locationName":"newStartDate"
+        },
+        "NewCommitmentDuration":{
+          "shape":"BoxedInteger",
+          "locationName":"newCommitmentDuration"
+        }
+      }
+    },
+    "ModificationTerms":{
+      "type":"structure",
+      "members":{
+        "ReservationUpdate":{
+          "shape":"ModificationReservationUpdate",
+          "locationName":"reservationUpdate"
+        }
+      }
+    },
     "ModifyAccountVpcEncryptionControlRequest":{
       "type":"structure",
       "members":{
@@ -44301,7 +44825,10 @@
         "Accept":{"shape":"Boolean"},
         "DryRun":{"shape":"Boolean"},
         "AdditionalInfo":{"shape":"String"},
-        "InstanceMatchCriteria":{"shape":"InstanceMatchCriteria"}
+        "InstanceMatchCriteria":{"shape":"InstanceMatchCriteria"},
+        "AcceptModificationTerms":{"shape":"Boolean"},
+        "StartDate":{"shape":"MillisecondDateTime"},
+        "QuoteId":{"shape":"CapacityReservationModificationQuoteId"}
       }
     },
     "ModifyCapacityReservationResult":{
@@ -44310,6 +44837,38 @@
         "Return":{
           "shape":"Boolean",
           "locationName":"return"
+        },
+        "AdjustmentStatus":{
+          "shape":"CapacityReservationAdjustmentStatus",
+          "locationName":"adjustmentStatus"
+        },
+        "AdjustmentDetails":{
+          "shape":"CapacityReservationAdjustmentDetails",
+          "locationName":"adjustmentDetails"
+        }
+      }
+    },
+    "ModifyClientVpnEndpointAuthorizationPolicyRequest":{
+      "type":"structure",
+      "required":["ClientVpnEndpointId"],
+      "members":{
+        "ClientVpnEndpointId":{"shape":"ClientVpnEndpointId"},
+        "PolicyDocument":{"shape":"String"},
+        "Description":{"shape":"String"},
+        "ShadowMode":{"shape":"ClientVpnAuthorizationPolicyShadowMode"},
+        "ClientToken":{
+          "shape":"String",
+          "idempotencyToken":true
+        },
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "ModifyClientVpnEndpointAuthorizationPolicyResult":{
+      "type":"structure",
+      "members":{
+        "Status":{
+          "shape":"ClientVpnAuthorizationPolicyStatus",
+          "locationName":"status"
         }
       }
     },
@@ -44336,7 +44895,8 @@
         "ClientLoginBannerOptions":{"shape":"ClientLoginBannerOptions"},
         "ClientRouteEnforcementOptions":{"shape":"ClientRouteEnforcementOptions"},
         "DisconnectOnSessionTimeout":{"shape":"Boolean"},
-        "TransitGatewayConfiguration":{"shape":"TransitGatewayConfigurationInputStructure"}
+        "TransitGatewayConfiguration":{"shape":"TransitGatewayConfigurationInputStructure"},
+        "DevicePostureOptions":{"shape":"DevicePostureOptions"}
       }
     },
     "ModifyClientVpnEndpointResult":{
@@ -45591,6 +46151,42 @@
         "TrafficMirrorSession":{
           "shape":"TrafficMirrorSession",
           "locationName":"trafficMirrorSession"
+        }
+      }
+    },
+    "ModifyTransitGatewayAttachmentNatConfigurationRequest":{
+      "type":"structure",
+      "required":["TransitGatewayAttachmentId"],
+      "members":{
+        "TransitGatewayAttachmentId":{"shape":"TransitGatewayAttachmentId"},
+        "NatGatewaySupport":{"shape":"TransitGatewayAttachmentNatGatewaySupportValue"},
+        "NatSystemRouteSupport":{"shape":"TransitGatewayAttachmentNatSystemRouteSupportValue"},
+        "NatGatewayRules":{
+          "shape":"TransitGatewayNatRuleRequestList",
+          "locationName":"NatGatewayRule"
+        },
+        "ResetNatGatewayRules":{"shape":"Boolean"},
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "ModifyTransitGatewayAttachmentNatConfigurationResult":{
+      "type":"structure",
+      "members":{
+        "TransitGatewayAttachmentId":{
+          "shape":"TransitGatewayAttachmentId",
+          "locationName":"transitGatewayAttachmentId"
+        },
+        "NatGatewaySupport":{
+          "shape":"TransitGatewayAttachmentNatGatewaySupportState",
+          "locationName":"natGatewaySupport"
+        },
+        "NatSystemRouteSupport":{
+          "shape":"TransitGatewayAttachmentNatSystemRouteSupportValue",
+          "locationName":"natSystemRouteSupport"
+        },
+        "NatGatewayRules":{
+          "shape":"TransitGatewayNatRuleList",
+          "locationName":"natGatewayRuleSet"
         }
       }
     },
@@ -48448,6 +49044,10 @@
           "shape":"TransitGatewayRouteTableRoute",
           "locationName":"transitGatewayRouteTableRoute"
         },
+        "TransitGatewayPolicyTableEntry":{
+          "shape":"AnalysisTransitGatewayPolicyTableEntry",
+          "locationName":"transitGatewayPolicyTableEntry"
+        },
         "Explanations":{
           "shape":"ExplanationList",
           "locationName":"explanationSet"
@@ -48670,6 +49270,23 @@
       "member":{
         "shape":"PerformanceFactorReferenceRequest",
         "locationName":"item"
+      }
+    },
+    "PerformanceStatusSummary":{
+      "type":"structure",
+      "members":{
+        "Status":{
+          "shape":"SummaryStatus",
+          "locationName":"status"
+        },
+        "ImpairedSince":{
+          "shape":"MillisecondDateTime",
+          "locationName":"impairedSince"
+        },
+        "Remediation":{
+          "shape":"String",
+          "locationName":"remediation"
+        }
       }
     },
     "Period":{
@@ -52182,7 +52799,8 @@
         "vpn-concentrator",
         "ipam-pool-allocation",
         "capacity-reservation-cancellation-quote",
-        "application-status-check"
+        "application-status-check",
+        "capacity-reservation-modification-quote"
       ]
     },
     "ResourceTypeOption":{
@@ -52761,7 +53379,8 @@
         "ripe",
         "apnic",
         "arin",
-        "lacnic"
+        "lacnic",
+        "nicbr"
       ]
     },
     "RoleId":{"type":"string"},
@@ -58042,6 +58661,10 @@
         "Tags":{
           "shape":"TagList",
           "locationName":"tagSet"
+        },
+        "NatGatewaySupport":{
+          "shape":"TransitGatewayAttachmentNatGatewaySupportState",
+          "locationName":"natGatewaySupport"
         }
       }
     },
@@ -58105,6 +58728,29 @@
         "shape":"TransitGatewayAttachment",
         "locationName":"item"
       }
+    },
+    "TransitGatewayAttachmentNatGatewaySupportState":{
+      "type":"string",
+      "enum":[
+        "enabled",
+        "disabled",
+        "enabling",
+        "disabling"
+      ]
+    },
+    "TransitGatewayAttachmentNatGatewaySupportValue":{
+      "type":"string",
+      "enum":[
+        "enable",
+        "disable"
+      ]
+    },
+    "TransitGatewayAttachmentNatSystemRouteSupportValue":{
+      "type":"string",
+      "enum":[
+        "enable",
+        "disable"
+      ]
     },
     "TransitGatewayAttachmentPropagation":{
       "type":"structure",
@@ -58813,6 +59459,62 @@
           "locationName":"groupIpAddress"
         }
       }
+    },
+    "TransitGatewayNatRule":{
+      "type":"structure",
+      "members":{
+        "RuleNumber":{
+          "shape":"Integer",
+          "locationName":"ruleNumber"
+        },
+        "MatchSourceCidr":{
+          "shape":"String",
+          "locationName":"matchSourceCidr"
+        },
+        "NatCidr":{
+          "shape":"String",
+          "locationName":"natCidr"
+        },
+        "State":{
+          "shape":"TransitGatewayNatRuleState",
+          "locationName":"state"
+        }
+      }
+    },
+    "TransitGatewayNatRuleList":{
+      "type":"list",
+      "member":{
+        "shape":"TransitGatewayNatRule",
+        "locationName":"item"
+      },
+      "max":50,
+      "min":0
+    },
+    "TransitGatewayNatRuleRequest":{
+      "type":"structure",
+      "members":{
+        "RuleNumber":{"shape":"Integer"},
+        "MatchSourceCidr":{"shape":"String"},
+        "NatCidr":{"shape":"String"}
+      }
+    },
+    "TransitGatewayNatRuleRequestList":{
+      "type":"list",
+      "member":{
+        "shape":"TransitGatewayNatRuleRequest",
+        "locationName":"item"
+      },
+      "max":50,
+      "min":0
+    },
+    "TransitGatewayNatRuleState":{
+      "type":"string",
+      "enum":[
+        "pending",
+        "activated",
+        "deactivated",
+        "deleting"
+      ]
     },
     "TransitGatewayNetworkInterfaceIdList":{
       "type":"list",
@@ -59527,7 +60229,8 @@
       "type":"string",
       "enum":[
         "static",
-        "propagated"
+        "propagated",
+        "system"
       ]
     },
     "TransitGatewayState":{

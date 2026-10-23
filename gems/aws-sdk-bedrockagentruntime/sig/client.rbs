@@ -27,6 +27,7 @@ module Aws
                       ?convert_params: bool,
                       ?correct_clock_skew: bool,
                       ?defaults_mode: String,
+                      ?disable_clock_skew_correction: bool,
                       ?disable_host_prefix_injection: bool,
                       ?disable_request_compression: bool,
                       ?endpoint: String,
@@ -94,7 +95,13 @@ module Aws
                                              model_arn: ::String
                                            }
                                          }?,
-                                         type: ("BEDROCK_FOUNDATION_MODEL")
+                                         mantle_foundation_model_configuration: {
+                                           model_configuration: {
+                                             model_arn: ::String,
+                                             project_id: ::String?
+                                           }
+                                         }?,
+                                         type: ("BEDROCK_FOUNDATION_MODEL" | "MANTLE_FOUNDATION_MODEL")
                                        }?,
                                        foundation_model_type: ("CUSTOM" | "MANAGED")?,
                                        max_agent_iteration: ::Integer?,
@@ -154,6 +161,10 @@ module Aws
                                          guardrail_id: ::String,
                                          guardrail_version: ::String
                                        }?
+                                     },
+                                     ?retrieval_instruction_configuration: {
+                                       retrieval_instruction_id: ::String,
+                                       version: ::String?
                                      },
                                      retrievers: Array[
                                        {

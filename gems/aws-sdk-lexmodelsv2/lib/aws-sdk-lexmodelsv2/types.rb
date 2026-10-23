@@ -2472,6 +2472,11 @@ module Aws::LexModelsV2
     #   (speech-to-speech) to be enabled when `enabled` is `true`.
     #   @return [Types::AudioFillerSettings]
     #
+    # @!attribute [rw] speaker_diarization_settings
+    #   The speaker diarization settings to apply when importing the bot
+    #   locale configuration.
+    #   @return [Types::SpeakerDiarizationSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BotLocaleImportSpecification AWS API Documentation
     #
     class BotLocaleImportSpecification < Struct.new(
@@ -2483,7 +2488,8 @@ module Aws::LexModelsV2
       :speech_recognition_settings,
       :speech_detection_sensitivity,
       :unified_speech_settings,
-      :audio_filler_settings)
+      :audio_filler_settings,
+      :speaker_diarization_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3669,6 +3675,12 @@ module Aws::LexModelsV2
     #   interactions.
     #   @return [String]
     #
+    # @!attribute [rw] speaker_diarization_settings
+    #   The speaker diarization settings to configure for the new bot
+    #   locale. When enabled, Amazon Lex restricts speech detection to the
+    #   primary (loudest) speaker during streaming audio conversations.
+    #   @return [Types::SpeakerDiarizationSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateBotLocaleRequest AWS API Documentation
     #
     class CreateBotLocaleRequest < Struct.new(
@@ -3682,7 +3694,8 @@ module Aws::LexModelsV2
       :audio_filler_settings,
       :speech_recognition_settings,
       :generative_ai_settings,
-      :speech_detection_sensitivity)
+      :speech_detection_sensitivity,
+      :speaker_diarization_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3760,6 +3773,11 @@ module Aws::LexModelsV2
     #   specified for the bot locale.
     #   @return [String]
     #
+    # @!attribute [rw] speaker_diarization_settings
+    #   The speaker diarization settings configured for the created bot
+    #   locale.
+    #   @return [Types::SpeakerDiarizationSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateBotLocaleResponse AWS API Documentation
     #
     class CreateBotLocaleResponse < Struct.new(
@@ -3776,7 +3794,8 @@ module Aws::LexModelsV2
       :bot_locale_status,
       :creation_date_time,
       :generative_ai_settings,
-      :speech_detection_sensitivity)
+      :speech_detection_sensitivity,
+      :speaker_diarization_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4248,9 +4267,9 @@ module Aws::LexModelsV2
     #
     # @!attribute [rw] qn_a_intent_configuration
     #   Specifies the configuration of the built-in `Amazon.QnAIntent`. The
-    #   `AMAZON.QnAIntent` intent is called when Amazon Lex can't determine
-    #   another intent to invoke. If you specify this field, you can't
-    #   specify the `kendraConfiguration` field.
+    #   `AMAZON.QnAIntent` intent is called when Amazon Lex V2 can't
+    #   determine another intent to invoke. If you specify this field, you
+    #   can't specify the `kendraConfiguration` field.
     #   @return [Types::QnAIntentConfiguration]
     #
     # @!attribute [rw] q_in_connect_intent_configuration
@@ -6164,6 +6183,10 @@ module Aws::LexModelsV2
     #   for the bot locale.
     #   @return [String]
     #
+    # @!attribute [rw] speaker_diarization_settings
+    #   The speaker diarization settings configured for the bot locale.
+    #   @return [Types::SpeakerDiarizationSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeBotLocaleResponse AWS API Documentation
     #
     class DescribeBotLocaleResponse < Struct.new(
@@ -6187,7 +6210,8 @@ module Aws::LexModelsV2
       :bot_locale_history_events,
       :recommended_actions,
       :generative_ai_settings,
-      :speech_detection_sensitivity)
+      :speech_detection_sensitivity,
+      :speaker_diarization_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8645,6 +8669,10 @@ module Aws::LexModelsV2
     #   correct before placing it. For other intents, such as intents that
     #   simply respond to user questions, you might not need to ask the user
     #   for confirmation before providing the information.
+    #
+    #   Required unless the bot locale's `assistedNluMode` is
+    #   `DialogManager`, in which case Amazon Lex generates the confirmation
+    #   prompt.
     #   @return [Types::PromptSpecification]
     #
     # @!attribute [rw] declination_response
@@ -11699,8 +11727,10 @@ module Aws::LexModelsV2
     #
     # @!attribute [rw] assisted_nlu_mode
     #   Specifies the mode for Assisted NLU operation. Use `Primary` to make
-    #   Assisted NLU the primary intent recognition method, or `Fallback` to
-    #   use it only when standard NLU confidence is low.
+    #   Assisted NLU the primary intent recognition method, `Fallback` to
+    #   use it only when standard NLU confidence is low, or `DialogManager`
+    #   to use a large language model to manage the conversation, including
+    #   intent recognition, slot elicitation, and confirmation.
     #   @return [String]
     #
     # @!attribute [rw] intent_disambiguation_settings
@@ -13020,7 +13050,7 @@ module Aws::LexModelsV2
     # @!attribute [rw] slot_resolution_strategy
     #   Specifies whether assisted slot resolution is turned on for the slot
     #   or not. If the value is `EnhancedFallback`, assisted slot resolution
-    #   is activated when Amazon Lex defaults to the
+    #   is activated when Amazon Lex V2 defaults to the
     #   `AMAZON.FallbackIntent`. If the value is `Default`, assisted slot
     #   resolution is turned off.
     #   @return [String]
@@ -13452,6 +13482,26 @@ module Aws::LexModelsV2
       :resolution_strategy,
       :regex_filter,
       :advanced_recognition_setting)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies configuration that restricts speech detection to the primary
+    # (loudest) speaker during streaming audio conversations, so that speech
+    # from background speakers does not start a turn, interrupt the bot, or
+    # reach speech recognition.
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether speaker diarization is enabled for the bot locale.
+    #   Set to `true` to have Amazon Lex treat speech from speakers other
+    #   than the primary speaker as non-speech. Set to `false` to disable
+    #   speaker diarization and rely on voice activity detection alone.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/SpeakerDiarizationSettings AWS API Documentation
+    #
+    class SpeakerDiarizationSettings < Struct.new(
+      :enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15169,6 +15219,13 @@ module Aws::LexModelsV2
     #   voice interactions.
     #   @return [String]
     #
+    # @!attribute [rw] speaker_diarization_settings
+    #   The updated speaker diarization settings to apply to the bot locale.
+    #   If you omit this field, Amazon Lex keeps the setting currently
+    #   stored on the bot locale. To turn speaker diarization off, set
+    #   `enabled` to `false` explicitly.
+    #   @return [Types::SpeakerDiarizationSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateBotLocaleRequest AWS API Documentation
     #
     class UpdateBotLocaleRequest < Struct.new(
@@ -15182,7 +15239,8 @@ module Aws::LexModelsV2
       :audio_filler_settings,
       :speech_recognition_settings,
       :generative_ai_settings,
-      :speech_detection_sensitivity)
+      :speech_detection_sensitivity,
+      :speaker_diarization_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15263,6 +15321,10 @@ module Aws::LexModelsV2
     #   the bot locale.
     #   @return [String]
     #
+    # @!attribute [rw] speaker_diarization_settings
+    #   The updated speaker diarization settings for the bot locale.
+    #   @return [Types::SpeakerDiarizationSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateBotLocaleResponse AWS API Documentation
     #
     class UpdateBotLocaleResponse < Struct.new(
@@ -15282,7 +15344,8 @@ module Aws::LexModelsV2
       :last_updated_date_time,
       :recommended_actions,
       :generative_ai_settings,
-      :speech_detection_sensitivity)
+      :speech_detection_sensitivity,
+      :speaker_diarization_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15686,9 +15749,9 @@ module Aws::LexModelsV2
     #
     # @!attribute [rw] qn_a_intent_configuration
     #   Specifies the configuration of the built-in `Amazon.QnAIntent`. The
-    #   `AMAZON.QnAIntent` intent is called when Amazon Lex can't determine
-    #   another intent to invoke. If you specify this field, you can't
-    #   specify the `kendraConfiguration` field.
+    #   `AMAZON.QnAIntent` intent is called when Amazon Lex V2 can't
+    #   determine another intent to invoke. If you specify this field, you
+    #   can't specify the `kendraConfiguration` field.
     #   @return [Types::QnAIntentConfiguration]
     #
     # @!attribute [rw] q_in_connect_intent_configuration
@@ -16869,12 +16932,14 @@ module Aws::LexModelsV2
     #
     # @!attribute [rw] waiting_response
     #   The response that Amazon Lex sends to indicate that the bot is
-    #   waiting for the conversation to continue.
+    #   waiting for the conversation to continue. Required unless the bot
+    #   locale's `assistedNluMode` is `DialogManager`.
     #   @return [Types::ResponseSpecification]
     #
     # @!attribute [rw] continue_response
     #   The response that Amazon Lex sends to indicate that the bot is ready
-    #   to continue the conversation.
+    #   to continue the conversation. Required unless the bot locale's
+    #   `assistedNluMode` is `DialogManager`.
     #   @return [Types::ResponseSpecification]
     #
     # @!attribute [rw] still_waiting_response

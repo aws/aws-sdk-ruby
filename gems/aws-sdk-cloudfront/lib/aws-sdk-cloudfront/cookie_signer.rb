@@ -12,10 +12,18 @@ module Aws
     #
     #     signer = Aws::CloudFront::CookieSigner.new(
     #       key_pair_id: "cf-keypair-id",
-    #       private_key_path: "./unit_test_dummy_key"
+    #       private_key_path: "./private_key.pem"
     #     )
     #     cookies = signer.signed_cookie(url,
     #       policy: policy.to_json
+    #     )
+    #
+    # Pass `hash_algorithm: 'SHA256'` to sign with SHA-256 instead of SHA-1:
+    #
+    #     signer = Aws::CloudFront::CookieSigner.new(
+    #       key_pair_id: "cf-keypair-id",
+    #       private_key_path: "./private_key.pem",
+    #       hash_algorithm: "SHA256"
     #     )
     #
     class CookieSigner

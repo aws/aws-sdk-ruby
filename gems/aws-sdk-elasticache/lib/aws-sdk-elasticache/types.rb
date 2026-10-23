@@ -1408,6 +1408,10 @@ module Aws::ElastiCache
     #   The ID of the replication group to which data is being migrated.
     #   @return [String]
     #
+    # @!attribute [rw] serverless_cache_name
+    #   The name of the serverless cache to which data is being migrated.
+    #   @return [String]
+    #
     # @!attribute [rw] force
     #   Forces the migration to stop without ensuring that data is in sync.
     #   It is recommended to use this option only to abort the migration and
@@ -1419,6 +1423,7 @@ module Aws::ElastiCache
     #
     class CompleteMigrationMessage < Struct.new(
       :replication_group_id,
+      :serverless_cache_name,
       :force)
       SENSITIVE = []
       include Aws::Structure
@@ -1429,10 +1434,16 @@ module Aws::ElastiCache
     #   replication group.
     #   @return [Types::ReplicationGroup]
     #
+    # @!attribute [rw] serverless_cache
+    #   Provides the details of the serverless cache for which the migration
+    #   completed.
+    #   @return [Types::ServerlessCache]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CompleteMigrationResponse AWS API Documentation
     #
     class CompleteMigrationResponse < Struct.new(
-      :replication_group)
+      :replication_group,
+      :serverless_cache)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2255,12 +2266,19 @@ module Aws::ElastiCache
     #   a lowercase string.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateGlobalReplicationGroupMessage AWS API Documentation
     #
     class CreateGlobalReplicationGroupMessage < Struct.new(
       :global_replication_group_id_suffix,
       :global_replication_group_description,
-      :primary_replication_group_id)
+      :primary_replication_group_id,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2973,6 +2991,15 @@ module Aws::ElastiCache
     #   provided subnets are IPv6-only, in which case it defaults to `ipv6`.
     #   @return [String]
     #
+    # @!attribute [rw] connection_type
+    #   The connection type for the serverless cache. Must be either `vpc`
+    #   \| `public`. Use `vpc` to access the cache through a VPC endpoint,
+    #   or `public` to access the cache over the internet. If not specified,
+    #   defaults to `vpc`. This value cannot be changed after the serverless
+    #   cache is created. Setting this to `public` requires Valkey 9 or
+    #   above.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateServerlessCacheRequest AWS API Documentation
     #
     class CreateServerlessCacheRequest < Struct.new(
@@ -2989,7 +3016,8 @@ module Aws::ElastiCache
       :subnet_ids,
       :snapshot_retention_limit,
       :daily_snapshot_time,
-      :network_type)
+      :network_type,
+      :connection_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5789,6 +5817,42 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # The migration is not healthy. Check the events for this serverless
+    # cache for more details. For `CompleteMigration`, set `Force` to true
+    # to bypass this check.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/MigrationHealthFault AWS API Documentation
+    #
+    class MigrationHealthFault < Aws::EmptyStructure; end
+
+    # Provides a summary of the current migration status for a serverless
+    # cache.
+    #
+    # @!attribute [rw] status
+    #   The current status of the migration.
+    #   @return [String]
+    #
+    # @!attribute [rw] migration_endpoint
+    #   The migration endpoint, which is the standard endpoint of the
+    #   serverless cache. Point your application at this endpoint during the
+    #   migration. Until cutover, ElastiCache routes requests on this
+    #   endpoint to your source.
+    #   @return [Types::Endpoint]
+    #
+    # @!attribute [rw] cutover_mode
+    #   The cutover configuration for the migration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/MigrationSummary AWS API Documentation
+    #
+    class MigrationSummary < Struct.new(
+      :status,
+      :migration_endpoint,
+      :cutover_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the input of a `ModifyCacheCluster` operation.
     #
     # @!attribute [rw] cache_cluster_id
@@ -7422,6 +7486,47 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # @!attribute [rw] serverless_cache_name
+    #   The name of the serverless cache to prepare for migration.
+    #   @return [String]
+    #
+    # @!attribute [rw] customer_node_endpoint_list
+    #   The list of endpoints from which to migrate data. For serverless
+    #   cache migrations, the list should have only one element.
+    #   @return [Array<Types::CustomerNodeEndpoint>]
+    #
+    # @!attribute [rw] source_authentication_configuration
+    #   The authentication configuration for connecting to the source during
+    #   migration.
+    #   @return [Types::SourceAuthenticationConfiguration]
+    #
+    # @!attribute [rw] source_tls_configuration
+    #   The TLS configuration for connecting to the source during migration.
+    #   @return [Types::SourceTlsConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/PrepareMigrationRequest AWS API Documentation
+    #
+    class PrepareMigrationRequest < Struct.new(
+      :serverless_cache_name,
+      :customer_node_endpoint_list,
+      :source_authentication_configuration,
+      :source_tls_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] serverless_cache
+    #   Provides the details of the serverless cache prepared for migration.
+    #   @return [Types::ServerlessCache]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/PrepareMigrationResponse AWS API Documentation
+    #
+    class PrepareMigrationResponse < Struct.new(
+      :serverless_cache)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Update action that has been processed for the corresponding apply/stop
     # request
     #
@@ -8604,6 +8709,22 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # Configuration for authenticating with the source using Secrets Manager
+    # during migration.
+    #
+    # @!attribute [rw] secret_arn
+    #   The ARN of the secret in AWS Secrets Manager that contains the
+    #   credentials for authenticating with the source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/SecretManagerAuthConfig AWS API Documentation
+    #
+    class SecretManagerAuthConfig < Struct.new(
+      :secret_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents a single cache security group and its status.
     #
     # @!attribute [rw] security_group_id
@@ -8726,6 +8847,15 @@ module Aws::ElastiCache
     #   `ipv6`.
     #   @return [String]
     #
+    # @!attribute [rw] connection_type
+    #   The connection type for the serverless cache. Must be either `vpc`
+    #   \| `public`. If not specified, defaults to `vpc`.
+    #   @return [String]
+    #
+    # @!attribute [rw] migration
+    #   Provides a summary of the migration status for the serverless cache.
+    #   @return [Types::MigrationSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ServerlessCache AWS API Documentation
     #
     class ServerlessCache < Struct.new(
@@ -8747,7 +8877,9 @@ module Aws::ElastiCache
       :subnet_ids,
       :snapshot_retention_limit,
       :daily_snapshot_time,
-      :network_type)
+      :network_type,
+      :connection_type,
+      :migration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8757,6 +8889,13 @@ module Aws::ElastiCache
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ServerlessCacheAlreadyExistsFault AWS API Documentation
     #
     class ServerlessCacheAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # A migration is already in progress for this serverless cache. You
+    # cannot start another migration until the current one completes.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ServerlessCacheAlreadyUnderMigrationFault AWS API Documentation
+    #
+    class ServerlessCacheAlreadyUnderMigrationFault < Aws::EmptyStructure; end
 
     # The configuration settings for a specific serverless cache.
     #
@@ -8788,6 +8927,12 @@ module Aws::ElastiCache
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ServerlessCacheNotFoundFault AWS API Documentation
     #
     class ServerlessCacheNotFoundFault < Aws::EmptyStructure; end
+
+    # The serverless cache is not currently under migration.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ServerlessCacheNotUnderMigrationFault AWS API Documentation
+    #
+    class ServerlessCacheNotUnderMigrationFault < Aws::EmptyStructure; end
 
     # The number of serverless caches exceeds the customer quota.
     #
@@ -9373,21 +9518,77 @@ module Aws::ElastiCache
     #
     class SnapshotQuotaExceededFault < Aws::EmptyStructure; end
 
+    # The authentication configuration for connecting to the source during
+    # migration.
+    #
+    # @!attribute [rw] secret_manager_config
+    #   The Secrets Manager configuration used for authenticating with the
+    #   source during migration.
+    #   @return [Types::SecretManagerAuthConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/SourceAuthenticationConfiguration AWS API Documentation
+    #
+    class SourceAuthenticationConfiguration < Struct.new(
+      :secret_manager_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The TLS configuration for connecting to the source during migration.
+    #
+    # @!attribute [rw] source_tls_mode
+    #   The TLS mode to use when connecting to the source. Valid values are
+    #   `none` and `verify-ca`.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_tls_certificate
+    #   The TLS certificate used to verify the identity of the source during
+    #   migration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/SourceTlsConfiguration AWS API Documentation
+    #
+    class SourceTlsConfiguration < Struct.new(
+      :source_tls_mode,
+      :source_tls_certificate)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] serverless_cache_name
+    #   The name of the serverless cache to which data is being migrated.
+    #   @return [String]
+    #
     # @!attribute [rw] replication_group_id
     #   The ID of the replication group to which data should be migrated.
     #   @return [String]
     #
     # @!attribute [rw] customer_node_endpoint_list
-    #   List of endpoints from which data should be migrated. For Valkey or
+    #   The list of endpoints from which to migrate data. For Valkey or
     #   Redis OSS (cluster mode disabled), the list should have only one
-    #   element.
+    #   element. For serverless cache migrations, ElastiCache uses the
+    #   endpoint that you provided in `PrepareMigration`.
     #   @return [Array<Types::CustomerNodeEndpoint>]
+    #
+    # @!attribute [rw] auto_cutover
+    #   Specifies whether ElastiCache automatically attempts to complete the
+    #   migration after data sync is established.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] clear_target_cache_data
+    #   Specifies whether ElastiCache deletes existing data in the
+    #   serverless cache before migration begins. After `StopMigration`,
+    #   `StartMigration` requires this option to restart the data sync.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/StartMigrationMessage AWS API Documentation
     #
     class StartMigrationMessage < Struct.new(
+      :serverless_cache_name,
       :replication_group_id,
-      :customer_node_endpoint_list)
+      :customer_node_endpoint_list,
+      :auto_cutover,
+      :clear_target_cache_data)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9397,10 +9598,41 @@ module Aws::ElastiCache
     #   replication group.
     #   @return [Types::ReplicationGroup]
     #
+    # @!attribute [rw] serverless_cache
+    #   Provides the details of the serverless cache to which ElastiCache is
+    #   migrating data.
+    #   @return [Types::ServerlessCache]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/StartMigrationResponse AWS API Documentation
     #
     class StartMigrationResponse < Struct.new(
-      :replication_group)
+      :replication_group,
+      :serverless_cache)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] serverless_cache_name
+    #   The name of the serverless cache for which to stop the data sync.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/StopMigrationRequest AWS API Documentation
+    #
+    class StopMigrationRequest < Struct.new(
+      :serverless_cache_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] serverless_cache
+    #   Provides the details of the serverless cache for which the data sync
+    #   stopped.
+    #   @return [Types::ServerlessCache]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/StopMigrationResponse AWS API Documentation
+    #
+    class StopMigrationResponse < Struct.new(
+      :serverless_cache)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9474,10 +9706,10 @@ module Aws::ElastiCache
 
     # A tag that can be added to an ElastiCache cluster or replication
     # group. Tags are composed of a Key/Value pair. You can use tags to
-    # categorize and track all your ElastiCache resources, with the
-    # exception of global replication group. When you add or remove tags on
-    # replication groups, those actions will be replicated to all nodes in
-    # the replication group. A tag with a null Value is permitted.
+    # categorize and track all your ElastiCache resources. When you add or
+    # remove tags on replication groups, those actions will be replicated to
+    # all nodes in the replication group. A tag with a null Value is
+    # permitted.
     #
     # @!attribute [rw] key
     #   The key for the tag. May not be null.

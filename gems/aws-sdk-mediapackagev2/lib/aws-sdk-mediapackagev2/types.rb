@@ -239,6 +239,38 @@ module Aws::MediaPackageV2
       include Aws::Structure
     end
 
+    # The configuration that controls the content key period timing
+    # information that MediaPackage signals to your DRM key provider.
+    #
+    # @!attribute [rw] content_key_period_timing
+    #   Specifies what timing information MediaPackage signals in the
+    #   `ContentKeyPeriod` to your DRM key provider. If you don't specify a
+    #   value, the default is `INDEX_ONLY`. Signaling start and end times
+    #   (`START_END_ONLY` or `INDEX_WITH_START_END`) also requires key
+    #   rotation to be enabled.
+    #
+    #   The allowed values are:
+    #
+    #   * `INDEX_ONLY` - Signals only the content key index. This is the
+    #     default and matches the current behavior. It's supported for both
+    #     SPEKE Version 2.0 and 2.1.
+    #
+    #   * `START_END_ONLY` - Signals only the start and end times the key is
+    #     used for. Requires `SpekeVersion` `V2_1`.
+    #
+    #   * `INDEX_WITH_START_END` - Signals both the content key index and
+    #     the start and end times the key is used for. Requires
+    #     `SpekeVersion` `V2_1`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/ContentKeyPeriodConfiguration AWS API Documentation
+    #
+    class ContentKeyPeriodConfiguration < Struct.new(
+      :content_key_period_timing)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] channel_group_name
     #   The name that describes the channel group. The name is the primary
     #   identifier for the channel group, and must be unique for your
@@ -1967,6 +1999,17 @@ module Aws::MediaPackageV2
     #   endpoint URL.
     #   @return [Time]
     #
+    # @!attribute [rw] multiview
+    #   Optionally pin this manifest to a single multiview combination, so
+    #   that players request it without an `aws.multiview` query parameter.
+    #   When you pin a combination, note that you cannot use the
+    #   `aws.multiview` query parameter for this manifest's endpoint URL,
+    #   even when that parameter requests the same combination.
+    #
+    #   This setting is valid only on an origin endpoint whose channel has
+    #   an `InputType` of `MULTIVIEW`.
+    #   @return [Types::MultiviewFilterConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/FilterConfiguration AWS API Documentation
     #
     class FilterConfiguration < Struct.new(
@@ -1975,7 +2018,8 @@ module Aws::MediaPackageV2
       :start,
       :end,
       :time_delay_seconds,
-      :clip_start_time)
+      :clip_start_time,
+      :multiview)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3587,6 +3631,36 @@ module Aws::MediaPackageV2
       include Aws::Structure
     end
 
+    # The multiview combination for a pinned manifest. MediaPackage serves
+    # the manifest with this layout and these sources, so players request it
+    # without an `aws.multiview` query parameter.
+    #
+    # If a request for a pinned manifest also includes an `aws.multiview`
+    # query parameter, MediaPackage rejects the request, even when that
+    # parameter requests the same combination.
+    #
+    # @!attribute [rw] layout
+    #   The layout that MediaPackage uses to composite the tiles into a
+    #   single output. This layout must be one of the `AvailableLayouts` of
+    #   the channel that this origin endpoint is on.
+    #   @return [String]
+    #
+    # @!attribute [rw] sources
+    #   The source channels to composite, in tile order. Each channel must
+    #   be one of the `AvailableSources` of the channel that this origin
+    #   endpoint is on, and the number of channels must equal the number of
+    #   tiles in `Layout`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/MultiviewFilterConfiguration AWS API Documentation
+    #
+    class MultiviewFilterConfiguration < Struct.new(
+      :layout,
+      :sources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration of the origin endpoint.
     #
     # @!attribute [rw] arn
@@ -4193,6 +4267,36 @@ module Aws::MediaPackageV2
     #   key encryption.
     #   @return [String]
     #
+    # @!attribute [rw] speke_version
+    #   Specifies the SPEKE version used with your DRM key provider. If you
+    #   don't specify a value, the default is `V2_0`.
+    #
+    #   The allowed values are:
+    #
+    #   * `V2_0` - Follows the SPEKE Version 2.0 contract and signals only
+    #     the content key index in key requests. This is the default.
+    #
+    #   * `V2_1` - Follows the SPEKE Version 2.1 contract and additionally
+    #     supports signaling the start and end times a content key is used
+    #     for, using `ContentKeyPeriodConfiguration`.
+    #
+    #   For more information, see [SPEKE Version 2.0 payload][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/speke/latest/documentation/standard-payload-components-v2.html
+    #   @return [String]
+    #
+    # @!attribute [rw] content_key_period_configuration
+    #   The configuration that controls whether MediaPackage signals the
+    #   start and end times a content key is used for, in the
+    #   `ContentKeyPeriod` sent to your DRM key provider. Signaling this
+    #   timing is supported only when key rotation is enabled
+    #   (`KeyRotationIntervalSeconds` is set to a non-zero value) and
+    #   `SpekeVersion` is `V2_1`. You can update these settings on an
+    #   existing origin endpoint.
+    #   @return [Types::ContentKeyPeriodConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/SpekeKeyProvider AWS API Documentation
     #
     class SpekeKeyProvider < Struct.new(
@@ -4201,7 +4305,9 @@ module Aws::MediaPackageV2
       :drm_systems,
       :role_arn,
       :url,
-      :certificate_arn)
+      :certificate_arn,
+      :speke_version,
+      :content_key_period_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

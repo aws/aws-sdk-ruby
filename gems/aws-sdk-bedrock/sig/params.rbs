@@ -395,7 +395,10 @@ module Aws
           action: ("BLOCK" | "NONE")?,
           enabled: bool?
         }
-      ]
+      ],
+      tier_config: {
+        tier_name: ("CLASSIC" | "STANDARD")
+      }?
     }
 
       type sage_maker_endpoint = {

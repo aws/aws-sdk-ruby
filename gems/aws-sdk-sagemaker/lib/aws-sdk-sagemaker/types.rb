@@ -2768,6 +2768,30 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The query execution identifier and the result output location for the
+    # Amazon Athena query that an Athena step runs.
+    #
+    # @!attribute [rw] query_execution_id
+    #   The unique identifier of the Amazon Athena query execution that was
+    #   run by this step execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_output_location
+    #   The Amazon S3 location of the Amazon Athena query results. This is
+    #   the effective output location reported by `GetQueryExecution` for
+    #   the query. This value can be absent when the query uses Athena
+    #   managed query results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AthenaStepMetadata AWS API Documentation
+    #
+    class AthenaStepMetadata < Struct.new(
+      :query_execution_id,
+      :s3_output_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] cluster_name
     #   The name or Amazon Resource Name (ARN) of the SageMaker HyperPod
     #   cluster that contains the target node.
@@ -4988,6 +5012,31 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The billable token usage for a training session, broken down by
+    # operation type.
+    #
+    # @!attribute [rw] prefill_token_count
+    #   The number of prefill tokens consumed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sample_token_count
+    #   The number of sample tokens consumed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] training_token_count
+    #   The number of training tokens consumed.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BillableTokenUsage AWS API Documentation
+    #
+    class BillableTokenUsage < Struct.new(
+      :prefill_token_count,
+      :sample_token_count,
+      :training_token_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Update policy for a blue/green deployment. If this update policy is
     # specified, SageMaker creates a new fleet during the deployment while
     # maintaining the old fleet. SageMaker flips traffic to the new fleet
@@ -6123,6 +6172,104 @@ module Aws::SageMaker
     class ClarifyTextConfig < Struct.new(
       :language,
       :granularity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon S3 output resources associated with an upstream step that
+    # the Cleanup step could not delete.
+    #
+    # @!attribute [rw] step_name
+    #   The name of the upstream step whose Amazon S3 output resources the
+    #   Cleanup step could not delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error code that identifies why the Cleanup step could not delete
+    #   the output resources associated with the upstream step.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A message describing why the Cleanup step could not delete the
+    #   output resources associated with the upstream step.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CleanupFailure AWS API Documentation
+    #
+    class CleanupFailure < Struct.new(
+      :step_name,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The cleanup outcomes for Amazon S3 output resources associated with
+    # upstream steps.
+    #
+    # @!attribute [rw] cleaned_steps
+    #   The names of upstream steps whose Amazon S3 output resources the
+    #   Cleanup step deleted successfully.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] failed_steps
+    #   The upstream steps whose Amazon S3 output resources the Cleanup step
+    #   could not delete.
+    #   @return [Array<Types::CleanupFailure>]
+    #
+    # @!attribute [rw] skipped_steps
+    #   The names of upstream steps that the Cleanup step skipped. The
+    #   Cleanup step skips a step when the output properties needed to
+    #   locate its resources are unavailable.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CleanupStepMetadata AWS API Documentation
+    #
+    class CleanupStepMetadata < Struct.new(
+      :cleaned_steps,
+      :failed_steps,
+      :skipped_steps)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The external MySQL-compatible database that the Slurm accounting
+    # daemon (`slurmdbd`) connects to for a SageMaker HyperPod cluster. You
+    # provide the database credentials in an Amazon Web Services Secrets
+    # Manager secret instead of in the request.
+    #
+    # @!attribute [rw] endpoint
+    #   The hostname or endpoint of the accounting database, such as the
+    #   endpoint of an Amazon RDS for MySQL or Aurora MySQL database. The
+    #   database must be reachable from the subnets and security groups that
+    #   you configure for the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port that the accounting database listens on. The default is
+    #   `3306`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] name
+    #   The name of the database schema that stores the Slurm accounting
+    #   data. The default is `slurm_acct_db_` followed by the cluster ID
+    #   from the cluster ARN, for example `slurm_acct_db_a1b2c3d4e5f6`.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    #   Manager secret that contains the user name and password for the
+    #   accounting database. The database user must be able to create the
+    #   schema and to read from and write to it.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterAccountingDatabase AWS API Documentation
+    #
+    class ClusterAccountingDatabase < Struct.new(
+      :endpoint,
+      :port,
+      :name,
+      :secret_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7626,10 +7773,23 @@ module Aws::SageMaker
     #   Valid values are `Managed`, `Overwrite`, and `Merge`.
     #   @return [String]
     #
+    # @!attribute [rw] accounting_database
+    #   The external database that stores the Slurm accounting data for the
+    #   cluster, such as job history, associations, and usage. When you omit
+    #   this field, Slurm accounting uses a database on the cluster's
+    #   controller node.
+    #
+    #   <note markdown="1"> This field is only supported for clusters using `Continuous` as the
+    #   `NodeProvisioningMode`.
+    #
+    #    </note>
+    #   @return [Types::ClusterAccountingDatabase]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterOrchestratorSlurmConfig AWS API Documentation
     #
     class ClusterOrchestratorSlurmConfig < Struct.new(
-      :slurm_config_strategy)
+      :slurm_config_strategy,
+      :accounting_database)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9991,7 +10151,9 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] name
-    #   Name for the cluster policy.
+    #   The name for the cluster policy. The name must be unique within the
+    #   SageMaker AI HyperPod cluster specified by `ClusterArn`. You can use
+    #   the same name in other clusters within a Region or across Regions.
     #   @return [String]
     #
     # @!attribute [rw] cluster_arn
@@ -10196,7 +10358,10 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] name
-    #   Name to the compute allocation definition.
+    #   The name of the compute allocation definition. The name must be
+    #   unique within the SageMaker AI HyperPod cluster specified by
+    #   `ClusterArn`. You can use the same name in other clusters within a
+    #   Region or across Regions.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -14659,6 +14824,79 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] training_session_name
+    #   The name of the training session.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_package_group_arn
+    #   The Amazon Resource Name (ARN) of the model package group where
+    #   checkpoints and fine-tuned model artifacts are published.
+    #   @return [String]
+    #
+    # @!attribute [rw] lora_config
+    #   The Low-Rank Adaptation (LoRA) configuration for the training
+    #   session, including the rank and alpha parameters.
+    #   @return [Types::LoraConfig]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker
+    #   assumes to access resources on your behalf. The role must have
+    #   permissions to access the output S3 path and model package group.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_config
+    #   The Virtual Private Cloud (VPC) configuration for the training
+    #   session. Specify subnets and security groups to run the training
+    #   session in your VPC.
+    #   @return [Types::VpcConfig]
+    #
+    # @!attribute [rw] model_config
+    #   The configuration for the base model, including the model ARN and
+    #   end-user license agreement (EULA) acceptance.
+    #   @return [Types::TrainingSessionModelConfig]
+    #
+    # @!attribute [rw] output_config
+    #   The output configuration for the training session, including the S3
+    #   location and optional encryption settings.
+    #   @return [Types::TrainingSessionOutputConfig]
+    #
+    # @!attribute [rw] tags
+    #   An array of key-value pairs to apply to the training session as
+    #   tags. For more information, see [Tagging Amazon Web Services
+    #   Resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTrainingSessionRequest AWS API Documentation
+    #
+    class CreateTrainingSessionRequest < Struct.new(
+      :training_session_name,
+      :model_package_group_arn,
+      :lora_config,
+      :role_arn,
+      :vpc_config,
+      :model_config,
+      :output_config,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] training_session_arn
+    #   The Amazon Resource Name (ARN) of the training session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTrainingSessionResponse AWS API Documentation
+    #
+    class CreateTrainingSessionResponse < Struct.new(
+      :training_session_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] transform_job_name
     #   The name of the transform job. The name must be unique within an
     #   Amazon Web Services Region in an Amazon Web Services account.
@@ -15656,6 +15894,48 @@ module Aws::SageMaker
       :s3_data_source,
       :file_system_data_source,
       :dataset_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Metadata information about a change to the external Slurm accounting
+    # database of a HyperPod cluster.
+    #
+    # @!attribute [rw] rollback_status
+    #   Whether HyperPod restored the previous accounting database
+    #   configuration after the change failed. Valid values:
+    #
+    #   * `NotApplicable`: The change failed before HyperPod modified the
+    #     cluster, for example because the database could not be reached or
+    #     rejected the credentials, so there was nothing to restore.
+    #
+    #   * `Reverted`: The change failed after it was applied, and HyperPod
+    #     restored the previous configuration. The cluster continues to use
+    #     the previous accounting database.
+    #
+    #   * `RevertFailed`: The change failed and HyperPod could not restore
+    #     the previous configuration, so Slurm accounting on the cluster
+    #     might not be working.
+    #
+    #   This field is omitted when the change succeeds.
+    #   @return [String]
+    #
+    # @!attribute [rw] advisory
+    #   Additional information about a change that succeeded, such as an
+    #   action to take on the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_message
+    #   An error message describing why the accounting database change
+    #   failed, and how to resolve it.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DatabaseConfigurationMetadata AWS API Documentation
+    #
+    class DatabaseConfigurationMetadata < Struct.new(
+      :rollback_status,
+      :advisory,
+      :failure_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16956,6 +17236,22 @@ module Aws::SageMaker
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] training_session_name
+    #   The name of the training session to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteTrainingSessionRequest AWS API Documentation
+    #
+    class DeleteTrainingSessionRequest < Struct.new(
+      :training_session_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteTrainingSessionResponse AWS API Documentation
+    #
+    class DeleteTrainingSessionResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] trial_component_name
     #   The name of the component to delete.
@@ -24530,6 +24826,30 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] training_session_name
+    #   The name of the training session to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrainingSessionRequest AWS API Documentation
+    #
+    class DescribeTrainingSessionRequest < Struct.new(
+      :training_session_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] training_session_detail
+    #   The detailed information about the training session.
+    #   @return [Types::TrainingSessionDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrainingSessionResponse AWS API Documentation
+    #
+    class DescribeTrainingSessionResponse < Struct.new(
+      :training_session_detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] transform_job_name
     #   The name of the transform job that you want to view details of.
     #   @return [String]
@@ -25820,6 +26140,36 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The configurations and outcomes of an Amazon EMR Serverless step
+    # execution.
+    #
+    # @!attribute [rw] application_id
+    #   The identifier of the Amazon EMR Serverless application.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_run_id
+    #   The identifier of the Amazon EMR Serverless job run.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_run_name
+    #   The name of the Amazon EMR Serverless job run.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_file_path
+    #   The path to the log file for the Amazon EMR Serverless job run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EMRServerlessStepMetadata AWS API Documentation
+    #
+    class EMRServerlessStepMetadata < Struct.new(
+      :application_id,
+      :job_run_id,
+      :job_run_name,
+      :log_file_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configurations and outcomes of an Amazon EMR step execution.
     #
     # @!attribute [rw] cluster_id
@@ -26973,6 +27323,16 @@ module Aws::SageMaker
     #   Metadata specific to instance-level events.
     #   @return [Types::InstanceMetadata]
     #
+    # @!attribute [rw] database_configuration
+    #   Metadata specific to events about the external Slurm accounting
+    #   database of the cluster.
+    #   @return [Types::DatabaseConfigurationMetadata]
+    #
+    # @!attribute [rw] slurm_health
+    #   Metadata specific to events about the health of the Slurm components
+    #   on the controller node of the cluster.
+    #   @return [Types::SlurmHealthMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EventMetadata AWS API Documentation
     #
     class EventMetadata < Struct.new(
@@ -26980,6 +27340,8 @@ module Aws::SageMaker
       :instance_group,
       :instance_group_scaling,
       :instance,
+      :database_configuration,
+      :slurm_health,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -26989,6 +27351,8 @@ module Aws::SageMaker
       class InstanceGroup < EventMetadata; end
       class InstanceGroupScaling < EventMetadata; end
       class Instance < EventMetadata; end
+      class DatabaseConfiguration < EventMetadata; end
+      class SlurmHealth < EventMetadata; end
       class Unknown < EventMetadata; end
     end
 
@@ -27980,6 +28344,73 @@ module Aws::SageMaker
       :flow_definition_status,
       :creation_time,
       :failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of the selector that identifies an iteration of a ForEach
+    # step.
+    #
+    # @!attribute [rw] step_name
+    #   The name of the step associated with the iteration.
+    #   @return [String]
+    #
+    # @!attribute [rw] index
+    #   The index of the iteration within the ForEach step.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ForEachSelectorResult AWS API Documentation
+    #
+    class ForEachSelectorResult < Struct.new(
+      :step_name,
+      :index)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The status, the iteration-step counts, and the selector information
+    # for a ForEach step execution.
+    #
+    # @!attribute [rw] status
+    #   The status of the ForEach step execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_item_count
+    #   The number of input items that the ForEach step iterates over.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_step_count
+    #   The total number of steps generated across all iterations of the
+    #   ForEach step.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] succeeded_step_count
+    #   The number of iteration steps that completed successfully.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed_step_count
+    #   The number of iteration steps that failed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stopped_step_count
+    #   The number of iteration steps that were stopped.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] selector
+    #   Identifies the body step and iteration selected within the ForEach
+    #   step.
+    #   @return [Types::ForEachSelectorResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ForEachStepMetadata AWS API Documentation
+    #
+    class ForEachStepMetadata < Struct.new(
+      :status,
+      :input_item_count,
+      :total_step_count,
+      :succeeded_step_count,
+      :failed_step_count,
+      :stopped_step_count,
+      :selector)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33011,6 +33442,30 @@ module Aws::SageMaker
     class IntegerParameterRangeSpecification < Struct.new(
       :min_value,
       :max_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The context for an iteration of a ForEach step.
+    #
+    # @!attribute [rw] parent_step_name
+    #   The name of the ForEach step that generated this iteration.
+    #   @return [String]
+    #
+    # @!attribute [rw] index
+    #   The index of the iteration within the ForEach step.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] item
+    #   The input item that is being processed in this iteration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/IterationContext AWS API Documentation
+    #
+    class IterationContext < Struct.new(
+      :parent_step_name,
+      :index,
+      :item)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -40184,6 +40639,67 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   If the response was truncated, use the token returned in the
+    #   previous response to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of training sessions to return in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] creation_time_after
+    #   A filter that returns only training sessions created after the
+    #   specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_before
+    #   A filter that returns only training sessions created before the
+    #   specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name_contains
+    #   A string in the training session name to filter results. Only
+    #   sessions whose name contains the specified string are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_equals
+    #   A filter that returns only training sessions with the specified
+    #   status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTrainingSessionsRequest AWS API Documentation
+    #
+    class ListTrainingSessionsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :creation_time_after,
+      :creation_time_before,
+      :name_contains,
+      :status_equals)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If the response is truncated, this token retrieves the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] training_session_summaries
+    #   An array of `TrainingSessionSummary` objects that provide summary
+    #   information about the training sessions.
+    #   @return [Array<Types::TrainingSessionSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTrainingSessionsResponse AWS API Documentation
+    #
+    class ListTrainingSessionsResponse < Struct.new(
+      :next_token,
+      :training_session_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] creation_time_after
     #   A filter that returns only transform jobs created after the
     #   specified time.
@@ -40625,6 +41141,26 @@ module Aws::SageMaker
     class ListWorkteamsResponse < Struct.new(
       :workteams,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Low-Rank Adaptation (LoRA) configuration for a training session,
+    # including the rank and alpha parameters.
+    #
+    # @!attribute [rw] rank
+    #   The rank of the Low-Rank Adaptation (LoRA) adapter matrices.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] alpha
+    #   The Low-Rank Adaptation (LoRA) scaling factor.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LoraConfig AWS API Documentation
+    #
+    class LoraConfig < Struct.new(
+      :rank,
+      :alpha)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -46064,6 +46600,11 @@ module Aws::SageMaker
     #   are reused for this step.
     #   @return [Types::SelectiveExecutionResult]
     #
+    # @!attribute [rw] iteration_context
+    #   The context for the iteration of a ForEach step that generated this
+    #   step execution.
+    #   @return [Types::IterationContext]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PipelineExecutionStep AWS API Documentation
     #
     class PipelineExecutionStep < Struct.new(
@@ -46077,7 +46618,8 @@ module Aws::SageMaker
       :failure_reason,
       :metadata,
       :attempt_count,
-      :selective_execution_result)
+      :selective_execution_result,
+      :iteration_context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -46132,6 +46674,11 @@ module Aws::SageMaker
     # @!attribute [rw] emr
     #   The configurations and outcomes of an Amazon EMR step execution.
     #   @return [Types::EMRStepMetadata]
+    #
+    # @!attribute [rw] emr_serverless
+    #   The configurations and outcomes of an Amazon EMR Serverless step
+    #   execution.
+    #   @return [Types::EMRServerlessStepMetadata]
     #
     # @!attribute [rw] quality_check
     #   The configurations and outcomes of the check step execution. This
@@ -46235,6 +46782,18 @@ module Aws::SageMaker
     #   The metadata for a SageMaker job used in a pipeline execution step.
     #   @return [Types::JobStepMetadata]
     #
+    # @!attribute [rw] athena
+    #   The metadata for the Athena step execution.
+    #   @return [Types::AthenaStepMetadata]
+    #
+    # @!attribute [rw] cleanup
+    #   The metadata for the cleanup step execution.
+    #   @return [Types::CleanupStepMetadata]
+    #
+    # @!attribute [rw] for_each
+    #   The metadata for the ForEach step execution.
+    #   @return [Types::ForEachStepMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PipelineExecutionStepMetadata AWS API Documentation
     #
     class PipelineExecutionStepMetadata < Struct.new(
@@ -46248,6 +46807,7 @@ module Aws::SageMaker
       :callback,
       :lambda,
       :emr,
+      :emr_serverless,
       :quality_check,
       :clarify_check,
       :fail,
@@ -46260,7 +46820,10 @@ module Aws::SageMaker
       :bedrock_model_import,
       :inference_component,
       :lineage,
-      :job)
+      :job,
+      :athena,
+      :cleanup,
+      :for_each)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -51872,6 +52435,47 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Metadata information about the health of a Slurm component on the
+    # controller node of a HyperPod cluster.
+    #
+    # @!attribute [rw] component
+    #   The Slurm component that the health information describes. The valid
+    #   value is `Slurmdbd`, the Slurm accounting daemon.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The health of the component. Valid values are `Healthy` and
+    #   `Unhealthy`.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason the component is unhealthy. Valid values:
+    #
+    #   * `DaemonDown`: The daemon is not running, so job accounting records
+    #     are not being written.
+    #
+    #   * `DaemonDisabled`: The daemon is running and its accounting
+    #     database is responding, but the daemon is not enabled to start
+    #     automatically. Job accounting stops the next time the controller
+    #     node restarts.
+    #
+    #   * `DbUnreachable`: The daemon is running, but its accounting
+    #     database did not respond. Job accounting records might not be
+    #     written.
+    #
+    #   This field is omitted when the component is healthy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SlurmHealthMetadata AWS API Documentation
+    #
+    class SlurmHealthMetadata < Struct.new(
+      :component,
+      :status,
+      :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies an algorithm that was used to create the model package. The
     # algorithm must be either an algorithm resource in your SageMaker
     # account or an algorithm in Amazon Web Services Marketplace that you
@@ -52843,6 +53447,22 @@ module Aws::SageMaker
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] training_session_name
+    #   The name of the training session to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopTrainingSessionRequest AWS API Documentation
+    #
+    class StopTrainingSessionRequest < Struct.new(
+      :training_session_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopTrainingSessionResponse AWS API Documentation
+    #
+    class StopTrainingSessionResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] transform_job_name
     #   The name of the batch transform job to stop.
@@ -55056,6 +55676,190 @@ module Aws::SageMaker
     #
     class TrainingRepositoryAuthConfig < Struct.new(
       :training_repository_credentials_provider_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains detailed information about a training session.
+    #
+    # @!attribute [rw] training_session_arn
+    #   The Amazon Resource Name (ARN) of the training session.
+    #   @return [String]
+    #
+    # @!attribute [rw] training_session_name
+    #   The name of the training session.
+    #   @return [String]
+    #
+    # @!attribute [rw] training_session_status
+    #   The current status of the training session.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_package_group_arn
+    #   The Amazon Resource Name (ARN) of the model package group where
+    #   checkpoints are published.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that the training session was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the training session was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The date and time that the training session ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] error_details
+    #   If the training session failed or is blocked, detailed error
+    #   information.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_received_sequence_number
+    #   The sequence number of the last training operation received by the
+    #   session.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] billable_token_usage
+    #   The billable token usage for the training session.
+    #   @return [Types::BillableTokenUsage]
+    #
+    # @!attribute [rw] vpc_config
+    #   The Virtual Private Cloud (VPC) configuration for the training
+    #   session.
+    #   @return [Types::VpcConfig]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role associated with the
+    #   training session.
+    #   @return [String]
+    #
+    # @!attribute [rw] lora_config
+    #   The Low-Rank Adaptation (LoRA) configuration for the training
+    #   session.
+    #   @return [Types::LoraConfig]
+    #
+    # @!attribute [rw] model_config
+    #   The configuration for the base model.
+    #   @return [Types::TrainingSessionModelConfig]
+    #
+    # @!attribute [rw] output_config
+    #   The output configuration for the training session.
+    #   @return [Types::TrainingSessionOutputConfig]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the training session.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingSessionDetail AWS API Documentation
+    #
+    class TrainingSessionDetail < Struct.new(
+      :training_session_arn,
+      :training_session_name,
+      :training_session_status,
+      :model_package_group_arn,
+      :creation_time,
+      :last_modified_time,
+      :end_time,
+      :error_details,
+      :last_received_sequence_number,
+      :billable_token_usage,
+      :vpc_config,
+      :role_arn,
+      :lora_config,
+      :model_config,
+      :output_config,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for the base model used in a training session.
+    #
+    # @!attribute [rw] base_model_arn
+    #   The Amazon Resource Name (ARN) of the base foundation model from
+    #   SageMaker Hub.
+    #   @return [String]
+    #
+    # @!attribute [rw] accept_eula
+    #   Specifies whether you accept the end-user license agreement (EULA)
+    #   for gated models.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingSessionModelConfig AWS API Documentation
+    #
+    class TrainingSessionModelConfig < Struct.new(
+      :base_model_arn,
+      :accept_eula)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The output configuration for a training session, including the Amazon
+    # S3 location for checkpoints and model artifacts, and optional
+    # encryption settings.
+    #
+    # @!attribute [rw] s3_location
+    #   The Amazon S3 location where training session outputs, including
+    #   checkpoints and model artifacts, are stored.
+    #   @return [Types::TrainingSessionS3Location]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingSessionOutputConfig AWS API Documentation
+    #
+    class TrainingSessionOutputConfig < Struct.new(
+      :s3_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the Amazon S3 path and optional encryption settings for
+    # training session output data, including checkpoints, model artifacts,
+    # and invocation results.
+    #
+    # @!attribute [rw] path
+    #   The Amazon S3 path where training session outputs are stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt output
+    #   data. If not specified, the default Amazon S3 encryption is used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingSessionS3Location AWS API Documentation
+    #
+    class TrainingSessionS3Location < Struct.new(
+      :path,
+      :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about a training session.
+    #
+    # @!attribute [rw] training_session_arn
+    #   The Amazon Resource Name (ARN) of the training session.
+    #   @return [String]
+    #
+    # @!attribute [rw] training_session_status
+    #   The current status of the training session.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that the training session was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the training session was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingSessionSummary AWS API Documentation
+    #
+    class TrainingSessionSummary < Struct.new(
+      :training_session_arn,
+      :training_session_status,
+      :creation_time,
+      :last_modified_time)
       SENSITIVE = []
       include Aws::Structure
     end

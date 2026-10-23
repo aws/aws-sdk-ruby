@@ -27,6 +27,7 @@ module Aws
                       ?convert_params: bool,
                       ?correct_clock_skew: bool,
                       ?defaults_mode: String,
+                      ?disable_clock_skew_correction: bool,
                       ?disable_host_prefix_injection: bool,
                       ?disable_request_compression: bool,
                       ?endpoint: String,
@@ -158,6 +159,37 @@ module Aws
                                         agent_space_id: ::String
                                       ) -> _BatchDeleteThreatModelsResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteThreatModelsResponseSuccess
+
+      interface _BatchDisassociateFindingIssueResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDisassociateFindingIssueOutput]
+        def errors: () -> ::Array[Types::BatchDisassociateFindingIssueError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#batch_disassociate_finding_issue-instance_method
+      def batch_disassociate_finding_issue: (
+                                              agent_space_id: ::String,
+                                              ?pentest_job_id: ::String,
+                                              ?code_review_job_id: ::String,
+                                              finding_ids: Array[::String]
+                                            ) -> _BatchDisassociateFindingIssueResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDisassociateFindingIssueResponseSuccess
+
+      interface _BatchExportFindingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchExportFindingsOutput]
+        def results: () -> ::Array[Types::BatchExportFindingResult]
+        def errors: () -> ::Array[Types::BatchExportFindingError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#batch_export_findings-instance_method
+      def batch_export_findings: (
+                                   agent_space_id: ::String,
+                                   ?pentest_job_id: ::String,
+                                   ?code_review_job_id: ::String,
+                                   issue_destination: {
+                                     integration_id: ::String,
+                                     project_key: ::String
+                                   },
+                                   finding_ids: Array[::String]
+                                 ) -> _BatchExportFindingsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchExportFindingsResponseSuccess
 
       interface _BatchGetAgentSpacesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetAgentSpacesOutput]
@@ -409,6 +441,8 @@ module Aws
         def code_remediation_strategy: () -> ("AUTOMATIC" | "DISABLED")
         def validation_mode: () -> ("DISABLED" | "SIMULATED")
         def max_task_hours: () -> ::Float
+        def report_destination: () -> Types::ReportDestination
+        def report_filters: () -> Types::ReportFilters
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#create_code_review-instance_method
       def create_code_review: (
@@ -422,7 +456,14 @@ module Aws
                                 },
                                 ?code_remediation_strategy: ("AUTOMATIC" | "DISABLED"),
                                 ?validation_mode: ("DISABLED" | "SIMULATED"),
-                                ?max_task_hours: ::Float
+                                ?max_task_hours: ::Float,
+                                ?report_destination: {
+                                  integration_id: ::String,
+                                  container_id: ::String,
+                                  parent_id: ::String?,
+                                  document_id: ::String?
+                                },
+                                ?report_filters: Params::report_filters
                               ) -> _CreateCodeReviewResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCodeReviewResponseSuccess
 
@@ -432,7 +473,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#create_integration-instance_method
       def create_integration: (
-                                provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE"),
+                                provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS" | "JIRA"),
                                 input: {
                                   github: {
                                     code: ::String,
@@ -454,6 +495,22 @@ module Aws
                                     state: ::String
                                   }?,
                                   confluence: {
+                                    installation_id: ::String,
+                                    code: ::String,
+                                    state: ::String,
+                                    site_url: ::String
+                                  }?,
+                                  azure_dev_ops: {
+                                    code: ::String,
+                                    state: ::String,
+                                    organization_name: ::String
+                                  }?,
+                                  bitbucket_data_center: {
+                                    target_url: ::String,
+                                    code: ::String,
+                                    state: ::String
+                                  }?,
+                                  jira: {
                                     installation_id: ::String,
                                     code: ::String,
                                     state: ::String,
@@ -495,6 +552,10 @@ module Aws
         def service_role: () -> ::String
         def log_config: () -> Types::CloudWatchLog
         def agent_space_id: () -> ::String
+        def report_destination: () -> Types::ReportDestination
+        def report_filters: () -> Types::ReportFilters
+        def cicd_configuration: () -> Types::CiCdConfiguration
+        def test_scope: () -> Types::TestScope
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#create_pentest-instance_method
       def create_pentest: (
@@ -515,7 +576,20 @@ module Aws
                             ?network_traffic_config: Params::network_traffic_config,
                             ?code_remediation_strategy: ("AUTOMATIC" | "DISABLED"),
                             ?disable_managed_skills: Array[("FINDING_PERSONALIZATION" | "LOGIN_OPTIMIZATION")],
-                            ?max_task_hours: ::Float
+                            ?max_task_hours: ::Float,
+                            ?report_destination: {
+                              integration_id: ::String,
+                              container_id: ::String,
+                              parent_id: ::String?,
+                              document_id: ::String?
+                            },
+                            ?report_filters: Params::report_filters,
+                            ?cicd_configuration: {
+                              enabled: bool?
+                            },
+                            ?test_scope: {
+                              type: ("WEB_APP" | "GENERATIVE_AI_APP")
+                            }
                           ) -> _CreatePentestResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePentestResponseSuccess
 
@@ -657,6 +731,7 @@ module Aws
         def log_config: () -> Types::CloudWatchLog
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
+        def report_destination: () -> Types::ReportDestination
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#create_threat_model-instance_method
       def create_threat_model: (
@@ -821,11 +896,13 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::GetIntegrationOutput]
         def integration_id: () -> ::String
         def installation_id: () -> ::String
-        def provider: () -> ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE")
-        def provider_type: () -> ("SOURCE_CODE" | "DOCUMENTATION")
+        def provider: () -> ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS" | "JIRA")
+        def provider_type: () -> ("SOURCE_CODE" | "DOCUMENTATION" | "ISSUE_TRACKING")
         def display_name: () -> ::String
         def kms_key_id: () -> ::String
         def target_url: () -> ::String
+        def site_url: () -> ::String
+        def webhook_url: () -> ::String
         def private_connection_name: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#get_integration-instance_method
@@ -880,9 +957,28 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#initiate_provider_registration-instance_method
       def initiate_provider_registration: (
-                                            provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE")
+                                            provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS" | "JIRA"),
+                                            ?target_url: ::String,
+                                            ?organization_name: ::String,
+                                            ?client_id: ::String,
+                                            ?client_secret: ::String
                                           ) -> _InitiateProviderRegistrationResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InitiateProviderRegistrationResponseSuccess
+
+      interface _ListActorMessagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListActorMessagesOutput]
+        def messages: () -> ::Array[Types::ActorMessage]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#list_actor_messages-instance_method
+      def list_actor_messages: (
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String,
+                                 agent_space_id: ::String,
+                                 pentest_id: ::String,
+                                 actor_identifier: ::String
+                               ) -> _ListActorMessagesResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListActorMessagesResponseSuccess
 
       interface _ListAgentSpacesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAgentSpacesOutput]
@@ -1008,7 +1104,7 @@ module Aws
       def list_integrated_resources: (
                                        agent_space_id: ::String,
                                        ?integration_id: ::String,
-                                       ?resource_type: ("CODE_REPOSITORY" | "DOCUMENT"),
+                                       ?resource_type: ("CODE_REPOSITORY" | "DOCUMENT" | "PROJECT"),
                                        ?next_token: ::String,
                                        ?max_results: ::Integer
                                      ) -> _ListIntegratedResourcesResponseSuccess
@@ -1022,8 +1118,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#list_integrations-instance_method
       def list_integrations: (
                                ?filter: {
-                                 provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE")?,
-                                 provider_type: ("SOURCE_CODE" | "DOCUMENTATION")?
+                                 provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS" | "JIRA")?,
+                                 provider_type: ("SOURCE_CODE" | "DOCUMENTATION" | "ISSUE_TRACKING")?
                                },
                                ?next_token: ::String,
                                ?max_results: ::Integer
@@ -1071,7 +1167,8 @@ module Aws
                                            ?max_results: ::Integer,
                                            pentest_id: ::String,
                                            agent_space_id: ::String,
-                                           ?next_token: ::String
+                                           ?next_token: ::String,
+                                           ?job_type: ("FULL" | "REVALIDATION" | "CICD")
                                          ) -> _ListPentestJobsForPentestResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPentestJobsForPentestResponseSuccess
 
@@ -1252,8 +1349,17 @@ module Aws
       def start_pentest_job: (
                                agent_space_id: ::String,
                                pentest_id: ::String,
-                               ?job_type: ("FULL" | "REVALIDATION"),
-                               ?selected_finding_ids: Array[::String]
+                               ?job_type: ("FULL" | "REVALIDATION" | "CICD"),
+                               ?selected_finding_ids: Array[::String],
+                               ?scope_changes: Array[
+                                 {
+                                   integration_id: ::String,
+                                   provider_resource_id: ::String,
+                                   base_commit_sha: ::String?,
+                                   head_commit_sha: ::String,
+                                   trigger_run_id: ::String?
+                                 }
+                               ]
                              ) -> _StartPentestJobResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartPentestJobResponseSuccess
 
@@ -1374,6 +1480,8 @@ module Aws
         def code_remediation_strategy: () -> ("AUTOMATIC" | "DISABLED")
         def validation_mode: () -> ("DISABLED" | "SIMULATED")
         def max_task_hours: () -> ::Float
+        def report_destination: () -> Types::ReportDestination
+        def report_filters: () -> Types::ReportFilters
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#update_code_review-instance_method
       def update_code_review: (
@@ -1388,7 +1496,14 @@ module Aws
                                 },
                                 ?code_remediation_strategy: ("AUTOMATIC" | "DISABLED"),
                                 ?validation_mode: ("DISABLED" | "SIMULATED"),
-                                ?max_task_hours: ::Float
+                                ?max_task_hours: ::Float,
+                                ?report_destination: {
+                                  integration_id: ::String,
+                                  container_id: ::String,
+                                  parent_id: ::String?,
+                                  document_id: ::String?
+                                },
+                                ?report_filters: Params::report_filters
                               ) -> _UpdateCodeReviewResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCodeReviewResponseSuccess
 
@@ -1439,18 +1554,38 @@ module Aws
                                                  page_id: ::String,
                                                  title: ::String?,
                                                  space_title: ::String?
+                                               }?,
+                                               azure_dev_ops_repository: {
+                                                 name: ::String,
+                                                 organization: ::String,
+                                                 project: ::String?
+                                               }?,
+                                               jira_project: {
+                                                 name: ::String,
+                                                 project_key: ::String,
+                                                 project_id: ::String,
+                                                 project_name: ::String?
                                                }?
                                              },
                                              capabilities: {
                                                github: {
+                                                 trigger_filter_groups: Array[
+                                                   Params::trigger_filter_group
+                                                 ]?,
                                                  leave_comments: bool?,
                                                  remediate_code: bool?
                                                }?,
                                                gitlab: {
+                                                 trigger_filter_groups: Array[
+                                                   Params::trigger_filter_group
+                                                 ]?,
                                                  leave_comments: bool?,
                                                  remediate_code: bool?
                                                }?,
                                                bitbucket: {
+                                                 trigger_filter_groups: Array[
+                                                   Params::trigger_filter_group
+                                                 ]?,
                                                  leave_comments: bool?,
                                                  remediate_code: bool?
                                                }?,
@@ -1458,12 +1593,36 @@ module Aws
                                                  fetch_document: bool?,
                                                  create_document: bool?,
                                                  update_document: bool?
+                                               }?,
+                                               azure_dev_ops: {
+                                                 trigger_filter_groups: Array[
+                                                   Params::trigger_filter_group
+                                                 ]?,
+                                                 leave_comments: bool?,
+                                                 remediate_code: bool?
+                                               }?,
+                                               jira: {
+                                                 create_issue: bool?,
+                                                 comment_issue: bool?
                                                }?
                                              }?
                                            }
                                          ]
                                        ) -> _UpdateIntegratedResourcesResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIntegratedResourcesResponseSuccess
+
+      interface _UpdateIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateIntegrationOutput]
+        def integration_id: () -> ::String
+        def webhook_url: () -> ::String
+        def secret: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#update_integration-instance_method
+      def update_integration: (
+                                integration_id: ::String,
+                                webhook_action: ("CREATE_IF_ABSENT" | "ROTATE")
+                              ) -> _UpdateIntegrationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIntegrationResponseSuccess
 
       interface _UpdatePentestResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePentestOutput]
@@ -1476,6 +1635,10 @@ module Aws
         def service_role: () -> ::String
         def log_config: () -> Types::CloudWatchLog
         def agent_space_id: () -> ::String
+        def report_destination: () -> Types::ReportDestination
+        def report_filters: () -> Types::ReportFilters
+        def cicd_configuration: () -> Types::CiCdConfiguration
+        def test_scope: () -> Types::TestScope
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#update_pentest-instance_method
       def update_pentest: (
@@ -1497,7 +1660,20 @@ module Aws
                             ?network_traffic_config: Params::network_traffic_config,
                             ?code_remediation_strategy: ("AUTOMATIC" | "DISABLED"),
                             ?disable_managed_skills: Array[("FINDING_PERSONALIZATION" | "LOGIN_OPTIMIZATION")],
-                            ?max_task_hours: ::Float
+                            ?max_task_hours: ::Float,
+                            ?report_destination: {
+                              integration_id: ::String,
+                              container_id: ::String,
+                              parent_id: ::String?,
+                              document_id: ::String?
+                            },
+                            ?report_filters: Params::report_filters,
+                            ?cicd_configuration: {
+                              enabled: bool?
+                            },
+                            ?test_scope: {
+                              type: ("WEB_APP" | "GENERATIVE_AI_APP")
+                            }
                           ) -> _UpdatePentestResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePentestResponseSuccess
 
@@ -1621,6 +1797,7 @@ module Aws
         def log_config: () -> Types::CloudWatchLog
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
+        def report_destination: () -> Types::ReportDestination
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#update_threat_model-instance_method
       def update_threat_model: (
@@ -1636,6 +1813,12 @@ module Aws
                                  ?log_config: {
                                    log_group: ::String?,
                                    log_stream: ::String?
+                                 },
+                                 ?report_destination: {
+                                   integration_id: ::String,
+                                   container_id: ::String,
+                                   parent_id: ::String?,
+                                   document_id: ::String?
                                  }
                                ) -> _UpdateThreatModelResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateThreatModelResponseSuccess

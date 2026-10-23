@@ -3,6 +3,31 @@ Unreleased Changes
 
 * Issue - Mix `PageableResponse` into `Seahorse::Client::Response` once instead of extending every response object, which cleared Ruby's method cache for each of the extension's methods on every request and made YJIT discard compiled code.
 
+3.260.0 (2026-10-21)
+------------------
+
+* Issue - Remove the `AAA Certificate Services` root from the bundled CA file. It cross-signed eMudhra intermediate CAs whose private keys were compromised. This only affects applications that opt in with `Aws.use_bundled_cert!` and use it to reach non-AWS endpoints; AWS service endpoints are not affected.
+
+* Feature - Bump the minimum version of the aws-eventstream dependency.
+
+3.259.0 (2026-10-20)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Feature - Updated Aws::Signin::Client with the latest API changes.
+
+* Feature - Standardize clock skew correction: use a 4 minute detection threshold and an NTP-style midpoint calculation, refresh the stored correction from every response so a stale value can heal, and ignore cached (`Age` header) and slow (over 15 minute) responses. Add a `disable_clock_skew_correction` option (`AWS_DISABLE_CLOCK_SKEW_CORRECTION`) that takes precedence over `correct_clock_skew`, which continues to work when the new option is unset.
+
+3.258.0 (2026-10-19)
+------------------
+
+* Feature - Improve RBS support for service-specific error handling by making modeled errors inherit from each service's `ServiceError`.
+
 3.257.0 (2026-09-14)
 ------------------
 

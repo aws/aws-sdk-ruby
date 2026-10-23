@@ -867,12 +867,28 @@ module Aws::GuardDuty
     class DestinationProperties
       attr_accessor destination_arn: ::String
       attr_accessor kms_key_arn: ::String
+      attr_accessor expected_bucket_owner: ::String
       SENSITIVE: []
     end
 
     class Detection
       attr_accessor anomaly: Types::Anomaly
       attr_accessor sequence: Types::Sequence
+      SENSITIVE: []
+    end
+
+    class DetectionRuleEc2Requirements
+      attr_accessor min_agent_version: ::String
+      SENSITIVE: []
+    end
+
+    class DetectionRuleEcsFargateRequirements
+      attr_accessor min_agent_version: ::String
+      SENSITIVE: []
+    end
+
+    class DetectionRuleEksRequirements
+      attr_accessor min_agent_version: ::String
       SENSITIVE: []
     end
 
@@ -907,16 +923,29 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class DetectionRuleRuntimeMonitoringDetails
+      attr_accessor platforms: Types::DetectionRuleRuntimePlatforms
+      SENSITIVE: []
+    end
+
+    class DetectionRuleRuntimePlatforms
+      attr_accessor eks: Types::DetectionRuleEksRequirements
+      attr_accessor ec2: Types::DetectionRuleEc2Requirements
+      attr_accessor ecs_fargate: Types::DetectionRuleEcsFargateRequirements
+      SENSITIVE: []
+    end
+
     class DetectorAdditionalConfiguration
-      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")
+      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT" | "RDS_DATA_RISK")
       attr_accessor status: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
     class DetectorAdditionalConfigurationResult
-      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")
+      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT" | "RDS_DATA_RISK")
       attr_accessor status: ("ENABLED" | "DISABLED")
       attr_accessor updated_at: ::Time
+      attr_accessor managed_by: ("GUARDDUTY_POLICY")
       SENSITIVE: []
     end
 
@@ -932,6 +961,7 @@ module Aws::GuardDuty
       attr_accessor status: ("ENABLED" | "DISABLED")
       attr_accessor updated_at: ::Time
       attr_accessor additional_configuration: ::Array[Types::DetectorAdditionalConfigurationResult]
+      attr_accessor managed_by: ("GUARDDUTY_POLICY")
       SENSITIVE: []
     end
 
@@ -1175,6 +1205,7 @@ module Aws::GuardDuty
       attr_accessor type: ::String
       attr_accessor updated_at: ::String
       attr_accessor associated_attack_sequence_arn: ::String
+      attr_accessor custom_detection_rule_name: ::String
       SENSITIVE: []
     end
 
@@ -2189,15 +2220,16 @@ module Aws::GuardDuty
     end
 
     class MemberAdditionalConfiguration
-      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")
+      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT" | "RDS_DATA_RISK")
       attr_accessor status: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
     class MemberAdditionalConfigurationResult
-      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")
+      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT" | "RDS_DATA_RISK")
       attr_accessor status: ("ENABLED" | "DISABLED")
       attr_accessor updated_at: ::Time
+      attr_accessor managed_by: ("GUARDDUTY_POLICY")
       SENSITIVE: []
     end
 
@@ -2220,6 +2252,7 @@ module Aws::GuardDuty
       attr_accessor status: ("ENABLED" | "DISABLED")
       attr_accessor updated_at: ::Time
       attr_accessor additional_configuration: ::Array[Types::MemberAdditionalConfigurationResult]
+      attr_accessor managed_by: ("GUARDDUTY_POLICY")
       SENSITIVE: []
     end
 
@@ -2293,13 +2326,13 @@ module Aws::GuardDuty
     end
 
     class OrganizationAdditionalConfiguration
-      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")
+      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT" | "RDS_DATA_RISK")
       attr_accessor auto_enable: ("NEW" | "NONE" | "ALL")
       SENSITIVE: []
     end
 
     class OrganizationAdditionalConfigurationResult
-      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")
+      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT" | "RDS_DATA_RISK")
       attr_accessor auto_enable: ("NEW" | "NONE" | "ALL")
       SENSITIVE: []
     end
@@ -2356,7 +2389,7 @@ module Aws::GuardDuty
     end
 
     class OrganizationFeatureStatisticsAdditionalConfiguration
-      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")
+      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT" | "RDS_DATA_RISK")
       attr_accessor enabled_accounts_count: ::Integer
       SENSITIVE: []
     end
@@ -2546,6 +2579,7 @@ module Aws::GuardDuty
     class RemoteAccountDetails
       attr_accessor account_id: ::String
       attr_accessor affiliated: bool
+      attr_accessor aws_service_name: ::String
       SENSITIVE: []
     end
 
@@ -2652,13 +2686,14 @@ module Aws::GuardDuty
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor severity: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW")
-      attr_accessor data_source: ("CloudTrailManagementEvent")
+      attr_accessor data_source: ("CloudTrailManagementEvent" | "RuntimeMonitoring")
       attr_accessor tactic: ::String
       attr_accessor technique: ::String
       attr_accessor service: ::String
       attr_accessor definition: Types::RuleDefinition
       attr_accessor language: ("SQL")
       attr_accessor schema: ("CloudTrail")
+      attr_accessor runtime_monitoring_details: Types::DetectionRuleRuntimeMonitoringDetails
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -2670,7 +2705,7 @@ module Aws::GuardDuty
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor severity: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW")
-      attr_accessor data_source: ("CloudTrailManagementEvent")
+      attr_accessor data_source: ("CloudTrailManagementEvent" | "RuntimeMonitoring")
       attr_accessor tactic: ::String
       attr_accessor technique: ::String
       attr_accessor service: ::String
@@ -3315,7 +3350,7 @@ module Aws::GuardDuty
       attr_accessor account_ids: ::Array[::String]
       attr_accessor data_sources: ::Array[("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_LOGS" | "KUBERNETES_AUDIT_LOGS" | "EC2_MALWARE_SCAN")]
       attr_accessor resources: ::Array[::String]
-      attr_accessor features: ::Array[("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "EC2_RUNTIME_MONITORING" | "FARGATE_RUNTIME_MONITORING" | "RDS_DBI_PROTECTION_PROVISIONED" | "RDS_DBI_PROTECTION_SERVERLESS" | "AI_PROTECTION")]
+      attr_accessor features: ::Array[("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "EC2_RUNTIME_MONITORING" | "FARGATE_RUNTIME_MONITORING" | "RDS_DBI_PROTECTION_PROVISIONED" | "RDS_DBI_PROTECTION_SERVERLESS" | "RDS_DBI_PROTECTION_LIMITLESS" | "RDS_DATA_ACTIVITY_DBI_PROTECTION_PROVISIONED" | "RDS_DATA_ACTIVITY_DBI_PROTECTION_SERVERLESS" | "RDS_DATA_ACTIVITY_DBI_PROTECTION_LIMITLESS" | "AI_PROTECTION")]
       SENSITIVE: []
     end
 
@@ -3326,7 +3361,7 @@ module Aws::GuardDuty
     end
 
     class UsageFeatureResult
-      attr_accessor feature: ("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "EC2_RUNTIME_MONITORING" | "FARGATE_RUNTIME_MONITORING" | "RDS_DBI_PROTECTION_PROVISIONED" | "RDS_DBI_PROTECTION_SERVERLESS" | "AI_PROTECTION")
+      attr_accessor feature: ("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "EC2_RUNTIME_MONITORING" | "FARGATE_RUNTIME_MONITORING" | "RDS_DBI_PROTECTION_PROVISIONED" | "RDS_DBI_PROTECTION_SERVERLESS" | "RDS_DBI_PROTECTION_LIMITLESS" | "RDS_DATA_ACTIVITY_DBI_PROTECTION_PROVISIONED" | "RDS_DATA_ACTIVITY_DBI_PROTECTION_SERVERLESS" | "RDS_DATA_ACTIVITY_DBI_PROTECTION_LIMITLESS" | "AI_PROTECTION")
       attr_accessor total: Types::Total
       SENSITIVE: []
     end
@@ -3354,7 +3389,7 @@ module Aws::GuardDuty
     end
 
     class UsageTopAccountsResult
-      attr_accessor feature: ("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "EC2_RUNTIME_MONITORING" | "FARGATE_RUNTIME_MONITORING" | "RDS_DBI_PROTECTION_PROVISIONED" | "RDS_DBI_PROTECTION_SERVERLESS" | "AI_PROTECTION")
+      attr_accessor feature: ("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "EC2_RUNTIME_MONITORING" | "FARGATE_RUNTIME_MONITORING" | "RDS_DBI_PROTECTION_PROVISIONED" | "RDS_DBI_PROTECTION_SERVERLESS" | "RDS_DBI_PROTECTION_LIMITLESS" | "RDS_DATA_ACTIVITY_DBI_PROTECTION_PROVISIONED" | "RDS_DATA_ACTIVITY_DBI_PROTECTION_SERVERLESS" | "RDS_DATA_ACTIVITY_DBI_PROTECTION_LIMITLESS" | "AI_PROTECTION")
       attr_accessor accounts: ::Array[Types::UsageTopAccountResult]
       SENSITIVE: []
     end

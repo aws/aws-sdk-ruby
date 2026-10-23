@@ -230,12 +230,12 @@ module Aws::CodePipeline
     # @!attribute [rw] configuration
     #   The action's configuration. These are key-value pairs that specify
     #   input values for an action. For more information, see [Action
-    #   Structure Requirements in CodePipeline][1]. For the list of
+    #   Structure Requirements in CodePipeline ][1]. For the list of
     #   configuration properties for the CloudFormation action type in
-    #   CodePipeline, see [Configuration Properties Reference][2] in the
-    #   *CloudFormation User Guide*. For template snippets with examples,
+    #   CodePipeline, see [Configuration Properties Reference][2] in the <i>
+    #   CloudFormation User Guide</i>. For template snippets with examples,
     #   see [Using Parameter Override Functions with CodePipeline
-    #   Pipelines][3] in the *CloudFormation User Guide*.
+    #   Pipelines][3] in the <i> CloudFormation User Guide</i>.
     #
     #   The values can be represented in either JSON or YAML format. For
     #   example, the JSON configuration item format is as follows:
@@ -891,8 +891,8 @@ module Aws::CodePipeline
     #   The creator of the action being called. There are three valid values
     #   for the `Owner` field in the action category section within your
     #   pipeline structure: `AWS`, `ThirdParty`, and `Custom`. For more
-    #   information, see [Valid Action Types and Providers in
-    #   CodePipeline][1].
+    #   information, see [Valid Action Types and Providers in CodePipeline
+    #   ][1].
     #
     #
     #
@@ -904,8 +904,8 @@ module Aws::CodePipeline
     #   providers are determined by the action category. For example, an
     #   action in the Deploy category type might have a provider of
     #   CodeDeploy, which would be specified as `CodeDeploy`. For more
-    #   information, see [Valid Action Types and Providers in
-    #   CodePipeline][1].
+    #   information, see [Valid Action Types and Providers in CodePipeline
+    #   ][1].
     #
     #
     #
@@ -1383,7 +1383,7 @@ module Aws::CodePipeline
     # The condition for the stage. A condition is made up of the rules and
     # the result for the condition. For more information about conditions,
     # see [Stage conditions][1] and [How do stage conditions work?][2].. For
-    # more information about rules, see the [CodePipeline rule
+    # more information about rules, see the [ CodePipeline rule
     # reference][3].
     #
     #
@@ -3828,8 +3828,8 @@ module Aws::CodePipeline
     #   change detection. For example, for a pipeline with a CodeCommit
     #   source, we recommend you migrate (update) your pipeline to use
     #   CloudWatch Events. To learn more, see [Migrate polling pipelines to
-    #   use event-based change detection][2] in the *CodePipeline User
-    #   Guide*.
+    #   use event-based change detection][2] in the <i> CodePipeline User
+    #   Guide</i>.
     #
     #
     #
@@ -4617,8 +4617,8 @@ module Aws::CodePipeline
     # condition, such as a rule that checks for a test result before
     # allowing the run to enter the deployment stage. For more information
     # about conditions, see [Stage conditions][1] and [How do stage
-    # conditions work?][2]. For more information about rules, see the
-    # [CodePipeline rule reference][3].
+    # conditions work?][2]. For more information about rules, see the [
+    # CodePipeline rule reference][3].
     #
     #
     #
@@ -4843,7 +4843,7 @@ module Aws::CodePipeline
     #   The ID for the rule type, which is made up of the combined values
     #   for category, owner, provider, and version. For more information
     #   about conditions, see [Stage conditions][1]. For more information
-    #   about rules, see the [CodePipeline rule reference][2].
+    #   about rules, see the [ CodePipeline rule reference][2].
     #
     #
     #
@@ -5037,7 +5037,7 @@ module Aws::CodePipeline
     # The ID for the rule type, which is made up of the combined values for
     # category, owner, provider, and version. For more information about
     # conditions, see [Stage conditions][1]. For more information about
-    # rules, see the [CodePipeline rule reference][2].
+    # rules, see the [ CodePipeline rule reference][2].
     #
     #
     #
@@ -5057,7 +5057,7 @@ module Aws::CodePipeline
     #
     # @!attribute [rw] provider
     #   The rule provider, such as the `DeploymentWindow` rule. For a list
-    #   of rule provider names, see the rules listed in the [CodePipeline
+    #   of rule provider names, see the rules listed in the [ CodePipeline
     #   rule reference][1].
     #
     #

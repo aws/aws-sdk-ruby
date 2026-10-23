@@ -128,6 +128,14 @@ module Aws
             expect(uploaded_keys).not_to include('huge.bin')
             expect(result[:completed_uploads]).to eq(4)
           end
+
+          it 'raises instead of hanging when the callback raises a non-StandardError',
+             thread_report_on_exception: false do
+            filter_callback = ->(_path, file) { file == 'medium.log' ? raise(SystemStackError, 'filter failed') : true }
+            upload = Thread.new { uploader.upload(temp_dir, 'test-bucket', filter_callback: filter_callback) }
+
+            expect { upload.join(5) }.to raise_error(SystemStackError, 'filter failed')
+          end
         end
 
         context 'request callbacks', :jruby_flaky do

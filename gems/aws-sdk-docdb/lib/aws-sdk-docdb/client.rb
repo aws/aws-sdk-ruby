@@ -201,12 +201,19 @@ module Aws::DocDB
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -1019,8 +1026,8 @@ module Aws::DocDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/event-auditing.html
-    #   [2]: https://docs.aws.amazon.com/documentdb/latest/developerguide/profiling.html
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/devguide/event-auditing.html
+    #   [2]: https://docs.aws.amazon.com/documentdb/latest/devguide/profiling.html
     #
     # @option params [Boolean] :deletion_protection
     #   Specifies whether this cluster can be deleted. If `DeletionProtection`
@@ -1095,7 +1102,11 @@ module Aws::DocDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html
+    #
+    # @option params [Boolean] :copy_tags_to_snapshot
+    #   Specifies whether to copy all tags from the DB cluster to snapshots of
+    #   the DB cluster. The default is not to copy them.
     #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -1141,6 +1152,7 @@ module Aws::DocDB
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
     #     network_type: "String",
+    #     copy_tags_to_snapshot: false,
     #     source_region: "String",
     #   })
     #
@@ -1197,6 +1209,7 @@ module Aws::DocDB
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.network_type #=> String
+    #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -1227,9 +1240,9 @@ module Aws::DocDB
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/cluster_parameter_group-create.html
-    # [2]: https://docs.aws.amazon.com/documentdb/latest/developerguide/cluster_parameter_group-copy.html
-    # [3]: https://docs.aws.amazon.com/documentdb/latest/developerguide/cluster_parameter_group-modify.html
+    # [1]: https://docs.aws.amazon.com/documentdb/latest/devguide/cluster_parameter_group-create.html
+    # [2]: https://docs.aws.amazon.com/documentdb/latest/devguide/cluster_parameter_group-copy.html
+    # [3]: https://docs.aws.amazon.com/documentdb/latest/devguide/cluster_parameter_group-modify.html
     #
     # @option params [required, String] :db_cluster_parameter_group_name
     #   The name of the cluster parameter group.
@@ -1446,7 +1459,7 @@ module Aws::DocDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/devguide/performance-insights.html
     #
     # @option params [String] :performance_insights_kms_key_id
     #   The KMS key identifier for encryption of Performance Insights data.
@@ -1470,8 +1483,8 @@ module Aws::DocDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html
-    #   [2]: https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/devguide/ca_cert_rotation.html
+    #   [2]: https://docs.aws.amazon.com/documentdb/latest/devguide/security.encryption.ssl.html
     #
     # @return [Types::CreateDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1968,6 +1981,7 @@ module Aws::DocDB
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.network_type #=> String
+    #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -2833,6 +2847,7 @@ module Aws::DocDB
     #   resp.db_clusters[0].master_user_secret.secret_status #=> String
     #   resp.db_clusters[0].master_user_secret.kms_key_id #=> String
     #   resp.db_clusters[0].network_type #=> String
+    #   resp.db_clusters[0].copy_tags_to_snapshot #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeDBClusters AWS API Documentation
     #
@@ -3824,6 +3839,7 @@ module Aws::DocDB
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.network_type #=> String
+    #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -4225,7 +4241,11 @@ module Aws::DocDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html
+    #
+    # @option params [Boolean] :copy_tags_to_snapshot
+    #   Specifies whether to copy all tags from the DB cluster to snapshots of
+    #   the DB cluster. The default is not to copy them.
     #
     # @return [Types::ModifyDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4260,6 +4280,7 @@ module Aws::DocDB
     #     master_user_secret_kms_key_id: "String",
     #     rotate_master_user_password: false,
     #     network_type: "String",
+    #     copy_tags_to_snapshot: false,
     #   })
     #
     # @example Response structure
@@ -4315,6 +4336,7 @@ module Aws::DocDB
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.network_type #=> String
+    #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -4568,7 +4590,7 @@ module Aws::DocDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/devguide/performance-insights.html
     #
     # @option params [String] :performance_insights_kms_key_id
     #   The KMS key identifier for encryption of Performance Insights data.
@@ -4599,8 +4621,8 @@ module Aws::DocDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html
-    #   [2]: https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/devguide/ca_cert_rotation.html
+    #   [2]: https://docs.aws.amazon.com/documentdb/latest/devguide/security.encryption.ssl.html
     #
     # @return [Types::ModifyDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5356,7 +5378,11 @@ module Aws::DocDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html
+    #
+    # @option params [Boolean] :copy_tags_to_snapshot
+    #   Specifies whether to copy all tags from the restored DB cluster to
+    #   snapshots of the restored DB cluster. The default is not to copy them.
     #
     # @return [Types::RestoreDBClusterFromSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5389,6 +5415,7 @@ module Aws::DocDB
     #     },
     #     storage_type: "String",
     #     network_type: "String",
+    #     copy_tags_to_snapshot: false,
     #   })
     #
     # @example Response structure
@@ -5444,6 +5471,7 @@ module Aws::DocDB
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.network_type #=> String
+    #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -5613,7 +5641,11 @@ module Aws::DocDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html
+    #
+    # @option params [Boolean] :copy_tags_to_snapshot
+    #   Specifies whether to copy all tags from the restored DB cluster to
+    #   snapshots of the restored DB cluster. The default is not to copy them.
     #
     # @return [Types::RestoreDBClusterToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5645,6 +5677,7 @@ module Aws::DocDB
     #     },
     #     storage_type: "String",
     #     network_type: "String",
+    #     copy_tags_to_snapshot: false,
     #   })
     #
     # @example Response structure
@@ -5700,6 +5733,7 @@ module Aws::DocDB
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.network_type #=> String
+    #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -5716,7 +5750,7 @@ module Aws::DocDB
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/db-cluster-stop-start.html
+    # [1]: https://docs.aws.amazon.com/documentdb/latest/devguide/db-cluster-stop-start.html
     #
     # @option params [required, String] :db_cluster_identifier
     #   The identifier of the cluster to restart. Example:
@@ -5785,6 +5819,7 @@ module Aws::DocDB
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.network_type #=> String
+    #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/StartDBCluster AWS API Documentation
     #
@@ -5801,7 +5836,7 @@ module Aws::DocDB
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/db-cluster-stop-start.html
+    # [1]: https://docs.aws.amazon.com/documentdb/latest/devguide/db-cluster-stop-start.html
     #
     # @option params [required, String] :db_cluster_identifier
     #   The identifier of the cluster to stop. Example:
@@ -5870,6 +5905,7 @@ module Aws::DocDB
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.network_type #=> String
+    #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/StopDBCluster AWS API Documentation
     #
@@ -5976,7 +6012,7 @@ module Aws::DocDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-docdb'
-      context[:gem_version] = '1.109.0'
+      context[:gem_version] = '1.113.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -11,163 +11,163 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class ADAssessmentLimitExceededException < ::Aws::Errors::ServiceError
+      class ADAssessmentLimitExceededException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class AuthenticationFailedException < ::Aws::Errors::ServiceError
+      class AuthenticationFailedException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class CertificateAlreadyExistsException < ::Aws::Errors::ServiceError
+      class CertificateAlreadyExistsException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class CertificateDoesNotExistException < ::Aws::Errors::ServiceError
+      class CertificateDoesNotExistException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class CertificateInUseException < ::Aws::Errors::ServiceError
+      class CertificateInUseException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class CertificateLimitExceededException < ::Aws::Errors::ServiceError
+      class CertificateLimitExceededException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class ClientException < ::Aws::Errors::ServiceError
+      class ClientException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class DirectoryAlreadyInRegionException < ::Aws::Errors::ServiceError
+      class DirectoryAlreadyInRegionException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class DirectoryAlreadySharedException < ::Aws::Errors::ServiceError
+      class DirectoryAlreadySharedException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class DirectoryDoesNotExistException < ::Aws::Errors::ServiceError
+      class DirectoryDoesNotExistException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class DirectoryInDesiredStateException < ::Aws::Errors::ServiceError
+      class DirectoryInDesiredStateException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class DirectoryLimitExceededException < ::Aws::Errors::ServiceError
+      class DirectoryLimitExceededException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class DirectoryNotSharedException < ::Aws::Errors::ServiceError
+      class DirectoryNotSharedException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class DirectoryUnavailableException < ::Aws::Errors::ServiceError
+      class DirectoryUnavailableException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class DisableAlreadyInProgressException < ::Aws::Errors::ServiceError
+      class DisableAlreadyInProgressException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class DomainControllerLimitExceededException < ::Aws::Errors::ServiceError
+      class DomainControllerLimitExceededException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class EnableAlreadyInProgressException < ::Aws::Errors::ServiceError
+      class EnableAlreadyInProgressException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class EntityAlreadyExistsException < ::Aws::Errors::ServiceError
+      class EntityAlreadyExistsException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class EntityDoesNotExistException < ::Aws::Errors::ServiceError
+      class EntityDoesNotExistException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class IncompatibleSettingsException < ::Aws::Errors::ServiceError
+      class IncompatibleSettingsException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class InsufficientPermissionsException < ::Aws::Errors::ServiceError
+      class InsufficientPermissionsException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class InvalidCertificateException < ::Aws::Errors::ServiceError
+      class InvalidCertificateException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class InvalidClientAuthStatusException < ::Aws::Errors::ServiceError
+      class InvalidClientAuthStatusException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class InvalidLDAPSStatusException < ::Aws::Errors::ServiceError
+      class InvalidLDAPSStatusException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class InvalidNextTokenException < ::Aws::Errors::ServiceError
+      class InvalidNextTokenException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class InvalidParameterException < ::Aws::Errors::ServiceError
+      class InvalidParameterException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class InvalidPasswordException < ::Aws::Errors::ServiceError
+      class InvalidPasswordException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class InvalidTargetException < ::Aws::Errors::ServiceError
+      class InvalidTargetException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class IpRouteLimitExceededException < ::Aws::Errors::ServiceError
+      class IpRouteLimitExceededException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class NoAvailableCertificateException < ::Aws::Errors::ServiceError
+      class NoAvailableCertificateException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class OrganizationsException < ::Aws::Errors::ServiceError
+      class OrganizationsException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class RegionLimitExceededException < ::Aws::Errors::ServiceError
+      class RegionLimitExceededException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class ServiceException < ::Aws::Errors::ServiceError
+      class ServiceException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class ShareLimitExceededException < ::Aws::Errors::ServiceError
+      class ShareLimitExceededException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class SnapshotLimitExceededException < ::Aws::Errors::ServiceError
+      class SnapshotLimitExceededException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class TagLimitExceededException < ::Aws::Errors::ServiceError
+      class TagLimitExceededException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class UnsupportedOperationException < ::Aws::Errors::ServiceError
+      class UnsupportedOperationException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class UnsupportedSettingsException < ::Aws::Errors::ServiceError
+      class UnsupportedSettingsException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class UserDoesNotExistException < ::Aws::Errors::ServiceError
+      class UserDoesNotExistException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end

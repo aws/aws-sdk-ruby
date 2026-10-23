@@ -201,12 +201,19 @@ module Aws::DevOpsAgent
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -535,6 +542,7 @@ module Aws::DevOpsAgent
     #         owner_type: "organization", # required, accepts organization, user
     #         instance_identifier: "String",
     #         runtime_role_arn: "RoleArn",
+    #         release_management_association_id: "AssociationId",
     #       },
     #       slack: {
     #         workspace_id: "SlackConfigurationWorkspaceIdString", # required
@@ -588,6 +596,7 @@ module Aws::DevOpsAgent
     #         project_path: "String", # required
     #         instance_identifier: "String",
     #         runtime_role_arn: "RoleArn",
+    #         release_management_association_id: "AssociationId",
     #       },
     #       mcpserversplunk: {
     #       },
@@ -628,6 +637,29 @@ module Aws::DevOpsAgent
     #       remoteagent: {
     #       },
     #       remoteagentsigv4: {
+    #       },
+    #       msteams: {
+    #         team_id: "Guid", # required
+    #         team_name: "String", # required
+    #         transmission_target: { # required
+    #           ops_oncall_target: {
+    #             channel_name: "String", # required
+    #             channel_id: "MSTeamsChannelId", # required
+    #           },
+    #           ops_sre_target: {
+    #             channel_name: "String", # required
+    #             channel_id: "MSTeamsChannelId", # required
+    #           },
+    #         },
+    #       },
+    #       release_management: {
+    #         name: "DisplayName", # required
+    #         network_access: { # required
+    #           private_access: {
+    #             private_connection_name: "PrivateConnectionName", # required
+    #             runtime_role_arn: "RoleArn", # required
+    #           },
+    #         },
     #       },
     #     },
     #     capabilities: {
@@ -670,6 +702,7 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.github.owner_type #=> String, one of "organization", "user"
     #   resp.association.configuration.github.instance_identifier #=> String
     #   resp.association.configuration.github.runtime_role_arn #=> String
+    #   resp.association.configuration.github.release_management_association_id #=> String
     #   resp.association.configuration.slack.workspace_id #=> String
     #   resp.association.configuration.slack.workspace_name #=> String
     #   resp.association.configuration.slack.transmission_target.ops_oncall_target.channel_name #=> String
@@ -698,6 +731,7 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.gitlab.project_path #=> String
     #   resp.association.configuration.gitlab.instance_identifier #=> String
     #   resp.association.configuration.gitlab.runtime_role_arn #=> String
+    #   resp.association.configuration.gitlab.release_management_association_id #=> String
     #   resp.association.configuration.azure.subscription_id #=> String
     #   resp.association.configuration.azuredevops.organization_name #=> String
     #   resp.association.configuration.azuredevops.project_id #=> String
@@ -717,6 +751,15 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.mcpserversigv4.tool_details #=> Array
     #   resp.association.configuration.mcpserversigv4.tool_details[0].name #=> String
     #   resp.association.configuration.mcpserversigv4.tool_details[0].tool_classification #=> String, one of "READ_ONLY", "MUTATIVE", "DESTRUCTIVE"
+    #   resp.association.configuration.msteams.team_id #=> String
+    #   resp.association.configuration.msteams.team_name #=> String
+    #   resp.association.configuration.msteams.transmission_target.ops_oncall_target.channel_name #=> String
+    #   resp.association.configuration.msteams.transmission_target.ops_oncall_target.channel_id #=> String
+    #   resp.association.configuration.msteams.transmission_target.ops_sre_target.channel_name #=> String
+    #   resp.association.configuration.msteams.transmission_target.ops_sre_target.channel_id #=> String
+    #   resp.association.configuration.release_management.name #=> String
+    #   resp.association.configuration.release_management.network_access.private_access.private_connection_name #=> String
+    #   resp.association.configuration.release_management.network_access.private_access.runtime_role_arn #=> String
     #   resp.association.capabilities #=> Hash
     #   resp.association.capabilities["CapabilityType"].enabled #=> Boolean
     #   resp.association.capabilities["CapabilityType"].trigger_filter_groups #=> Array
@@ -1193,7 +1236,26 @@ module Aws::DevOpsAgent
     #     type: "TriggerType", # required
     #     condition: { # required
     #       schedule: {
-    #         expression: "ScheduleExpression", # required
+    #         expression: "ScheduleExpression",
+    #         spec: {
+    #           cron: {
+    #             expression: "ScheduleExpression", # required
+    #           },
+    #           time_range: {
+    #             start_after: "TimeOfDay", # required
+    #             start_before: "TimeOfDay", # required
+    #             recurrence: { # required
+    #               daily: {
+    #               },
+    #               weekly: {
+    #                 day_of_week: "MONDAY", # required, accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+    #               },
+    #               monthly: {
+    #                 day_of_month: 1, # required
+    #               },
+    #             },
+    #           },
+    #         },
     #       },
     #     },
     #     action: { # required
@@ -1208,6 +1270,11 @@ module Aws::DevOpsAgent
     #   resp.trigger.agent_space_id #=> String
     #   resp.trigger.type #=> String
     #   resp.trigger.condition.schedule.expression #=> String
+    #   resp.trigger.condition.schedule.spec.cron.expression #=> String
+    #   resp.trigger.condition.schedule.spec.time_range.start_after #=> String
+    #   resp.trigger.condition.schedule.spec.time_range.start_before #=> String
+    #   resp.trigger.condition.schedule.spec.time_range.recurrence.weekly.day_of_week #=> String, one of "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"
+    #   resp.trigger.condition.schedule.spec.time_range.recurrence.monthly.day_of_month #=> Integer
     #   resp.trigger.status #=> String
     #   resp.trigger.created_at #=> Time
     #   resp.trigger.updated_at #=> Time
@@ -1568,6 +1635,7 @@ module Aws::DevOpsAgent
     #   * {Types::GetAccountUsageOutput#monthly_account_evaluation_hours #monthly_account_evaluation_hours} => Types::UsageMetric
     #   * {Types::GetAccountUsageOutput#monthly_account_system_learning_hours #monthly_account_system_learning_hours} => Types::UsageMetric
     #   * {Types::GetAccountUsageOutput#monthly_account_on_demand_hours #monthly_account_on_demand_hours} => Types::UsageMetric
+    #   * {Types::GetAccountUsageOutput#monthly_account_grader_hours #monthly_account_grader_hours} => Types::UsageMetric
     #   * {Types::GetAccountUsageOutput#usage_period_start_time #usage_period_start_time} => Time
     #   * {Types::GetAccountUsageOutput#usage_period_end_time #usage_period_end_time} => Time
     #
@@ -1581,6 +1649,8 @@ module Aws::DevOpsAgent
     #   resp.monthly_account_system_learning_hours.usage #=> Float
     #   resp.monthly_account_on_demand_hours.limit #=> Integer
     #   resp.monthly_account_on_demand_hours.usage #=> Float
+    #   resp.monthly_account_grader_hours.limit #=> Integer
+    #   resp.monthly_account_grader_hours.usage #=> Float
     #   resp.usage_period_start_time #=> Time
     #   resp.usage_period_end_time #=> Time
     #
@@ -1598,6 +1668,9 @@ module Aws::DevOpsAgent
     # @option params [required, String] :agent_space_id
     #   The unique identifier of the AgentSpace
     #
+    # @option params [String] :included_data
+    #   How much data to include in the response.
+    #
     # @return [Types::GetAgentSpaceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetAgentSpaceOutput#agent_space #agent_space} => Types::AgentSpace
@@ -1607,6 +1680,7 @@ module Aws::DevOpsAgent
     #
     #   resp = client.get_agent_space({
     #     agent_space_id: "AgentSpaceId", # required
+    #     included_data: "METADATA_ONLY", # accepts METADATA_ONLY, ALL_DATA
     #   })
     #
     # @example Response structure
@@ -1802,6 +1876,7 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.github.owner_type #=> String, one of "organization", "user"
     #   resp.association.configuration.github.instance_identifier #=> String
     #   resp.association.configuration.github.runtime_role_arn #=> String
+    #   resp.association.configuration.github.release_management_association_id #=> String
     #   resp.association.configuration.slack.workspace_id #=> String
     #   resp.association.configuration.slack.workspace_name #=> String
     #   resp.association.configuration.slack.transmission_target.ops_oncall_target.channel_name #=> String
@@ -1830,6 +1905,7 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.gitlab.project_path #=> String
     #   resp.association.configuration.gitlab.instance_identifier #=> String
     #   resp.association.configuration.gitlab.runtime_role_arn #=> String
+    #   resp.association.configuration.gitlab.release_management_association_id #=> String
     #   resp.association.configuration.azure.subscription_id #=> String
     #   resp.association.configuration.azuredevops.organization_name #=> String
     #   resp.association.configuration.azuredevops.project_id #=> String
@@ -1849,6 +1925,15 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.mcpserversigv4.tool_details #=> Array
     #   resp.association.configuration.mcpserversigv4.tool_details[0].name #=> String
     #   resp.association.configuration.mcpserversigv4.tool_details[0].tool_classification #=> String, one of "READ_ONLY", "MUTATIVE", "DESTRUCTIVE"
+    #   resp.association.configuration.msteams.team_id #=> String
+    #   resp.association.configuration.msteams.team_name #=> String
+    #   resp.association.configuration.msteams.transmission_target.ops_oncall_target.channel_name #=> String
+    #   resp.association.configuration.msteams.transmission_target.ops_oncall_target.channel_id #=> String
+    #   resp.association.configuration.msteams.transmission_target.ops_sre_target.channel_name #=> String
+    #   resp.association.configuration.msteams.transmission_target.ops_sre_target.channel_id #=> String
+    #   resp.association.configuration.release_management.name #=> String
+    #   resp.association.configuration.release_management.network_access.private_access.private_connection_name #=> String
+    #   resp.association.configuration.release_management.network_access.private_access.runtime_role_arn #=> String
     #   resp.association.capabilities #=> Hash
     #   resp.association.capabilities["CapabilityType"].enabled #=> Boolean
     #   resp.association.capabilities["CapabilityType"].trigger_filter_groups #=> Array
@@ -2034,7 +2119,7 @@ module Aws::DevOpsAgent
     # @example Response structure
     #
     #   resp.service.service_id #=> String
-    #   resp.service.service_type #=> String, one of "github", "slack", "azure", "azuredevops", "dynatrace", "servicenow", "pagerduty", "gitlab", "eventChannel", "mcpservernewrelic", "mcpservergrafana", "mcpserverdatadog", "mcpserver", "mcpserversplunk", "azureidentity", "mcpserversigv4", "remoteagent", "remoteagentsigv4"
+    #   resp.service.service_type #=> String, one of "github", "slack", "azure", "azuredevops", "msteams", "dynatrace", "servicenow", "pagerduty", "gitlab", "eventChannel", "mcpservernewrelic", "mcpservergrafana", "mcpserverdatadog", "mcpserver", "mcpserversplunk", "azureidentity", "mcpserversigv4", "remoteagent", "remoteagentsigv4"
     #   resp.service.name #=> String
     #   resp.service.accessible_resources #=> Array
     #   resp.service.additional_service_details.github.owner #=> String
@@ -2044,23 +2129,29 @@ module Aws::DevOpsAgent
     #   resp.service.additional_service_details.slack.team_name #=> String
     #   resp.service.additional_service_details.mcpserverdatadog.name #=> String
     #   resp.service.additional_service_details.mcpserverdatadog.endpoint #=> String
-    #   resp.service.additional_service_details.mcpserverdatadog.authorization_method #=> String, one of "oauth-client-credentials", "oauth-3lo", "api-key", "bearer-token"
+    #   resp.service.additional_service_details.mcpserverdatadog.authorization_method #=> String, one of "oauth-client-credentials", "oauth-3lo", "api-key", "bearer-token", "custom-headers"
     #   resp.service.additional_service_details.mcpserverdatadog.description #=> String
     #   resp.service.additional_service_details.mcpserverdatadog.api_key_header #=> String
+    #   resp.service.additional_service_details.mcpserverdatadog.custom_header_names #=> Array
+    #   resp.service.additional_service_details.mcpserverdatadog.custom_header_names[0] #=> String
     #   resp.service.additional_service_details.mcpserver.name #=> String
     #   resp.service.additional_service_details.mcpserver.endpoint #=> String
-    #   resp.service.additional_service_details.mcpserver.authorization_method #=> String, one of "oauth-client-credentials", "oauth-3lo", "api-key", "bearer-token"
+    #   resp.service.additional_service_details.mcpserver.authorization_method #=> String, one of "oauth-client-credentials", "oauth-3lo", "api-key", "bearer-token", "custom-headers"
     #   resp.service.additional_service_details.mcpserver.description #=> String
     #   resp.service.additional_service_details.mcpserver.api_key_header #=> String
+    #   resp.service.additional_service_details.mcpserver.custom_header_names #=> Array
+    #   resp.service.additional_service_details.mcpserver.custom_header_names[0] #=> String
     #   resp.service.additional_service_details.servicenow.instance_url #=> String
     #   resp.service.additional_service_details.gitlab.target_url #=> String
     #   resp.service.additional_service_details.gitlab.token_type #=> String, one of "personal", "group"
     #   resp.service.additional_service_details.gitlab.group_id #=> String
     #   resp.service.additional_service_details.mcpserversplunk.name #=> String
     #   resp.service.additional_service_details.mcpserversplunk.endpoint #=> String
-    #   resp.service.additional_service_details.mcpserversplunk.authorization_method #=> String, one of "oauth-client-credentials", "oauth-3lo", "api-key", "bearer-token"
+    #   resp.service.additional_service_details.mcpserversplunk.authorization_method #=> String, one of "oauth-client-credentials", "oauth-3lo", "api-key", "bearer-token", "custom-headers"
     #   resp.service.additional_service_details.mcpserversplunk.description #=> String
     #   resp.service.additional_service_details.mcpserversplunk.api_key_header #=> String
+    #   resp.service.additional_service_details.mcpserversplunk.custom_header_names #=> Array
+    #   resp.service.additional_service_details.mcpserversplunk.custom_header_names[0] #=> String
     #   resp.service.additional_service_details.mcpservernewrelic.account_id #=> String
     #   resp.service.additional_service_details.mcpservernewrelic.region #=> String, one of "US", "EU", "JP"
     #   resp.service.additional_service_details.mcpservernewrelic.description #=> String
@@ -2071,7 +2162,7 @@ module Aws::DevOpsAgent
     #   resp.service.additional_service_details.azureidentity.web_identity_token_audiences #=> Array
     #   resp.service.additional_service_details.azureidentity.web_identity_token_audiences[0] #=> String
     #   resp.service.additional_service_details.mcpservergrafana.endpoint #=> String
-    #   resp.service.additional_service_details.mcpservergrafana.authorization_method #=> String, one of "oauth-client-credentials", "oauth-3lo", "api-key", "bearer-token"
+    #   resp.service.additional_service_details.mcpservergrafana.authorization_method #=> String, one of "oauth-client-credentials", "oauth-3lo", "api-key", "bearer-token", "custom-headers"
     #   resp.service.additional_service_details.pagerduty.scopes #=> Array
     #   resp.service.additional_service_details.pagerduty.scopes[0] #=> String
     #   resp.service.additional_service_details.mcpserversigv4.name #=> String
@@ -2135,6 +2226,11 @@ module Aws::DevOpsAgent
     #   resp.trigger.agent_space_id #=> String
     #   resp.trigger.type #=> String
     #   resp.trigger.condition.schedule.expression #=> String
+    #   resp.trigger.condition.schedule.spec.cron.expression #=> String
+    #   resp.trigger.condition.schedule.spec.time_range.start_after #=> String
+    #   resp.trigger.condition.schedule.spec.time_range.start_before #=> String
+    #   resp.trigger.condition.schedule.spec.time_range.recurrence.weekly.day_of_week #=> String, one of "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"
+    #   resp.trigger.condition.schedule.spec.time_range.recurrence.monthly.day_of_month #=> Integer
     #   resp.trigger.status #=> String
     #   resp.trigger.created_at #=> Time
     #   resp.trigger.updated_at #=> Time
@@ -2156,6 +2252,9 @@ module Aws::DevOpsAgent
     # @option params [String] :next_token
     #   Token for the next page of results.
     #
+    # @option params [String] :included_data
+    #   How much data to include in the response.
+    #
     # @return [Types::ListAgentSpacesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListAgentSpacesOutput#next_token #next_token} => String
@@ -2168,6 +2267,7 @@ module Aws::DevOpsAgent
     #   resp = client.list_agent_spaces({
     #     max_results: 1,
     #     next_token: "NextToken",
+    #     included_data: "METADATA_ONLY", # accepts METADATA_ONLY, ALL_DATA
     #   })
     #
     # @example Response structure
@@ -2450,6 +2550,7 @@ module Aws::DevOpsAgent
     #   resp.associations[0].configuration.github.owner_type #=> String, one of "organization", "user"
     #   resp.associations[0].configuration.github.instance_identifier #=> String
     #   resp.associations[0].configuration.github.runtime_role_arn #=> String
+    #   resp.associations[0].configuration.github.release_management_association_id #=> String
     #   resp.associations[0].configuration.slack.workspace_id #=> String
     #   resp.associations[0].configuration.slack.workspace_name #=> String
     #   resp.associations[0].configuration.slack.transmission_target.ops_oncall_target.channel_name #=> String
@@ -2478,6 +2579,7 @@ module Aws::DevOpsAgent
     #   resp.associations[0].configuration.gitlab.project_path #=> String
     #   resp.associations[0].configuration.gitlab.instance_identifier #=> String
     #   resp.associations[0].configuration.gitlab.runtime_role_arn #=> String
+    #   resp.associations[0].configuration.gitlab.release_management_association_id #=> String
     #   resp.associations[0].configuration.azure.subscription_id #=> String
     #   resp.associations[0].configuration.azuredevops.organization_name #=> String
     #   resp.associations[0].configuration.azuredevops.project_id #=> String
@@ -2497,6 +2599,15 @@ module Aws::DevOpsAgent
     #   resp.associations[0].configuration.mcpserversigv4.tool_details #=> Array
     #   resp.associations[0].configuration.mcpserversigv4.tool_details[0].name #=> String
     #   resp.associations[0].configuration.mcpserversigv4.tool_details[0].tool_classification #=> String, one of "READ_ONLY", "MUTATIVE", "DESTRUCTIVE"
+    #   resp.associations[0].configuration.msteams.team_id #=> String
+    #   resp.associations[0].configuration.msteams.team_name #=> String
+    #   resp.associations[0].configuration.msteams.transmission_target.ops_oncall_target.channel_name #=> String
+    #   resp.associations[0].configuration.msteams.transmission_target.ops_oncall_target.channel_id #=> String
+    #   resp.associations[0].configuration.msteams.transmission_target.ops_sre_target.channel_name #=> String
+    #   resp.associations[0].configuration.msteams.transmission_target.ops_sre_target.channel_id #=> String
+    #   resp.associations[0].configuration.release_management.name #=> String
+    #   resp.associations[0].configuration.release_management.network_access.private_access.private_connection_name #=> String
+    #   resp.associations[0].configuration.release_management.network_access.private_access.runtime_role_arn #=> String
     #   resp.associations[0].capabilities #=> Hash
     #   resp.associations[0].capabilities["CapabilityType"].enabled #=> Boolean
     #   resp.associations[0].capabilities["CapabilityType"].trigger_filter_groups #=> Array
@@ -2994,7 +3105,7 @@ module Aws::DevOpsAgent
     #   resp = client.list_services({
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     filter_service_type: "github", # accepts github, slack, azure, azuredevops, dynatrace, servicenow, pagerduty, gitlab, eventChannel, mcpservernewrelic, mcpservergrafana, mcpserverdatadog, mcpserver, mcpserversplunk, azureidentity, mcpserversigv4, remoteagent, remoteagentsigv4
+    #     filter_service_type: "github", # accepts github, slack, azure, azuredevops, msteams, dynatrace, servicenow, pagerduty, gitlab, eventChannel, mcpservernewrelic, mcpservergrafana, mcpserverdatadog, mcpserver, mcpserversplunk, azureidentity, mcpserversigv4, remoteagent, remoteagentsigv4
     #   })
     #
     # @example Response structure
@@ -3002,7 +3113,7 @@ module Aws::DevOpsAgent
     #   resp.next_token #=> String
     #   resp.services #=> Array
     #   resp.services[0].service_id #=> String
-    #   resp.services[0].service_type #=> String, one of "github", "slack", "azure", "azuredevops", "dynatrace", "servicenow", "pagerduty", "gitlab", "eventChannel", "mcpservernewrelic", "mcpservergrafana", "mcpserverdatadog", "mcpserver", "mcpserversplunk", "azureidentity", "mcpserversigv4", "remoteagent", "remoteagentsigv4"
+    #   resp.services[0].service_type #=> String, one of "github", "slack", "azure", "azuredevops", "msteams", "dynatrace", "servicenow", "pagerduty", "gitlab", "eventChannel", "mcpservernewrelic", "mcpservergrafana", "mcpserverdatadog", "mcpserver", "mcpserversplunk", "azureidentity", "mcpserversigv4", "remoteagent", "remoteagentsigv4"
     #   resp.services[0].name #=> String
     #   resp.services[0].accessible_resources #=> Array
     #   resp.services[0].additional_service_details.github.owner #=> String
@@ -3012,23 +3123,29 @@ module Aws::DevOpsAgent
     #   resp.services[0].additional_service_details.slack.team_name #=> String
     #   resp.services[0].additional_service_details.mcpserverdatadog.name #=> String
     #   resp.services[0].additional_service_details.mcpserverdatadog.endpoint #=> String
-    #   resp.services[0].additional_service_details.mcpserverdatadog.authorization_method #=> String, one of "oauth-client-credentials", "oauth-3lo", "api-key", "bearer-token"
+    #   resp.services[0].additional_service_details.mcpserverdatadog.authorization_method #=> String, one of "oauth-client-credentials", "oauth-3lo", "api-key", "bearer-token", "custom-headers"
     #   resp.services[0].additional_service_details.mcpserverdatadog.description #=> String
     #   resp.services[0].additional_service_details.mcpserverdatadog.api_key_header #=> String
+    #   resp.services[0].additional_service_details.mcpserverdatadog.custom_header_names #=> Array
+    #   resp.services[0].additional_service_details.mcpserverdatadog.custom_header_names[0] #=> String
     #   resp.services[0].additional_service_details.mcpserver.name #=> String
     #   resp.services[0].additional_service_details.mcpserver.endpoint #=> String
-    #   resp.services[0].additional_service_details.mcpserver.authorization_method #=> String, one of "oauth-client-credentials", "oauth-3lo", "api-key", "bearer-token"
+    #   resp.services[0].additional_service_details.mcpserver.authorization_method #=> String, one of "oauth-client-credentials", "oauth-3lo", "api-key", "bearer-token", "custom-headers"
     #   resp.services[0].additional_service_details.mcpserver.description #=> String
     #   resp.services[0].additional_service_details.mcpserver.api_key_header #=> String
+    #   resp.services[0].additional_service_details.mcpserver.custom_header_names #=> Array
+    #   resp.services[0].additional_service_details.mcpserver.custom_header_names[0] #=> String
     #   resp.services[0].additional_service_details.servicenow.instance_url #=> String
     #   resp.services[0].additional_service_details.gitlab.target_url #=> String
     #   resp.services[0].additional_service_details.gitlab.token_type #=> String, one of "personal", "group"
     #   resp.services[0].additional_service_details.gitlab.group_id #=> String
     #   resp.services[0].additional_service_details.mcpserversplunk.name #=> String
     #   resp.services[0].additional_service_details.mcpserversplunk.endpoint #=> String
-    #   resp.services[0].additional_service_details.mcpserversplunk.authorization_method #=> String, one of "oauth-client-credentials", "oauth-3lo", "api-key", "bearer-token"
+    #   resp.services[0].additional_service_details.mcpserversplunk.authorization_method #=> String, one of "oauth-client-credentials", "oauth-3lo", "api-key", "bearer-token", "custom-headers"
     #   resp.services[0].additional_service_details.mcpserversplunk.description #=> String
     #   resp.services[0].additional_service_details.mcpserversplunk.api_key_header #=> String
+    #   resp.services[0].additional_service_details.mcpserversplunk.custom_header_names #=> Array
+    #   resp.services[0].additional_service_details.mcpserversplunk.custom_header_names[0] #=> String
     #   resp.services[0].additional_service_details.mcpservernewrelic.account_id #=> String
     #   resp.services[0].additional_service_details.mcpservernewrelic.region #=> String, one of "US", "EU", "JP"
     #   resp.services[0].additional_service_details.mcpservernewrelic.description #=> String
@@ -3039,7 +3156,7 @@ module Aws::DevOpsAgent
     #   resp.services[0].additional_service_details.azureidentity.web_identity_token_audiences #=> Array
     #   resp.services[0].additional_service_details.azureidentity.web_identity_token_audiences[0] #=> String
     #   resp.services[0].additional_service_details.mcpservergrafana.endpoint #=> String
-    #   resp.services[0].additional_service_details.mcpservergrafana.authorization_method #=> String, one of "oauth-client-credentials", "oauth-3lo", "api-key", "bearer-token"
+    #   resp.services[0].additional_service_details.mcpservergrafana.authorization_method #=> String, one of "oauth-client-credentials", "oauth-3lo", "api-key", "bearer-token", "custom-headers"
     #   resp.services[0].additional_service_details.pagerduty.scopes #=> Array
     #   resp.services[0].additional_service_details.pagerduty.scopes[0] #=> String
     #   resp.services[0].additional_service_details.mcpserversigv4.name #=> String
@@ -3144,6 +3261,11 @@ module Aws::DevOpsAgent
     #   resp.items[0].agent_space_id #=> String
     #   resp.items[0].type #=> String
     #   resp.items[0].condition.schedule.expression #=> String
+    #   resp.items[0].condition.schedule.spec.cron.expression #=> String
+    #   resp.items[0].condition.schedule.spec.time_range.start_after #=> String
+    #   resp.items[0].condition.schedule.spec.time_range.start_before #=> String
+    #   resp.items[0].condition.schedule.spec.time_range.recurrence.weekly.day_of_week #=> String, one of "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"
+    #   resp.items[0].condition.schedule.spec.time_range.recurrence.monthly.day_of_month #=> Integer
     #   resp.items[0].status #=> String
     #   resp.items[0].created_at #=> Time
     #   resp.items[0].updated_at #=> Time
@@ -3310,6 +3432,11 @@ module Aws::DevOpsAgent
     #             token_value: "MCPServerBearerTokenConfigTokenValueString", # required
     #             authorization_header: "MCPServerBearerTokenConfigAuthorizationHeaderString",
     #           },
+    #           custom_headers: {
+    #             headers: { # required
+    #               "CustomHeaderName" => "CustomHeaderValue",
+    #             },
+    #           },
     #           authorization_discovery: {
     #             return_to_endpoint: "MCPServerAuthorizationDiscoveryConfigReturnToEndpointString", # required
     #           },
@@ -3358,6 +3485,11 @@ module Aws::DevOpsAgent
     #             token_name: "MCPServerBearerTokenConfigTokenNameString", # required
     #             token_value: "MCPServerBearerTokenConfigTokenValueString", # required
     #             authorization_header: "MCPServerBearerTokenConfigAuthorizationHeaderString",
+    #           },
+    #           custom_headers: {
+    #             headers: { # required
+    #               "CustomHeaderName" => "CustomHeaderValue",
+    #             },
     #           },
     #           authorization_discovery: {
     #             return_to_endpoint: "MCPServerAuthorizationDiscoveryConfigReturnToEndpointString", # required
@@ -3416,6 +3548,11 @@ module Aws::DevOpsAgent
     #             token_name: "MCPServerBearerTokenConfigTokenNameString", # required
     #             token_value: "MCPServerBearerTokenConfigTokenValueString", # required
     #             authorization_header: "MCPServerBearerTokenConfigAuthorizationHeaderString",
+    #           },
+    #           custom_headers: {
+    #             headers: { # required
+    #               "CustomHeaderName" => "CustomHeaderValue",
+    #             },
     #           },
     #           authorization_discovery: {
     #             return_to_endpoint: "MCPServerAuthorizationDiscoveryConfigReturnToEndpointString", # required
@@ -3497,7 +3634,7 @@ module Aws::DevOpsAgent
     #     private_connection_name: "PrivateConnectionName",
     #     target_url_private_connection_name: "PrivateConnectionName",
     #     exchange_url_private_connection_name: "PrivateConnectionName",
-    #     name: "ServiceName",
+    #     name: "ServiceNameInput",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -4199,6 +4336,7 @@ module Aws::DevOpsAgent
     #         owner_type: "organization", # required, accepts organization, user
     #         instance_identifier: "String",
     #         runtime_role_arn: "RoleArn",
+    #         release_management_association_id: "AssociationId",
     #       },
     #       slack: {
     #         workspace_id: "SlackConfigurationWorkspaceIdString", # required
@@ -4252,6 +4390,7 @@ module Aws::DevOpsAgent
     #         project_path: "String", # required
     #         instance_identifier: "String",
     #         runtime_role_arn: "RoleArn",
+    #         release_management_association_id: "AssociationId",
     #       },
     #       mcpserversplunk: {
     #       },
@@ -4292,6 +4431,29 @@ module Aws::DevOpsAgent
     #       remoteagent: {
     #       },
     #       remoteagentsigv4: {
+    #       },
+    #       msteams: {
+    #         team_id: "Guid", # required
+    #         team_name: "String", # required
+    #         transmission_target: { # required
+    #           ops_oncall_target: {
+    #             channel_name: "String", # required
+    #             channel_id: "MSTeamsChannelId", # required
+    #           },
+    #           ops_sre_target: {
+    #             channel_name: "String", # required
+    #             channel_id: "MSTeamsChannelId", # required
+    #           },
+    #         },
+    #       },
+    #       release_management: {
+    #         name: "DisplayName", # required
+    #         network_access: { # required
+    #           private_access: {
+    #             private_connection_name: "PrivateConnectionName", # required
+    #             runtime_role_arn: "RoleArn", # required
+    #           },
+    #         },
     #       },
     #     },
     #     capabilities: {
@@ -4334,6 +4496,7 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.github.owner_type #=> String, one of "organization", "user"
     #   resp.association.configuration.github.instance_identifier #=> String
     #   resp.association.configuration.github.runtime_role_arn #=> String
+    #   resp.association.configuration.github.release_management_association_id #=> String
     #   resp.association.configuration.slack.workspace_id #=> String
     #   resp.association.configuration.slack.workspace_name #=> String
     #   resp.association.configuration.slack.transmission_target.ops_oncall_target.channel_name #=> String
@@ -4362,6 +4525,7 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.gitlab.project_path #=> String
     #   resp.association.configuration.gitlab.instance_identifier #=> String
     #   resp.association.configuration.gitlab.runtime_role_arn #=> String
+    #   resp.association.configuration.gitlab.release_management_association_id #=> String
     #   resp.association.configuration.azure.subscription_id #=> String
     #   resp.association.configuration.azuredevops.organization_name #=> String
     #   resp.association.configuration.azuredevops.project_id #=> String
@@ -4381,6 +4545,15 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.mcpserversigv4.tool_details #=> Array
     #   resp.association.configuration.mcpserversigv4.tool_details[0].name #=> String
     #   resp.association.configuration.mcpserversigv4.tool_details[0].tool_classification #=> String, one of "READ_ONLY", "MUTATIVE", "DESTRUCTIVE"
+    #   resp.association.configuration.msteams.team_id #=> String
+    #   resp.association.configuration.msteams.team_name #=> String
+    #   resp.association.configuration.msteams.transmission_target.ops_oncall_target.channel_name #=> String
+    #   resp.association.configuration.msteams.transmission_target.ops_oncall_target.channel_id #=> String
+    #   resp.association.configuration.msteams.transmission_target.ops_sre_target.channel_name #=> String
+    #   resp.association.configuration.msteams.transmission_target.ops_sre_target.channel_id #=> String
+    #   resp.association.configuration.release_management.name #=> String
+    #   resp.association.configuration.release_management.network_access.private_access.private_connection_name #=> String
+    #   resp.association.configuration.release_management.network_access.private_access.runtime_role_arn #=> String
     #   resp.association.capabilities #=> Hash
     #   resp.association.capabilities["CapabilityType"].enabled #=> Boolean
     #   resp.association.capabilities["CapabilityType"].trigger_filter_groups #=> Array
@@ -4713,6 +4886,11 @@ module Aws::DevOpsAgent
     #   resp.trigger.agent_space_id #=> String
     #   resp.trigger.type #=> String
     #   resp.trigger.condition.schedule.expression #=> String
+    #   resp.trigger.condition.schedule.spec.cron.expression #=> String
+    #   resp.trigger.condition.schedule.spec.time_range.start_after #=> String
+    #   resp.trigger.condition.schedule.spec.time_range.start_before #=> String
+    #   resp.trigger.condition.schedule.spec.time_range.recurrence.weekly.day_of_week #=> String, one of "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"
+    #   resp.trigger.condition.schedule.spec.time_range.recurrence.monthly.day_of_month #=> Integer
     #   resp.trigger.status #=> String
     #   resp.trigger.created_at #=> Time
     #   resp.trigger.updated_at #=> Time
@@ -4767,7 +4945,7 @@ module Aws::DevOpsAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-devopsagent'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

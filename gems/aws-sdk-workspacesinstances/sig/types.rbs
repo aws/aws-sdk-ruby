@@ -372,6 +372,25 @@ module Aws::WorkspacesInstances
       SENSITIVE: [:private_ip_address, :user_data]
     end
 
+    class ModifyVolumeRequest
+      attr_accessor volume_id: ::String
+      attr_accessor size_in_gb: ::Integer
+      attr_accessor volume_type: ("standard" | "io1" | "io2" | "gp2" | "sc1" | "st1" | "gp3")
+      attr_accessor iops: ::Integer
+      attr_accessor throughput: ::Integer
+      attr_accessor client_token: ::String
+      SENSITIVE: [:client_token]
+    end
+
+    class ModifyVolumeResponse
+      attr_accessor volume_id: ::String
+      attr_accessor target_size: ::Integer
+      attr_accessor target_volume_type: ("standard" | "io1" | "io2" | "gp2" | "sc1" | "st1" | "gp3")
+      attr_accessor target_iops: ::Integer
+      attr_accessor target_throughput: ::Integer
+      SENSITIVE: []
+    end
+
     class Placement
       attr_accessor affinity: ::String
       attr_accessor availability_zone: ::String
@@ -488,6 +507,13 @@ module Aws::WorkspacesInstances
       attr_accessor name: ::String
       attr_accessor reason: ::String
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VolumeModificationRateExceededException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
       SENSITIVE: []
     end
 

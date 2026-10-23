@@ -214,10 +214,20 @@ module Aws::PinpointSMSVoiceV2
     #   format for processing.
     #   @return [String]
     #
+    # @!attribute [rw] enable_cleansing
+    #   Specifies whether the service cleanses the phone number that you
+    #   provide. When set to `true`, the service normalizes the phone number
+    #   according to the destination country's national numbering plan and
+    #   dialing rules. The service returns the cleansed number in E.164
+    #   format in the `E164PhoneNumber` field and returns the number that
+    #   you provided in the `OriginalPhoneNumber` field.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/CarrierLookupRequest AWS API Documentation
     #
     class CarrierLookupRequest < Struct.new(
-      :phone_number)
+      :phone_number,
+      :enable_cleansing)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -259,9 +269,16 @@ module Aws::PinpointSMSVoiceV2
     #
     # @!attribute [rw] phone_number_type
     #   Describes the type of phone number. Valid values are: MOBILE,
-    #   LANDLINE, OTHER, and INVALID. Avoid sending SMS or voice messages to
-    #   INVALID phone numbers, as these numbers are unlikely to belong to
-    #   actual recipients.
+    #   LANDLINE, VOIP, PREPAID, OTHER, and INVALID. Avoid sending SMS or
+    #   voice messages to INVALID phone numbers, as these numbers are
+    #   unlikely to belong to actual recipients.
+    #   @return [String]
+    #
+    # @!attribute [rw] original_phone_number
+    #   The phone number exactly as you supplied it in the request. This
+    #   field is returned only when you set `EnableCleansing` to `true`, the
+    #   phone number was cleansed, and a normalized E.164 phone number was
+    #   returned in the `E164PhoneNumber` field.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/CarrierLookupResult AWS API Documentation
@@ -274,7 +291,8 @@ module Aws::PinpointSMSVoiceV2
       :mcc,
       :mnc,
       :carrier,
-      :phone_number_type)
+      :phone_number_type,
+      :original_phone_number)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4618,8 +4636,11 @@ module Aws::PinpointSMSVoiceV2
     #   @return [String]
     #
     # @!attribute [rw] number_preference
-    #   Optional. If omitted, returns unfiltered available numbers. Max 1
-    #   element for List API.
+    #   An optional selection preference used to return only phone numbers
+    #   that match a specific digit pattern, such as numbers that start
+    #   with, end with, or contain a particular sequence. You can specify at
+    #   most one preference. Number preferences apply only to `TEN_DLC`
+    #   numbers in the `US`.
     #   @return [Array<Types::NumberPreferenceItem>]
     #
     # @!attribute [rw] next_token
@@ -5200,8 +5221,9 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # A single number preference — specifies a pattern type and filter
-    # value.
+    # A single number preference that specifies how to match available phone
+    # numbers. Each preference pairs a match type with one or more filter
+    # values.
     #
     # @!attribute [rw] preference_type
     #   The type of match to apply to the filter values.
@@ -5464,6 +5486,10 @@ module Aws::PinpointSMSVoiceV2
     #   message caps.
     #   @return [Types::MessagingLimits]
     #
+    # @!attribute [rw] pricing_tier
+    #   The pricing model.
+    #   @return [String]
+    #
     # @!attribute [rw] created_timestamp
     #   The time when the phone number was created, in [UNIX epoch time][1]
     #   format.
@@ -5495,6 +5521,7 @@ module Aws::PinpointSMSVoiceV2
       :pool_id,
       :registration_id,
       :messaging_limits,
+      :pricing_tier,
       :created_timestamp)
       SENSITIVE = []
       include Aws::Structure
@@ -8907,6 +8934,10 @@ module Aws::PinpointSMSVoiceV2
     #   per-capability send rates.
     #   @return [Types::MessagingLimits]
     #
+    # @!attribute [rw] pricing_tier
+    #   The pricing model.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SenderIdInformation AWS API Documentation
     #
     class SenderIdInformation < Struct.new(
@@ -8918,7 +8949,8 @@ module Aws::PinpointSMSVoiceV2
       :deletion_protection_enabled,
       :registered,
       :registration_id,
-      :messaging_limits)
+      :messaging_limits,
+      :pricing_tier)
       SENSITIVE = []
       include Aws::Structure
     end

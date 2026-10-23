@@ -673,6 +673,7 @@
         "INTERSTITIAL_VOD_FAILURE",
         "PRE_ADS_REQUEST_HOOK_ERROR",
         "PRE_ADS_REQUEST_FUNCTION_ERROR",
+        "BEACON_RECEIVED",
         "POST_ADS_RESPONSE_HOOK_ERROR",
         "POST_ADS_RESPONSE_FUNCTION_ERROR",
         "PRE_MANIFEST_INSERTION_HOOK_ERROR",
@@ -818,6 +819,7 @@
         "Url":{"shape":"__string"},
         "Body":{"shape":"__string"},
         "Headers":{"shape":"__mapOf__string"},
+        "Cache":{"shape":"HttpRequestCacheConfiguration"},
         "TargetService":{"shape":"AwsTargetService"},
         "TargetRegion":{"shape":"AwsServiceRequestConfigurationTargetRegionString"}
       }
@@ -843,6 +845,25 @@
         "senderFault":true
       },
       "exception":true
+    },
+    "BeaconEventType":{
+      "type":"string",
+      "enum":[
+        "MUTE",
+        "UNMUTE",
+        "PAUSE",
+        "SKIP"
+      ]
+    },
+    "BeaconEventTypeList":{
+      "type":"list",
+      "member":{"shape":"BeaconEventType"}
+    },
+    "BeaconingConfiguration":{
+      "type":"structure",
+      "members":{
+        "ClientSide":{"shape":"ClientSideBeaconingConfiguration"}
+      }
     },
     "Bumper":{
       "type":"structure",
@@ -892,6 +913,21 @@
       "enum":[
         "RUNNING",
         "STOPPED"
+      ]
+    },
+    "ClientSideBeaconingConfiguration":{
+      "type":"structure",
+      "required":["ReportingMode"],
+      "members":{
+        "ReportingMode":{"shape":"ClientSideBeaconingMode"},
+        "AdditionalEventTypes":{"shape":"BeaconEventTypeList"}
+      }
+    },
+    "ClientSideBeaconingMode":{
+      "type":"string",
+      "enum":[
+        "DISABLED",
+        "INSIGHTS"
       ]
     },
     "ClipRange":{
@@ -1814,7 +1850,8 @@
         "YieldOptimizationConfiguration":{"shape":"YieldOptimizationConfiguration"},
         "FunctionMapping":{"shape":"FunctionMapping"},
         "AdsPersonalizationTimeouts":{"shape":"AdsPersonalizationTimeouts"},
-        "AdsPersonalizationConcurrency":{"shape":"AdsPersonalizationConcurrency"}
+        "AdsPersonalizationConcurrency":{"shape":"AdsPersonalizationConcurrency"},
+        "BeaconingConfiguration":{"shape":"BeaconingConfiguration"}
       }
     },
     "GetPrefetchScheduleRequest":{
@@ -1900,6 +1937,18 @@
         "CompressRequest":{"shape":"CompressionMethod"}
       }
     },
+    "HttpRequestCacheConfiguration":{
+      "type":"structure",
+      "required":[
+        "TtlMinimumSeconds",
+        "TtlMaximumSeconds"
+      ],
+      "members":{
+        "TtlMinimumSeconds":{"shape":"__integerMin1"},
+        "TtlMaximumSeconds":{"shape":"__integerMin1"},
+        "Key":{"shape":"__string"}
+      }
+    },
     "HttpRequestConfiguration":{
       "type":"structure",
       "required":[
@@ -1915,7 +1964,8 @@
         "RequestTimeoutMilliseconds":{"shape":"__integer"},
         "Url":{"shape":"__string"},
         "Body":{"shape":"__string"},
-        "Headers":{"shape":"__mapOf__string"}
+        "Headers":{"shape":"__mapOf__string"},
+        "Cache":{"shape":"HttpRequestCacheConfiguration"}
       }
     },
     "InsertionMode":{
@@ -2378,7 +2428,8 @@
         "YieldOptimizationConfiguration":{"shape":"YieldOptimizationConfiguration"},
         "FunctionMapping":{"shape":"FunctionMapping"},
         "AdsPersonalizationTimeouts":{"shape":"AdsPersonalizationTimeouts"},
-        "AdsPersonalizationConcurrency":{"shape":"AdsPersonalizationConcurrency"}
+        "AdsPersonalizationConcurrency":{"shape":"AdsPersonalizationConcurrency"},
+        "BeaconingConfiguration":{"shape":"BeaconingConfiguration"}
       }
     },
     "PlaybackMode":{
@@ -2552,7 +2603,8 @@
         "YieldOptimizationConfiguration":{"shape":"YieldOptimizationConfiguration"},
         "FunctionMapping":{"shape":"FunctionMapping"},
         "AdsPersonalizationTimeouts":{"shape":"AdsPersonalizationTimeouts"},
-        "AdsPersonalizationConcurrency":{"shape":"AdsPersonalizationConcurrency"}
+        "AdsPersonalizationConcurrency":{"shape":"AdsPersonalizationConcurrency"},
+        "BeaconingConfiguration":{"shape":"BeaconingConfiguration"}
       }
     },
     "PutPlaybackConfigurationResponse":{
@@ -2588,7 +2640,8 @@
         "YieldOptimizationConfiguration":{"shape":"YieldOptimizationConfiguration"},
         "FunctionMapping":{"shape":"FunctionMapping"},
         "AdsPersonalizationTimeouts":{"shape":"AdsPersonalizationTimeouts"},
-        "AdsPersonalizationConcurrency":{"shape":"AdsPersonalizationConcurrency"}
+        "AdsPersonalizationConcurrency":{"shape":"AdsPersonalizationConcurrency"},
+        "BeaconingConfiguration":{"shape":"BeaconingConfiguration"}
       }
     },
     "RecurringConsumption":{
@@ -3160,7 +3213,8 @@
         "RequestTimeoutMilliseconds":{"shape":"__integer"},
         "Url":{"shape":"__string"},
         "Body":{"shape":"__string"},
-        "Headers":{"shape":"__mapOf__string"}
+        "Headers":{"shape":"__mapOf__string"},
+        "Cache":{"shape":"HttpRequestCacheConfiguration"}
       }
     },
     "VastResponse":{

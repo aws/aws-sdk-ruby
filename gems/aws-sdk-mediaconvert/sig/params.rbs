@@ -49,6 +49,7 @@ module Aws
       program_selection: ::Integer?,
       remix_settings: Params::remix_settings?,
       selector_type: ("PID" | "TRACK" | "LANGUAGE_CODE" | "HLS_RENDITION_GROUP" | "ALL_PCM" | "STREAM")?,
+      smpte_337_passthrough: ("ENABLED" | "DISABLED")?,
       streams: Array[::Integer]?,
       tracks: Array[::Integer]?
     }
@@ -323,6 +324,7 @@ module Aws
       base_url: ::String?,
       client_cache: ("DISABLED" | "ENABLED")?,
       codec_specification: ("RFC_6381" | "RFC_4281")?,
+      dash_adaptation_set_grouping: Array[("CODEC")]?,
       dash_i_frame_trick_play_name_modifier: ::String?,
       dash_manifest_style: ("BASIC" | "COMPACT" | "DISTINCT" | "FULL")?,
       destination: ::String?,
@@ -386,6 +388,7 @@ module Aws
       ]?,
       audio_channel_config_scheme_id_uri: ("MPEG_CHANNEL_CONFIGURATION" | "DOLBY_CHANNEL_CONFIGURATION")?,
       base_url: ::String?,
+      dash_adaptation_set_grouping: Array[("CODEC")]?,
       dash_i_frame_trick_play_name_modifier: ::String?,
       dash_manifest_style: ("BASIC" | "COMPACT" | "DISTINCT" | "FULL")?,
       destination: ::String?,
@@ -764,6 +767,7 @@ module Aws
       type av_1_settings = {
       adaptive_quantization: ("OFF" | "LOW" | "MEDIUM" | "HIGH" | "HIGHER" | "MAX")?,
       bit_depth: ("BIT_8" | "BIT_10")?,
+      bitrate: ::Integer?,
       film_grain_synthesis: ("DISABLED" | "ENABLED")?,
       framerate_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
       framerate_conversion_algorithm: ("DUPLICATE_DROP" | "INTERPOLATE" | "FRAMEFORMER" | "MAINTAIN_FRAME_COUNT")?,
@@ -777,8 +781,11 @@ module Aws
         qvbr_quality_level: ::Integer?,
         qvbr_quality_level_fine_tune: ::Float?
       }?,
-      rate_control_mode: ("QVBR")?,
+      rate_control_mode: ("CBR" | "QVBR")?,
+      scene_change_detect: ("DISABLED" | "ENABLED" | "TRANSITION_DETECTION")?,
       slices: ::Integer?,
+      sliding_window_ms: ::Integer?,
+      sliding_window_peak_bitrate: ::Integer?,
       spatial_adaptive_quantization: ("DISABLED" | "ENABLED")?
     }
 
@@ -845,6 +852,8 @@ module Aws
       scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")?,
       scene_change_detect: ("DISABLED" | "ENABLED" | "TRANSITION_DETECTION")?,
       slices: ::Integer?,
+      sliding_window_ms: ::Integer?,
+      sliding_window_peak_bitrate: ::Integer?,
       slow_pal: ("DISABLED" | "ENABLED")?,
       softness: ::Integer?,
       spatial_adaptive_quantization: ("DISABLED" | "ENABLED")?,
@@ -902,6 +911,8 @@ module Aws
       scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")?,
       scene_change_detect: ("DISABLED" | "ENABLED" | "TRANSITION_DETECTION")?,
       slices: ::Integer?,
+      sliding_window_ms: ::Integer?,
+      sliding_window_peak_bitrate: ::Integer?,
       slow_pal: ("DISABLED" | "ENABLED")?,
       spatial_adaptive_quantization: ("DISABLED" | "ENABLED")?,
       telecine: ("NONE" | "SOFT" | "HARD")?,
@@ -945,6 +956,8 @@ module Aws
       rate_control_mode: ("VBR" | "CBR")?,
       scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")?,
       scene_change_detect: ("DISABLED" | "ENABLED")?,
+      sliding_window_ms: ::Integer?,
+      sliding_window_peak_bitrate: ::Integer?,
       slow_pal: ("DISABLED" | "ENABLED")?,
       softness: ::Integer?,
       spatial_adaptive_quantization: ("DISABLED" | "ENABLED")?,
@@ -1097,6 +1110,8 @@ module Aws
       mpeg_2_settings: Params::mpeg_2_settings?,
       passthrough_settings: {
         frame_control: ("NEAREST_IDRFRAME" | "NEAREST_IFRAME")?,
+        gops_per_segment: ::Integer?,
+        segmentation_mode: ("AUTO" | "DURATION_BASED" | "GOP_COUNT")?,
         video_selector_mode: ("AUTO" | "REMUX_ALL")?
       }?,
       prores_settings: Params::prores_settings?,
@@ -1138,7 +1153,7 @@ module Aws
     }
 
       type noise_reducer = {
-      filter: ("BILATERAL" | "MEAN" | "GAUSSIAN" | "LANCZOS" | "SHARPEN" | "CONSERVE" | "SPATIAL" | "TEMPORAL")?,
+      filter: ("BILATERAL" | "MEAN" | "GAUSSIAN" | "LANCZOS" | "SHARPEN" | "CONSERVE" | "SPATIAL" | "TEMPORAL" | "PERCEPTUAL" | "NONE")?,
       filter_settings: {
         strength: ::Integer?
       }?,
@@ -1541,6 +1556,9 @@ module Aws
       ]?,
       kantar_watermark: Params::kantar_watermark_settings?,
       motion_image_inserter: Params::motion_image_inserter?,
+      motion_image_inserters: Array[
+        Params::motion_image_inserter
+      ]?,
       nielsen_configuration: {
         breakout_code: ::Integer?,
         distributor_id: ::String?

@@ -28,6 +28,7 @@ module Aws::Imagebuilder
     Arn = Shapes::StringShape.new(name: 'Arn')
     AutoDisableFailureCount = Shapes::IntegerShape.new(name: 'AutoDisableFailureCount')
     AutoDisablePolicy = Shapes::StructureShape.new(name: 'AutoDisablePolicy')
+    AutoScalingGroupConfiguration = Shapes::StructureShape.new(name: 'AutoScalingGroupConfiguration')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BuildType = Shapes::StringShape.new(name: 'BuildType')
     CallRateLimitExceededException = Shapes::StructureShape.new(name: 'CallRateLimitExceededException')
@@ -35,6 +36,7 @@ module Aws::Imagebuilder
     CancelImageCreationResponse = Shapes::StructureShape.new(name: 'CancelImageCreationResponse')
     CancelLifecycleExecutionRequest = Shapes::StructureShape.new(name: 'CancelLifecycleExecutionRequest')
     CancelLifecycleExecutionResponse = Shapes::StructureShape.new(name: 'CancelLifecycleExecutionResponse')
+    CapacityWaitTimeoutSeconds = Shapes::IntegerShape.new(name: 'CapacityWaitTimeoutSeconds')
     ClientException = Shapes::StructureShape.new(name: 'ClientException')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     Component = Shapes::StructureShape.new(name: 'Component')
@@ -362,6 +364,7 @@ module Aws::Imagebuilder
     PackageVulnerabilityDetails = Shapes::StructureShape.new(name: 'PackageVulnerabilityDetails')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     ParallelGroup = Shapes::StringShape.new(name: 'ParallelGroup')
+    ParentInstanceConfiguration = Shapes::StructureShape.new(name: 'ParentInstanceConfiguration')
     PipelineExecutionStartCondition = Shapes::StringShape.new(name: 'PipelineExecutionStartCondition')
     PipelineLoggingConfiguration = Shapes::StructureShape.new(name: 'PipelineLoggingConfiguration')
     PipelineStatus = Shapes::StringShape.new(name: 'PipelineStatus')
@@ -449,6 +452,7 @@ module Aws::Imagebuilder
     Uri = Shapes::StringShape.new(name: 'Uri')
     UserDataOverride = Shapes::StringShape.new(name: 'UserDataOverride')
     VersionNumber = Shapes::StringShape.new(name: 'VersionNumber')
+    VersionNumberWithBuild = Shapes::StringShape.new(name: 'VersionNumberWithBuild')
     VulnerabilityId = Shapes::StringShape.new(name: 'VulnerabilityId')
     VulnerabilityIdAggregation = Shapes::StructureShape.new(name: 'VulnerabilityIdAggregation')
     VulnerabilityIdList = Shapes::ListShape.new(name: 'VulnerabilityIdList')
@@ -467,7 +471,6 @@ module Aws::Imagebuilder
     WorkflowExecutionMetadata = Shapes::StructureShape.new(name: 'WorkflowExecutionMetadata')
     WorkflowExecutionStatus = Shapes::StringShape.new(name: 'WorkflowExecutionStatus')
     WorkflowExecutionsList = Shapes::ListShape.new(name: 'WorkflowExecutionsList')
-    WorkflowNameArn = Shapes::StringShape.new(name: 'WorkflowNameArn')
     WorkflowParameter = Shapes::StructureShape.new(name: 'WorkflowParameter')
     WorkflowParameterDescription = Shapes::StringShape.new(name: 'WorkflowParameterDescription')
     WorkflowParameterDetail = Shapes::StructureShape.new(name: 'WorkflowParameterDetail')
@@ -500,7 +503,6 @@ module Aws::Imagebuilder
     WorkflowSummaryList = Shapes::ListShape.new(name: 'WorkflowSummaryList')
     WorkflowType = Shapes::StringShape.new(name: 'WorkflowType')
     WorkflowVersion = Shapes::StructureShape.new(name: 'WorkflowVersion')
-    WorkflowVersionArn = Shapes::StringShape.new(name: 'WorkflowVersionArn')
     WorkflowVersionArnOrBuildVersionArn = Shapes::StringShape.new(name: 'WorkflowVersionArnOrBuildVersionArn')
     WorkflowVersionList = Shapes::ListShape.new(name: 'WorkflowVersionList')
     WorkflowWildcardVersionArn = Shapes::StringShape.new(name: 'WorkflowWildcardVersionArn')
@@ -540,6 +542,10 @@ module Aws::Imagebuilder
 
     AutoDisablePolicy.add_member(:failure_count, Shapes::ShapeRef.new(shape: AutoDisableFailureCount, required: true, location_name: "failureCount"))
     AutoDisablePolicy.struct_class = Types::AutoDisablePolicy
+
+    AutoScalingGroupConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "name"))
+    AutoScalingGroupConfiguration.add_member(:capacity_wait_timeout_seconds, Shapes::ShapeRef.new(shape: CapacityWaitTimeoutSeconds, location_name: "capacityWaitTimeoutSeconds"))
+    AutoScalingGroupConfiguration.struct_class = Types::AutoScalingGroupConfiguration
 
     CallRateLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     CallRateLimitExceededException.struct_class = Types::CallRateLimitExceededException
@@ -826,11 +832,13 @@ module Aws::Imagebuilder
     CreateInfrastructureConfigurationRequest.add_member(:logging, Shapes::ShapeRef.new(shape: Logging, location_name: "logging"))
     CreateInfrastructureConfigurationRequest.add_member(:key_pair, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "keyPair"))
     CreateInfrastructureConfigurationRequest.add_member(:terminate_instance_on_failure, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "terminateInstanceOnFailure"))
+    CreateInfrastructureConfigurationRequest.add_member(:terminate_instance_on_completion, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "terminateInstanceOnCompletion"))
     CreateInfrastructureConfigurationRequest.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: SnsTopicArn, location_name: "snsTopicArn"))
     CreateInfrastructureConfigurationRequest.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagMap, location_name: "resourceTags"))
     CreateInfrastructureConfigurationRequest.add_member(:instance_metadata_options, Shapes::ShapeRef.new(shape: InstanceMetadataOptions, location_name: "instanceMetadataOptions"))
     CreateInfrastructureConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateInfrastructureConfigurationRequest.add_member(:placement, Shapes::ShapeRef.new(shape: Placement, location_name: "placement"))
+    CreateInfrastructureConfigurationRequest.add_member(:parent_instance, Shapes::ShapeRef.new(shape: ParentInstanceConfiguration, location_name: "parentInstance"))
     CreateInfrastructureConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateInfrastructureConfigurationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     CreateInfrastructureConfigurationRequest.struct_class = Types::CreateInfrastructureConfigurationRequest
@@ -1210,7 +1218,7 @@ module Aws::Imagebuilder
     Image.add_member(:arn, Shapes::ShapeRef.new(shape: ImageBuilderArn, location_name: "arn"))
     Image.add_member(:type, Shapes::ShapeRef.new(shape: ImageType, location_name: "type"))
     Image.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
-    Image.add_member(:version, Shapes::ShapeRef.new(shape: VersionNumber, location_name: "version"))
+    Image.add_member(:version, Shapes::ShapeRef.new(shape: VersionNumberWithBuild, location_name: "version"))
     Image.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, location_name: "platform"))
     Image.add_member(:enhanced_image_metadata_enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "enhancedImageMetadataEnabled"))
     Image.add_member(:os_version, Shapes::ShapeRef.new(shape: OsVersion, location_name: "osVersion"))
@@ -1369,7 +1377,7 @@ module Aws::Imagebuilder
     ImageSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ImageBuilderArn, location_name: "arn"))
     ImageSummary.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     ImageSummary.add_member(:type, Shapes::ShapeRef.new(shape: ImageType, location_name: "type"))
-    ImageSummary.add_member(:version, Shapes::ShapeRef.new(shape: VersionNumber, location_name: "version"))
+    ImageSummary.add_member(:version, Shapes::ShapeRef.new(shape: VersionNumberWithBuild, location_name: "version"))
     ImageSummary.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, location_name: "platform"))
     ImageSummary.add_member(:os_version, Shapes::ShapeRef.new(shape: OsVersion, location_name: "osVersion"))
     ImageSummary.add_member(:state, Shapes::ShapeRef.new(shape: ImageState, location_name: "state"))
@@ -1475,6 +1483,8 @@ module Aws::Imagebuilder
     InfrastructureConfiguration.add_member(:instance_metadata_options, Shapes::ShapeRef.new(shape: InstanceMetadataOptions, location_name: "instanceMetadataOptions"))
     InfrastructureConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     InfrastructureConfiguration.add_member(:placement, Shapes::ShapeRef.new(shape: Placement, location_name: "placement"))
+    InfrastructureConfiguration.add_member(:terminate_instance_on_completion, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "terminateInstanceOnCompletion"))
+    InfrastructureConfiguration.add_member(:parent_instance, Shapes::ShapeRef.new(shape: ParentInstanceConfiguration, location_name: "parentInstance"))
     InfrastructureConfiguration.struct_class = Types::InfrastructureConfiguration
 
     InfrastructureConfigurationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ImageBuilderArn, location_name: "arn"))
@@ -1926,6 +1936,9 @@ module Aws::Imagebuilder
     PackageVulnerabilityDetails.add_member(:reference_urls, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "referenceUrls"))
     PackageVulnerabilityDetails.struct_class = Types::PackageVulnerabilityDetails
 
+    ParentInstanceConfiguration.add_member(:auto_scaling_group, Shapes::ShapeRef.new(shape: AutoScalingGroupConfiguration, required: true, location_name: "autoScalingGroup"))
+    ParentInstanceConfiguration.struct_class = Types::ParentInstanceConfiguration
+
     PipelineLoggingConfiguration.add_member(:image_log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, location_name: "imageLogGroupName"))
     PipelineLoggingConfiguration.add_member(:pipeline_log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, location_name: "pipelineLogGroupName"))
     PipelineLoggingConfiguration.struct_class = Types::PipelineLoggingConfiguration
@@ -2177,10 +2190,12 @@ module Aws::Imagebuilder
     UpdateInfrastructureConfigurationRequest.add_member(:logging, Shapes::ShapeRef.new(shape: Logging, location_name: "logging"))
     UpdateInfrastructureConfigurationRequest.add_member(:key_pair, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "keyPair"))
     UpdateInfrastructureConfigurationRequest.add_member(:terminate_instance_on_failure, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "terminateInstanceOnFailure"))
+    UpdateInfrastructureConfigurationRequest.add_member(:terminate_instance_on_completion, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "terminateInstanceOnCompletion"))
     UpdateInfrastructureConfigurationRequest.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: SnsTopicArn, location_name: "snsTopicArn"))
     UpdateInfrastructureConfigurationRequest.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagMap, location_name: "resourceTags"))
     UpdateInfrastructureConfigurationRequest.add_member(:instance_metadata_options, Shapes::ShapeRef.new(shape: InstanceMetadataOptions, location_name: "instanceMetadataOptions"))
     UpdateInfrastructureConfigurationRequest.add_member(:placement, Shapes::ShapeRef.new(shape: Placement, location_name: "placement"))
+    UpdateInfrastructureConfigurationRequest.add_member(:parent_instance, Shapes::ShapeRef.new(shape: ParentInstanceConfiguration, location_name: "parentInstance"))
     UpdateInfrastructureConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateInfrastructureConfigurationRequest.struct_class = Types::UpdateInfrastructureConfigurationRequest
 
@@ -2313,7 +2328,7 @@ module Aws::Imagebuilder
     WorkflowStepMetadata.add_member(:max_attempts, Shapes::ShapeRef.new(shape: WorkflowStepAttemptCount, location_name: "maxAttempts"))
     WorkflowStepMetadata.struct_class = Types::WorkflowStepMetadata
 
-    WorkflowSummary.add_member(:arn, Shapes::ShapeRef.new(shape: WorkflowNameArn, location_name: "arn"))
+    WorkflowSummary.add_member(:arn, Shapes::ShapeRef.new(shape: WorkflowBuildVersionArn, location_name: "arn"))
     WorkflowSummary.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     WorkflowSummary.add_member(:version, Shapes::ShapeRef.new(shape: VersionNumber, location_name: "version"))
     WorkflowSummary.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
@@ -2327,7 +2342,7 @@ module Aws::Imagebuilder
 
     WorkflowSummaryList.member = Shapes::ShapeRef.new(shape: WorkflowSummary)
 
-    WorkflowVersion.add_member(:arn, Shapes::ShapeRef.new(shape: WorkflowVersionArn, location_name: "arn"))
+    WorkflowVersion.add_member(:arn, Shapes::ShapeRef.new(shape: WorkflowWildcardVersionArn, location_name: "arn"))
     WorkflowVersion.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     WorkflowVersion.add_member(:version, Shapes::ShapeRef.new(shape: VersionNumber, location_name: "version"))
     WorkflowVersion.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))

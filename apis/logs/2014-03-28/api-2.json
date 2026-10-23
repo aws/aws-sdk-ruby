@@ -2591,6 +2591,7 @@
         "deliveryDestinationType":{"shape":"DeliveryDestinationType"},
         "outputFormat":{"shape":"OutputFormat"},
         "deliveryDestinationConfiguration":{"shape":"DeliveryDestinationConfiguration"},
+        "roleArn":{"shape":"Arn"},
         "tags":{"shape":"Tags"}
       }
     },
@@ -2606,6 +2607,12 @@
       "max":60,
       "min":1,
       "pattern":"[\\w-]*"
+    },
+    "DeliveryDestinationNames":{
+      "type":"list",
+      "member":{"shape":"DeliveryDestinationName"},
+      "max":20,
+      "min":1
     },
     "DeliveryDestinationPolicy":{
       "type":"string",
@@ -2715,6 +2722,12 @@
       "min":1,
       "pattern":"[\\w-]*"
     },
+    "DeliverySourceNames":{
+      "type":"list",
+      "member":{"shape":"DeliverySourceName"},
+      "max":20,
+      "min":1
+    },
     "DeliverySourceStatus":{
       "type":"string",
       "enum":[
@@ -2775,7 +2788,8 @@
       "type":"structure",
       "members":{
         "nextToken":{"shape":"NextToken"},
-        "limit":{"shape":"DescribeLimit"}
+        "limit":{"shape":"DescribeLimit"},
+        "deliverySourceNames":{"shape":"DeliverySourceNames"}
       }
     },
     "DescribeDeliveriesResponse":{
@@ -2789,7 +2803,8 @@
       "type":"structure",
       "members":{
         "nextToken":{"shape":"NextToken"},
-        "limit":{"shape":"DescribeLimit"}
+        "limit":{"shape":"DescribeLimit"},
+        "names":{"shape":"DeliveryDestinationNames"}
       }
     },
     "DescribeDeliveryDestinationsResponse":{
@@ -2803,7 +2818,8 @@
       "type":"structure",
       "members":{
         "nextToken":{"shape":"NextToken"},
-        "limit":{"shape":"DescribeLimit"}
+        "limit":{"shape":"DescribeLimit"},
+        "resourceArns":{"shape":"FilterResourceArns"}
       }
     },
     "DescribeDeliverySourcesResponse":{
@@ -3455,6 +3471,12 @@
       "type":"string",
       "max":1024,
       "min":0
+    },
+    "FilterResourceArns":{
+      "type":"list",
+      "member":{"shape":"Arn"},
+      "max":20,
+      "min":1
     },
     "FilteredLogEvent":{
       "type":"structure",
@@ -5169,6 +5191,7 @@
         "outputFormat":{"shape":"OutputFormat"},
         "deliveryDestinationConfiguration":{"shape":"DeliveryDestinationConfiguration"},
         "deliveryDestinationType":{"shape":"DeliveryDestinationType"},
+        "roleArn":{"shape":"Arn"},
         "tags":{"shape":"Tags"}
       }
     },

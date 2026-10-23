@@ -20,7 +20,7 @@ module Aws::Connect
     end
 
     class ActionSummary
-      attr_accessor action_type: ("CREATE_TASK" | "ASSIGN_CONTACT_CATEGORY" | "GENERATE_EVENTBRIDGE_EVENT" | "SEND_NOTIFICATION" | "CREATE_CASE" | "UPDATE_CASE" | "ASSIGN_SLA" | "END_ASSOCIATED_TASKS" | "SUBMIT_AUTO_EVALUATION" | "EXTRACT_INFORMATION")
+      attr_accessor action_type: ("CREATE_TASK" | "ASSIGN_CONTACT_CATEGORY" | "GENERATE_EVENTBRIDGE_EVENT" | "SEND_NOTIFICATION" | "CREATE_CASE" | "UPDATE_CASE" | "ASSIGN_SLA" | "END_ASSOCIATED_TASKS" | "SUBMIT_AUTO_EVALUATION" | "EXTRACT_INFORMATION" | "SEND_IN_APP_NOTIFICATION")
       SENSITIVE: []
     end
 
@@ -247,6 +247,13 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class ApproximateDriftedResourceCount
+      attr_accessor region: ::String
+      attr_accessor count: ::Integer
+      attr_accessor timestamp: ::Time
+      SENSITIVE: []
+    end
+
     class AssignContactCategoryActionDefinition < Aws::EmptyStructure
     end
 
@@ -461,7 +468,7 @@ module Aws::Connect
       attr_accessor file_id: ::String
       attr_accessor file_name: ::String
       attr_accessor file_size_in_bytes: ::Integer
-      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
       attr_accessor created_by: Types::CreatedByInfo
       attr_accessor file_use_case_type: ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT" | "VOICE_RECORDING")
       attr_accessor associated_resource_arn: ::String
@@ -508,7 +515,7 @@ module Aws::Connect
     end
 
     class Attribute
-      attr_accessor attribute_type: ("INBOUND_CALLS" | "OUTBOUND_CALLS" | "CONTACTFLOW_LOGS" | "CONTACT_LENS" | "AUTO_RESOLVE_BEST_VOICES" | "USE_CUSTOM_TTS_VOICES" | "EARLY_MEDIA" | "MULTI_PARTY_CONFERENCE" | "HIGH_VOLUME_OUTBOUND" | "ENHANCED_CONTACT_MONITORING" | "ENHANCED_CHAT_MONITORING" | "MULTI_PARTY_CHAT_CONFERENCE" | "MESSAGE_STREAMING")
+      attr_accessor attribute_type: ("INBOUND_CALLS" | "OUTBOUND_CALLS" | "CONTACTFLOW_LOGS" | "CONTACT_LENS" | "AUTO_RESOLVE_BEST_VOICES" | "USE_CUSTOM_TTS_VOICES" | "EARLY_MEDIA" | "MULTI_PARTY_CONFERENCE" | "AUTO_MUTE_AGENT_ON_HOLD" | "HIGH_VOLUME_OUTBOUND" | "ENHANCED_CONTACT_MONITORING" | "ENHANCED_CHAT_MONITORING" | "MULTI_PARTY_CHAT_CONFERENCE" | "MESSAGE_STREAMING")
       attr_accessor value: ::String
       SENSITIVE: []
     end
@@ -927,6 +934,12 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class ConnectionCredentials
+      attr_accessor connection_token: ::String
+      attr_accessor expiry: ::String
+      SENSITIVE: []
+    end
+
     class ConnectionData
       attr_accessor attendee: Types::Attendee
       attr_accessor meeting: Types::Meeting
@@ -1084,6 +1097,29 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class ContactFlowAliasInfo
+      attr_accessor contact_flow_id: ::String
+      attr_accessor contact_flow_arn: ::String
+      attr_accessor alias_id: ::String
+      attr_accessor version: ::Integer
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor last_modified_region: ::String
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ContactFlowAliasSummary
+      attr_accessor arn: ::String
+      attr_accessor alias_id: ::String
+      attr_accessor version: ::Integer
+      attr_accessor alias_name: ::String
+      attr_accessor alias_description: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
     class ContactFlowAttributeAndCondition
       attr_accessor tag_conditions: ::Array[Types::TagCondition]
       attr_accessor contact_flow_type_condition: Types::ContactFlowTypeCondition
@@ -1206,6 +1242,8 @@ module Aws::Connect
       attr_accessor arn: ::String
       attr_accessor version_description: ::String
       attr_accessor version: ::Integer
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
       SENSITIVE: []
     end
 
@@ -1344,7 +1382,7 @@ module Aws::Connect
       attr_accessor file_arn: ::String
       attr_accessor file_id: ::String
       attr_accessor creation_time: ::String
-      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
       SENSITIVE: []
     end
 
@@ -1367,6 +1405,21 @@ module Aws::Connect
     class CreateCaseActionDefinition
       attr_accessor fields: ::Array[Types::FieldValue]
       attr_accessor template_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateContactFlowAliasRequest
+      attr_accessor instance_id: ::String
+      attr_accessor description: ::String
+      attr_accessor contact_flow_id: ::String
+      attr_accessor contact_flow_version: ::Integer
+      attr_accessor alias_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateContactFlowAliasResponse
+      attr_accessor contact_flow_arn: ::String
+      attr_accessor id: ::String
       SENSITIVE: []
     end
 
@@ -2292,6 +2345,16 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class DeleteContactFlowAliasRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_flow_id: ::String
+      attr_accessor alias_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteContactFlowAliasResponse < Aws::EmptyStructure
+    end
+
     class DeleteContactFlowModuleAliasRequest
       attr_accessor instance_id: ::String
       attr_accessor contact_flow_module_id: ::String
@@ -2641,6 +2704,18 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class DescribeContactFlowAliasRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_flow_id: ::String
+      attr_accessor alias_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeContactFlowAliasResponse
+      attr_accessor contact_flow_alias: Types::ContactFlowAliasInfo
+      SENSITIVE: []
+    end
+
     class DescribeContactFlowModuleAliasRequest
       attr_accessor instance_id: ::String
       attr_accessor contact_flow_module_id: ::String
@@ -2776,7 +2851,7 @@ module Aws::Connect
 
     class DescribeInstanceAttributeRequest
       attr_accessor instance_id: ::String
-      attr_accessor attribute_type: ("INBOUND_CALLS" | "OUTBOUND_CALLS" | "CONTACTFLOW_LOGS" | "CONTACT_LENS" | "AUTO_RESOLVE_BEST_VOICES" | "USE_CUSTOM_TTS_VOICES" | "EARLY_MEDIA" | "MULTI_PARTY_CONFERENCE" | "HIGH_VOLUME_OUTBOUND" | "ENHANCED_CONTACT_MONITORING" | "ENHANCED_CHAT_MONITORING" | "MULTI_PARTY_CHAT_CONFERENCE" | "MESSAGE_STREAMING")
+      attr_accessor attribute_type: ("INBOUND_CALLS" | "OUTBOUND_CALLS" | "CONTACTFLOW_LOGS" | "CONTACT_LENS" | "AUTO_RESOLVE_BEST_VOICES" | "USE_CUSTOM_TTS_VOICES" | "EARLY_MEDIA" | "MULTI_PARTY_CONFERENCE" | "AUTO_MUTE_AGENT_ON_HOLD" | "HIGH_VOLUME_OUTBOUND" | "ENHANCED_CONTACT_MONITORING" | "ENHANCED_CHAT_MONITORING" | "MULTI_PARTY_CHAT_CONFERENCE" | "MESSAGE_STREAMING")
       SENSITIVE: []
     end
 
@@ -4169,6 +4244,7 @@ module Aws::Connect
       attr_accessor file_id: ::String
       attr_accessor url_expiry_in_seconds: ::Integer
       attr_accessor associated_resource_arn: ::String
+      attr_accessor url_content_disposition: ("INLINE" | "ATTACHMENT")
       SENSITIVE: []
     end
 
@@ -4176,7 +4252,7 @@ module Aws::Connect
       attr_accessor file_arn: ::String
       attr_accessor file_id: ::String
       attr_accessor creation_time: ::String
-      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
       attr_accessor file_name: ::String
       attr_accessor file_size_in_bytes: ::Integer
       attr_accessor associated_resource_arn: ::String
@@ -4416,6 +4492,7 @@ module Aws::Connect
       attr_accessor arn: ::String
       attr_accessor sign_in_config: Types::SignInConfig
       attr_accessor agent_config: Types::AgentConfig
+      attr_accessor last_failover_time: ::Time
       SENSITIVE: []
     end
 
@@ -4991,6 +5068,20 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class ListContactFlowAliasesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_flow_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListContactFlowAliasesResponse
+      attr_accessor contact_flow_alias_summary_list: ::Array[Types::ContactFlowAliasSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListContactFlowModuleAliasesRequest
       attr_accessor instance_id: ::String
       attr_accessor contact_flow_module_id: ::String
@@ -5514,6 +5605,22 @@ module Aws::Connect
       attr_accessor status: ("IN_PROGRESS" | "FAILED" | "COMPLETED")
       attr_accessor segments: ::Array[Types::RealtimeContactAnalysisSegment]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListReplicationFindingsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListReplicationFindingsResponse
+      attr_accessor replication_findings_list: ::Array[Types::ReplicationFinding]
+      attr_accessor approximate_drifted_resource_counts: ::Array[Types::ApproximateDriftedResourceCount]
+      attr_accessor next_token: ::String
+      attr_accessor resource_replication_statuses: ::Array[Types::ResourceReplicationStatus]
       SENSITIVE: []
     end
 
@@ -6999,6 +7106,18 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class ReplicationFinding
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor region: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor name: ::String
+      attr_accessor operation: ::String
+      attr_accessor reference_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class ReplicationStatusSummary
       attr_accessor region: ::String
       attr_accessor replication_status: ("INSTANCE_REPLICATION_COMPLETE" | "INSTANCE_REPLICATION_IN_PROGRESS" | "INSTANCE_REPLICATION_FAILED" | "INSTANCE_REPLICA_DELETING" | "INSTANCE_REPLICATION_DELETION_FAILED" | "RESOURCE_REPLICATION_NOT_STARTED")
@@ -7030,6 +7149,12 @@ module Aws::Connect
 
     class ResourceNotReadyException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceReplicationStatus
+      attr_accessor region: ::String
+      attr_accessor status: ::String
       SENSITIVE: []
     end
 
@@ -7184,7 +7309,7 @@ module Aws::Connect
     end
 
     class RuleAction
-      attr_accessor action_type: ("CREATE_TASK" | "ASSIGN_CONTACT_CATEGORY" | "GENERATE_EVENTBRIDGE_EVENT" | "SEND_NOTIFICATION" | "CREATE_CASE" | "UPDATE_CASE" | "ASSIGN_SLA" | "END_ASSOCIATED_TASKS" | "SUBMIT_AUTO_EVALUATION" | "EXTRACT_INFORMATION")
+      attr_accessor action_type: ("CREATE_TASK" | "ASSIGN_CONTACT_CATEGORY" | "GENERATE_EVENTBRIDGE_EVENT" | "SEND_NOTIFICATION" | "CREATE_CASE" | "UPDATE_CASE" | "ASSIGN_SLA" | "END_ASSOCIATED_TASKS" | "SUBMIT_AUTO_EVALUATION" | "EXTRACT_INFORMATION" | "SEND_IN_APP_NOTIFICATION")
       attr_accessor task_action: Types::TaskActionDefinition
       attr_accessor event_bridge_action: Types::EventBridgeActionDefinition
       attr_accessor assign_contact_category_action: Types::AssignContactCategoryActionDefinition
@@ -7195,6 +7320,7 @@ module Aws::Connect
       attr_accessor end_associated_tasks_action: Types::EndAssociatedTasksActionDefinition
       attr_accessor submit_auto_evaluation_action: Types::SubmitAutoEvaluationActionDefinition
       attr_accessor extract_information_action: Types::ExtractInformationActionDefinition
+      attr_accessor send_in_app_notification_action: Types::SendInAppNotificationActionDefinition
       SENSITIVE: []
     end
 
@@ -7826,6 +7952,7 @@ module Aws::Connect
       attr_accessor hierarchy_restricted_resources: ::Array[::String]
       attr_accessor allowed_access_control_hierarchy_group_id: ::String
       attr_accessor granular_access_control_configuration: Types::GranularAccessControlConfiguration
+      attr_accessor type: ("AWS_MANAGED" | "CUSTOMER_MANAGED")
       SENSITIVE: []
     end
 
@@ -7848,6 +7975,7 @@ module Aws::Connect
       attr_accessor security_profile_name: ::String
       attr_accessor description: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ("AWS_MANAGED" | "CUSTOMER_MANAGED")
       SENSITIVE: []
     end
 
@@ -7857,6 +7985,7 @@ module Aws::Connect
       attr_accessor name: ::String
       attr_accessor last_modified_time: ::Time
       attr_accessor last_modified_region: ::String
+      attr_accessor type: ("AWS_MANAGED" | "CUSTOMER_MANAGED")
       SENSITIVE: []
     end
 
@@ -7886,6 +8015,14 @@ module Aws::Connect
     class SendChatIntegrationEventResponse
       attr_accessor initial_contact_id: ::String
       attr_accessor new_chat_created: bool
+      SENSITIVE: []
+    end
+
+    class SendInAppNotificationActionDefinition
+      attr_accessor content: ::Hash[("en_US" | "de_DE" | "es_ES" | "fr_FR" | "id_ID" | "it_IT" | "ja_JP" | "ko_KR" | "pt_BR" | "zh_CN" | "zh_TW"), ::String]
+      attr_accessor recipient: Types::NotificationRecipientType
+      attr_accessor exclusion: Types::NotificationRecipientType
+      attr_accessor priority: ("HIGH" | "LOW")
       SENSITIVE: []
     end
 
@@ -8018,7 +8155,7 @@ module Aws::Connect
       attr_accessor file_arn: ::String
       attr_accessor file_id: ::String
       attr_accessor creation_time: ::String
-      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
       attr_accessor created_by: Types::CreatedByInfo
       attr_accessor upload_url_metadata: Types::UploadUrlMetadata
       SENSITIVE: []
@@ -8039,6 +8176,8 @@ module Aws::Connect
       attr_accessor segment_attributes: ::Hash[::String, Types::SegmentAttributeValue]
       attr_accessor customer_id: ::String
       attr_accessor disconnect_on_customer_exit: ::Array[("AGENT")]
+      attr_accessor connection_types: ::Array[("WEBSOCKET" | "CONNECTION_CREDENTIALS" | "AUTHENTICATION_SESSION" | "WEBRTC_CONNECTION")]
+      attr_accessor chat_streaming_configuration: Types::ChatStreamingConfiguration
       SENSITIVE: [:customer_id]
     end
 
@@ -8047,6 +8186,9 @@ module Aws::Connect
       attr_accessor participant_id: ::String
       attr_accessor participant_token: ::String
       attr_accessor continued_from_contact_id: ::String
+      attr_accessor connection_credentials: Types::ConnectionCredentials
+      attr_accessor websocket: Types::Websocket
+      attr_accessor streaming_id: ::String
       SENSITIVE: []
     end
 
@@ -8747,6 +8889,19 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class UpdateContactFlowAliasRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_flow_id: ::String
+      attr_accessor alias_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor contact_flow_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateContactFlowAliasResponse < Aws::EmptyStructure
+    end
+
     class UpdateContactFlowContentRequest
       attr_accessor instance_id: ::String
       attr_accessor contact_flow_id: ::String
@@ -9001,7 +9156,7 @@ module Aws::Connect
 
     class UpdateInstanceAttributeRequest
       attr_accessor instance_id: ::String
-      attr_accessor attribute_type: ("INBOUND_CALLS" | "OUTBOUND_CALLS" | "CONTACTFLOW_LOGS" | "CONTACT_LENS" | "AUTO_RESOLVE_BEST_VOICES" | "USE_CUSTOM_TTS_VOICES" | "EARLY_MEDIA" | "MULTI_PARTY_CONFERENCE" | "HIGH_VOLUME_OUTBOUND" | "ENHANCED_CONTACT_MONITORING" | "ENHANCED_CHAT_MONITORING" | "MULTI_PARTY_CHAT_CONFERENCE" | "MESSAGE_STREAMING")
+      attr_accessor attribute_type: ("INBOUND_CALLS" | "OUTBOUND_CALLS" | "CONTACTFLOW_LOGS" | "CONTACT_LENS" | "AUTO_RESOLVE_BEST_VOICES" | "USE_CUSTOM_TTS_VOICES" | "EARLY_MEDIA" | "MULTI_PARTY_CONFERENCE" | "AUTO_MUTE_AGENT_ON_HOLD" | "HIGH_VOLUME_OUTBOUND" | "ENHANCED_CONTACT_MONITORING" | "ENHANCED_CHAT_MONITORING" | "MULTI_PARTY_CHAT_CONFERENCE" | "MESSAGE_STREAMING")
       attr_accessor value: ::String
       attr_accessor client_token: ::String
       SENSITIVE: []
@@ -9784,6 +9939,12 @@ module Aws::Connect
 
     class WebNotificationSource
       attr_accessor source_campaign: Types::SourceCampaign
+      SENSITIVE: []
+    end
+
+    class Websocket
+      attr_accessor url: ::String
+      attr_accessor connection_expiry: ::String
       SENSITIVE: []
     end
 

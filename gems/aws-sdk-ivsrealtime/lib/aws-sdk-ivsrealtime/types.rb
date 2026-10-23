@@ -2876,6 +2876,22 @@ module Aws::IVSRealTime
       include Aws::Structure
     end
 
+    # @!attribute [rw] token_id
+    #   The ID of the connection token to revoke.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/RevokeConnectionTokenRequest AWS API Documentation
+    #
+    class RevokeConnectionTokenRequest < Struct.new(
+      :token_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/RevokeConnectionTokenResponse AWS API Documentation
+    #
+    class RevokeConnectionTokenResponse < Aws::EmptyStructure; end
+
     # A complex type that describes an S3 location where recorded videos
     # will be stored.
     #

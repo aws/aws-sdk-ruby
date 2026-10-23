@@ -27,6 +27,7 @@ module Aws
                       ?convert_params: bool,
                       ?correct_clock_skew: bool,
                       ?defaults_mode: String,
+                      ?disable_clock_skew_correction: bool,
                       ?disable_host_prefix_injection: bool,
                       ?disable_request_compression: bool,
                       ?endpoint: String,
@@ -479,7 +480,17 @@ module Aws
                             int: ::String?,
                             float: ::String?,
                             string: ::String?,
-                            path: ::String?
+                            path: ::String?,
+                            bool: ::String?,
+                            range_expr: ::String?,
+                            string_list: Array[::String]?,
+                            path_list: Array[::String]?,
+                            int_list: Array[::String]?,
+                            float_list: Array[::String]?,
+                            bool_list: Array[::String]?,
+                            int_list_list: Array[
+                              Array[::String]
+                            ]?
                           }],
                         ?attachments: {
                           manifests: Array[
@@ -1445,6 +1456,22 @@ module Aws
                          ?max_results: ::Integer
                        ) -> _ListLimitsResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLimitsResponseSuccess
+
+      interface _ListMembershipsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMembershipsResponse]
+        def memberships: () -> ::Array[Types::MembershipSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#list_memberships-instance_method
+      def list_memberships: (
+                              ?next_token: ::String,
+                              ?max_results: ::Integer,
+                              principal_id: ::String,
+                              ?identity_store_id: ::String,
+                              ?identity_center_region: ::String,
+                              ?resource_types: Array[("FARM" | "QUEUE" | "FLEET" | "JOB")]
+                            ) -> _ListMembershipsResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMembershipsResponseSuccess
 
       interface _ListMeteredProductsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListMeteredProductsResponse]

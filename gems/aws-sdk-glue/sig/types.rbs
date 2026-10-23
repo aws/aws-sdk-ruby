@@ -339,6 +339,17 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class BatchGetDataQualityResultV2Request
+      attr_accessor result_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetDataQualityResultV2Response
+      attr_accessor results: ::Array[Types::DataQualityResultV2Item]
+      attr_accessor results_not_found: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class BatchGetDataQualityRulesetEvaluationRunRequest
       attr_accessor run_ids: ::Array[::String]
       SENSITIVE: []
@@ -1247,6 +1258,7 @@ module Aws::Glue
       attr_accessor configuration: ::String
       attr_accessor crawler_security_configuration: ::String
       attr_accessor lake_formation_configuration: Types::LakeFormationConfiguration
+      attr_accessor catalog_id: ::String
       SENSITIVE: []
     end
 
@@ -1393,6 +1405,7 @@ module Aws::Glue
       attr_accessor configuration: ::String
       attr_accessor crawler_security_configuration: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor catalog_id: ::String
       SENSITIVE: []
     end
 
@@ -1460,7 +1473,7 @@ module Aws::Glue
       attr_accessor public_key: ::String
       attr_accessor public_keys: ::Array[::String]
       attr_accessor number_of_nodes: ::Integer
-      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X")
       attr_accessor glue_version: ::String
       attr_accessor number_of_workers: ::Integer
       attr_accessor extra_python_libs_s3_path: ::String
@@ -1480,7 +1493,7 @@ module Aws::Glue
       attr_accessor yarn_endpoint_address: ::String
       attr_accessor zeppelin_remote_spark_interpreter_port: ::Integer
       attr_accessor number_of_nodes: ::Integer
-      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X")
       attr_accessor glue_version: ::String
       attr_accessor number_of_workers: ::Integer
       attr_accessor availability_zone: ::String
@@ -1633,7 +1646,7 @@ module Aws::Glue
       attr_accessor notification_property: Types::NotificationProperty
       attr_accessor glue_version: ::String
       attr_accessor number_of_workers: ::Integer
-      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X")
       attr_accessor code_gen_configuration_nodes: ::Hash[::String, Types::CodeGenConfigurationNode]
       attr_accessor execution_class: ("FLEX" | "STANDARD")
       attr_accessor source_control_details: Types::SourceControlDetails
@@ -1660,7 +1673,7 @@ module Aws::Glue
       attr_accessor role: ::String
       attr_accessor glue_version: ::String
       attr_accessor max_capacity: ::Float
-      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X")
       attr_accessor number_of_workers: ::Integer
       attr_accessor timeout: ::Integer
       attr_accessor max_retries: ::Integer
@@ -1776,7 +1789,7 @@ module Aws::Glue
       attr_accessor connections: Types::ConnectionsList
       attr_accessor max_capacity: ::Float
       attr_accessor number_of_workers: ::Integer
-      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X")
       attr_accessor security_configuration: ::String
       attr_accessor glue_version: ::String
       attr_accessor tags: ::Hash[::String, ::String]
@@ -2003,6 +2016,12 @@ module Aws::Glue
       SENSITIVE: [:description, :evaluation_message, :evaluated_metrics, :evaluated_distributions]
     end
 
+    class DataQualityConfigurationV2
+      attr_accessor observations_enabled: ("ALL" | "NONE")
+      attr_accessor observation_mode: ("SCHEDULED" | "FIXED")
+      SENSITIVE: []
+    end
+
     class DataQualityEncryption
       attr_accessor data_quality_encryption_mode: ("DISABLED" | "SSE-KMS")
       attr_accessor kms_key_arn: ::String
@@ -2081,6 +2100,44 @@ module Aws::Glue
       attr_accessor job_run_id: ::String
       attr_accessor started_after: ::Time
       attr_accessor started_before: ::Time
+      SENSITIVE: []
+    end
+
+    class DataQualityResultV2Item
+      attr_accessor result_id: ::String
+      attr_accessor data_source: Types::DataSource
+      attr_accessor dimensions: ::Hash[::String, ::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor execution_started_on: ::Time
+      attr_accessor execution_completed_on: ::Time
+      attr_accessor result_published_on: ::Time
+      attr_accessor score: ::Float
+      attr_accessor rule_results: ::Array[Types::DataQualityRuleResult]
+      attr_accessor analyzer_results: ::Array[Types::DataQualityAnalyzerResult]
+      attr_accessor observations: ::Array[Types::DataQualityObservation]
+      attr_accessor evaluation_context: ::String
+      attr_accessor descriptors: ::Hash[::String, ::String]
+      attr_accessor aggregated_metrics: Types::DataQualityAggregatedMetrics
+      attr_accessor ruleset_name: ::String
+      SENSITIVE: []
+    end
+
+    class DataQualityResultsV2Description
+      attr_accessor result_id: ::String
+      attr_accessor data_source: Types::DataSource
+      attr_accessor result_published_on: ::Time
+      attr_accessor dimensions: ::Hash[::String, ::String]
+      attr_accessor evaluation_context: ::String
+      attr_accessor descriptors: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DataQualityResultsV2FilterCriteria
+      attr_accessor data_source: Types::DataSource
+      attr_accessor published_after: ::Time
+      attr_accessor published_before: ::Time
+      attr_accessor dimensions: ::Hash[::String, ::String]
+      attr_accessor evaluation_context: ::String
       SENSITIVE: []
     end
 
@@ -2185,6 +2242,16 @@ module Aws::Glue
       attr_accessor table_name: ::String
       attr_accessor database_name: ::String
       attr_accessor catalog_id: ::String
+      SENSITIVE: []
+    end
+
+    class DataQualityTelemetry
+      attr_accessor vcpu_hours: ::Float
+      attr_accessor flags_enabled: ::Hash[::String, ::String]
+      attr_accessor library_version: ::String
+      attr_accessor spark_version: ::String
+      attr_accessor host_runtime_version: ::String
+      attr_accessor engine: ("SPARK" | "PYTHON")
       SENSITIVE: []
     end
 
@@ -2343,6 +2410,7 @@ module Aws::Glue
     class DeleteColumnStatisticsTaskSettingsRequest
       attr_accessor database_name: ::String
       attr_accessor table_name: ::String
+      attr_accessor catalog_id: ::String
       SENSITIVE: []
     end
 
@@ -2735,7 +2803,7 @@ module Aws::Glue
       attr_accessor zeppelin_remote_spark_interpreter_port: ::Integer
       attr_accessor public_address: ::String
       attr_accessor status: ::String
-      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X")
       attr_accessor glue_version: ::String
       attr_accessor number_of_workers: ::Integer
       attr_accessor number_of_nodes: ::Integer
@@ -3339,6 +3407,7 @@ module Aws::Glue
       attr_accessor table_name: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor catalog_id: ::String
       SENSITIVE: []
     end
 
@@ -3351,6 +3420,7 @@ module Aws::Glue
     class GetColumnStatisticsTaskSettingsRequest
       attr_accessor database_name: ::String
       attr_accessor table_name: ::String
+      attr_accessor catalog_id: ::String
       SENSITIVE: []
     end
 
@@ -3523,6 +3593,31 @@ module Aws::Glue
       attr_accessor analyzer_results: ::Array[Types::DataQualityAnalyzerResult]
       attr_accessor observations: ::Array[Types::DataQualityObservation]
       attr_accessor aggregated_metrics: Types::DataQualityAggregatedMetrics
+      SENSITIVE: []
+    end
+
+    class GetDataQualityResultV2Request
+      attr_accessor result_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataQualityResultV2Response
+      attr_accessor result_id: ::String
+      attr_accessor data_source: Types::DataSource
+      attr_accessor profile_id: ::String
+      attr_accessor dimensions: ::Hash[::String, ::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor execution_started_on: ::Time
+      attr_accessor execution_completed_on: ::Time
+      attr_accessor result_published_on: ::Time
+      attr_accessor score: ::Float
+      attr_accessor rule_results: ::Array[Types::DataQualityRuleResult]
+      attr_accessor analyzer_results: ::Array[Types::DataQualityAnalyzerResult]
+      attr_accessor observations: ::Array[Types::DataQualityObservation]
+      attr_accessor evaluation_context: ::String
+      attr_accessor descriptors: ::Hash[::String, ::String]
+      attr_accessor aggregated_metrics: Types::DataQualityAggregatedMetrics
+      attr_accessor ruleset_name: ::String
       SENSITIVE: []
     end
 
@@ -3860,7 +3955,7 @@ module Aws::Glue
       attr_accessor role: ::String
       attr_accessor glue_version: ::String
       attr_accessor max_capacity: ::Float
-      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X")
       attr_accessor number_of_workers: ::Integer
       attr_accessor timeout: ::Integer
       attr_accessor max_retries: ::Integer
@@ -4133,6 +4228,27 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class GetSystemLogsForJobRunRequest
+      attr_accessor job_name: ::String
+      attr_accessor run_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSystemLogsForJobRunResponse
+      attr_accessor system_logs_url: ::String
+      SENSITIVE: []
+    end
+
+    class GetSystemLogsForSessionRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSystemLogsForSessionResponse
+      attr_accessor system_logs_url: ::String
+      SENSITIVE: []
+    end
+
     class GetTableOptimizerRequest
       attr_accessor catalog_id: ::String
       attr_accessor database_name: ::String
@@ -4205,6 +4321,7 @@ module Aws::Glue
       attr_accessor transaction_id: ::String
       attr_accessor query_as_of_time: ::Time
       attr_accessor audit_context: Types::AuditContext
+      attr_accessor resource_share_type: ("FEDERATED" | "ALL")
       attr_accessor include_status_details: bool
       attr_accessor attributes_to_get: ::Array[("NAME" | "TABLE_TYPE" | "DEFAULT" | "LATEST_ICEBERG_METADATA")]
       SENSITIVE: []
@@ -4732,6 +4849,7 @@ module Aws::Glue
       attr_accessor refresh_interval: ::String
       attr_accessor source_properties: ::Hash[::String, ::String]
       attr_accessor continuous_sync: bool
+      attr_accessor target_namespace: ::String
       SENSITIVE: []
     end
 
@@ -4923,7 +5041,7 @@ module Aws::Glue
       attr_accessor allocated_capacity: ::Integer
       attr_accessor timeout: ::Integer
       attr_accessor max_capacity: ::Float
-      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X")
       attr_accessor number_of_workers: ::Integer
       attr_accessor security_configuration: ::String
       attr_accessor notification_property: Types::NotificationProperty
@@ -4985,7 +5103,7 @@ module Aws::Glue
       attr_accessor execution_time: ::Integer
       attr_accessor timeout: ::Integer
       attr_accessor max_capacity: ::Float
-      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X")
       attr_accessor number_of_workers: ::Integer
       attr_accessor security_configuration: ::String
       attr_accessor log_group_name: ::String
@@ -5015,7 +5133,7 @@ module Aws::Glue
       attr_accessor allocated_capacity: ::Integer
       attr_accessor timeout: ::Integer
       attr_accessor max_capacity: ::Float
-      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X")
       attr_accessor number_of_workers: ::Integer
       attr_accessor security_configuration: ::String
       attr_accessor notification_property: Types::NotificationProperty
@@ -5243,6 +5361,19 @@ module Aws::Glue
 
     class ListDataQualityResultsResponse
       attr_accessor results: ::Array[Types::DataQualityResultDescription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataQualityResultsV2Request
+      attr_accessor filter: Types::DataQualityResultsV2FilterCriteria
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDataQualityResultsV2Response
+      attr_accessor results: ::Array[Types::DataQualityResultsV2Description]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -5619,7 +5750,7 @@ module Aws::Glue
       attr_accessor role: ::String
       attr_accessor glue_version: ::String
       attr_accessor max_capacity: ::Float
-      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X")
       attr_accessor number_of_workers: ::Integer
       attr_accessor timeout: ::Integer
       attr_accessor max_retries: ::Integer
@@ -5832,7 +5963,7 @@ module Aws::Glue
     end
 
     class OAuth2Properties
-      attr_accessor o_auth_2_grant_type: ("AUTHORIZATION_CODE" | "CLIENT_CREDENTIALS" | "JWT_BEARER")
+      attr_accessor o_auth_2_grant_type: ("AUTHORIZATION_CODE" | "CLIENT_CREDENTIALS" | "JWT_BEARER" | "REFRESH_TOKEN")
       attr_accessor o_auth_2_client_application: Types::OAuth2ClientApplication
       attr_accessor token_url: ::String
       attr_accessor token_url_parameters_map: ::Hash[::String, ::String]
@@ -5840,7 +5971,7 @@ module Aws::Glue
     end
 
     class OAuth2PropertiesInput
-      attr_accessor o_auth_2_grant_type: ("AUTHORIZATION_CODE" | "CLIENT_CREDENTIALS" | "JWT_BEARER")
+      attr_accessor o_auth_2_grant_type: ("AUTHORIZATION_CODE" | "CLIENT_CREDENTIALS" | "JWT_BEARER" | "REFRESH_TOKEN")
       attr_accessor o_auth_2_client_application: Types::OAuth2ClientApplication
       attr_accessor token_url: ::String
       attr_accessor token_url_parameters_map: ::Hash[::String, ::String]
@@ -6070,6 +6201,32 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class PublishDataQualityResultV2Request
+      attr_accessor dimensions: ::Hash[::String, ::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor execution_started_on: ::Time
+      attr_accessor execution_completed_on: ::Time
+      attr_accessor score: ::Float
+      attr_accessor rule_results: ::Array[Types::DataQualityRuleResult]
+      attr_accessor analyzer_results: ::Array[Types::DataQualityAnalyzerResult]
+      attr_accessor observations: ::Array[Types::DataQualityObservation]
+      attr_accessor aggregated_metrics: Types::DataQualityAggregatedMetrics
+      attr_accessor statistics: ::Array[Types::StatisticSummary]
+      attr_accessor run_configuration: Types::DataQualityConfigurationV2
+      attr_accessor client_token: ::String
+      attr_accessor evaluation_context: ::String
+      attr_accessor descriptors: ::Hash[::String, ::String]
+      attr_accessor ruleset_name: ::String
+      attr_accessor data_quality_security_configuration: ::String
+      attr_accessor telemetry: Types::DataQualityTelemetry
+      SENSITIVE: []
+    end
+
+    class PublishDataQualityResultV2Response
+      attr_accessor result_id: ::String
+      SENSITIVE: []
+    end
+
     class PutAssetRequest
       attr_accessor asset_type_id: ::String
       attr_accessor identifier: ::String
@@ -6235,6 +6392,11 @@ module Aws::Glue
       attr_accessor cluster_id: ::String
       attr_accessor query_authorization_id: ::String
       attr_accessor additional_context: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class RLSProperties
+      attr_accessor default_rls_policy: ::String
       SENSITIVE: []
     end
 
@@ -7005,7 +7167,7 @@ module Aws::Glue
       attr_accessor security_configuration: ::String
       attr_accessor glue_version: ::String
       attr_accessor number_of_workers: ::Integer
-      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X")
       attr_accessor completed_on: ::Time
       attr_accessor execution_time: ::Float
       attr_accessor dpu_seconds: ::Float
@@ -7203,6 +7365,7 @@ module Aws::Glue
     class StartColumnStatisticsTaskRunScheduleRequest
       attr_accessor database_name: ::String
       attr_accessor table_name: ::String
+      attr_accessor catalog_id: ::String
       SENSITIVE: []
     end
 
@@ -7293,7 +7456,7 @@ module Aws::Glue
       attr_accessor max_capacity: ::Float
       attr_accessor security_configuration: ::String
       attr_accessor notification_property: Types::NotificationProperty
-      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X")
       attr_accessor number_of_workers: ::Integer
       attr_accessor execution_class: ("FLEX" | "STANDARD")
       attr_accessor execution_role_session_policy: ::String
@@ -7435,6 +7598,7 @@ module Aws::Glue
     class StopColumnStatisticsTaskRunRequest
       attr_accessor database_name: ::String
       attr_accessor table_name: ::String
+      attr_accessor catalog_id: ::String
       SENSITIVE: []
     end
 
@@ -7444,6 +7608,7 @@ module Aws::Glue
     class StopColumnStatisticsTaskRunScheduleRequest
       attr_accessor database_name: ::String
       attr_accessor table_name: ::String
+      attr_accessor catalog_id: ::String
       SENSITIVE: []
     end
 
@@ -7538,6 +7703,15 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class SubObjectStatistics
+      attr_accessor source_type: ("HIVE_PARQUET" | "HIVE_ORC" | "HIVE_CSV" | "HIVE_JSON" | "PLAIN_PARQUET" | "ICEBERG")
+      attr_accessor glue_version_id: ::String
+      attr_accessor partition_count: ::Integer
+      attr_accessor file_count: ::Integer
+      attr_accessor total_file_bytes: ::Integer
+      SENSITIVE: []
+    end
+
     class SupportedDialect
       attr_accessor dialect: ("REDSHIFT" | "ATHENA" | "SPARK")
       attr_accessor dialect_version: ::String
@@ -7571,6 +7745,7 @@ module Aws::Glue
       attr_accessor is_materialized_view: bool
       attr_accessor iceberg_table_metadata: Types::IcebergTableMetadata
       attr_accessor status: Types::TableStatus
+      attr_accessor rls_properties: Types::RLSProperties
       SENSITIVE: []
     end
 
@@ -7602,6 +7777,7 @@ module Aws::Glue
       attr_accessor table_type: ::String
       attr_accessor parameters: ::Hash[::String, ::String]
       attr_accessor target_table: Types::TableIdentifier
+      attr_accessor federated_table: Types::FederatedTable
       attr_accessor view_definition: Types::ViewDefinitionInput
       SENSITIVE: []
     end
@@ -7994,6 +8170,7 @@ module Aws::Glue
       attr_accessor lake_formation_configuration: Types::LakeFormationConfiguration
       attr_accessor configuration: ::String
       attr_accessor crawler_security_configuration: ::String
+      attr_accessor catalog_id: ::String
       SENSITIVE: []
     end
 
@@ -8191,7 +8368,7 @@ module Aws::Glue
       attr_accessor role: ::String
       attr_accessor glue_version: ::String
       attr_accessor max_capacity: ::Float
-      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X")
       attr_accessor number_of_workers: ::Integer
       attr_accessor timeout: ::Integer
       attr_accessor max_retries: ::Integer
@@ -8398,6 +8575,7 @@ module Aws::Glue
 
     class ViewDefinition
       attr_accessor is_protected: bool
+      attr_accessor is_managed: bool
       attr_accessor definer: ::String
       attr_accessor view_version_id: ::Integer
       attr_accessor view_version_token: ::String
@@ -8405,12 +8583,15 @@ module Aws::Glue
       attr_accessor last_refresh_type: ("FULL" | "INCREMENTAL")
       attr_accessor sub_objects: ::Array[::String]
       attr_accessor sub_object_version_ids: ::Array[::Integer]
+      attr_accessor sub_objects_statistics: ::Array[Types::SubObjectStatistics]
       attr_accessor representations: ::Array[Types::ViewRepresentation]
+      attr_accessor spark_pipeline_info: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
     class ViewDefinitionInput
       attr_accessor is_protected: bool
+      attr_accessor is_managed: bool
       attr_accessor definer: ::String
       attr_accessor representations: ::Array[Types::ViewRepresentationInput]
       attr_accessor view_version_id: ::Integer
@@ -8419,6 +8600,8 @@ module Aws::Glue
       attr_accessor last_refresh_type: ("FULL" | "INCREMENTAL")
       attr_accessor sub_objects: ::Array[::String]
       attr_accessor sub_object_version_ids: ::Array[::Integer]
+      attr_accessor sub_objects_statistics: ::Array[Types::SubObjectStatistics]
+      attr_accessor spark_pipeline_info: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 

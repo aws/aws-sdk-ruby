@@ -27,6 +27,7 @@ module Aws
                       ?convert_params: bool,
                       ?correct_clock_skew: bool,
                       ?defaults_mode: String,
+                      ?disable_clock_skew_correction: bool,
                       ?disable_host_prefix_injection: bool,
                       ?disable_request_compression: bool,
                       ?endpoint: String,
@@ -83,6 +84,8 @@ module Aws
         def arn: () -> ::String
         def name: () -> ::String
         def id: () -> ::String
+        def version_arn: () -> ::String
+        def version: () -> ::Integer
         def configuration: () -> Types::NetworkConnectorConfiguration
         def operator_role: () -> ::String
         def state: () -> ("PENDING" | "ACTIVE" | "INACTIVE" | "FAILED" | "DELETING" | "DELETE_FAILED")
@@ -102,6 +105,8 @@ module Aws
         def arn: () -> ::String
         def name: () -> ::String
         def id: () -> ::String
+        def version_arn: () -> ::String
+        def version: () -> ::Integer
         def configuration: () -> Types::NetworkConnectorConfiguration
         def operator_role: () -> ::String
         def state: () -> ("PENDING" | "ACTIVE" | "INACTIVE" | "FAILED" | "DELETING" | "DELETE_FAILED")
@@ -117,15 +122,18 @@ module Aws
         def arn: () -> ::String
         def name: () -> ::String
         def id: () -> ::String
+        def version_arn: () -> ::String
         def version: () -> ::Integer
+        def latest_version_arn: () -> ::String
+        def latest_version: () -> ::Integer
         def configuration: () -> Types::NetworkConnectorConfiguration
         def operator_role: () -> ::String
         def state: () -> ("PENDING" | "ACTIVE" | "INACTIVE" | "FAILED" | "DELETING" | "DELETE_FAILED")
         def state_reason: () -> ::String
-        def state_reason_code: () -> ("DisallowedByVpcEncryptionControl" | "Ec2RequestLimitExceeded" | "InsufficientRolePermissions" | "InternalError" | "InvalidSecurityGroup" | "InvalidSubnet" | "SubnetOutOfIPAddresses")
+        def state_reason_code: () -> ("DisallowedByVpcEncryptionControl" | "Ec2RequestLimitExceeded" | "InsufficientRolePermissions" | "InternalError" | "InvalidSecurityGroup" | "InvalidSubnet" | "SecurityGroupsPerInterfaceLimitExceeded" | "SubnetOutOfIPAddresses")
         def last_update_status: () -> ("Successful" | "Failed" | "InProgress")
         def last_update_status_reason: () -> ::String
-        def last_update_status_reason_code: () -> ("DisallowedByVpcEncryptionControl" | "Ec2RequestLimitExceeded" | "InsufficientRolePermissions" | "InternalError" | "InvalidSecurityGroup" | "InvalidSubnet" | "SubnetOutOfIPAddresses")
+        def last_update_status_reason_code: () -> ("DisallowedByVpcEncryptionControl" | "Ec2RequestLimitExceeded" | "InsufficientRolePermissions" | "InternalError" | "InvalidSecurityGroup" | "InvalidSubnet" | "SecurityGroupsPerInterfaceLimitExceeded" | "SubnetOutOfIPAddresses")
         def last_modified: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaCore/Client.html#get_network_connector-instance_method
@@ -133,6 +141,20 @@ module Aws
                                    identifier: ::String
                                  ) -> _GetNetworkConnectorResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNetworkConnectorResponseSuccess
+
+      interface _ListNetworkConnectorVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNetworkConnectorVersionsResponse]
+        def network_connector_versions: () -> ::Array[Types::NetworkConnectorVersionSummary]
+        def next_marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaCore/Client.html#list_network_connector_versions-instance_method
+      def list_network_connector_versions: (
+                                             identifier: ::String,
+                                             ?state: ("PENDING" | "ACTIVE" | "INACTIVE" | "FAILED" | "DELETING" | "DELETE_FAILED"),
+                                             ?marker: ::String,
+                                             ?max_items: ::Integer
+                                           ) -> _ListNetworkConnectorVersionsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNetworkConnectorVersionsResponseSuccess
 
       interface _ListNetworkConnectorsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListNetworkConnectorsResponse]
@@ -152,6 +174,8 @@ module Aws
         def arn: () -> ::String
         def name: () -> ::String
         def id: () -> ::String
+        def version_arn: () -> ::String
+        def version: () -> ::Integer
         def operator_role: () -> ::String
         def configuration: () -> Types::NetworkConnectorConfiguration
         def state: () -> ("PENDING" | "ACTIVE" | "INACTIVE" | "FAILED" | "DELETING" | "DELETE_FAILED")

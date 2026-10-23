@@ -187,6 +187,7 @@ module Aws::EMRServerless
       attr_accessor application_id: ::String
       attr_accessor resource_id: ::String
       attr_accessor resource_type: ("SESSION")
+      attr_accessor access_system_profile_logs: bool
       SENSITIVE: []
     end
 

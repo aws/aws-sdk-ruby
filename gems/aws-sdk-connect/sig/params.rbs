@@ -521,8 +521,21 @@ module Aws
       case_sla_configuration: Params::case_sla_configuration?
     }
 
+      type send_in_app_notification_action_definition = {
+      content: Hash[("en_US" | "de_DE" | "es_ES" | "fr_FR" | "id_ID" | "it_IT" | "ja_JP" | "ko_KR" | "pt_BR" | "zh_CN" | "zh_TW"), ::String],
+      recipient: {
+        user_tags: Hash[::String, ::String]?,
+        user_ids: Array[::String]?
+      },
+      exclusion: {
+        user_tags: Hash[::String, ::String]?,
+        user_ids: Array[::String]?
+      }?,
+      priority: ("HIGH" | "LOW")?
+    }
+
       type rule_action = {
-      action_type: ("CREATE_TASK" | "ASSIGN_CONTACT_CATEGORY" | "GENERATE_EVENTBRIDGE_EVENT" | "SEND_NOTIFICATION" | "CREATE_CASE" | "UPDATE_CASE" | "ASSIGN_SLA" | "END_ASSOCIATED_TASKS" | "SUBMIT_AUTO_EVALUATION" | "EXTRACT_INFORMATION"),
+      action_type: ("CREATE_TASK" | "ASSIGN_CONTACT_CATEGORY" | "GENERATE_EVENTBRIDGE_EVENT" | "SEND_NOTIFICATION" | "CREATE_CASE" | "UPDATE_CASE" | "ASSIGN_SLA" | "END_ASSOCIATED_TASKS" | "SUBMIT_AUTO_EVALUATION" | "EXTRACT_INFORMATION" | "SEND_IN_APP_NOTIFICATION"),
       task_action: Params::task_action_definition?,
       event_bridge_action: {
         name: ::String
@@ -544,7 +557,8 @@ module Aws
             identifier: ::String
           }
         ]
-      }?
+      }?,
+      send_in_app_notification_action: Params::send_in_app_notification_action_definition?
     }
 
       type field_value = {

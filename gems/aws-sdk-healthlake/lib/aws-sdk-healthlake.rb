@@ -27,6 +27,22 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:healthlake)
 #
 # See {Client} for more information.
 #
+# # Async Client
+#
+# The {AsyncClient} class provides one asynchronous method for each API operation.
+# Operation methods each accept a hash of request parameters and return an async
+# response. For streaming operations, you can signal input events and register
+# output event callbacks before waiting on the response.
+#
+#     health_lake = Aws::HealthLake::AsyncClient.new
+#     resp = health_lake.create_data_transformation_profile(
+#       # params and input stream
+#      ) do |output_stream|
+#       # register callbacks for events
+#     end
+#
+# See {AsyncClient} for more information.
+#
 # # Errors
 #
 # Errors returned from Amazon HealthLake are defined in the
@@ -54,8 +70,10 @@ module Aws::HealthLake
   autoload :EndpointParameters, 'aws-sdk-healthlake/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-healthlake/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-healthlake/endpoints'
+  autoload :AsyncClient, 'aws-sdk-healthlake/async_client'
+  autoload :EventStreams, 'aws-sdk-healthlake/event_streams'
 
-  GEM_VERSION = '1.72.0'
+  GEM_VERSION = '1.75.0'
 
 end
 

@@ -27,6 +27,7 @@ module Aws
                       ?convert_params: bool,
                       ?correct_clock_skew: bool,
                       ?defaults_mode: String,
+                      ?disable_clock_skew_correction: bool,
                       ?disable_host_prefix_injection: bool,
                       ?disable_request_compression: bool,
                       ?endpoint: String,
@@ -249,7 +250,8 @@ module Aws
                                            destination_type: ("S3"),
                                            destination_properties: {
                                              destination_arn: ::String?,
-                                             kms_key_arn: ::String?
+                                             kms_key_arn: ::String?,
+                                             expected_bucket_owner: ::String?
                                            },
                                            ?client_token: ::String,
                                            ?tags: Hash[::String, ::String]
@@ -885,7 +887,7 @@ module Aws
                                     account_ids: Array[::String]?,
                                     data_sources: Array[("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_LOGS" | "KUBERNETES_AUDIT_LOGS" | "EC2_MALWARE_SCAN")]?,
                                     resources: Array[::String]?,
-                                    features: Array[("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "EC2_RUNTIME_MONITORING" | "FARGATE_RUNTIME_MONITORING" | "RDS_DBI_PROTECTION_PROVISIONED" | "RDS_DBI_PROTECTION_SERVERLESS" | "AI_PROTECTION")]?
+                                    features: Array[("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "EC2_RUNTIME_MONITORING" | "FARGATE_RUNTIME_MONITORING" | "RDS_DBI_PROTECTION_PROVISIONED" | "RDS_DBI_PROTECTION_SERVERLESS" | "RDS_DBI_PROTECTION_LIMITLESS" | "RDS_DATA_ACTIVITY_DBI_PROTECTION_PROVISIONED" | "RDS_DATA_ACTIVITY_DBI_PROTECTION_SERVERLESS" | "RDS_DATA_ACTIVITY_DBI_PROTECTION_LIMITLESS" | "AI_PROTECTION")]?
                                   },
                                   ?unit: ::String,
                                   ?max_results: ::Integer,
@@ -1410,7 +1412,7 @@ module Aws
                                          status: ("ENABLED" | "DISABLED")?,
                                          additional_configuration: Array[
                                            {
-                                             name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")?,
+                                             name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT" | "RDS_DATA_RISK")?,
                                              status: ("ENABLED" | "DISABLED")?
                                            }
                                          ]?
@@ -1449,7 +1451,7 @@ module Aws
                                                    auto_enable: ("NEW" | "NONE" | "ALL")?,
                                                    additional_configuration: Array[
                                                      {
-                                                       name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")?,
+                                                       name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT" | "RDS_DATA_RISK")?,
                                                        auto_enable: ("NEW" | "NONE" | "ALL")?
                                                      }
                                                    ]?
@@ -1468,7 +1470,8 @@ module Aws
                                            destination_id: ::String,
                                            ?destination_properties: {
                                              destination_arn: ::String?,
-                                             kms_key_arn: ::String?
+                                             kms_key_arn: ::String?,
+                                             expected_bucket_owner: ::String?
                                            }
                                          ) -> _UpdatePublishingDestinationResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePublishingDestinationResponseSuccess

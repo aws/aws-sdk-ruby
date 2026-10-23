@@ -299,12 +299,14 @@ module Aws::ElastiCache
 
     class CompleteMigrationMessage
       attr_accessor replication_group_id: ::String
+      attr_accessor serverless_cache_name: ::String
       attr_accessor force: bool
       SENSITIVE: []
     end
 
     class CompleteMigrationResponse
       attr_accessor replication_group: Types::ReplicationGroup
+      attr_accessor serverless_cache: Types::ServerlessCache
       SENSITIVE: []
     end
 
@@ -424,6 +426,7 @@ module Aws::ElastiCache
       attr_accessor global_replication_group_id_suffix: ::String
       attr_accessor global_replication_group_description: ::String
       attr_accessor primary_replication_group_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 
@@ -496,6 +499,7 @@ module Aws::ElastiCache
       attr_accessor snapshot_retention_limit: ::Integer
       attr_accessor daily_snapshot_time: ::String
       attr_accessor network_type: ("ipv4" | "ipv6" | "dual_stack")
+      attr_accessor connection_type: ("vpc" | "public")
       SENSITIVE: []
     end
 
@@ -1152,6 +1156,16 @@ module Aws::ElastiCache
       SENSITIVE: []
     end
 
+    class MigrationHealthFault < Aws::EmptyStructure
+    end
+
+    class MigrationSummary
+      attr_accessor status: ::String
+      attr_accessor migration_endpoint: Types::Endpoint
+      attr_accessor cutover_mode: ::String
+      SENSITIVE: []
+    end
+
     class ModifyCacheClusterMessage
       attr_accessor cache_cluster_id: ::String
       attr_accessor num_cache_nodes: ::Integer
@@ -1434,6 +1448,19 @@ module Aws::ElastiCache
       SENSITIVE: []
     end
 
+    class PrepareMigrationRequest
+      attr_accessor serverless_cache_name: ::String
+      attr_accessor customer_node_endpoint_list: ::Array[Types::CustomerNodeEndpoint]
+      attr_accessor source_authentication_configuration: Types::SourceAuthenticationConfiguration
+      attr_accessor source_tls_configuration: Types::SourceTlsConfiguration
+      SENSITIVE: []
+    end
+
+    class PrepareMigrationResponse
+      attr_accessor serverless_cache: Types::ServerlessCache
+      SENSITIVE: []
+    end
+
     class ProcessedUpdateAction
       attr_accessor replication_group_id: ::String
       attr_accessor cache_cluster_id: ::String
@@ -1655,6 +1682,11 @@ module Aws::ElastiCache
       SENSITIVE: []
     end
 
+    class SecretManagerAuthConfig
+      attr_accessor secret_arn: ::String
+      SENSITIVE: []
+    end
+
     class SecurityGroupMembership
       attr_accessor security_group_id: ::String
       attr_accessor status: ::String
@@ -1681,10 +1713,15 @@ module Aws::ElastiCache
       attr_accessor snapshot_retention_limit: ::Integer
       attr_accessor daily_snapshot_time: ::String
       attr_accessor network_type: ("ipv4" | "ipv6" | "dual_stack")
+      attr_accessor connection_type: ("vpc" | "public")
+      attr_accessor migration: Types::MigrationSummary
       SENSITIVE: []
     end
 
     class ServerlessCacheAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class ServerlessCacheAlreadyUnderMigrationFault < Aws::EmptyStructure
     end
 
     class ServerlessCacheConfiguration
@@ -1695,6 +1732,9 @@ module Aws::ElastiCache
     end
 
     class ServerlessCacheNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ServerlessCacheNotUnderMigrationFault < Aws::EmptyStructure
     end
 
     class ServerlessCacheQuotaForCustomerExceededFault < Aws::EmptyStructure
@@ -1800,14 +1840,39 @@ module Aws::ElastiCache
     class SnapshotQuotaExceededFault < Aws::EmptyStructure
     end
 
+    class SourceAuthenticationConfiguration
+      attr_accessor secret_manager_config: Types::SecretManagerAuthConfig
+      SENSITIVE: []
+    end
+
+    class SourceTlsConfiguration
+      attr_accessor source_tls_mode: ("none" | "verify-ca")
+      attr_accessor source_tls_certificate: ::String
+      SENSITIVE: []
+    end
+
     class StartMigrationMessage
+      attr_accessor serverless_cache_name: ::String
       attr_accessor replication_group_id: ::String
       attr_accessor customer_node_endpoint_list: ::Array[Types::CustomerNodeEndpoint]
+      attr_accessor auto_cutover: bool
+      attr_accessor clear_target_cache_data: bool
       SENSITIVE: []
     end
 
     class StartMigrationResponse
       attr_accessor replication_group: Types::ReplicationGroup
+      attr_accessor serverless_cache: Types::ServerlessCache
+      SENSITIVE: []
+    end
+
+    class StopMigrationRequest
+      attr_accessor serverless_cache_name: ::String
+      SENSITIVE: []
+    end
+
+    class StopMigrationResponse
+      attr_accessor serverless_cache: Types::ServerlessCache
       SENSITIVE: []
     end
 

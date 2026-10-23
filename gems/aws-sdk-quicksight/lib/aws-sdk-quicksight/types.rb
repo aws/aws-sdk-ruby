@@ -6701,6 +6701,476 @@ module Aws::QuickSight
     #   The ability to use New Relic actions.
     #   @return [String]
     #
+    # @!attribute [rw] pager_duty_agent_action
+    #   The ability to perform actions using PagerDuty Agent connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_pager_duty_agent_action
+    #   The ability to create and update PagerDuty Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_pager_duty_agent_action
+    #   The ability to share PagerDuty Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_pager_duty_agent_action
+    #   The ability to use PagerDuty Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] visier_agent_action
+    #   The ability to perform actions using Visier Agent connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_visier_agent_action
+    #   The ability to create and update Visier Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_visier_agent_action
+    #   The ability to share Visier Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_visier_agent_action
+    #   The ability to use Visier Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] zoom_action
+    #   The ability to perform actions using Zoom connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_zoom_action
+    #   The ability to create and update Zoom actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_zoom_action
+    #   The ability to share Zoom actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_zoom_action
+    #   The ability to use Zoom actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] snow_flake_action
+    #   The ability to perform actions using Snowflake Cortex Agent
+    #   connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_snow_flake_action
+    #   The ability to create and update Snowflake Cortex Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_snow_flake_action
+    #   The ability to share Snowflake Cortex Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_snow_flake_action
+    #   The ability to use Snowflake Cortex Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] zapier_action
+    #   The ability to perform actions using Zapier Agent connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_zapier_action
+    #   The ability to create and update Zapier Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_zapier_action
+    #   The ability to share Zapier Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_zapier_action
+    #   The ability to use Zapier Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] airtable_action
+    #   The ability to perform actions using Airtable connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_airtable_action
+    #   The ability to create and update Airtable actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_airtable_action
+    #   The ability to share Airtable actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_airtable_action
+    #   The ability to use Airtable actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] dropbox_action
+    #   The ability to perform actions using Dropbox connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_dropbox_action
+    #   The ability to create and update Dropbox actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_dropbox_action
+    #   The ability to share Dropbox actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_dropbox_action
+    #   The ability to use Dropbox actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] gmail_action
+    #   The ability to perform actions using Gmail connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_gmail_action
+    #   The ability to create and update Gmail actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_gmail_action
+    #   The ability to share Gmail actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_gmail_action
+    #   The ability to use Gmail actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] google_analytics_action
+    #   The ability to perform actions using Google Analytics connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_google_analytics_action
+    #   The ability to create and update Google Analytics actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_google_analytics_action
+    #   The ability to share Google Analytics actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_google_analytics_action
+    #   The ability to use Google Analytics actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] google_docs_action
+    #   The ability to perform actions using Google Docs connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_google_docs_action
+    #   The ability to create and update Google Docs actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_google_docs_action
+    #   The ability to share Google Docs actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_google_docs_action
+    #   The ability to use Google Docs actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] google_drive_action
+    #   The ability to perform actions using Google Drive connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_google_drive_action
+    #   The ability to create and update Google Drive actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_google_drive_action
+    #   The ability to share Google Drive actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_google_drive_action
+    #   The ability to use Google Drive actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] google_meet_action
+    #   The ability to perform actions using Google Meet connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_google_meet_action
+    #   The ability to create and update Google Meet actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_google_meet_action
+    #   The ability to share Google Meet actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_google_meet_action
+    #   The ability to use Google Meet actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] google_sheets_action
+    #   The ability to perform actions using Google Sheets connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_google_sheets_action
+    #   The ability to create and update Google Sheets actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_google_sheets_action
+    #   The ability to share Google Sheets actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_google_sheets_action
+    #   The ability to use Google Sheets actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] google_slides_action
+    #   The ability to perform actions using Google Slides connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_google_slides_action
+    #   The ability to create and update Google Slides actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_google_slides_action
+    #   The ability to share Google Slides actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_google_slides_action
+    #   The ability to use Google Slides actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] quick_books_action
+    #   The ability to perform actions using QuickBooks connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_quick_books_action
+    #   The ability to create and update QuickBooks actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_quick_books_action
+    #   The ability to share QuickBooks actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_quick_books_action
+    #   The ability to use QuickBooks actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] figma_action
+    #   The ability to perform actions using Figma connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_figma_action
+    #   The ability to create and update Figma actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_figma_action
+    #   The ability to share Figma actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_figma_action
+    #   The ability to use Figma actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] whats_app_action
+    #   The ability to perform actions using WhatsApp connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_whats_app_action
+    #   The ability to create and update WhatsApp actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_whats_app_action
+    #   The ability to share WhatsApp actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_whats_app_action
+    #   The ability to use WhatsApp actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] google_chat_action
+    #   The ability to perform actions using Google Chat connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_google_chat_action
+    #   The ability to create and update Google Chat actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_google_chat_action
+    #   The ability to share Google Chat actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_google_chat_action
+    #   The ability to use Google Chat actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] one_note_action
+    #   The ability to perform actions using Microsoft OneNote connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_one_note_action
+    #   The ability to create and update Microsoft OneNote actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_one_note_action
+    #   The ability to share Microsoft OneNote actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_one_note_action
+    #   The ability to use Microsoft OneNote actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] shopify_action
+    #   The ability to perform actions using Shopify connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_shopify_action
+    #   The ability to create and update Shopify actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_shopify_action
+    #   The ability to share Shopify actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_shopify_action
+    #   The ability to use Shopify actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] adobe_action
+    #   The ability to perform actions using Adobe Marketing Agent
+    #   connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_adobe_action
+    #   The ability to create and update Adobe Marketing Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_adobe_action
+    #   The ability to share Adobe Marketing Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_adobe_action
+    #   The ability to use Adobe Marketing Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] cisco_webex_vidcast_action
+    #   The ability to perform actions using Cisco Webex Video Messaging
+    #   Agent connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_cisco_webex_vidcast_action
+    #   The ability to create and update Cisco Webex Video Messaging Agent
+    #   actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_cisco_webex_vidcast_action
+    #   The ability to share Cisco Webex Video Messaging Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_cisco_webex_vidcast_action
+    #   The ability to use Cisco Webex Video Messaging Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] cisco_webex_meetings_action
+    #   The ability to perform actions using Cisco Webex Meetings
+    #   connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_cisco_webex_meetings_action
+    #   The ability to create and update Cisco Webex Meetings actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_cisco_webex_meetings_action
+    #   The ability to share Cisco Webex Meetings actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_cisco_webex_meetings_action
+    #   The ability to use Cisco Webex Meetings actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] dun_and_bradstreet_action
+    #   The ability to perform actions using Dun and Bradstreet connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_dun_and_bradstreet_action
+    #   The ability to create and update Dun and Bradstreet actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_dun_and_bradstreet_action
+    #   The ability to share Dun and Bradstreet actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_dun_and_bradstreet_action
+    #   The ability to use Dun and Bradstreet actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] hg_insights_action
+    #   The ability to perform actions using HG Insights Agent connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_hg_insights_action
+    #   The ability to create and update HG Insights Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_hg_insights_action
+    #   The ability to share HG Insights Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_hg_insights_action
+    #   The ability to use HG Insights Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] zoom_info_action
+    #   The ability to perform actions using ZoomInfo Agent connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_zoom_info_action
+    #   The ability to create and update ZoomInfo Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_zoom_info_action
+    #   The ability to share ZoomInfo Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_zoom_info_action
+    #   The ability to use ZoomInfo Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] moodys_action
+    #   The ability to perform actions using Moody's GenAI Ready Data
+    #   connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_moodys_action
+    #   The ability to create and update Moody's GenAI Ready Data actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_moodys_action
+    #   The ability to share Moody's GenAI Ready Data actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_moodys_action
+    #   The ability to use Moody's GenAI Ready Data actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] bee_action
+    #   The ability to perform actions using Bee connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_bee_action
+    #   The ability to create and update Bee actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_bee_action
+    #   The ability to share Bee actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_bee_action
+    #   The ability to use Bee actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] gong_action
+    #   The ability to perform actions using Gong connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_gong_action
+    #   The ability to create and update Gong actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_gong_action
+    #   The ability to share Gong actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_gong_action
+    #   The ability to use Gong actions.
+    #   @return [String]
+    #
     # @!attribute [rw] topic
     #   The ability to perform Topic-related actions.
     #   @return [String]
@@ -6815,6 +7285,742 @@ module Aws::QuickSight
     # @!attribute [rw] quick_event_trigger
     #   The ability to create, view, edit, delete, and run Quick event
     #   triggers for flows and automations.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_data_source
+    #   The ability to create, update, and share file data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_file_data_source
+    #   The ability to create file data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_file_data_source
+    #   The ability to update file data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_file_data_source
+    #   The ability to share file data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_data_source
+    #   The ability to create, update, and share Amazon S3 data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_s3_data_source
+    #   The ability to create Amazon S3 data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_s3_data_source
+    #   The ability to update Amazon S3 data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_s3_data_source
+    #   The ability to share Amazon S3 data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_analytics_data_source
+    #   The ability to create, update, and share Amazon S3 Analytics data
+    #   sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_s3_analytics_data_source
+    #   The ability to create Amazon S3 Analytics data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_s3_analytics_data_source
+    #   The ability to update Amazon S3 Analytics data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_s3_analytics_data_source
+    #   The ability to share Amazon S3 Analytics data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_tables_data_source
+    #   The ability to create, update, and share Amazon S3 Tables data
+    #   sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_s3_tables_data_source
+    #   The ability to create Amazon S3 Tables data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_s3_tables_data_source
+    #   The ability to update Amazon S3 Tables data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_s3_tables_data_source
+    #   The ability to share Amazon S3 Tables data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] athena_data_source
+    #   The ability to create, update, and share Amazon Athena data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_athena_data_source
+    #   The ability to create Amazon Athena data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_athena_data_source
+    #   The ability to update Amazon Athena data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_athena_data_source
+    #   The ability to share Amazon Athena data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] rds_data_source
+    #   The ability to create, update, and share auto-discovered Amazon RDS
+    #   data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_rds_data_source
+    #   The ability to create auto-discovered Amazon RDS data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_rds_data_source
+    #   The ability to update auto-discovered Amazon RDS data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_rds_data_source
+    #   The ability to share auto-discovered Amazon RDS data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] redshift_auto_discovered_data_source
+    #   The ability to create, update, and share auto-discovered Amazon
+    #   Redshift data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_redshift_auto_discovered_data_source
+    #   The ability to create auto-discovered Amazon Redshift data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_redshift_auto_discovered_data_source
+    #   The ability to update auto-discovered Amazon Redshift data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_redshift_auto_discovered_data_source
+    #   The ability to share auto-discovered Amazon Redshift data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] redshift_manual_data_source
+    #   The ability to create, update, and share manually configured Amazon
+    #   Redshift data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_redshift_manual_data_source
+    #   The ability to create manually configured Amazon Redshift data
+    #   sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_redshift_manual_data_source
+    #   The ability to update manually configured Amazon Redshift data
+    #   sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_redshift_manual_data_source
+    #   The ability to share manually configured Amazon Redshift data
+    #   sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] open_search_data_source
+    #   The ability to create, update, and share Amazon OpenSearch Service
+    #   data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_open_search_data_source
+    #   The ability to create Amazon OpenSearch Service data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_open_search_data_source
+    #   The ability to update Amazon OpenSearch Service data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_open_search_data_source
+    #   The ability to share Amazon OpenSearch Service data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestream_data_source
+    #   The ability to create, update, and share Amazon Timestream data
+    #   sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_timestream_data_source
+    #   The ability to create Amazon Timestream data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_timestream_data_source
+    #   The ability to update Amazon Timestream data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_timestream_data_source
+    #   The ability to share Amazon Timestream data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] aurora_data_source
+    #   The ability to create, update, and share Amazon Aurora data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_aurora_data_source
+    #   The ability to create Amazon Aurora data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_aurora_data_source
+    #   The ability to update Amazon Aurora data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_aurora_data_source
+    #   The ability to share Amazon Aurora data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] my_sql_data_source
+    #   The ability to create, update, and share MySQL data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_my_sql_data_source
+    #   The ability to create MySQL data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_my_sql_data_source
+    #   The ability to update MySQL data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_my_sql_data_source
+    #   The ability to share MySQL data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] postgre_sql_data_source
+    #   The ability to create, update, and share PostgreSQL data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_postgre_sql_data_source
+    #   The ability to create PostgreSQL data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_postgre_sql_data_source
+    #   The ability to update PostgreSQL data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_postgre_sql_data_source
+    #   The ability to share PostgreSQL data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] oracle_data_source
+    #   The ability to create, update, and share Oracle data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_oracle_data_source
+    #   The ability to create Oracle data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_oracle_data_source
+    #   The ability to update Oracle data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_oracle_data_source
+    #   The ability to share Oracle data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] sql_server_data_source
+    #   The ability to create, update, and share SQL Server data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_sql_server_data_source
+    #   The ability to create SQL Server data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_sql_server_data_source
+    #   The ability to update SQL Server data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_sql_server_data_source
+    #   The ability to share SQL Server data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] maria_db_data_source
+    #   The ability to create, update, and share MariaDB data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_maria_db_data_source
+    #   The ability to create MariaDB data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_maria_db_data_source
+    #   The ability to update MariaDB data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_maria_db_data_source
+    #   The ability to share MariaDB data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] snowflake_data_source
+    #   The ability to create, update, and share Snowflake data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_snowflake_data_source
+    #   The ability to create Snowflake data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_snowflake_data_source
+    #   The ability to update Snowflake data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_snowflake_data_source
+    #   The ability to share Snowflake data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] google_big_query_data_source
+    #   The ability to create, update, and share Google BigQuery data
+    #   sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_google_big_query_data_source
+    #   The ability to create Google BigQuery data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_google_big_query_data_source
+    #   The ability to update Google BigQuery data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_google_big_query_data_source
+    #   The ability to share Google BigQuery data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] databricks_data_source
+    #   The ability to create, update, and share Databricks data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_databricks_data_source
+    #   The ability to create Databricks data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_databricks_data_source
+    #   The ability to update Databricks data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_databricks_data_source
+    #   The ability to share Databricks data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] starburst_data_source
+    #   The ability to create, update, and share Starburst data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_starburst_data_source
+    #   The ability to create Starburst data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_starburst_data_source
+    #   The ability to update Starburst data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_starburst_data_source
+    #   The ability to share Starburst data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] trino_data_source
+    #   The ability to create, update, and share Trino data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_trino_data_source
+    #   The ability to create Trino data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_trino_data_source
+    #   The ability to update Trino data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_trino_data_source
+    #   The ability to share Trino data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] impala_data_source
+    #   The ability to create, update, and share Impala data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_impala_data_source
+    #   The ability to create Impala data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_impala_data_source
+    #   The ability to update Impala data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_impala_data_source
+    #   The ability to share Impala data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] teradata_data_source
+    #   The ability to create, update, and share Teradata data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_teradata_data_source
+    #   The ability to create Teradata data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_teradata_data_source
+    #   The ability to update Teradata data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_teradata_data_source
+    #   The ability to share Teradata data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] presto_data_source
+    #   The ability to create, update, and share Presto data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_presto_data_source
+    #   The ability to create Presto data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_presto_data_source
+    #   The ability to update Presto data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_presto_data_source
+    #   The ability to share Presto data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] spark_data_source
+    #   The ability to create, update, and share Spark data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_spark_data_source
+    #   The ability to create Spark data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_spark_data_source
+    #   The ability to update Spark data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_spark_data_source
+    #   The ability to share Spark data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] exasol_data_source
+    #   The ability to create, update, and share Exasol data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_exasol_data_source
+    #   The ability to create Exasol data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_exasol_data_source
+    #   The ability to update Exasol data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_exasol_data_source
+    #   The ability to share Exasol data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_2_data_source
+    #   The ability to create, update, and share Db2 data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_db_2_data_source
+    #   The ability to create Db2 data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_db_2_data_source
+    #   The ability to update Db2 data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_db_2_data_source
+    #   The ability to share Db2 data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] sap_hana_data_source
+    #   The ability to create, update, and share SAP HANA data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_sap_hana_data_source
+    #   The ability to create SAP HANA data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_sap_hana_data_source
+    #   The ability to update SAP HANA data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_sap_hana_data_source
+    #   The ability to share SAP HANA data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] denodo_data_source
+    #   The ability to create, update, and share Denodo data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_denodo_data_source
+    #   The ability to create Denodo data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_denodo_data_source
+    #   The ability to update Denodo data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_denodo_data_source
+    #   The ability to share Denodo data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] dremio_data_source
+    #   The ability to create, update, and share Dremio data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_dremio_data_source
+    #   The ability to create Dremio data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_dremio_data_source
+    #   The ability to update Dremio data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_dremio_data_source
+    #   The ability to share Dremio data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] salesforce_data_source
+    #   The ability to create, update, and share Salesforce data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_salesforce_data_source
+    #   The ability to create Salesforce data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_salesforce_data_source
+    #   The ability to update Salesforce data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_salesforce_data_source
+    #   The ability to share Salesforce data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] radiant_data_source
+    #   The ability to create, update, and share Amazon QuickSight data
+    #   sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_radiant_data_source
+    #   The ability to create Amazon QuickSight data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_radiant_data_source
+    #   The ability to update Amazon QuickSight data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_radiant_data_source
+    #   The ability to share Amazon QuickSight data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] pay_pal_data_source
+    #   The ability to create, update, and share PayPal data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_pay_pal_data_source
+    #   The ability to create PayPal data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_pay_pal_data_source
+    #   The ability to update PayPal data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_pay_pal_data_source
+    #   The ability to share PayPal data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] square_data_source
+    #   The ability to create, update, and share Square data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_square_data_source
+    #   The ability to create Square data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_square_data_source
+    #   The ability to update Square data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_square_data_source
+    #   The ability to share Square data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] git_hub_data_source
+    #   The ability to create, update, and share GitHub data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_git_hub_data_source
+    #   The ability to create GitHub data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_git_hub_data_source
+    #   The ability to update GitHub data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_git_hub_data_source
+    #   The ability to share GitHub data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] twitter_data_source
+    #   The ability to create, update, and share Twitter data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_twitter_data_source
+    #   The ability to create Twitter data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_twitter_data_source
+    #   The ability to update Twitter data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_twitter_data_source
+    #   The ability to share Twitter data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] jira_data_source
+    #   The ability to create, update, and share Jira data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_jira_data_source
+    #   The ability to create Jira data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_jira_data_source
+    #   The ability to update Jira data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_jira_data_source
+    #   The ability to share Jira data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_now_data_source
+    #   The ability to create, update, and share ServiceNow data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_service_now_data_source
+    #   The ability to create ServiceNow data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_service_now_data_source
+    #   The ability to update ServiceNow data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_service_now_data_source
+    #   The ability to share ServiceNow data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] adobe_analytics_data_source
+    #   The ability to create, update, and share Adobe Analytics data
+    #   sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_adobe_analytics_data_source
+    #   The ability to create Adobe Analytics data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_adobe_analytics_data_source
+    #   The ability to update Adobe Analytics data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_adobe_analytics_data_source
+    #   The ability to share Adobe Analytics data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] google_analytics_data_source
+    #   The ability to create, update, and share Google Analytics data
+    #   sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_google_analytics_data_source
+    #   The ability to create Google Analytics data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_google_analytics_data_source
+    #   The ability to update Google Analytics data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_google_analytics_data_source
+    #   The ability to share Google Analytics data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] google_sheets_data_source
+    #   The ability to create, update, and share Google Sheets data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_google_sheets_data_source
+    #   The ability to create Google Sheets data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_google_sheets_data_source
+    #   The ability to update Google Sheets data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_google_sheets_data_source
+    #   The ability to share Google Sheets data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_db_data_source
+    #   The ability to create, update, and share Amazon DocumentDB data
+    #   sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_document_db_data_source
+    #   The ability to create Amazon DocumentDB data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_document_db_data_source
+    #   The ability to update Amazon DocumentDB data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_document_db_data_source
+    #   The ability to share Amazon DocumentDB data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] mongo_db_data_source
+    #   The ability to create, update, and share MongoDB data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_mongo_db_data_source
+    #   The ability to create MongoDB data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_mongo_db_data_source
+    #   The ability to update MongoDB data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_mongo_db_data_source
+    #   The ability to share MongoDB data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] mongo_atlas_data_source
+    #   The ability to create, update, and share MongoDB Atlas data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_mongo_atlas_data_source
+    #   The ability to create MongoDB Atlas data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_mongo_atlas_data_source
+    #   The ability to update MongoDB Atlas data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_mongo_atlas_data_source
+    #   The ability to share MongoDB Atlas data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] dynamo_db_data_source
+    #   The ability to create, update, and share Amazon DynamoDB data
+    #   sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_dynamo_db_data_source
+    #   The ability to create Amazon DynamoDB data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_dynamo_db_data_source
+    #   The ability to update Amazon DynamoDB data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_dynamo_db_data_source
+    #   The ability to share Amazon DynamoDB data sources.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Capabilities AWS API Documentation
@@ -7073,6 +8279,122 @@ module Aws::QuickSight
       :create_and_update_new_relic_action,
       :share_new_relic_action,
       :use_new_relic_action,
+      :pager_duty_agent_action,
+      :create_and_update_pager_duty_agent_action,
+      :share_pager_duty_agent_action,
+      :use_pager_duty_agent_action,
+      :visier_agent_action,
+      :create_and_update_visier_agent_action,
+      :share_visier_agent_action,
+      :use_visier_agent_action,
+      :zoom_action,
+      :create_and_update_zoom_action,
+      :share_zoom_action,
+      :use_zoom_action,
+      :snow_flake_action,
+      :create_and_update_snow_flake_action,
+      :share_snow_flake_action,
+      :use_snow_flake_action,
+      :zapier_action,
+      :create_and_update_zapier_action,
+      :share_zapier_action,
+      :use_zapier_action,
+      :airtable_action,
+      :create_and_update_airtable_action,
+      :share_airtable_action,
+      :use_airtable_action,
+      :dropbox_action,
+      :create_and_update_dropbox_action,
+      :share_dropbox_action,
+      :use_dropbox_action,
+      :gmail_action,
+      :create_and_update_gmail_action,
+      :share_gmail_action,
+      :use_gmail_action,
+      :google_analytics_action,
+      :create_and_update_google_analytics_action,
+      :share_google_analytics_action,
+      :use_google_analytics_action,
+      :google_docs_action,
+      :create_and_update_google_docs_action,
+      :share_google_docs_action,
+      :use_google_docs_action,
+      :google_drive_action,
+      :create_and_update_google_drive_action,
+      :share_google_drive_action,
+      :use_google_drive_action,
+      :google_meet_action,
+      :create_and_update_google_meet_action,
+      :share_google_meet_action,
+      :use_google_meet_action,
+      :google_sheets_action,
+      :create_and_update_google_sheets_action,
+      :share_google_sheets_action,
+      :use_google_sheets_action,
+      :google_slides_action,
+      :create_and_update_google_slides_action,
+      :share_google_slides_action,
+      :use_google_slides_action,
+      :quick_books_action,
+      :create_and_update_quick_books_action,
+      :share_quick_books_action,
+      :use_quick_books_action,
+      :figma_action,
+      :create_and_update_figma_action,
+      :share_figma_action,
+      :use_figma_action,
+      :whats_app_action,
+      :create_and_update_whats_app_action,
+      :share_whats_app_action,
+      :use_whats_app_action,
+      :google_chat_action,
+      :create_and_update_google_chat_action,
+      :share_google_chat_action,
+      :use_google_chat_action,
+      :one_note_action,
+      :create_and_update_one_note_action,
+      :share_one_note_action,
+      :use_one_note_action,
+      :shopify_action,
+      :create_and_update_shopify_action,
+      :share_shopify_action,
+      :use_shopify_action,
+      :adobe_action,
+      :create_and_update_adobe_action,
+      :share_adobe_action,
+      :use_adobe_action,
+      :cisco_webex_vidcast_action,
+      :create_and_update_cisco_webex_vidcast_action,
+      :share_cisco_webex_vidcast_action,
+      :use_cisco_webex_vidcast_action,
+      :cisco_webex_meetings_action,
+      :create_and_update_cisco_webex_meetings_action,
+      :share_cisco_webex_meetings_action,
+      :use_cisco_webex_meetings_action,
+      :dun_and_bradstreet_action,
+      :create_and_update_dun_and_bradstreet_action,
+      :share_dun_and_bradstreet_action,
+      :use_dun_and_bradstreet_action,
+      :hg_insights_action,
+      :create_and_update_hg_insights_action,
+      :share_hg_insights_action,
+      :use_hg_insights_action,
+      :zoom_info_action,
+      :create_and_update_zoom_info_action,
+      :share_zoom_info_action,
+      :use_zoom_info_action,
+      :moodys_action,
+      :create_and_update_moodys_action,
+      :share_moodys_action,
+      :use_moodys_action,
+      :bee_action,
+      :create_and_update_bee_action,
+      :share_bee_action,
+      :use_bee_action,
+      :gong_action,
+      :create_and_update_gong_action,
+      :share_gong_action,
+      :use_gong_action,
       :topic,
       :edit_visual_with_q,
       :build_calculated_field_with_q,
@@ -7098,7 +8420,187 @@ module Aws::QuickSight
       :trigger,
       :schedule_trigger,
       :inbound_email_trigger,
-      :quick_event_trigger)
+      :quick_event_trigger,
+      :file_data_source,
+      :create_file_data_source,
+      :update_file_data_source,
+      :share_file_data_source,
+      :s3_data_source,
+      :create_s3_data_source,
+      :update_s3_data_source,
+      :share_s3_data_source,
+      :s3_analytics_data_source,
+      :create_s3_analytics_data_source,
+      :update_s3_analytics_data_source,
+      :share_s3_analytics_data_source,
+      :s3_tables_data_source,
+      :create_s3_tables_data_source,
+      :update_s3_tables_data_source,
+      :share_s3_tables_data_source,
+      :athena_data_source,
+      :create_athena_data_source,
+      :update_athena_data_source,
+      :share_athena_data_source,
+      :rds_data_source,
+      :create_rds_data_source,
+      :update_rds_data_source,
+      :share_rds_data_source,
+      :redshift_auto_discovered_data_source,
+      :create_redshift_auto_discovered_data_source,
+      :update_redshift_auto_discovered_data_source,
+      :share_redshift_auto_discovered_data_source,
+      :redshift_manual_data_source,
+      :create_redshift_manual_data_source,
+      :update_redshift_manual_data_source,
+      :share_redshift_manual_data_source,
+      :open_search_data_source,
+      :create_open_search_data_source,
+      :update_open_search_data_source,
+      :share_open_search_data_source,
+      :timestream_data_source,
+      :create_timestream_data_source,
+      :update_timestream_data_source,
+      :share_timestream_data_source,
+      :aurora_data_source,
+      :create_aurora_data_source,
+      :update_aurora_data_source,
+      :share_aurora_data_source,
+      :my_sql_data_source,
+      :create_my_sql_data_source,
+      :update_my_sql_data_source,
+      :share_my_sql_data_source,
+      :postgre_sql_data_source,
+      :create_postgre_sql_data_source,
+      :update_postgre_sql_data_source,
+      :share_postgre_sql_data_source,
+      :oracle_data_source,
+      :create_oracle_data_source,
+      :update_oracle_data_source,
+      :share_oracle_data_source,
+      :sql_server_data_source,
+      :create_sql_server_data_source,
+      :update_sql_server_data_source,
+      :share_sql_server_data_source,
+      :maria_db_data_source,
+      :create_maria_db_data_source,
+      :update_maria_db_data_source,
+      :share_maria_db_data_source,
+      :snowflake_data_source,
+      :create_snowflake_data_source,
+      :update_snowflake_data_source,
+      :share_snowflake_data_source,
+      :google_big_query_data_source,
+      :create_google_big_query_data_source,
+      :update_google_big_query_data_source,
+      :share_google_big_query_data_source,
+      :databricks_data_source,
+      :create_databricks_data_source,
+      :update_databricks_data_source,
+      :share_databricks_data_source,
+      :starburst_data_source,
+      :create_starburst_data_source,
+      :update_starburst_data_source,
+      :share_starburst_data_source,
+      :trino_data_source,
+      :create_trino_data_source,
+      :update_trino_data_source,
+      :share_trino_data_source,
+      :impala_data_source,
+      :create_impala_data_source,
+      :update_impala_data_source,
+      :share_impala_data_source,
+      :teradata_data_source,
+      :create_teradata_data_source,
+      :update_teradata_data_source,
+      :share_teradata_data_source,
+      :presto_data_source,
+      :create_presto_data_source,
+      :update_presto_data_source,
+      :share_presto_data_source,
+      :spark_data_source,
+      :create_spark_data_source,
+      :update_spark_data_source,
+      :share_spark_data_source,
+      :exasol_data_source,
+      :create_exasol_data_source,
+      :update_exasol_data_source,
+      :share_exasol_data_source,
+      :db_2_data_source,
+      :create_db_2_data_source,
+      :update_db_2_data_source,
+      :share_db_2_data_source,
+      :sap_hana_data_source,
+      :create_sap_hana_data_source,
+      :update_sap_hana_data_source,
+      :share_sap_hana_data_source,
+      :denodo_data_source,
+      :create_denodo_data_source,
+      :update_denodo_data_source,
+      :share_denodo_data_source,
+      :dremio_data_source,
+      :create_dremio_data_source,
+      :update_dremio_data_source,
+      :share_dremio_data_source,
+      :salesforce_data_source,
+      :create_salesforce_data_source,
+      :update_salesforce_data_source,
+      :share_salesforce_data_source,
+      :radiant_data_source,
+      :create_radiant_data_source,
+      :update_radiant_data_source,
+      :share_radiant_data_source,
+      :pay_pal_data_source,
+      :create_pay_pal_data_source,
+      :update_pay_pal_data_source,
+      :share_pay_pal_data_source,
+      :square_data_source,
+      :create_square_data_source,
+      :update_square_data_source,
+      :share_square_data_source,
+      :git_hub_data_source,
+      :create_git_hub_data_source,
+      :update_git_hub_data_source,
+      :share_git_hub_data_source,
+      :twitter_data_source,
+      :create_twitter_data_source,
+      :update_twitter_data_source,
+      :share_twitter_data_source,
+      :jira_data_source,
+      :create_jira_data_source,
+      :update_jira_data_source,
+      :share_jira_data_source,
+      :service_now_data_source,
+      :create_service_now_data_source,
+      :update_service_now_data_source,
+      :share_service_now_data_source,
+      :adobe_analytics_data_source,
+      :create_adobe_analytics_data_source,
+      :update_adobe_analytics_data_source,
+      :share_adobe_analytics_data_source,
+      :google_analytics_data_source,
+      :create_google_analytics_data_source,
+      :update_google_analytics_data_source,
+      :share_google_analytics_data_source,
+      :google_sheets_data_source,
+      :create_google_sheets_data_source,
+      :update_google_sheets_data_source,
+      :share_google_sheets_data_source,
+      :document_db_data_source,
+      :create_document_db_data_source,
+      :update_document_db_data_source,
+      :share_document_db_data_source,
+      :mongo_db_data_source,
+      :create_mongo_db_data_source,
+      :update_mongo_db_data_source,
+      :share_mongo_db_data_source,
+      :mongo_atlas_data_source,
+      :create_mongo_atlas_data_source,
+      :update_mongo_atlas_data_source,
+      :share_mongo_atlas_data_source,
+      :dynamo_db_data_source,
+      :create_dynamo_db_data_source,
+      :update_dynamo_db_data_source,
+      :share_dynamo_db_data_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14642,6 +16144,23 @@ module Aws::QuickSight
     #   information, see ` OAuthClientCredentials `.
     #   @return [Types::OAuthClientCredentials]
     #
+    # @!attribute [rw] service_account_credentials
+    #   The service account credentials for connecting to a data source that
+    #   uses Google Workspace domain-wide delegation.
+    #   @return [Types::ServiceAccountCredentials]
+    #
+    # @!attribute [rw] share_point_client_credentials
+    #   The client credentials for connecting to a Microsoft SharePoint data
+    #   source using two-legged OAuth (2LO) certificate-based
+    #   authentication.
+    #   @return [Types::SharePointClientCredentials]
+    #
+    # @!attribute [rw] one_drive_client_credentials
+    #   The client credentials for connecting to a Microsoft OneDrive data
+    #   source using two-legged OAuth (2LO) certificate-based
+    #   authentication.
+    #   @return [Types::OneDriveClientCredentials]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSourceCredentials AWS API Documentation
     #
     class DataSourceCredentials < Struct.new(
@@ -14650,7 +16169,10 @@ module Aws::QuickSight
       :secret_arn,
       :key_pair_credentials,
       :web_proxy_credentials,
-      :o_auth_client_credentials)
+      :o_auth_client_credentials,
+      :service_account_credentials,
+      :share_point_client_credentials,
+      :one_drive_client_credentials)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15019,12 +16541,24 @@ module Aws::QuickSight
     #   The HTTP path of the Databricks data source.
     #   @return [String]
     #
+    # @!attribute [rw] authentication_type
+    #   The authentication type that you want to use for your connection.
+    #   This parameter accepts OAuth and non-OAuth authentication types.
+    #   @return [String]
+    #
+    # @!attribute [rw] o_auth_parameters
+    #   An object that contains information needed to create a data source
+    #   connection between an Quick Sight account and Databricks.
+    #   @return [Types::OAuthParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DatabricksParameters AWS API Documentation
     #
     class DatabricksParameters < Struct.new(
       :host,
       :port,
-      :sql_endpoint_path)
+      :sql_endpoint_path,
+      :authentication_type,
+      :o_auth_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15803,6 +17337,16 @@ module Aws::QuickSight
     #   control type.
     #   @return [Types::DefaultRelativeDateTimeControlOptions]
     #
+    # @!attribute [rw] default_hierarchy_list
+    #   The default options that correspond to the `HierarchyList` filter
+    #   control type.
+    #   @return [Types::DefaultHierarchyFilterListControlOptions]
+    #
+    # @!attribute [rw] default_hierarchy_dropdown
+    #   The default options that correspond to the `HierarchyDropdown`
+    #   filter control type.
+    #   @return [Types::DefaultHierarchyFilterDropDownControlOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DefaultFilterControlOptions AWS API Documentation
     #
     class DefaultFilterControlOptions < Struct.new(
@@ -15812,7 +17356,9 @@ module Aws::QuickSight
       :default_text_field_options,
       :default_text_area_options,
       :default_slider_options,
-      :default_relative_date_time_options)
+      :default_relative_date_time_options,
+      :default_hierarchy_list,
+      :default_hierarchy_dropdown)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15943,6 +17489,93 @@ module Aws::QuickSight
     #
     class DefaultGridLayoutConfiguration < Struct.new(
       :canvas_size_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The default options that correspond to the `HierarchyDropdown` filter
+    # control type.
+    #
+    # @!attribute [rw] display_options
+    #   The display options of a control.
+    #   @return [Types::HierarchyFilterDropDownControlDisplayOptions]
+    #
+    # @!attribute [rw] type
+    #   The type of the `DefaultHierarchyFilterDropDownControlOptions`.
+    #   Choose one of the following options:
+    #
+    #   * `MULTI_SELECT`: The user can select multiple entries from a
+    #     dropdown menu.
+    #
+    #   * `SINGLE_SELECT`: The user can select a single entry from a
+    #     dropdown menu.
+    #   @return [String]
+    #
+    # @!attribute [rw] commit_mode
+    #   The visibility configuration of the Apply button on a
+    #   `HierarchyFilterDropDownControl`.
+    #   @return [String]
+    #
+    # @!attribute [rw] control_sort_configurations
+    #   The sort configuration for the values displayed in the control. Only
+    #   one sort configuration can be applied per control.
+    #   @return [Array<Types::ControlSortConfiguration>]
+    #
+    # @!attribute [rw] control_title_format_text
+    #   The title text format configuration for the control.
+    #   @return [Types::ControlTitleFormatText]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DefaultHierarchyFilterDropDownControlOptions AWS API Documentation
+    #
+    class DefaultHierarchyFilterDropDownControlOptions < Struct.new(
+      :display_options,
+      :type,
+      :commit_mode,
+      :control_sort_configurations,
+      :control_title_format_text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The default options that correspond to the `HierarchyList` filter
+    # control type.
+    #
+    # @!attribute [rw] display_options
+    #   The display options of a control.
+    #   @return [Types::HierarchyFilterListControlDisplayOptions]
+    #
+    # @!attribute [rw] type
+    #   The type of the `DefaultHierarchyFilterListControlOptions`. Choose
+    #   one of the following options:
+    #
+    #   * `MULTI_SELECT`: The user can select multiple entries from the
+    #     list.
+    #
+    #   * `SINGLE_SELECT`: The user can select a single entry from the list.
+    #   @return [String]
+    #
+    # @!attribute [rw] commit_mode
+    #   The visibility configuration of the Apply button on a
+    #   `HierarchyFilterListControl`.
+    #   @return [String]
+    #
+    # @!attribute [rw] control_sort_configurations
+    #   The sort configuration for the values displayed in the control. Only
+    #   one sort configuration can be applied per control.
+    #   @return [Array<Types::ControlSortConfiguration>]
+    #
+    # @!attribute [rw] control_title_format_text
+    #   The title text format configuration for the control.
+    #   @return [Types::ControlTitleFormatText]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DefaultHierarchyFilterListControlOptions AWS API Documentation
+    #
+    class DefaultHierarchyFilterListControlOptions < Struct.new(
+      :display_options,
+      :type,
+      :commit_mode,
+      :control_sort_configurations,
+      :control_title_format_text)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23020,6 +24653,13 @@ module Aws::QuickSight
     #   by the nested inner filter.
     #   @return [Types::NestedFilter]
     #
+    # @!attribute [rw] hierarchy_filter
+    #   A `HierarchyFilter` filters data by drilling down through an ordered
+    #   list of columns. Each level in the list narrows the data by one
+    #   column, and the selected values at each level determine which values
+    #   are available at the next.
+    #   @return [Types::HierarchyFilter]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Filter AWS API Documentation
     #
     class Filter < Struct.new(
@@ -23030,7 +24670,8 @@ module Aws::QuickSight
       :time_range_filter,
       :relative_dates_filter,
       :top_bottom_filter,
-      :nested_filter)
+      :nested_filter,
+      :hierarchy_filter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23104,6 +24745,18 @@ module Aws::QuickSight
     #   This represents your filter control on a sheet
     #   @return [Types::FilterCrossSheetControl]
     #
+    # @!attribute [rw] hierarchy_list
+    #   A control from a hierarchy filter that displays the hierarchy as a
+    #   list. You can expand a value to see and select the values beneath
+    #   it, and select either a single value or multiple values.
+    #   @return [Types::HierarchyFilterListControl]
+    #
+    # @!attribute [rw] hierarchy_dropdown
+    #   A control from a hierarchy filter that displays the hierarchy as a
+    #   dropdown list. You can expand a value to see and select the values
+    #   beneath it, and select either a single value or multiple values.
+    #   @return [Types::HierarchyFilterDropDownControl]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FilterControl AWS API Documentation
     #
     class FilterControl < Struct.new(
@@ -23114,7 +24767,9 @@ module Aws::QuickSight
       :text_area,
       :slider,
       :relative_date_time,
-      :cross_sheet)
+      :cross_sheet,
+      :hierarchy_list,
+      :hierarchy_dropdown)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27277,6 +28932,317 @@ module Aws::QuickSight
       :actions,
       :visual_content_alt_text)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A `HierarchyFilter` filters data by drilling down through an ordered
+    # list of columns. Each level in the list narrows the data by one
+    # column, and the selected values at each level determine which values
+    # are available at the next.
+    #
+    # @!attribute [rw] filter_id
+    #   An identifier that uniquely identifies a filter within a dashboard,
+    #   analysis, or template.
+    #   @return [String]
+    #
+    # @!attribute [rw] column
+    #   The column that anchors the filter. This column determines the
+    #   dataset that the whole filter applies to, so every column in
+    #   `HierarchyLevels` and in `HierarchyTree` must belong to the same
+    #   dataset.
+    #   @return [Types::ColumnIdentifier]
+    #
+    # @!attribute [rw] hierarchy_levels
+    #   The ordered list of columns that defines the drill-down path of the
+    #   filter. The first level is the top of the hierarchy. You can specify
+    #   a maximum of 5 levels.
+    #   @return [Array<Types::HierarchyFilterLevel>]
+    #
+    # @!attribute [rw] hierarchy_tree
+    #   The tree of selected values for the filter. Each node records the
+    #   values that are selected at one level of the hierarchy, and its
+    #   children record the selections beneath those values. Omit this
+    #   attribute to define the drill-down path without restricting any
+    #   values.
+    #   @return [Types::HierarchyFilterNode]
+    #
+    # @!attribute [rw] null_option
+    #   This option determines how null values should be treated when
+    #   filtering data.
+    #
+    #   * `ALL_VALUES`: Include null values in filtered results.
+    #
+    #   * `NULLS_ONLY`: Only include null values in filtered results.
+    #
+    #   * `NON_NULLS_ONLY`: Exclude null values from filtered results.
+    #   @return [String]
+    #
+    # @!attribute [rw] match_operator
+    #   Determines whether the values selected in `HierarchyTree` are kept
+    #   or removed. Choose one of the following options:
+    #
+    #   * `INCLUDE`: Keep only the selected values.
+    #
+    #   * `EXCLUDE`: Remove the selected values.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_filter_control_configuration
+    #   The default configurations for the associated controls. This applies
+    #   only for filters that are scoped to multiple sheets.
+    #   @return [Types::DefaultFilterControlConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/HierarchyFilter AWS API Documentation
+    #
+    class HierarchyFilter < Struct.new(
+      :filter_id,
+      :column,
+      :hierarchy_levels,
+      :hierarchy_tree,
+      :null_option,
+      :match_operator,
+      :default_filter_control_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A control from a hierarchy filter that displays the hierarchy as a
+    # dropdown list. You can expand a value to see and select the values
+    # beneath it, and select either a single value or multiple values.
+    #
+    # @!attribute [rw] filter_control_id
+    #   The ID of the `HierarchyFilterDropDownControl`.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_filter_id
+    #   The source filter ID of the `HierarchyFilterDropDownControl`. This
+    #   must be the `FilterId` of a `HierarchyFilter`.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title of the `HierarchyFilterDropDownControl`.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_options
+    #   The display options of a control.
+    #   @return [Types::HierarchyFilterDropDownControlDisplayOptions]
+    #
+    # @!attribute [rw] type
+    #   The type of the `HierarchyFilterDropDownControl`. Choose one of the
+    #   following options:
+    #
+    #   * `MULTI_SELECT`: The user can select multiple entries from a
+    #     dropdown menu.
+    #
+    #   * `SINGLE_SELECT`: The user can select a single entry from a
+    #     dropdown menu.
+    #   @return [String]
+    #
+    # @!attribute [rw] commit_mode
+    #   The visibility configuration of the Apply button on a
+    #   `HierarchyFilterDropDownControl`.
+    #   @return [String]
+    #
+    # @!attribute [rw] control_sort_configurations
+    #   The sort configuration for the values displayed in the control. Only
+    #   one sort configuration can be applied per control.
+    #   @return [Array<Types::ControlSortConfiguration>]
+    #
+    # @!attribute [rw] control_title_format_text
+    #   The title text format configuration for the control.
+    #   @return [Types::ControlTitleFormatText]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/HierarchyFilterDropDownControl AWS API Documentation
+    #
+    class HierarchyFilterDropDownControl < Struct.new(
+      :filter_control_id,
+      :source_filter_id,
+      :title,
+      :display_options,
+      :type,
+      :commit_mode,
+      :control_sort_configurations,
+      :control_title_format_text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The display options of a control.
+    #
+    # @!attribute [rw] title_options
+    #   The options to configure the title visibility, name, and font size.
+    #   @return [Types::LabelOptions]
+    #
+    # @!attribute [rw] info_icon_label_options
+    #   The configuration of info icon label options.
+    #   @return [Types::SheetControlInfoIconLabelOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/HierarchyFilterDropDownControlDisplayOptions AWS API Documentation
+    #
+    class HierarchyFilterDropDownControlDisplayOptions < Struct.new(
+      :title_options,
+      :info_icon_label_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # One level of the drill-down path of a `HierarchyFilter`.
+    #
+    # @!attribute [rw] column
+    #   The column that this level of the hierarchy drills down by. This
+    #   column must belong to the same dataset as `HierarchyFilter$Column`.
+    #   @return [Types::ColumnIdentifier]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/HierarchyFilterLevel AWS API Documentation
+    #
+    class HierarchyFilterLevel < Struct.new(
+      :column)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A control from a hierarchy filter that displays the hierarchy as a
+    # list. You can expand a value to see and select the values beneath it,
+    # and select either a single value or multiple values.
+    #
+    # @!attribute [rw] filter_control_id
+    #   The ID of the `HierarchyFilterListControl`.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_filter_id
+    #   The source filter ID of the `HierarchyFilterListControl`. This must
+    #   be the `FilterId` of a `HierarchyFilter`.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title of the `HierarchyFilterListControl`.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_options
+    #   The display options of a control.
+    #   @return [Types::HierarchyFilterListControlDisplayOptions]
+    #
+    # @!attribute [rw] type
+    #   The type of the `HierarchyFilterListControl`. Choose one of the
+    #   following options:
+    #
+    #   * `MULTI_SELECT`: The user can select multiple entries from the
+    #     list.
+    #
+    #   * `SINGLE_SELECT`: The user can select a single entry from the list.
+    #   @return [String]
+    #
+    # @!attribute [rw] commit_mode
+    #   The visibility configuration of the Apply button on a
+    #   `HierarchyFilterListControl`.
+    #   @return [String]
+    #
+    # @!attribute [rw] control_sort_configurations
+    #   The sort configuration for the values displayed in the control. Only
+    #   one sort configuration can be applied per control.
+    #   @return [Array<Types::ControlSortConfiguration>]
+    #
+    # @!attribute [rw] control_title_format_text
+    #   The title text format configuration for the control.
+    #   @return [Types::ControlTitleFormatText]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/HierarchyFilterListControl AWS API Documentation
+    #
+    class HierarchyFilterListControl < Struct.new(
+      :filter_control_id,
+      :source_filter_id,
+      :title,
+      :display_options,
+      :type,
+      :commit_mode,
+      :control_sort_configurations,
+      :control_title_format_text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The display options of a control.
+    #
+    # @!attribute [rw] title_options
+    #   The options to configure the title visibility, name, and font size.
+    #   @return [Types::LabelOptions]
+    #
+    # @!attribute [rw] info_icon_label_options
+    #   The configuration of info icon label options.
+    #   @return [Types::SheetControlInfoIconLabelOptions]
+    #
+    # @!attribute [rw] search_options
+    #   The configuration of the search options in a hierarchy list control.
+    #   @return [Types::HierarchyFilterListControlSearchOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/HierarchyFilterListControlDisplayOptions AWS API Documentation
+    #
+    class HierarchyFilterListControlDisplayOptions < Struct.new(
+      :title_options,
+      :info_icon_label_options,
+      :search_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration of the search options in a hierarchy list control.
+    #
+    # @!attribute [rw] visibility
+    #   The visibility configuration of the search options in a hierarchy
+    #   list control.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/HierarchyFilterListControlSearchOptions AWS API Documentation
+    #
+    class HierarchyFilterListControlSearchOptions < Struct.new(
+      :visibility)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A node in the selection tree of a `HierarchyFilter`. Each node records
+    # the values that are selected at one level of the hierarchy. Nodes nest
+    # through `Children` to record selections at deeper levels.
+    #
+    # The tree cannot be deeper than the number of levels declared in
+    # `HierarchyLevels`. A tree can be a maximum of 5 levels deep, and a
+    # node can have a maximum of 1,000 children.
+    #
+    # @!attribute [rw] column
+    #   The column that this node selects values from. This column must
+    #   match the column of the corresponding level in
+    #   `HierarchyFilter$HierarchyLevels`. The node at depth 1 must match
+    #   the first level, the node at depth 2 must match the second level,
+    #   and so on.
+    #   @return [Types::ColumnIdentifier]
+    #
+    # @!attribute [rw] parent_value
+    #   The value in the parent node's `HierarchyValues` that this node
+    #   belongs to. When a parent selects several values, each of its
+    #   children repeats one of them here to identify which branch of the
+    #   hierarchy that child describes.
+    #
+    #   Omit this attribute on the root node of `HierarchyTree`, which has
+    #   no parent.
+    #   @return [String]
+    #
+    # @!attribute [rw] hierarchy_values
+    #   The values that are selected at this level of the hierarchy. You can
+    #   specify a maximum of 2,000 values per node.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] children
+    #   The nodes that record the selections at the next level of the
+    #   hierarchy. You can specify a maximum of 1,000 children per node.
+    #   @return [Array<Types::HierarchyFilterNode>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/HierarchyFilterNode AWS API Documentation
+    #
+    class HierarchyFilterNode < Struct.new(
+      :column,
+      :parent_value,
+      :hierarchy_values,
+      :children)
+      SENSITIVE = [:parent_value, :hierarchy_values]
       include Aws::Structure
     end
 
@@ -34246,8 +36212,8 @@ module Aws::QuickSight
 
     # An object that contains information needed to create a data source
     # connection that uses OAuth client credentials. This option is
-    # available for data source connections that are made with Snowflake and
-    # Starburst.
+    # available for data source connections that are made with Snowflake,
+    # Starburst, and Databricks.
     #
     # @!attribute [rw] token_provider_url
     #   The token endpoint URL of the identity provider.
@@ -34281,6 +36247,31 @@ module Aws::QuickSight
       :identity_provider_resource_uri,
       :identity_provider_ca_certificates_bundle_s3_uri)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The client credentials for connecting to a Microsoft OneDrive data
+    # source using two-legged OAuth (2LO) certificate-based authentication.
+    # OneDrive connections access files stored in your OneDrive storage. The
+    # tenant ID and client ID are supplied through `OneDriveParameters`.
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the AWS Key Management Service
+    #   (AWS KMS) key used to encrypt the OneDrive certificate credentials.
+    #   This field is required.
+    #   @return [String]
+    #
+    # @!attribute [rw] cert_thumbprint
+    #   The thumbprint of the certificate used for two-legged OAuth (2LO)
+    #   authentication to OneDrive. This field is required.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/OneDriveClientCredentials AWS API Documentation
+    #
+    class OneDriveClientCredentials < Struct.new(
+      :kms_key_arn,
+      :cert_thumbprint)
+      SENSITIVE = [:kms_key_arn, :cert_thumbprint]
       include Aws::Structure
     end
 
@@ -40943,6 +42934,37 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The service account credentials used for Google Workspace domain-wide
+    # delegation. Use this structure when you authenticate a data source
+    # connection using domain-wide delegation across your Google Workspace
+    # domain.
+    #
+    # @!attribute [rw] admin_account_email
+    #   The email address of the Google Workspace administrator account that
+    #   the service account impersonates through domain-wide delegation.
+    #   This field is required.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_account_private_key
+    #   The private key of the Google service account used for domain-wide
+    #   delegation. This field is required.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_email
+    #   The client email address of the Google service account used for
+    #   domain-wide delegation. This field is required.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ServiceAccountCredentials AWS API Documentation
+    #
+    class ServiceAccountCredentials < Struct.new(
+      :admin_account_email,
+      :service_account_private_key,
+      :client_email)
+      SENSITIVE = [:service_account_private_key]
+      include Aws::Structure
+    end
+
     # The parameters for ServiceNow.
     #
     # @!attribute [rw] site_base_url
@@ -41030,6 +43052,32 @@ module Aws::QuickSight
     class ShapeConditionalFormat < Struct.new(
       :background_color)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The client credentials for connecting to a Microsoft SharePoint data
+    # source using two-legged OAuth (2LO) certificate-based authentication.
+    # SharePoint connections access documents stored in SharePoint sites and
+    # libraries. The tenant ID and client ID are supplied through
+    # `SharePointParameters`.
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the AWS Key Management Service
+    #   (AWS KMS) key used to encrypt the SharePoint certificate
+    #   credentials. This field is required.
+    #   @return [String]
+    #
+    # @!attribute [rw] cert_thumbprint
+    #   The thumbprint of the certificate used for two-legged OAuth (2LO)
+    #   authentication to SharePoint. This field is required.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SharePointClientCredentials AWS API Documentation
+    #
+    class SharePointClientCredentials < Struct.new(
+      :kms_key_arn,
+      :cert_thumbprint)
+      SENSITIVE = [:kms_key_arn, :cert_thumbprint]
       include Aws::Structure
     end
 

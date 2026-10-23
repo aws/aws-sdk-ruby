@@ -27,6 +27,7 @@ module Aws::AgentRegistry
     BatchGetDiscoverableRegistryRecordRequestEntriesList = Shapes::ListShape.new(name: 'BatchGetDiscoverableRegistryRecordRequestEntriesList')
     BatchGetDiscoverableRegistryRecordResponse = Shapes::StructureShape.new(name: 'BatchGetDiscoverableRegistryRecordResponse')
     CustomDescriptor = Shapes::StructureShape.new(name: 'CustomDescriptor')
+    CustomMetadataDocument = Shapes::DocumentShape.new(name: 'CustomMetadataDocument', document: true)
     DataSchemaVersion = Shapes::StringShape.new(name: 'DataSchemaVersion')
     DateTimestamp = Shapes::TimestampShape.new(name: 'DateTimestamp', timestampFormat: "iso8601")
     Description = Shapes::StringShape.new(name: 'Description')
@@ -207,6 +208,7 @@ module Aws::AgentRegistry
     RegistryRecordSummary.add_member(:status, Shapes::ShapeRef.new(shape: RegistryRecordStatus, required: true, location_name: "status"))
     RegistryRecordSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     RegistryRecordSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
+    RegistryRecordSummary.add_member(:custom_metadata, Shapes::ShapeRef.new(shape: CustomMetadataDocument, location_name: "customMetadata"))
     RegistryRecordSummary.struct_class = Types::RegistryRecordSummary
 
     RegistryRecordSummaryList.member = Shapes::ShapeRef.new(shape: RegistryRecordSummary)

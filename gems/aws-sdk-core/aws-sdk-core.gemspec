@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
   spec.files         = Dir['LICENSE.txt', 'CHANGELOG.md', 'VERSION', 'lib/**/*.rb', 'sig/**/*.rbs', 'ca-bundle.crt']
 
-  spec.add_dependency('aws-eventstream', '~> 1', '>= 1.3.0') # necessary for binary eventstream
+  spec.add_dependency('aws-eventstream', '~> 1', '>= 1.4.1') # necessary for binary eventstream
   spec.add_dependency('aws-partitions', '~> 1', '>= 1.992.0') # necessary for new endpoint resolution
   spec.add_dependency('aws-sigv4', '~> 1.9') # necessary for s3 express auth/native sigv4a support
 

@@ -33,6 +33,14 @@ module Aws::SecurityAgent
       SENSITIVE: [:mfa_forwarding_address]
     end
 
+    class ActorMessage
+      attr_accessor sender: ::String
+      attr_accessor subject: ::String
+      attr_accessor body: ::String
+      attr_accessor received_at: ::Time
+      SENSITIVE: [:sender, :subject, :body]
+    end
+
     class AddArtifactInput
       attr_accessor agent_space_id: ::String
       attr_accessor artifact_content: ::String
@@ -112,6 +120,37 @@ module Aws::SecurityAgent
       SENSITIVE: []
     end
 
+    class AzureDevOpsIntegrationInput
+      attr_accessor code: ::String
+      attr_accessor state: ::String
+      attr_accessor organization_name: ::String
+      SENSITIVE: []
+    end
+
+    class AzureDevOpsRepositoryMetadata
+      attr_accessor name: ::String
+      attr_accessor provider_resource_id: ::String
+      attr_accessor organization: ::String
+      attr_accessor project: ::String
+      attr_accessor project_id: ::String
+      attr_accessor access_type: ("PRIVATE" | "PUBLIC")
+      SENSITIVE: []
+    end
+
+    class AzureDevOpsRepositoryResource
+      attr_accessor name: ::String
+      attr_accessor organization: ::String
+      attr_accessor project: ::String
+      SENSITIVE: []
+    end
+
+    class AzureDevOpsResourceCapabilities
+      attr_accessor trigger_filter_groups: ::Array[Types::TriggerFilterGroup]
+      attr_accessor leave_comments: bool
+      attr_accessor remediate_code: bool
+      SENSITIVE: []
+    end
+
     class BatchCreateSecurityRequirementResult
       attr_accessor pack_id: ::String
       attr_accessor name: ::String
@@ -181,6 +220,54 @@ module Aws::SecurityAgent
     class BatchDeleteThreatModelsOutput
       attr_accessor deleted: ::Array[::String]
       attr_accessor failed: ::Array[Types::DeleteThreatModelFailure]
+      SENSITIVE: []
+    end
+
+    class BatchDisassociateFindingIssueError
+      attr_accessor finding_id: ::String
+      attr_accessor code: ("CLIENT_ERROR" | "INTERNAL_ERROR" | "STOPPED_BY_USER")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDisassociateFindingIssueInput
+      attr_accessor agent_space_id: ::String
+      attr_accessor pentest_job_id: ::String
+      attr_accessor code_review_job_id: ::String
+      attr_accessor finding_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchDisassociateFindingIssueOutput
+      attr_accessor errors: ::Array[Types::BatchDisassociateFindingIssueError]
+      SENSITIVE: []
+    end
+
+    class BatchExportFindingError
+      attr_accessor finding_id: ::String
+      attr_accessor code: ("CLIENT_ERROR" | "INTERNAL_ERROR" | "STOPPED_BY_USER")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchExportFindingResult
+      attr_accessor finding_id: ::String
+      attr_accessor linked_issue: Types::LinkedIssue
+      SENSITIVE: []
+    end
+
+    class BatchExportFindingsInput
+      attr_accessor agent_space_id: ::String
+      attr_accessor pentest_job_id: ::String
+      attr_accessor code_review_job_id: ::String
+      attr_accessor issue_destination: Types::IssueDestination
+      attr_accessor finding_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchExportFindingsOutput
+      attr_accessor results: ::Array[Types::BatchExportFindingResult]
+      attr_accessor errors: ::Array[Types::BatchExportFindingError]
       SENSITIVE: []
     end
 
@@ -392,6 +479,13 @@ module Aws::SecurityAgent
       SENSITIVE: []
     end
 
+    class BitbucketDataCenterIntegrationInput
+      attr_accessor target_url: ::String
+      attr_accessor code: ::String
+      attr_accessor state: ::String
+      SENSITIVE: []
+    end
+
     class BitbucketIntegrationInput
       attr_accessor installation_id: ::String
       attr_accessor workspace: ::String
@@ -415,6 +509,7 @@ module Aws::SecurityAgent
     end
 
     class BitbucketResourceCapabilities
+      attr_accessor trigger_filter_groups: ::Array[Types::TriggerFilterGroup]
       attr_accessor leave_comments: bool
       attr_accessor remediate_code: bool
       SENSITIVE: []
@@ -440,6 +535,11 @@ module Aws::SecurityAgent
     class Category
       attr_accessor name: ::String
       attr_accessor is_primary: bool
+      SENSITIVE: []
+    end
+
+    class CiCdConfiguration
+      attr_accessor enabled: bool
       SENSITIVE: []
     end
 
@@ -481,6 +581,8 @@ module Aws::SecurityAgent
       attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
       attr_accessor validation_mode: ("DISABLED" | "SIMULATED")
       attr_accessor max_task_hours: ::Float
+      attr_accessor report_destination: Types::ReportDestination
+      attr_accessor report_filters: Types::ReportFilters
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -502,6 +604,7 @@ module Aws::SecurityAgent
       attr_accessor integrated_repositories: ::Array[Types::IntegratedRepository]
       attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
       attr_accessor max_task_hours: ::Float
+      attr_accessor report_destination: Types::ReportDestination
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -646,6 +749,8 @@ module Aws::SecurityAgent
       attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
       attr_accessor validation_mode: ("DISABLED" | "SIMULATED")
       attr_accessor max_task_hours: ::Float
+      attr_accessor report_destination: Types::ReportDestination
+      attr_accessor report_filters: Types::ReportFilters
       SENSITIVE: []
     end
 
@@ -661,11 +766,13 @@ module Aws::SecurityAgent
       attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
       attr_accessor validation_mode: ("DISABLED" | "SIMULATED")
       attr_accessor max_task_hours: ::Float
+      attr_accessor report_destination: Types::ReportDestination
+      attr_accessor report_filters: Types::ReportFilters
       SENSITIVE: []
     end
 
     class CreateIntegrationInput
-      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE")
+      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS" | "JIRA")
       attr_accessor input: Types::ProviderInput
       attr_accessor integration_display_name: ::String
       attr_accessor kms_key_id: ::String
@@ -703,6 +810,10 @@ module Aws::SecurityAgent
       attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
       attr_accessor disable_managed_skills: ::Array[("FINDING_PERSONALIZATION" | "LOGIN_OPTIMIZATION")]
       attr_accessor max_task_hours: ::Float
+      attr_accessor report_destination: Types::ReportDestination
+      attr_accessor report_filters: Types::ReportFilters
+      attr_accessor cicd_configuration: Types::CiCdConfiguration
+      attr_accessor test_scope: Types::TestScope
       SENSITIVE: []
     end
 
@@ -716,6 +827,10 @@ module Aws::SecurityAgent
       attr_accessor service_role: ::String
       attr_accessor log_config: Types::CloudWatchLog
       attr_accessor agent_space_id: ::String
+      attr_accessor report_destination: Types::ReportDestination
+      attr_accessor report_filters: Types::ReportFilters
+      attr_accessor cicd_configuration: Types::CiCdConfiguration
+      attr_accessor test_scope: Types::TestScope
       SENSITIVE: []
     end
 
@@ -827,6 +942,7 @@ module Aws::SecurityAgent
       attr_accessor log_config: Types::CloudWatchLog
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor report_destination: Types::ReportDestination
       SENSITIVE: []
     end
 
@@ -1052,6 +1168,7 @@ module Aws::SecurityAgent
       attr_accessor confidence: ("FALSE_POSITIVE" | "UNCONFIRMED" | "LOW" | "MEDIUM" | "HIGH")
       attr_accessor validation_status: ("CONFIRMED" | "NOT_REPRODUCED" | "VALIDATION_FAILED" | "VALIDATING" | "NOT_VALIDATED")
       attr_accessor attack_script: ::String
+      attr_accessor remediation_code: ::String
       attr_accessor code_remediation_task: Types::CodeRemediationTask
       attr_accessor last_updated_by: ::String
       attr_accessor customer_note: ::String
@@ -1060,6 +1177,7 @@ module Aws::SecurityAgent
       attr_accessor alignment_rationale: ::String
       attr_accessor revalidation_job_ids: ::Array[::String]
       attr_accessor original_finding_id: ::String
+      attr_accessor linked_issue: Types::LinkedIssue
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -1121,11 +1239,13 @@ module Aws::SecurityAgent
     class GetIntegrationOutput
       attr_accessor integration_id: ::String
       attr_accessor installation_id: ::String
-      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE")
-      attr_accessor provider_type: ("SOURCE_CODE" | "DOCUMENTATION")
+      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS" | "JIRA")
+      attr_accessor provider_type: ("SOURCE_CODE" | "DOCUMENTATION" | "ISSUE_TRACKING")
       attr_accessor display_name: ::String
       attr_accessor kms_key_id: ::String
       attr_accessor target_url: ::String
+      attr_accessor site_url: ::String
+      attr_accessor webhook_url: ::String
       attr_accessor private_connection_name: ::String
       SENSITIVE: []
     end
@@ -1173,6 +1293,7 @@ module Aws::SecurityAgent
     end
 
     class GitHubResourceCapabilities
+      attr_accessor trigger_filter_groups: ::Array[Types::TriggerFilterGroup]
       attr_accessor leave_comments: bool
       attr_accessor remediate_code: bool
       SENSITIVE: []
@@ -1201,6 +1322,7 @@ module Aws::SecurityAgent
     end
 
     class GitLabResourceCapabilities
+      attr_accessor trigger_filter_groups: ::Array[Types::TriggerFilterGroup]
       attr_accessor leave_comments: bool
       attr_accessor remediate_code: bool
       SENSITIVE: []
@@ -1242,8 +1364,12 @@ module Aws::SecurityAgent
     end
 
     class InitiateProviderRegistrationInput
-      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE")
-      SENSITIVE: []
+      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS" | "JIRA")
+      attr_accessor target_url: ::String
+      attr_accessor organization_name: ::String
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      SENSITIVE: [:client_secret]
     end
 
     class InitiateProviderRegistrationOutput
@@ -1270,6 +1396,8 @@ module Aws::SecurityAgent
       attr_accessor gitlab_repository: Types::GitLabRepositoryResource
       attr_accessor bitbucket_repository: Types::BitbucketRepositoryResource
       attr_accessor confluence_document: Types::ConfluenceDocumentResource
+      attr_accessor azure_dev_ops_repository: Types::AzureDevOpsRepositoryResource
+      attr_accessor jira_project: Types::JiraProjectResource
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -1280,6 +1408,10 @@ module Aws::SecurityAgent
       class BitbucketRepository < IntegratedResource
       end
       class ConfluenceDocument < IntegratedResource
+      end
+      class AzureDevOpsRepository < IntegratedResource
+      end
+      class JiraProject < IntegratedResource
       end
       class Unknown < IntegratedResource
       end
@@ -1296,6 +1428,8 @@ module Aws::SecurityAgent
       attr_accessor gitlab_repository: Types::GitLabRepositoryMetadata
       attr_accessor bitbucket_repository: Types::BitbucketRepositoryMetadata
       attr_accessor confluence_document: Types::ConfluenceDocumentMetadata
+      attr_accessor azure_dev_ops_repository: Types::AzureDevOpsRepositoryMetadata
+      attr_accessor jira_project: Types::JiraProjectMetadata
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -1306,6 +1440,10 @@ module Aws::SecurityAgent
       class BitbucketRepository < IntegratedResourceMetadata
       end
       class ConfluenceDocument < IntegratedResourceMetadata
+      end
+      class AzureDevOpsRepository < IntegratedResourceMetadata
+      end
+      class JiraProject < IntegratedResourceMetadata
       end
       class Unknown < IntegratedResourceMetadata
       end
@@ -1319,8 +1457,8 @@ module Aws::SecurityAgent
     end
 
     class IntegrationFilter
-      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE")
-      attr_accessor provider_type: ("SOURCE_CODE" | "DOCUMENTATION")
+      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS" | "JIRA")
+      attr_accessor provider_type: ("SOURCE_CODE" | "DOCUMENTATION" | "ISSUE_TRACKING")
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -1335,16 +1473,80 @@ module Aws::SecurityAgent
     class IntegrationSummary
       attr_accessor integration_id: ::String
       attr_accessor installation_id: ::String
-      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE")
-      attr_accessor provider_type: ("SOURCE_CODE" | "DOCUMENTATION")
+      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS" | "JIRA")
+      attr_accessor provider_type: ("SOURCE_CODE" | "DOCUMENTATION" | "ISSUE_TRACKING")
       attr_accessor display_name: ::String
       attr_accessor target_url: ::String
+      attr_accessor webhook_url: ::String
       attr_accessor private_connection_name: ::String
       SENSITIVE: []
     end
 
     class InternalServerException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IssueDestination
+      attr_accessor integration_id: ::String
+      attr_accessor project_key: ::String
+      SENSITIVE: []
+    end
+
+    class JiraIntegrationInput
+      attr_accessor installation_id: ::String
+      attr_accessor code: ::String
+      attr_accessor state: ::String
+      attr_accessor site_url: ::String
+      SENSITIVE: []
+    end
+
+    class JiraProjectMetadata
+      attr_accessor name: ::String
+      attr_accessor provider_resource_id: ::String
+      attr_accessor project_key: ::String
+      attr_accessor project_id: ::String
+      attr_accessor project_name: ::String
+      SENSITIVE: []
+    end
+
+    class JiraProjectResource
+      attr_accessor name: ::String
+      attr_accessor project_key: ::String
+      attr_accessor project_id: ::String
+      attr_accessor project_name: ::String
+      SENSITIVE: []
+    end
+
+    class JiraResourceCapabilities
+      attr_accessor create_issue: bool
+      attr_accessor comment_issue: bool
+      SENSITIVE: []
+    end
+
+    class LinkedIssue
+      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS" | "JIRA")
+      attr_accessor integration_id: ::String
+      attr_accessor project_key: ::String
+      attr_accessor issue_key: ::String
+      attr_accessor issue_id: ::String
+      attr_accessor issue_url: ::String
+      attr_accessor site_url: ::String
+      SENSITIVE: []
+    end
+
+    class ListActorMessagesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor agent_space_id: ::String
+      attr_accessor pentest_id: ::String
+      attr_accessor actor_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ListActorMessagesOutput
+      attr_accessor messages: ::Array[Types::ActorMessage]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -1466,7 +1668,7 @@ module Aws::SecurityAgent
     class ListIntegratedResourcesInput
       attr_accessor agent_space_id: ::String
       attr_accessor integration_id: ::String
-      attr_accessor resource_type: ("CODE_REPOSITORY" | "DOCUMENT")
+      attr_accessor resource_type: ("CODE_REPOSITORY" | "DOCUMENT" | "PROJECT")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       SENSITIVE: []
@@ -1527,6 +1729,7 @@ module Aws::SecurityAgent
       attr_accessor pentest_id: ::String
       attr_accessor agent_space_id: ::String
       attr_accessor next_token: ::String
+      attr_accessor job_type: ("FULL" | "REVALIDATION" | "CICD")
       SENSITIVE: []
     end
 
@@ -1739,6 +1942,10 @@ module Aws::SecurityAgent
       attr_accessor clean_up_strategy: ("BEST_EFFORT_DELETE" | "RETAIN_ALL")
       attr_accessor disable_managed_skills: ::Array[("FINDING_PERSONALIZATION" | "LOGIN_OPTIMIZATION")]
       attr_accessor max_task_hours: ::Float
+      attr_accessor report_destination: Types::ReportDestination
+      attr_accessor report_filters: Types::ReportFilters
+      attr_accessor cicd_configuration: Types::CiCdConfiguration
+      attr_accessor test_scope: Types::TestScope
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -1770,8 +1977,14 @@ module Aws::SecurityAgent
       attr_accessor clean_up_strategy: ("BEST_EFFORT_DELETE" | "RETAIN_ALL")
       attr_accessor disable_managed_skills: ::Array[("FINDING_PERSONALIZATION" | "LOGIN_OPTIMIZATION")]
       attr_accessor max_task_hours: ::Float
-      attr_accessor job_type: ("FULL" | "REVALIDATION")
+      attr_accessor job_type: ("FULL" | "REVALIDATION" | "CICD")
       attr_accessor selected_finding_ids: ::Array[::String]
+      attr_accessor report_destination: Types::ReportDestination
+      attr_accessor report_url: ::String
+      attr_accessor scope_result: Types::ScopeResult
+      attr_accessor scope_changes: ::Array[Types::ScopeChange]
+      attr_accessor cicd_configuration: Types::CiCdConfiguration
+      attr_accessor test_scope: Types::TestScope
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -1784,6 +1997,8 @@ module Aws::SecurityAgent
       attr_accessor status: ("IN_PROGRESS" | "STOPPING" | "STOPPED" | "FAILED" | "COMPLETED")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor job_type: ("FULL" | "REVALIDATION" | "CICD")
+      attr_accessor report_url: ::String
       SENSITIVE: []
     end
 
@@ -1830,6 +2045,9 @@ module Aws::SecurityAgent
       attr_accessor gitlab: Types::GitLabIntegrationInput
       attr_accessor bitbucket: Types::BitbucketIntegrationInput
       attr_accessor confluence: Types::ConfluenceIntegrationInput
+      attr_accessor azure_dev_ops: Types::AzureDevOpsIntegrationInput
+      attr_accessor bitbucket_data_center: Types::BitbucketDataCenterIntegrationInput
+      attr_accessor jira: Types::JiraIntegrationInput
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -1841,6 +2059,12 @@ module Aws::SecurityAgent
       end
       class Confluence < ProviderInput
       end
+      class AzureDevOps < ProviderInput
+      end
+      class BitbucketDataCenter < ProviderInput
+      end
+      class Jira < ProviderInput
+      end
       class Unknown < ProviderInput
       end
     end
@@ -1850,6 +2074,8 @@ module Aws::SecurityAgent
       attr_accessor gitlab: Types::GitLabResourceCapabilities
       attr_accessor bitbucket: Types::BitbucketResourceCapabilities
       attr_accessor confluence: Types::ConfluenceResourceCapabilities
+      attr_accessor azure_dev_ops: Types::AzureDevOpsResourceCapabilities
+      attr_accessor jira: Types::JiraResourceCapabilities
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -1860,6 +2086,10 @@ module Aws::SecurityAgent
       class Bitbucket < ProviderResourceCapabilities
       end
       class Confluence < ProviderResourceCapabilities
+      end
+      class AzureDevOps < ProviderResourceCapabilities
+      end
+      class Jira < ProviderResourceCapabilities
       end
       class Unknown < ProviderResourceCapabilities
       end
@@ -1873,8 +2103,35 @@ module Aws::SecurityAgent
       SENSITIVE: []
     end
 
+    class ReportFilters
+      attr_accessor risk_levels: ::Array[("UNKNOWN" | "INFORMATIONAL" | "LOW" | "MEDIUM" | "HIGH" | "CRITICAL")]
+      attr_accessor confidence_levels: ::Array[("FALSE_POSITIVE" | "UNCONFIRMED" | "LOW" | "MEDIUM" | "HIGH")]
+      attr_accessor statuses: ::Array[("ACTIVE" | "RESOLVED" | "ACCEPTED" | "FALSE_POSITIVE")]
+      attr_accessor risk_types: ::Array[("CROSS_SITE_SCRIPTING" | "DEFAULT_CREDENTIALS" | "INSECURE_DIRECT_OBJECT_REFERENCE" | "PRIVILEGE_ESCALATION" | "SERVER_SIDE_TEMPLATE_INJECTION" | "COMMAND_INJECTION" | "CODE_INJECTION" | "SQL_INJECTION" | "ARBITRARY_FILE_UPLOAD" | "INSECURE_DESERIALIZATION" | "LOCAL_FILE_INCLUSION" | "INFORMATION_DISCLOSURE" | "PATH_TRAVERSAL" | "SERVER_SIDE_REQUEST_FORGERY" | "JSON_WEB_TOKEN_VULNERABILITIES" | "XML_EXTERNAL_ENTITY" | "FILE_DELETION" | "OTHER" | "GRAPHQL_VULNERABILITIES" | "BUSINESS_LOGIC_VULNERABILITIES" | "CRYPTOGRAPHIC_VULNERABILITIES" | "DENIAL_OF_SERVICE" | "FILE_ACCESS" | "FILE_CREATION" | "DATABASE_MODIFICATION" | "DATABASE_ACCESS" | "OUTBOUND_SERVICE_REQUEST" | "UNKNOWN")]
+      attr_accessor finding_types: ::Array[::String]
+      attr_accessor task_statuses: ::Array[("IN_PROGRESS" | "ABORTED" | "COMPLETED" | "INTERNAL_ERROR" | "FAILED")]
+      attr_accessor annotation_notes: bool
+      attr_accessor compliance_report: bool
+      SENSITIVE: []
+    end
+
     class ResourceNotFoundException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ScopeChange
+      attr_accessor integration_id: ::String
+      attr_accessor provider_resource_id: ::String
+      attr_accessor base_commit_sha: ::String
+      attr_accessor head_commit_sha: ::String
+      attr_accessor trigger_run_id: ::String
+      SENSITIVE: []
+    end
+
+    class ScopeResult
+      attr_accessor decision: ("IN_SCOPE" | "SCOPED_OUT" | "SCOPE_CONFLICT")
+      attr_accessor reason: ::String
       SENSITIVE: []
     end
 
@@ -1967,8 +2224,9 @@ module Aws::SecurityAgent
     class StartPentestJobInput
       attr_accessor agent_space_id: ::String
       attr_accessor pentest_id: ::String
-      attr_accessor job_type: ("FULL" | "REVALIDATION")
+      attr_accessor job_type: ("FULL" | "REVALIDATION" | "CICD")
       attr_accessor selected_finding_ids: ::Array[::String]
+      attr_accessor scope_changes: ::Array[Types::ScopeChange]
       SENSITIVE: []
     end
 
@@ -2094,6 +2352,11 @@ module Aws::SecurityAgent
       SENSITIVE: []
     end
 
+    class TestScope
+      attr_accessor type: ("WEB_APP" | "GENERATIVE_AI_APP")
+      SENSITIVE: []
+    end
+
     class Threat
       attr_accessor threat_id: ::String
       attr_accessor threat_job_id: ::String
@@ -2141,6 +2404,7 @@ module Aws::SecurityAgent
       attr_accessor scope_docs: ::Array[Types::DocumentInfo]
       attr_accessor service_role: ::String
       attr_accessor log_config: Types::CloudWatchLog
+      attr_accessor report_destination: Types::ReportDestination
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -2162,6 +2426,7 @@ module Aws::SecurityAgent
       attr_accessor scope_docs: ::Array[Types::DocumentInfo]
       attr_accessor error_information: Types::ErrorInformation
       attr_accessor system_overview: ::String
+      attr_accessor report_destination: Types::ReportDestination
       SENSITIVE: []
     end
 
@@ -2233,6 +2498,19 @@ module Aws::SecurityAgent
       SENSITIVE: []
     end
 
+    class TriggerFilter
+      attr_accessor type: ("TARGET_BRANCH" | "LABEL")
+      attr_accessor patterns: ::Array[::String]
+      attr_accessor match_mode: ("INCLUDE" | "EXCLUDE")
+      SENSITIVE: []
+    end
+
+    class TriggerFilterGroup
+      attr_accessor events: ::Array[("PULL_REQUEST_READY_FOR_REVIEW" | "PULL_REQUEST_DRAFT" | "PULL_REQUEST_LABEL_ADDED")]
+      attr_accessor filters: ::Array[Types::TriggerFilter]
+      SENSITIVE: []
+    end
+
     class TrustedCaCertificate
       attr_accessor source: Types::CaCertificateSource
       SENSITIVE: []
@@ -2291,6 +2569,8 @@ module Aws::SecurityAgent
       attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
       attr_accessor validation_mode: ("DISABLED" | "SIMULATED")
       attr_accessor max_task_hours: ::Float
+      attr_accessor report_destination: Types::ReportDestination
+      attr_accessor report_filters: Types::ReportFilters
       SENSITIVE: []
     end
 
@@ -2306,6 +2586,8 @@ module Aws::SecurityAgent
       attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
       attr_accessor validation_mode: ("DISABLED" | "SIMULATED")
       attr_accessor max_task_hours: ::Float
+      attr_accessor report_destination: Types::ReportDestination
+      attr_accessor report_filters: Types::ReportFilters
       SENSITIVE: []
     end
 
@@ -2337,6 +2619,19 @@ module Aws::SecurityAgent
     class UpdateIntegratedResourcesOutput < Aws::EmptyStructure
     end
 
+    class UpdateIntegrationInput
+      attr_accessor integration_id: ::String
+      attr_accessor webhook_action: ("CREATE_IF_ABSENT" | "ROTATE")
+      SENSITIVE: []
+    end
+
+    class UpdateIntegrationOutput
+      attr_accessor integration_id: ::String
+      attr_accessor webhook_url: ::String
+      attr_accessor secret: ::String
+      SENSITIVE: [:secret]
+    end
+
     class UpdatePentestInput
       attr_accessor pentest_id: ::String
       attr_accessor agent_space_id: ::String
@@ -2350,6 +2645,10 @@ module Aws::SecurityAgent
       attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
       attr_accessor disable_managed_skills: ::Array[("FINDING_PERSONALIZATION" | "LOGIN_OPTIMIZATION")]
       attr_accessor max_task_hours: ::Float
+      attr_accessor report_destination: Types::ReportDestination
+      attr_accessor report_filters: Types::ReportFilters
+      attr_accessor cicd_configuration: Types::CiCdConfiguration
+      attr_accessor test_scope: Types::TestScope
       SENSITIVE: []
     end
 
@@ -2363,6 +2662,10 @@ module Aws::SecurityAgent
       attr_accessor service_role: ::String
       attr_accessor log_config: Types::CloudWatchLog
       attr_accessor agent_space_id: ::String
+      attr_accessor report_destination: Types::ReportDestination
+      attr_accessor report_filters: Types::ReportFilters
+      attr_accessor cicd_configuration: Types::CiCdConfiguration
+      attr_accessor test_scope: Types::TestScope
       SENSITIVE: []
     end
 
@@ -2458,6 +2761,7 @@ module Aws::SecurityAgent
       attr_accessor scope_docs: ::Array[Types::DocumentInfo]
       attr_accessor service_role: ::String
       attr_accessor log_config: Types::CloudWatchLog
+      attr_accessor report_destination: Types::ReportDestination
       SENSITIVE: []
     end
 
@@ -2472,6 +2776,7 @@ module Aws::SecurityAgent
       attr_accessor log_config: Types::CloudWatchLog
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor report_destination: Types::ReportDestination
       SENSITIVE: []
     end
 

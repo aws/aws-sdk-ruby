@@ -11,55 +11,55 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
       end
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
       end
-      class DataAlreadyAcceptedException < ::Aws::Errors::ServiceError
+      class DataAlreadyAcceptedException < ServiceError
         def expected_sequence_token: () -> ::String
       end
-      class InternalServerException < ::Aws::Errors::ServiceError
+      class InternalServerException < ServiceError
       end
-      class InternalStreamingException < ::Aws::Errors::ServiceError
+      class InternalStreamingException < ServiceError
         def message: () -> ::String
       end
-      class InvalidOperationException < ::Aws::Errors::ServiceError
+      class InvalidOperationException < ServiceError
       end
-      class InvalidParameterException < ::Aws::Errors::ServiceError
+      class InvalidParameterException < ServiceError
       end
-      class InvalidSequenceTokenException < ::Aws::Errors::ServiceError
+      class InvalidSequenceTokenException < ServiceError
         def expected_sequence_token: () -> ::String
       end
-      class LimitExceededException < ::Aws::Errors::ServiceError
+      class LimitExceededException < ServiceError
       end
-      class MalformedQueryException < ::Aws::Errors::ServiceError
+      class MalformedQueryException < ServiceError
         def query_compile_error: () -> ::String
       end
-      class OperationAbortedException < ::Aws::Errors::ServiceError
+      class OperationAbortedException < ServiceError
       end
-      class ResourceAlreadyExistsException < ::Aws::Errors::ServiceError
+      class ResourceAlreadyExistsException < ServiceError
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
       end
-      class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
+      class ServiceQuotaExceededException < ServiceError
       end
-      class ServiceUnavailableException < ::Aws::Errors::ServiceError
+      class ServiceUnavailableException < ServiceError
       end
-      class SessionStreamingException < ::Aws::Errors::ServiceError
+      class SessionStreamingException < ServiceError
         def message: () -> ::String
       end
-      class SessionTimeoutException < ::Aws::Errors::ServiceError
+      class SessionTimeoutException < ServiceError
         def message: () -> ::String
       end
-      class ThrottlingException < ::Aws::Errors::ServiceError
+      class ThrottlingException < ServiceError
       end
-      class TooManyTagsException < ::Aws::Errors::ServiceError
+      class TooManyTagsException < ServiceError
         def message: () -> ::String
         def resource_name: () -> ::String
       end
-      class UnrecognizedClientException < ::Aws::Errors::ServiceError
+      class UnrecognizedClientException < ServiceError
       end
-      class ValidationException < ::Aws::Errors::ServiceError
+      class ValidationException < ServiceError
       end
     end
   end

@@ -391,6 +391,14 @@ module Aws::DevOpsAgent
       SENSITIVE: []
     end
 
+    class CronSchedule
+      attr_accessor expression: ::String
+      SENSITIVE: []
+    end
+
+    class DailyRecurrence < Aws::EmptyStructure
+    end
+
     class DatadogAuthorizationConfig
       attr_accessor authorization_discovery: Types::MCPServerAuthorizationDiscoveryConfig
       attr_accessor unknown: untyped
@@ -590,6 +598,7 @@ module Aws::DevOpsAgent
       attr_accessor monthly_account_evaluation_hours: Types::UsageMetric
       attr_accessor monthly_account_system_learning_hours: Types::UsageMetric
       attr_accessor monthly_account_on_demand_hours: Types::UsageMetric
+      attr_accessor monthly_account_grader_hours: Types::UsageMetric
       attr_accessor usage_period_start_time: ::Time
       attr_accessor usage_period_end_time: ::Time
       SENSITIVE: []
@@ -597,6 +606,7 @@ module Aws::DevOpsAgent
 
     class GetAgentSpaceInput
       attr_accessor agent_space_id: ::String
+      attr_accessor included_data: ("METADATA_ONLY" | "ALL_DATA")
       SENSITIVE: []
     end
 
@@ -720,6 +730,7 @@ module Aws::DevOpsAgent
       attr_accessor owner_type: ("organization" | "user")
       attr_accessor instance_identifier: ::String
       attr_accessor runtime_role_arn: ::String
+      attr_accessor release_management_association_id: ::String
       SENSITIVE: []
     end
 
@@ -728,6 +739,7 @@ module Aws::DevOpsAgent
       attr_accessor project_path: ::String
       attr_accessor instance_identifier: ::String
       attr_accessor runtime_role_arn: ::String
+      attr_accessor release_management_association_id: ::String
       SENSITIVE: []
     end
 
@@ -837,6 +849,7 @@ module Aws::DevOpsAgent
     class ListAgentSpacesInput
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor included_data: ("METADATA_ONLY" | "ALL_DATA")
       SENSITIVE: []
     end
 
@@ -1034,7 +1047,7 @@ module Aws::DevOpsAgent
     class ListServicesInput
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
-      attr_accessor filter_service_type: ("github" | "slack" | "azure" | "azuredevops" | "dynatrace" | "servicenow" | "pagerduty" | "gitlab" | "eventChannel" | "mcpservernewrelic" | "mcpservergrafana" | "mcpserverdatadog" | "mcpserver" | "mcpserversplunk" | "azureidentity" | "mcpserversigv4" | "remoteagent" | "remoteagentsigv4")
+      attr_accessor filter_service_type: ("github" | "slack" | "azure" | "azuredevops" | "msteams" | "dynatrace" | "servicenow" | "pagerduty" | "gitlab" | "eventChannel" | "mcpservernewrelic" | "mcpservergrafana" | "mcpserverdatadog" | "mcpserver" | "mcpserversplunk" | "azureidentity" | "mcpserversigv4" | "remoteagent" | "remoteagentsigv4")
       SENSITIVE: []
     end
 
@@ -1091,6 +1104,7 @@ module Aws::DevOpsAgent
       attr_accessor o_auth_3_lo: Types::MCPServerOAuth3LOConfig
       attr_accessor api_key: Types::MCPServerAPIKeyConfig
       attr_accessor bearer_token: Types::MCPServerBearerTokenConfig
+      attr_accessor custom_headers: Types::MCPServerCustomHeadersConfig
       attr_accessor authorization_discovery: Types::MCPServerAuthorizationDiscoveryConfig
       attr_accessor unknown: untyped
       SENSITIVE: []
@@ -1102,6 +1116,8 @@ module Aws::DevOpsAgent
       class ApiKey < MCPServerAuthorizationConfig
       end
       class BearerToken < MCPServerAuthorizationConfig
+      end
+      class CustomHeaders < MCPServerAuthorizationConfig
       end
       class AuthorizationDiscovery < MCPServerAuthorizationConfig
       end
@@ -1124,6 +1140,11 @@ module Aws::DevOpsAgent
     class MCPServerConfiguration
       attr_accessor tools: ::Array[::String]
       attr_accessor tool_details: ::Array[Types::MCPToolDetail]
+      SENSITIVE: []
+    end
+
+    class MCPServerCustomHeadersConfig
+      attr_accessor headers: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -1209,6 +1230,25 @@ module Aws::DevOpsAgent
       SENSITIVE: []
     end
 
+    class MSTeamsChannel
+      attr_accessor channel_name: ::String
+      attr_accessor channel_id: ::String
+      SENSITIVE: []
+    end
+
+    class MSTeamsConfiguration
+      attr_accessor team_id: ::String
+      attr_accessor team_name: ::String
+      attr_accessor transmission_target: Types::MSTeamsTransmissionTarget
+      SENSITIVE: []
+    end
+
+    class MSTeamsTransmissionTarget
+      attr_accessor ops_oncall_target: Types::MSTeamsChannel
+      attr_accessor ops_sre_target: Types::MSTeamsChannel
+      SENSITIVE: []
+    end
+
     class Message
       attr_accessor user_message: ::Array[Types::UserMessageBlock]
       attr_accessor assistant_message: ::Array[Types::AssistantMessageBlock]
@@ -1220,6 +1260,22 @@ module Aws::DevOpsAgent
       class AssistantMessage < Message
       end
       class Unknown < Message
+      end
+    end
+
+    class MonthlyRecurrence
+      attr_accessor day_of_month: ::Integer
+      SENSITIVE: []
+    end
+
+    class NetworkAccessConfiguration
+      attr_accessor private_access: Types::PrivateNetworkAccess
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class PrivateAccess < NetworkAccessConfiguration
+      end
+      class Unknown < NetworkAccessConfiguration
       end
     end
 
@@ -1324,6 +1380,12 @@ module Aws::DevOpsAgent
       SENSITIVE: []
     end
 
+    class PrivateNetworkAccess
+      attr_accessor private_connection_name: ::String
+      attr_accessor runtime_role_arn: ::String
+      SENSITIVE: []
+    end
+
     class Recommendation
       attr_accessor agent_space_arn: ::String
       attr_accessor recommendation_id: ::String
@@ -1347,6 +1409,23 @@ module Aws::DevOpsAgent
       attr_accessor summary: ::String
       attr_accessor spec: ::String
       SENSITIVE: []
+    end
+
+    class Recurrence
+      attr_accessor daily: Types::DailyRecurrence
+      attr_accessor weekly: Types::WeeklyRecurrence
+      attr_accessor monthly: Types::MonthlyRecurrence
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Daily < Recurrence
+      end
+      class Weekly < Recurrence
+      end
+      class Monthly < Recurrence
+      end
+      class Unknown < Recurrence
+      end
     end
 
     class ReferenceInput
@@ -1416,16 +1495,17 @@ module Aws::DevOpsAgent
 
     class RegisteredGrafanaServerDetails
       attr_accessor endpoint: ::String
-      attr_accessor authorization_method: ("oauth-client-credentials" | "oauth-3lo" | "api-key" | "bearer-token")
+      attr_accessor authorization_method: ("oauth-client-credentials" | "oauth-3lo" | "api-key" | "bearer-token" | "custom-headers")
       SENSITIVE: []
     end
 
     class RegisteredMCPServerDetails
       attr_accessor name: ::String
       attr_accessor endpoint: ::String
-      attr_accessor authorization_method: ("oauth-client-credentials" | "oauth-3lo" | "api-key" | "bearer-token")
+      attr_accessor authorization_method: ("oauth-client-credentials" | "oauth-3lo" | "api-key" | "bearer-token" | "custom-headers")
       attr_accessor description: ::String
       attr_accessor api_key_header: ::String
+      attr_accessor custom_header_names: ::Array[::String]
       SENSITIVE: [:description]
     end
 
@@ -1474,7 +1554,7 @@ module Aws::DevOpsAgent
 
     class RegisteredService
       attr_accessor service_id: ::String
-      attr_accessor service_type: ("github" | "slack" | "azure" | "azuredevops" | "dynatrace" | "servicenow" | "pagerduty" | "gitlab" | "eventChannel" | "mcpservernewrelic" | "mcpservergrafana" | "mcpserverdatadog" | "mcpserver" | "mcpserversplunk" | "azureidentity" | "mcpserversigv4" | "remoteagent" | "remoteagentsigv4")
+      attr_accessor service_type: ("github" | "slack" | "azure" | "azuredevops" | "msteams" | "dynatrace" | "servicenow" | "pagerduty" | "gitlab" | "eventChannel" | "mcpservernewrelic" | "mcpservergrafana" | "mcpserverdatadog" | "mcpserver" | "mcpserversplunk" | "azureidentity" | "mcpserversigv4" | "remoteagent" | "remoteagentsigv4")
       attr_accessor name: ::String
       attr_accessor accessible_resources: ::Array[untyped]
       attr_accessor additional_service_details: Types::AdditionalServiceDetails
@@ -1493,6 +1573,12 @@ module Aws::DevOpsAgent
     class RegisteredSlackServiceDetails
       attr_accessor team_id: ::String
       attr_accessor team_name: ::String
+      SENSITIVE: []
+    end
+
+    class ReleaseManagementConfiguration
+      attr_accessor name: ::String
+      attr_accessor network_access: Types::NetworkAccessConfiguration
       SENSITIVE: []
     end
 
@@ -1573,7 +1659,22 @@ module Aws::DevOpsAgent
 
     class ScheduleCondition
       attr_accessor expression: ::String
+      attr_accessor spec: Types::ScheduleSpec
       SENSITIVE: []
+    end
+
+    class ScheduleSpec
+      attr_accessor cron: Types::CronSchedule
+      attr_accessor time_range: Types::TimeRangeSchedule
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Cron < ScheduleSpec
+      end
+      class TimeRange < ScheduleSpec
+      end
+      class Unknown < ScheduleSpec
+      end
     end
 
     class SelfManagedInput
@@ -1728,6 +1829,8 @@ module Aws::DevOpsAgent
       attr_accessor mcpserversigv4: Types::MCPServerSigV4Configuration
       attr_accessor remoteagent: Types::RemoteAgentConfiguration
       attr_accessor remoteagentsigv4: Types::RemoteAgentSigV4Configuration
+      attr_accessor msteams: Types::MSTeamsConfiguration
+      attr_accessor release_management: Types::ReleaseManagementConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -1768,6 +1871,10 @@ module Aws::DevOpsAgent
       class Remoteagent < ServiceConfiguration
       end
       class Remoteagentsigv4 < ServiceConfiguration
+      end
+      class Msteams < ServiceConfiguration
+      end
+      class ReleaseManagement < ServiceConfiguration
       end
       class Unknown < ServiceConfiguration
       end
@@ -1950,6 +2057,13 @@ module Aws::DevOpsAgent
 
     class ThrottlingException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TimeRangeSchedule
+      attr_accessor start_after: ::String
+      attr_accessor start_before: ::String
+      attr_accessor recurrence: Types::Recurrence
       SENSITIVE: []
     end
 
@@ -2201,6 +2315,11 @@ module Aws::DevOpsAgent
       attr_accessor webhook_url: ::String
       attr_accessor webhook_type: ("hmac" | "apikey" | "gitlab" | "pagerduty")
       attr_accessor webhook_id: ::String
+      SENSITIVE: []
+    end
+
+    class WeeklyRecurrence
+      attr_accessor day_of_week: ("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY")
       SENSITIVE: []
     end
 

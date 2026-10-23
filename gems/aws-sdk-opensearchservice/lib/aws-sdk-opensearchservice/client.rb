@@ -199,12 +199,19 @@ module Aws::OpenSearchService
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -1354,6 +1361,7 @@ module Aws::OpenSearchService
     #     encryption_at_rest_options: {
     #       enabled: false,
     #       kms_key_id: "KmsKeyId",
+    #       encryption_mode: "DISK", # accepts DISK, NATIVE
     #     },
     #     node_to_node_encryption_options: {
     #       enabled: false,
@@ -1369,7 +1377,7 @@ module Aws::OpenSearchService
     #     },
     #     domain_endpoint_options: {
     #       enforce_https: false,
-    #       tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07, Policy-Min-TLS-1-2-PFS-2023-10, Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08
+    #       tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07, Policy-Min-TLS-1-2-PFS-2023-10, Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08, Policy-Min-TLS-1-2-FIPS-PQ-2026-10
     #       custom_endpoint_enabled: false,
     #       custom_endpoint: "DomainNameFqdn",
     #       custom_endpoint_certificate_arn: "ARN",
@@ -1525,6 +1533,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.cognito_options.role_arn #=> String
     #   resp.domain_status.encryption_at_rest_options.enabled #=> Boolean
     #   resp.domain_status.encryption_at_rest_options.kms_key_id #=> String
+    #   resp.domain_status.encryption_at_rest_options.encryption_mode #=> String, one of "DISK", "NATIVE"
     #   resp.domain_status.node_to_node_encryption_options.enabled #=> Boolean
     #   resp.domain_status.advanced_options #=> Hash
     #   resp.domain_status.advanced_options["String"] #=> String
@@ -1540,7 +1549,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.service_software_options.automated_update_date #=> Time
     #   resp.domain_status.service_software_options.optional_deployment #=> Boolean
     #   resp.domain_status.domain_endpoint_options.enforce_https #=> Boolean
-    #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10", "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08"
+    #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10", "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08", "Policy-Min-TLS-1-2-FIPS-PQ-2026-10"
     #   resp.domain_status.domain_endpoint_options.custom_endpoint_enabled #=> Boolean
     #   resp.domain_status.domain_endpoint_options.custom_endpoint #=> String
     #   resp.domain_status.domain_endpoint_options.custom_endpoint_certificate_arn #=> String
@@ -2066,6 +2075,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.cognito_options.role_arn #=> String
     #   resp.domain_status.encryption_at_rest_options.enabled #=> Boolean
     #   resp.domain_status.encryption_at_rest_options.kms_key_id #=> String
+    #   resp.domain_status.encryption_at_rest_options.encryption_mode #=> String, one of "DISK", "NATIVE"
     #   resp.domain_status.node_to_node_encryption_options.enabled #=> Boolean
     #   resp.domain_status.advanced_options #=> Hash
     #   resp.domain_status.advanced_options["String"] #=> String
@@ -2081,7 +2091,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.service_software_options.automated_update_date #=> Time
     #   resp.domain_status.service_software_options.optional_deployment #=> Boolean
     #   resp.domain_status.domain_endpoint_options.enforce_https #=> Boolean
-    #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10", "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08"
+    #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10", "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08", "Policy-Min-TLS-1-2-FIPS-PQ-2026-10"
     #   resp.domain_status.domain_endpoint_options.custom_endpoint_enabled #=> Boolean
     #   resp.domain_status.domain_endpoint_options.custom_endpoint #=> String
     #   resp.domain_status.domain_endpoint_options.custom_endpoint_certificate_arn #=> String
@@ -2521,6 +2531,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.cognito_options.role_arn #=> String
     #   resp.domain_status.encryption_at_rest_options.enabled #=> Boolean
     #   resp.domain_status.encryption_at_rest_options.kms_key_id #=> String
+    #   resp.domain_status.encryption_at_rest_options.encryption_mode #=> String, one of "DISK", "NATIVE"
     #   resp.domain_status.node_to_node_encryption_options.enabled #=> Boolean
     #   resp.domain_status.advanced_options #=> Hash
     #   resp.domain_status.advanced_options["String"] #=> String
@@ -2536,7 +2547,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.service_software_options.automated_update_date #=> Time
     #   resp.domain_status.service_software_options.optional_deployment #=> Boolean
     #   resp.domain_status.domain_endpoint_options.enforce_https #=> Boolean
-    #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10", "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08"
+    #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10", "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08", "Policy-Min-TLS-1-2-FIPS-PQ-2026-10"
     #   resp.domain_status.domain_endpoint_options.custom_endpoint_enabled #=> Boolean
     #   resp.domain_status.domain_endpoint_options.custom_endpoint #=> String
     #   resp.domain_status.domain_endpoint_options.custom_endpoint_certificate_arn #=> String
@@ -2706,6 +2717,12 @@ module Aws::OpenSearchService
     #   resp.change_progress_status.last_updated_time #=> Time
     #   resp.change_progress_status.config_change_status #=> String, one of "Pending", "Initializing", "Validating", "ValidationFailed", "ApplyingChanges", "Completed", "PendingUserInput", "Cancelled"
     #   resp.change_progress_status.initiated_by #=> String, one of "CUSTOMER", "SERVICE"
+    #   resp.change_progress_status.validation_failures #=> Array
+    #   resp.change_progress_status.validation_failures[0].code #=> String
+    #   resp.change_progress_status.validation_failures[0].message #=> String
+    #   resp.change_progress_status.validation_failures[0].severity #=> String, one of "Critical", "Warning"
+    #   resp.change_progress_status.accepted_warnings #=> Array
+    #   resp.change_progress_status.accepted_warnings[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomainChangeProgress AWS API Documentation
     #
@@ -2814,6 +2831,7 @@ module Aws::OpenSearchService
     #   resp.domain_config.cognito_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.encryption_at_rest_options.options.enabled #=> Boolean
     #   resp.domain_config.encryption_at_rest_options.options.kms_key_id #=> String
+    #   resp.domain_config.encryption_at_rest_options.options.encryption_mode #=> String, one of "DISK", "NATIVE"
     #   resp.domain_config.encryption_at_rest_options.status.creation_date #=> Time
     #   resp.domain_config.encryption_at_rest_options.status.update_date #=> Time
     #   resp.domain_config.encryption_at_rest_options.status.update_version #=> Integer
@@ -2841,7 +2859,7 @@ module Aws::OpenSearchService
     #   resp.domain_config.log_publishing_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.log_publishing_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.domain_endpoint_options.options.enforce_https #=> Boolean
-    #   resp.domain_config.domain_endpoint_options.options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10", "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08"
+    #   resp.domain_config.domain_endpoint_options.options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10", "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08", "Policy-Min-TLS-1-2-FIPS-PQ-2026-10"
     #   resp.domain_config.domain_endpoint_options.options.custom_endpoint_enabled #=> Boolean
     #   resp.domain_config.domain_endpoint_options.options.custom_endpoint #=> String
     #   resp.domain_config.domain_endpoint_options.options.custom_endpoint_certificate_arn #=> String
@@ -3142,6 +3160,7 @@ module Aws::OpenSearchService
     #   resp.domain_status_list[0].cognito_options.role_arn #=> String
     #   resp.domain_status_list[0].encryption_at_rest_options.enabled #=> Boolean
     #   resp.domain_status_list[0].encryption_at_rest_options.kms_key_id #=> String
+    #   resp.domain_status_list[0].encryption_at_rest_options.encryption_mode #=> String, one of "DISK", "NATIVE"
     #   resp.domain_status_list[0].node_to_node_encryption_options.enabled #=> Boolean
     #   resp.domain_status_list[0].advanced_options #=> Hash
     #   resp.domain_status_list[0].advanced_options["String"] #=> String
@@ -3157,7 +3176,7 @@ module Aws::OpenSearchService
     #   resp.domain_status_list[0].service_software_options.automated_update_date #=> Time
     #   resp.domain_status_list[0].service_software_options.optional_deployment #=> Boolean
     #   resp.domain_status_list[0].domain_endpoint_options.enforce_https #=> Boolean
-    #   resp.domain_status_list[0].domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10", "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08"
+    #   resp.domain_status_list[0].domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10", "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08", "Policy-Min-TLS-1-2-FIPS-PQ-2026-10"
     #   resp.domain_status_list[0].domain_endpoint_options.custom_endpoint_enabled #=> Boolean
     #   resp.domain_status_list[0].domain_endpoint_options.custom_endpoint #=> String
     #   resp.domain_status_list[0].domain_endpoint_options.custom_endpoint_certificate_arn #=> String
@@ -3269,6 +3288,9 @@ module Aws::OpenSearchService
     #   resp.dry_run_progress_status.validation_failures #=> Array
     #   resp.dry_run_progress_status.validation_failures[0].code #=> String
     #   resp.dry_run_progress_status.validation_failures[0].message #=> String
+    #   resp.dry_run_progress_status.validation_failures[0].severity #=> String, one of "Critical", "Warning"
+    #   resp.dry_run_progress_status.accepted_warnings #=> Array
+    #   resp.dry_run_progress_status.accepted_warnings[0] #=> String
     #   resp.dry_run_config.domain_id #=> String
     #   resp.dry_run_config.domain_name #=> String
     #   resp.dry_run_config.arn #=> String
@@ -3321,6 +3343,7 @@ module Aws::OpenSearchService
     #   resp.dry_run_config.cognito_options.role_arn #=> String
     #   resp.dry_run_config.encryption_at_rest_options.enabled #=> Boolean
     #   resp.dry_run_config.encryption_at_rest_options.kms_key_id #=> String
+    #   resp.dry_run_config.encryption_at_rest_options.encryption_mode #=> String, one of "DISK", "NATIVE"
     #   resp.dry_run_config.node_to_node_encryption_options.enabled #=> Boolean
     #   resp.dry_run_config.advanced_options #=> Hash
     #   resp.dry_run_config.advanced_options["String"] #=> String
@@ -3336,7 +3359,7 @@ module Aws::OpenSearchService
     #   resp.dry_run_config.service_software_options.automated_update_date #=> Time
     #   resp.dry_run_config.service_software_options.optional_deployment #=> Boolean
     #   resp.dry_run_config.domain_endpoint_options.enforce_https #=> Boolean
-    #   resp.dry_run_config.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10", "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08"
+    #   resp.dry_run_config.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10", "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08", "Policy-Min-TLS-1-2-FIPS-PQ-2026-10"
     #   resp.dry_run_config.domain_endpoint_options.custom_endpoint_enabled #=> Boolean
     #   resp.dry_run_config.domain_endpoint_options.custom_endpoint #=> String
     #   resp.dry_run_config.domain_endpoint_options.custom_endpoint_certificate_arn #=> String
@@ -6270,6 +6293,21 @@ module Aws::OpenSearchService
     #   The engine mode for the domain. The engine mode can't be changed
     #   after the domain is created. For valid values, see `EngineMode`.
     #
+    # @option params [Array<String>] :accepted_warnings
+    #   A list of advisory warning codes to accept for this configuration
+    #   change. By default, any advisory warning blocks the change. Include
+    #   the code of each warning you want to accept so the change can proceed.
+    #   You can find warning codes in the `ValidationFailures` list returned
+    #   by `DescribeDomainChangeProgress` and `DescribeDryRunProgress`.
+    #   Critical validation failures cannot be accepted and always block the
+    #   change. If you omit this parameter or pass an empty list, all warnings
+    #   block the change. For more information, see [Validating a domain
+    #   update][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-configuration-changes#validation-check
+    #
     # @return [Types::UpdateDomainConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDomainConfigResponse#domain_config #domain_config} => Types::DomainConfig
@@ -6343,10 +6381,11 @@ module Aws::OpenSearchService
     #     encryption_at_rest_options: {
     #       enabled: false,
     #       kms_key_id: "KmsKeyId",
+    #       encryption_mode: "DISK", # accepts DISK, NATIVE
     #     },
     #     domain_endpoint_options: {
     #       enforce_https: false,
-    #       tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07, Policy-Min-TLS-1-2-PFS-2023-10, Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08
+    #       tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07, Policy-Min-TLS-1-2-PFS-2023-10, Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08, Policy-Min-TLS-1-2-FIPS-PQ-2026-10
     #       custom_endpoint_enabled: false,
     #       custom_endpoint: "DomainNameFqdn",
     #       custom_endpoint_certificate_arn: "ARN",
@@ -6446,6 +6485,7 @@ module Aws::OpenSearchService
     #     },
     #     use_case: "SEARCH", # accepts SEARCH, VECTOR, OBSERVABILITY, MIXED
     #     engine_mode: "GENERAL", # accepts GENERAL, OPTIMIZED
+    #     accepted_warnings: ["String"],
     #   })
     #
     # @example Response structure
@@ -6530,6 +6570,7 @@ module Aws::OpenSearchService
     #   resp.domain_config.cognito_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.encryption_at_rest_options.options.enabled #=> Boolean
     #   resp.domain_config.encryption_at_rest_options.options.kms_key_id #=> String
+    #   resp.domain_config.encryption_at_rest_options.options.encryption_mode #=> String, one of "DISK", "NATIVE"
     #   resp.domain_config.encryption_at_rest_options.status.creation_date #=> Time
     #   resp.domain_config.encryption_at_rest_options.status.update_date #=> Time
     #   resp.domain_config.encryption_at_rest_options.status.update_version #=> Integer
@@ -6557,7 +6598,7 @@ module Aws::OpenSearchService
     #   resp.domain_config.log_publishing_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.log_publishing_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.domain_endpoint_options.options.enforce_https #=> Boolean
-    #   resp.domain_config.domain_endpoint_options.options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10", "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08"
+    #   resp.domain_config.domain_endpoint_options.options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10", "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08", "Policy-Min-TLS-1-2-FIPS-PQ-2026-10"
     #   resp.domain_config.domain_endpoint_options.options.custom_endpoint_enabled #=> Boolean
     #   resp.domain_config.domain_endpoint_options.options.custom_endpoint #=> String
     #   resp.domain_config.domain_endpoint_options.options.custom_endpoint_certificate_arn #=> String
@@ -6686,6 +6727,9 @@ module Aws::OpenSearchService
     #   resp.dry_run_progress_status.validation_failures #=> Array
     #   resp.dry_run_progress_status.validation_failures[0].code #=> String
     #   resp.dry_run_progress_status.validation_failures[0].message #=> String
+    #   resp.dry_run_progress_status.validation_failures[0].severity #=> String, one of "Critical", "Warning"
+    #   resp.dry_run_progress_status.accepted_warnings #=> Array
+    #   resp.dry_run_progress_status.accepted_warnings[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateDomainConfig AWS API Documentation
     #
@@ -7094,7 +7138,7 @@ module Aws::OpenSearchService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.110.0'
+      context[:gem_version] = '1.115.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

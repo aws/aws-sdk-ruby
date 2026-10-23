@@ -199,12 +199,19 @@ module Aws::Deadline
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -929,6 +936,21 @@ module Aws::Deadline
     #   resp.jobs[0].parameters["JobParametersKeyString"].float #=> String
     #   resp.jobs[0].parameters["JobParametersKeyString"].string #=> String
     #   resp.jobs[0].parameters["JobParametersKeyString"].path #=> String
+    #   resp.jobs[0].parameters["JobParametersKeyString"].bool #=> String
+    #   resp.jobs[0].parameters["JobParametersKeyString"].range_expr #=> String
+    #   resp.jobs[0].parameters["JobParametersKeyString"].string_list #=> Array
+    #   resp.jobs[0].parameters["JobParametersKeyString"].string_list[0] #=> String
+    #   resp.jobs[0].parameters["JobParametersKeyString"].path_list #=> Array
+    #   resp.jobs[0].parameters["JobParametersKeyString"].path_list[0] #=> String
+    #   resp.jobs[0].parameters["JobParametersKeyString"].int_list #=> Array
+    #   resp.jobs[0].parameters["JobParametersKeyString"].int_list[0] #=> String
+    #   resp.jobs[0].parameters["JobParametersKeyString"].float_list #=> Array
+    #   resp.jobs[0].parameters["JobParametersKeyString"].float_list[0] #=> String
+    #   resp.jobs[0].parameters["JobParametersKeyString"].bool_list #=> Array
+    #   resp.jobs[0].parameters["JobParametersKeyString"].bool_list[0] #=> String
+    #   resp.jobs[0].parameters["JobParametersKeyString"].int_list_list #=> Array
+    #   resp.jobs[0].parameters["JobParametersKeyString"].int_list_list[0] #=> Array
+    #   resp.jobs[0].parameters["JobParametersKeyString"].int_list_list[0][0] #=> String
     #   resp.jobs[0].attachments.manifests #=> Array
     #   resp.jobs[0].attachments.manifests[0].file_system_location_name #=> String
     #   resp.jobs[0].attachments.manifests[0].root_path #=> String
@@ -1022,7 +1044,24 @@ module Aws::Deadline
     #   resp.entities[0].job_details.parameters["JobParametersKeyString"].float #=> String
     #   resp.entities[0].job_details.parameters["JobParametersKeyString"].string #=> String
     #   resp.entities[0].job_details.parameters["JobParametersKeyString"].path #=> String
+    #   resp.entities[0].job_details.parameters["JobParametersKeyString"].bool #=> String
+    #   resp.entities[0].job_details.parameters["JobParametersKeyString"].range_expr #=> String
+    #   resp.entities[0].job_details.parameters["JobParametersKeyString"].string_list #=> Array
+    #   resp.entities[0].job_details.parameters["JobParametersKeyString"].string_list[0] #=> String
+    #   resp.entities[0].job_details.parameters["JobParametersKeyString"].path_list #=> Array
+    #   resp.entities[0].job_details.parameters["JobParametersKeyString"].path_list[0] #=> String
+    #   resp.entities[0].job_details.parameters["JobParametersKeyString"].int_list #=> Array
+    #   resp.entities[0].job_details.parameters["JobParametersKeyString"].int_list[0] #=> String
+    #   resp.entities[0].job_details.parameters["JobParametersKeyString"].float_list #=> Array
+    #   resp.entities[0].job_details.parameters["JobParametersKeyString"].float_list[0] #=> String
+    #   resp.entities[0].job_details.parameters["JobParametersKeyString"].bool_list #=> Array
+    #   resp.entities[0].job_details.parameters["JobParametersKeyString"].bool_list[0] #=> String
+    #   resp.entities[0].job_details.parameters["JobParametersKeyString"].int_list_list #=> Array
+    #   resp.entities[0].job_details.parameters["JobParametersKeyString"].int_list_list[0] #=> Array
+    #   resp.entities[0].job_details.parameters["JobParametersKeyString"].int_list_list[0][0] #=> String
     #   resp.entities[0].job_details.schema_version #=> String
+    #   resp.entities[0].job_details.extensions #=> Array
+    #   resp.entities[0].job_details.extensions[0] #=> String
     #   resp.entities[0].job_details.path_mapping_rules #=> Array
     #   resp.entities[0].job_details.path_mapping_rules[0].source_path_format #=> String, one of "windows", "posix"
     #   resp.entities[0].job_details.path_mapping_rules[0].source_path #=> String
@@ -1042,9 +1081,15 @@ module Aws::Deadline
     #   resp.entities[0].step_details.schema_version #=> String
     #   resp.entities[0].step_details.dependencies #=> Array
     #   resp.entities[0].step_details.dependencies[0] #=> String
+    #   resp.entities[0].step_details.extensions #=> Array
+    #   resp.entities[0].step_details.extensions[0] #=> String
+    #   resp.entities[0].step_details.resolved_symbol_table #=> String
     #   resp.entities[0].environment_details.job_id #=> String
     #   resp.entities[0].environment_details.environment_id #=> String
     #   resp.entities[0].environment_details.schema_version #=> String
+    #   resp.entities[0].environment_details.extensions #=> Array
+    #   resp.entities[0].environment_details.extensions[0] #=> String
+    #   resp.entities[0].environment_details.resolved_symbol_table #=> String
     #   resp.errors #=> Array
     #   resp.errors[0].job_details.job_id #=> String
     #   resp.errors[0].job_details.code #=> String, one of "AccessDeniedException", "InternalServerException", "ValidationException", "ResourceNotFoundException", "MaxPayloadSizeExceeded", "ConflictException"
@@ -2100,6 +2145,11 @@ module Aws::Deadline
     #               values: ["AttributeCapabilityValue"], # required
     #             },
     #           ],
+    #           software_add_ons: [
+    #             {
+    #               name: "docker", # required, accepts docker
+    #             },
+    #           ],
     #         },
     #         instance_market_options: { # required
     #           type: "on-demand", # required, accepts on-demand, spot, wait-and-save
@@ -2243,6 +2293,16 @@ module Aws::Deadline
     #         float: "FloatString",
     #         string: "ParameterString",
     #         path: "PathString",
+    #         bool: "BooleanString",
+    #         range_expr: "RangeExprString",
+    #         string_list: ["ParameterString"],
+    #         path_list: ["PathString"],
+    #         int_list: ["IntString"],
+    #         float_list: ["FloatString"],
+    #         bool_list: ["BooleanString"],
+    #         int_list_list: [
+    #           ["IntString"],
+    #         ],
     #       },
     #     },
     #     attachments: {
@@ -3598,6 +3658,8 @@ module Aws::Deadline
     #   resp.configuration.service_managed_ec2.instance_capabilities.custom_attributes[0].name #=> String
     #   resp.configuration.service_managed_ec2.instance_capabilities.custom_attributes[0].values #=> Array
     #   resp.configuration.service_managed_ec2.instance_capabilities.custom_attributes[0].values[0] #=> String
+    #   resp.configuration.service_managed_ec2.instance_capabilities.software_add_ons #=> Array
+    #   resp.configuration.service_managed_ec2.instance_capabilities.software_add_ons[0].name #=> String, one of "docker"
     #   resp.configuration.service_managed_ec2.instance_market_options.type #=> String, one of "on-demand", "spot", "wait-and-save"
     #   resp.configuration.service_managed_ec2.vpc_configuration.resource_configuration_arns #=> Array
     #   resp.configuration.service_managed_ec2.vpc_configuration.resource_configuration_arns[0] #=> String
@@ -3712,6 +3774,21 @@ module Aws::Deadline
     #   resp.parameters["JobParametersKeyString"].float #=> String
     #   resp.parameters["JobParametersKeyString"].string #=> String
     #   resp.parameters["JobParametersKeyString"].path #=> String
+    #   resp.parameters["JobParametersKeyString"].bool #=> String
+    #   resp.parameters["JobParametersKeyString"].range_expr #=> String
+    #   resp.parameters["JobParametersKeyString"].string_list #=> Array
+    #   resp.parameters["JobParametersKeyString"].string_list[0] #=> String
+    #   resp.parameters["JobParametersKeyString"].path_list #=> Array
+    #   resp.parameters["JobParametersKeyString"].path_list[0] #=> String
+    #   resp.parameters["JobParametersKeyString"].int_list #=> Array
+    #   resp.parameters["JobParametersKeyString"].int_list[0] #=> String
+    #   resp.parameters["JobParametersKeyString"].float_list #=> Array
+    #   resp.parameters["JobParametersKeyString"].float_list[0] #=> String
+    #   resp.parameters["JobParametersKeyString"].bool_list #=> Array
+    #   resp.parameters["JobParametersKeyString"].bool_list[0] #=> String
+    #   resp.parameters["JobParametersKeyString"].int_list_list #=> Array
+    #   resp.parameters["JobParametersKeyString"].int_list_list[0] #=> Array
+    #   resp.parameters["JobParametersKeyString"].int_list_list[0][0] #=> String
     #   resp.attachments.manifests #=> Array
     #   resp.attachments.manifests[0].file_system_location_name #=> String
     #   resp.attachments.manifests[0].root_path #=> String
@@ -5153,6 +5230,8 @@ module Aws::Deadline
     #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.custom_attributes[0].name #=> String
     #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.custom_attributes[0].values #=> Array
     #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.custom_attributes[0].values[0] #=> String
+    #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.software_add_ons #=> Array
+    #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.software_add_ons[0].name #=> String, one of "docker"
     #   resp.fleets[0].configuration.service_managed_ec2.instance_market_options.type #=> String, one of "on-demand", "spot", "wait-and-save"
     #   resp.fleets[0].configuration.service_managed_ec2.vpc_configuration.resource_configuration_arns #=> Array
     #   resp.fleets[0].configuration.service_managed_ec2.vpc_configuration.resource_configuration_arns[0] #=> String
@@ -5447,6 +5526,111 @@ module Aws::Deadline
     # @param [Hash] params ({})
     def list_limits(params = {}, options = {})
       req = build_request(:list_limits, params)
+      req.send_request(options)
+    end
+
+    # Lists the Deadline Cloud resource memberships associated with a
+    # specified IAM Identity Center principal, optionally filtered by the
+    # requested resource types.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or `null` to start from the
+    #   beginning.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return. Use this parameter with
+    #   `NextToken` to get results as a set of sequential pages.
+    #
+    # @option params [required, String] :principal_id
+    #   The ID of the IAM Identity Center principal whose Deadline Cloud
+    #   resource memberships you want to list.
+    #
+    # @option params [String] :identity_store_id
+    #   The identity store ID that contains the principal. This parameter is
+    #   required for callers that do not use a monitor session.
+    #
+    # @option params [String] :identity_center_region
+    #   The Region of the IAM Identity Center instance. If not provided, the
+    #   service defaults to the Amazon Web Services Region in which you make
+    #   the request.
+    #
+    # @option params [Array<String>] :resource_types
+    #   The resource types to include when listing the principal's
+    #   memberships. If not specified, memberships for all supported resource
+    #   types are returned.
+    #
+    # @return [Types::ListMembershipsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMembershipsResponse#memberships #memberships} => Array&lt;Types::MembershipSummary&gt;
+    #   * {Types::ListMembershipsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List memberships using a cross-region identity store
+    #
+    #   resp = client.list_memberships({
+    #     identity_center_region: "us-east-1", 
+    #     identity_store_id: "d-1234567890", 
+    #     principal_id: "12345678-1234-1234-1234-123456789abc", 
+    #     resource_types: [
+    #       "QUEUE", 
+    #       "JOB", 
+    #     ], 
+    #   })
+    #
+    # @example Example: List a Monitor user's memberships of every resource type
+    #
+    #   resp = client.list_memberships({
+    #     principal_id: "12345678-1234-1234-1234-123456789abc", 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_memberships({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     principal_id: "IdentityCenterPrincipalId", # required
+    #     identity_store_id: "IdentityStoreId",
+    #     identity_center_region: "Region",
+    #     resource_types: ["FARM"], # accepts FARM, QUEUE, FLEET, JOB
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.memberships #=> Array
+    #   resp.memberships[0].farm.farm_id #=> String
+    #   resp.memberships[0].farm.principal_id #=> String
+    #   resp.memberships[0].farm.principal_type #=> String, one of "USER", "GROUP"
+    #   resp.memberships[0].farm.identity_store_id #=> String
+    #   resp.memberships[0].farm.membership_level #=> String, one of "VIEWER", "CONTRIBUTOR", "OWNER", "MANAGER"
+    #   resp.memberships[0].queue.farm_id #=> String
+    #   resp.memberships[0].queue.queue_id #=> String
+    #   resp.memberships[0].queue.principal_id #=> String
+    #   resp.memberships[0].queue.principal_type #=> String, one of "USER", "GROUP"
+    #   resp.memberships[0].queue.identity_store_id #=> String
+    #   resp.memberships[0].queue.membership_level #=> String, one of "VIEWER", "CONTRIBUTOR", "OWNER", "MANAGER"
+    #   resp.memberships[0].fleet.farm_id #=> String
+    #   resp.memberships[0].fleet.fleet_id #=> String
+    #   resp.memberships[0].fleet.principal_id #=> String
+    #   resp.memberships[0].fleet.principal_type #=> String, one of "USER", "GROUP"
+    #   resp.memberships[0].fleet.identity_store_id #=> String
+    #   resp.memberships[0].fleet.membership_level #=> String, one of "VIEWER", "CONTRIBUTOR", "OWNER", "MANAGER"
+    #   resp.memberships[0].job.farm_id #=> String
+    #   resp.memberships[0].job.queue_id #=> String
+    #   resp.memberships[0].job.job_id #=> String
+    #   resp.memberships[0].job.principal_id #=> String
+    #   resp.memberships[0].job.principal_type #=> String, one of "USER", "GROUP"
+    #   resp.memberships[0].job.identity_store_id #=> String
+    #   resp.memberships[0].job.membership_level #=> String, one of "VIEWER", "CONTRIBUTOR", "OWNER", "MANAGER"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/ListMemberships AWS API Documentation
+    #
+    # @overload list_memberships(params = {})
+    # @param [Hash] params ({})
+    def list_memberships(params = {}, options = {})
+      req = build_request(:list_memberships, params)
       req.send_request(options)
     end
 
@@ -6669,6 +6853,21 @@ module Aws::Deadline
     #   resp.jobs[0].job_parameters["JobParametersKeyString"].float #=> String
     #   resp.jobs[0].job_parameters["JobParametersKeyString"].string #=> String
     #   resp.jobs[0].job_parameters["JobParametersKeyString"].path #=> String
+    #   resp.jobs[0].job_parameters["JobParametersKeyString"].bool #=> String
+    #   resp.jobs[0].job_parameters["JobParametersKeyString"].range_expr #=> String
+    #   resp.jobs[0].job_parameters["JobParametersKeyString"].string_list #=> Array
+    #   resp.jobs[0].job_parameters["JobParametersKeyString"].string_list[0] #=> String
+    #   resp.jobs[0].job_parameters["JobParametersKeyString"].path_list #=> Array
+    #   resp.jobs[0].job_parameters["JobParametersKeyString"].path_list[0] #=> String
+    #   resp.jobs[0].job_parameters["JobParametersKeyString"].int_list #=> Array
+    #   resp.jobs[0].job_parameters["JobParametersKeyString"].int_list[0] #=> String
+    #   resp.jobs[0].job_parameters["JobParametersKeyString"].float_list #=> Array
+    #   resp.jobs[0].job_parameters["JobParametersKeyString"].float_list[0] #=> String
+    #   resp.jobs[0].job_parameters["JobParametersKeyString"].bool_list #=> Array
+    #   resp.jobs[0].job_parameters["JobParametersKeyString"].bool_list[0] #=> String
+    #   resp.jobs[0].job_parameters["JobParametersKeyString"].int_list_list #=> Array
+    #   resp.jobs[0].job_parameters["JobParametersKeyString"].int_list_list[0] #=> Array
+    #   resp.jobs[0].job_parameters["JobParametersKeyString"].int_list_list[0][0] #=> String
     #   resp.jobs[0].max_worker_count #=> Integer
     #   resp.jobs[0].source_job_id #=> String
     #   resp.next_item_offset #=> Integer
@@ -7067,7 +7266,7 @@ module Aws::Deadline
     #   The Linux timestamp of the date and time that the statistics end.
     #
     # @option params [String] :timezone
-    #   The timezone to use for the statistics. Use UTC notation such as
+    #   The time zone to use for the statistics. Use UTC notation such as
     #   "UTC+8."
     #
     # @option params [String] :period
@@ -7307,6 +7506,16 @@ module Aws::Deadline
 
     # Updates a fleet.
     #
+    # <note markdown="1"> Workers that are running when you call `UpdateFleet` keep the instance
+    # type and capabilities that they launched with until they scale in.
+    # Deadline Cloud can schedule jobs that you submit after the update on
+    # these existing workers, so the new configuration might not take effect
+    # immediately. To make sure that all workers use the new configuration,
+    # set `maxWorkerCount` to 0, use the `ListWorkers` operation to confirm
+    # that the fleet has no workers, and then restore `maxWorkerCount`.
+    #
+    #  </note>
+    #
     # @option params [required, String] :farm_id
     #   The farm ID to update.
     #
@@ -7459,6 +7668,11 @@ module Aws::Deadline
     #             {
     #               name: "AttributeCapabilityName", # required
     #               values: ["AttributeCapabilityValue"], # required
+    #             },
+    #           ],
+    #           software_add_ons: [
+    #             {
+    #               name: "docker", # required, accepts docker
     #             },
     #           ],
     #         },
@@ -8329,6 +8543,8 @@ module Aws::Deadline
     #   resp.assigned_sessions["SessionId"].log_configuration.parameters #=> Hash
     #   resp.assigned_sessions["SessionId"].log_configuration.parameters["String"] #=> String
     #   resp.assigned_sessions["SessionId"].log_configuration.error #=> String
+    #   resp.assigned_sessions["SessionId"].metadata #=> Hash
+    #   resp.assigned_sessions["SessionId"].metadata["SessionMetadataKey"] #=> String
     #   resp.cancel_session_actions #=> Hash
     #   resp.cancel_session_actions["SessionId"] #=> Array
     #   resp.cancel_session_actions["SessionId"][0] #=> String
@@ -8362,7 +8578,7 @@ module Aws::Deadline
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-deadline'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

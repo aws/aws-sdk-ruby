@@ -178,6 +178,7 @@ module Aws::AppIntegrationsService
 
     AuthConfig.add_member(:auth_type, Shapes::ShapeRef.new(shape: AuthType, location_name: "AuthType"))
     AuthConfig.add_member(:credential_provider_identifier, Shapes::ShapeRef.new(shape: Arn, location_name: "CredentialProviderIdentifier"))
+    AuthConfig.add_member(:audience_override, Shapes::ShapeRef.new(shape: Identifier, location_name: "AudienceOverride"))
     AuthConfig.struct_class = Types::AuthConfig
 
     ClientAssociationMetadata.key = Shapes::ShapeRef.new(shape: NonBlankString)

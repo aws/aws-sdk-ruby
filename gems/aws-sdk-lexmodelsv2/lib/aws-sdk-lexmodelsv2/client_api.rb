@@ -726,6 +726,7 @@ module Aws::LexModelsV2
     SlotValueSelectionSetting = Shapes::StructureShape.new(name: 'SlotValueSelectionSetting')
     SlotValues = Shapes::ListShape.new(name: 'SlotValues')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
+    SpeakerDiarizationSettings = Shapes::StructureShape.new(name: 'SpeakerDiarizationSettings')
     Specifications = Shapes::StructureShape.new(name: 'Specifications')
     SpeechDetectionSensitivity = Shapes::StringShape.new(name: 'SpeechDetectionSensitivity')
     SpeechFoundationModel = Shapes::StructureShape.new(name: 'SpeechFoundationModel')
@@ -1313,6 +1314,7 @@ module Aws::LexModelsV2
     BotLocaleImportSpecification.add_member(:speech_detection_sensitivity, Shapes::ShapeRef.new(shape: SpeechDetectionSensitivity, location_name: "speechDetectionSensitivity"))
     BotLocaleImportSpecification.add_member(:unified_speech_settings, Shapes::ShapeRef.new(shape: UnifiedSpeechSettings, location_name: "unifiedSpeechSettings"))
     BotLocaleImportSpecification.add_member(:audio_filler_settings, Shapes::ShapeRef.new(shape: AudioFillerSettings, location_name: "audioFillerSettings"))
+    BotLocaleImportSpecification.add_member(:speaker_diarization_settings, Shapes::ShapeRef.new(shape: SpeakerDiarizationSettings, location_name: "speakerDiarizationSettings"))
     BotLocaleImportSpecification.struct_class = Types::BotLocaleImportSpecification
 
     BotLocaleSortBy.add_member(:attribute, Shapes::ShapeRef.new(shape: BotLocaleSortAttribute, required: true, location_name: "attribute"))
@@ -1567,6 +1569,7 @@ module Aws::LexModelsV2
     CreateBotLocaleRequest.add_member(:speech_recognition_settings, Shapes::ShapeRef.new(shape: SpeechRecognitionSettings, location_name: "speechRecognitionSettings"))
     CreateBotLocaleRequest.add_member(:generative_ai_settings, Shapes::ShapeRef.new(shape: GenerativeAISettings, location_name: "generativeAISettings"))
     CreateBotLocaleRequest.add_member(:speech_detection_sensitivity, Shapes::ShapeRef.new(shape: SpeechDetectionSensitivity, location_name: "speechDetectionSensitivity"))
+    CreateBotLocaleRequest.add_member(:speaker_diarization_settings, Shapes::ShapeRef.new(shape: SpeakerDiarizationSettings, location_name: "speakerDiarizationSettings"))
     CreateBotLocaleRequest.struct_class = Types::CreateBotLocaleRequest
 
     CreateBotLocaleResponse.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
@@ -1583,6 +1586,7 @@ module Aws::LexModelsV2
     CreateBotLocaleResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
     CreateBotLocaleResponse.add_member(:generative_ai_settings, Shapes::ShapeRef.new(shape: GenerativeAISettings, location_name: "generativeAISettings"))
     CreateBotLocaleResponse.add_member(:speech_detection_sensitivity, Shapes::ShapeRef.new(shape: SpeechDetectionSensitivity, location_name: "speechDetectionSensitivity"))
+    CreateBotLocaleResponse.add_member(:speaker_diarization_settings, Shapes::ShapeRef.new(shape: SpeakerDiarizationSettings, location_name: "speakerDiarizationSettings"))
     CreateBotLocaleResponse.struct_class = Types::CreateBotLocaleResponse
 
     CreateBotReplicaRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
@@ -2021,6 +2025,7 @@ module Aws::LexModelsV2
     DescribeBotLocaleResponse.add_member(:recommended_actions, Shapes::ShapeRef.new(shape: RecommendedActions, location_name: "recommendedActions"))
     DescribeBotLocaleResponse.add_member(:generative_ai_settings, Shapes::ShapeRef.new(shape: GenerativeAISettings, location_name: "generativeAISettings"))
     DescribeBotLocaleResponse.add_member(:speech_detection_sensitivity, Shapes::ShapeRef.new(shape: SpeechDetectionSensitivity, location_name: "speechDetectionSensitivity"))
+    DescribeBotLocaleResponse.add_member(:speaker_diarization_settings, Shapes::ShapeRef.new(shape: SpeakerDiarizationSettings, location_name: "speakerDiarizationSettings"))
     DescribeBotLocaleResponse.struct_class = Types::DescribeBotLocaleResponse
 
     DescribeBotRecommendationRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
@@ -2514,7 +2519,7 @@ module Aws::LexModelsV2
     IntentClosingSetting.add_member(:conditional, Shapes::ShapeRef.new(shape: ConditionalSpecification, location_name: "conditional"))
     IntentClosingSetting.struct_class = Types::IntentClosingSetting
 
-    IntentConfirmationSetting.add_member(:prompt_specification, Shapes::ShapeRef.new(shape: PromptSpecification, required: true, location_name: "promptSpecification"))
+    IntentConfirmationSetting.add_member(:prompt_specification, Shapes::ShapeRef.new(shape: PromptSpecification, location_name: "promptSpecification"))
     IntentConfirmationSetting.add_member(:declination_response, Shapes::ShapeRef.new(shape: ResponseSpecification, location_name: "declinationResponse"))
     IntentConfirmationSetting.add_member(:active, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "active"))
     IntentConfirmationSetting.add_member(:confirmation_response, Shapes::ShapeRef.new(shape: ResponseSpecification, location_name: "confirmationResponse"))
@@ -3400,6 +3405,9 @@ module Aws::LexModelsV2
 
     SlotValues.member = Shapes::ShapeRef.new(shape: SlotValueOverride)
 
+    SpeakerDiarizationSettings.add_member(:enabled, Shapes::ShapeRef.new(shape: Enabled, required: true, location_name: "enabled"))
+    SpeakerDiarizationSettings.struct_class = Types::SpeakerDiarizationSettings
+
     Specifications.add_member(:slot_type_id, Shapes::ShapeRef.new(shape: BuiltInOrCustomSlotTypeId, required: true, location_name: "slotTypeId"))
     Specifications.add_member(:value_elicitation_setting, Shapes::ShapeRef.new(shape: SubSlotValueElicitationSetting, required: true, location_name: "valueElicitationSetting"))
     Specifications.struct_class = Types::Specifications
@@ -3755,6 +3763,7 @@ module Aws::LexModelsV2
     UpdateBotLocaleRequest.add_member(:speech_recognition_settings, Shapes::ShapeRef.new(shape: SpeechRecognitionSettings, location_name: "speechRecognitionSettings"))
     UpdateBotLocaleRequest.add_member(:generative_ai_settings, Shapes::ShapeRef.new(shape: GenerativeAISettings, location_name: "generativeAISettings"))
     UpdateBotLocaleRequest.add_member(:speech_detection_sensitivity, Shapes::ShapeRef.new(shape: SpeechDetectionSensitivity, location_name: "speechDetectionSensitivity"))
+    UpdateBotLocaleRequest.add_member(:speaker_diarization_settings, Shapes::ShapeRef.new(shape: SpeakerDiarizationSettings, location_name: "speakerDiarizationSettings"))
     UpdateBotLocaleRequest.struct_class = Types::UpdateBotLocaleRequest
 
     UpdateBotLocaleResponse.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
@@ -3774,6 +3783,7 @@ module Aws::LexModelsV2
     UpdateBotLocaleResponse.add_member(:recommended_actions, Shapes::ShapeRef.new(shape: RecommendedActions, location_name: "recommendedActions"))
     UpdateBotLocaleResponse.add_member(:generative_ai_settings, Shapes::ShapeRef.new(shape: GenerativeAISettings, location_name: "generativeAISettings"))
     UpdateBotLocaleResponse.add_member(:speech_detection_sensitivity, Shapes::ShapeRef.new(shape: SpeechDetectionSensitivity, location_name: "speechDetectionSensitivity"))
+    UpdateBotLocaleResponse.add_member(:speaker_diarization_settings, Shapes::ShapeRef.new(shape: SpeakerDiarizationSettings, location_name: "speakerDiarizationSettings"))
     UpdateBotLocaleResponse.struct_class = Types::UpdateBotLocaleResponse
 
     UpdateBotRecommendationRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
@@ -4066,8 +4076,8 @@ module Aws::LexModelsV2
     VoiceSettings.add_member(:voice_id, Shapes::ShapeRef.new(shape: VoiceId, required: true, location_name: "voiceId"))
     VoiceSettings.struct_class = Types::VoiceSettings
 
-    WaitAndContinueSpecification.add_member(:waiting_response, Shapes::ShapeRef.new(shape: ResponseSpecification, required: true, location_name: "waitingResponse"))
-    WaitAndContinueSpecification.add_member(:continue_response, Shapes::ShapeRef.new(shape: ResponseSpecification, required: true, location_name: "continueResponse"))
+    WaitAndContinueSpecification.add_member(:waiting_response, Shapes::ShapeRef.new(shape: ResponseSpecification, location_name: "waitingResponse"))
+    WaitAndContinueSpecification.add_member(:continue_response, Shapes::ShapeRef.new(shape: ResponseSpecification, location_name: "continueResponse"))
     WaitAndContinueSpecification.add_member(:still_waiting_response, Shapes::ShapeRef.new(shape: StillWaitingResponseSpecification, location_name: "stillWaitingResponse"))
     WaitAndContinueSpecification.add_member(:active, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "active"))
     WaitAndContinueSpecification.struct_class = Types::WaitAndContinueSpecification

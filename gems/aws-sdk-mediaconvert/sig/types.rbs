@@ -181,6 +181,7 @@ module Aws::MediaConvert
       attr_accessor program_selection: ::Integer
       attr_accessor remix_settings: Types::RemixSettings
       attr_accessor selector_type: ("PID" | "TRACK" | "LANGUAGE_CODE" | "HLS_RENDITION_GROUP" | "ALL_PCM" | "STREAM")
+      attr_accessor smpte_337_passthrough: ("ENABLED" | "DISABLED")
       attr_accessor streams: ::Array[::Integer]
       attr_accessor tracks: ::Array[::Integer]
       SENSITIVE: []
@@ -223,6 +224,7 @@ module Aws::MediaConvert
     class Av1Settings
       attr_accessor adaptive_quantization: ("OFF" | "LOW" | "MEDIUM" | "HIGH" | "HIGHER" | "MAX")
       attr_accessor bit_depth: ("BIT_8" | "BIT_10")
+      attr_accessor bitrate: ::Integer
       attr_accessor film_grain_synthesis: ("DISABLED" | "ENABLED")
       attr_accessor framerate_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")
       attr_accessor framerate_conversion_algorithm: ("DUPLICATE_DROP" | "INTERPOLATE" | "FRAMEFORMER" | "MAINTAIN_FRAME_COUNT")
@@ -233,8 +235,11 @@ module Aws::MediaConvert
       attr_accessor number_b_frames_between_reference_frames: ::Integer
       attr_accessor per_frame_metrics: ::Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR" | "SHOT_CHANGE")]
       attr_accessor qvbr_settings: Types::Av1QvbrSettings
-      attr_accessor rate_control_mode: ("QVBR")
+      attr_accessor rate_control_mode: ("CBR" | "QVBR")
+      attr_accessor scene_change_detect: ("DISABLED" | "ENABLED" | "TRANSITION_DETECTION")
       attr_accessor slices: ::Integer
+      attr_accessor sliding_window_ms: ::Integer
+      attr_accessor sliding_window_peak_bitrate: ::Integer
       attr_accessor spatial_adaptive_quantization: ("DISABLED" | "ENABLED")
       SENSITIVE: []
     end
@@ -404,6 +409,7 @@ module Aws::MediaConvert
       attr_accessor base_url: ::String
       attr_accessor client_cache: ("DISABLED" | "ENABLED")
       attr_accessor codec_specification: ("RFC_6381" | "RFC_4281")
+      attr_accessor dash_adaptation_set_grouping: ::Array[("CODEC")]
       attr_accessor dash_i_frame_trick_play_name_modifier: ::String
       attr_accessor dash_manifest_style: ("BASIC" | "COMPACT" | "DISTINCT" | "FULL")
       attr_accessor destination: ::String
@@ -527,7 +533,7 @@ module Aws::MediaConvert
     class Container
       attr_accessor bit_rate: ::Integer
       attr_accessor duration: ::Float
-      attr_accessor format: ("mp4" | "quicktime" | "matroska" | "webm" | "mxf" | "wave" | "avi" | "mpegts" | "mpegps" | "mp3" | "flac" | "asf" | "ogg")
+      attr_accessor format: ("mp4" | "quicktime" | "matroska" | "webm" | "mxf" | "wave" | "avi" | "mpegts" | "mpegps" | "mp3" | "flac" | "asf" | "ogg" | "three_gp" | "three_g2" | "aac" | "ac3" | "eac3")
       attr_accessor start_timecode: ::String
       attr_accessor tracks: ::Array[Types::Track]
       SENSITIVE: []
@@ -650,6 +656,7 @@ module Aws::MediaConvert
       attr_accessor additional_manifests: ::Array[Types::DashAdditionalManifest]
       attr_accessor audio_channel_config_scheme_id_uri: ("MPEG_CHANNEL_CONFIGURATION" | "DOLBY_CHANNEL_CONFIGURATION")
       attr_accessor base_url: ::String
+      attr_accessor dash_adaptation_set_grouping: ::Array[("CODEC")]
       attr_accessor dash_i_frame_trick_play_name_modifier: ::String
       attr_accessor dash_manifest_style: ("BASIC" | "COMPACT" | "DISTINCT" | "FULL")
       attr_accessor destination: ::String
@@ -1142,6 +1149,8 @@ module Aws::MediaConvert
       attr_accessor scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")
       attr_accessor scene_change_detect: ("DISABLED" | "ENABLED" | "TRANSITION_DETECTION")
       attr_accessor slices: ::Integer
+      attr_accessor sliding_window_ms: ::Integer
+      attr_accessor sliding_window_peak_bitrate: ::Integer
       attr_accessor slow_pal: ("DISABLED" | "ENABLED")
       attr_accessor softness: ::Integer
       attr_accessor spatial_adaptive_quantization: ("DISABLED" | "ENABLED")
@@ -1200,6 +1209,8 @@ module Aws::MediaConvert
       attr_accessor scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")
       attr_accessor scene_change_detect: ("DISABLED" | "ENABLED" | "TRANSITION_DETECTION")
       attr_accessor slices: ::Integer
+      attr_accessor sliding_window_ms: ::Integer
+      attr_accessor sliding_window_peak_bitrate: ::Integer
       attr_accessor slow_pal: ("DISABLED" | "ENABLED")
       attr_accessor spatial_adaptive_quantization: ("DISABLED" | "ENABLED")
       attr_accessor telecine: ("NONE" | "SOFT" | "HARD")
@@ -1539,6 +1550,7 @@ module Aws::MediaConvert
       attr_accessor inputs: ::Array[Types::Input]
       attr_accessor kantar_watermark: Types::KantarWatermarkSettings
       attr_accessor motion_image_inserter: Types::MotionImageInserter
+      attr_accessor motion_image_inserters: ::Array[Types::MotionImageInserter]
       attr_accessor nielsen_configuration: Types::NielsenConfiguration
       attr_accessor nielsen_non_linear_watermark: Types::NielsenNonLinearWatermarkSettings
       attr_accessor output_groups: ::Array[Types::OutputGroup]
@@ -1574,6 +1586,7 @@ module Aws::MediaConvert
       attr_accessor inputs: ::Array[Types::InputTemplate]
       attr_accessor kantar_watermark: Types::KantarWatermarkSettings
       attr_accessor motion_image_inserter: Types::MotionImageInserter
+      attr_accessor motion_image_inserters: ::Array[Types::MotionImageInserter]
       attr_accessor nielsen_configuration: Types::NielsenConfiguration
       attr_accessor nielsen_non_linear_watermark: Types::NielsenNonLinearWatermarkSettings
       attr_accessor output_groups: ::Array[Types::OutputGroup]
@@ -1909,6 +1922,8 @@ module Aws::MediaConvert
       attr_accessor rate_control_mode: ("VBR" | "CBR")
       attr_accessor scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")
       attr_accessor scene_change_detect: ("DISABLED" | "ENABLED")
+      attr_accessor sliding_window_ms: ::Integer
+      attr_accessor sliding_window_peak_bitrate: ::Integer
       attr_accessor slow_pal: ("DISABLED" | "ENABLED")
       attr_accessor softness: ::Integer
       attr_accessor spatial_adaptive_quantization: ("DISABLED" | "ENABLED")
@@ -1995,7 +2010,7 @@ module Aws::MediaConvert
     end
 
     class NoiseReducer
-      attr_accessor filter: ("BILATERAL" | "MEAN" | "GAUSSIAN" | "LANCZOS" | "SHARPEN" | "CONSERVE" | "SPATIAL" | "TEMPORAL")
+      attr_accessor filter: ("BILATERAL" | "MEAN" | "GAUSSIAN" | "LANCZOS" | "SHARPEN" | "CONSERVE" | "SPATIAL" | "TEMPORAL" | "PERCEPTUAL" | "NONE")
       attr_accessor filter_settings: Types::NoiseReducerFilterSettings
       attr_accessor spatial_filter_settings: Types::NoiseReducerSpatialFilterSettings
       attr_accessor temporal_filter_settings: Types::NoiseReducerTemporalFilterSettings
@@ -2096,6 +2111,8 @@ module Aws::MediaConvert
 
     class PassthroughSettings
       attr_accessor frame_control: ("NEAREST_IDRFRAME" | "NEAREST_IFRAME")
+      attr_accessor gops_per_segment: ::Integer
+      attr_accessor segmentation_mode: ("AUTO" | "DURATION_BASED" | "GOP_COUNT")
       attr_accessor video_selector_mode: ("AUTO" | "REMUX_ALL")
       SENSITIVE: []
     end
