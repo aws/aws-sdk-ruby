@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Issue - Update `MessageVerifier` to validate the message `Type`, build the canonical string from only that type's signable fields, require `MessageId`/`Timestamp`/`TopicArn`/`Type` to be non-empty strings, and reject newlines in signed fields other than `Message`.
+* Issue - `Aws::SNS::MessageVerifier` now rejects messages with an unsupported `Type` or malformed signed fields.
 
 1.124.1 (2026-10-26)
 ------------------

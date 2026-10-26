@@ -23,21 +23,7 @@ module Aws
 
       class VerificationError < StandardError; end
 
-      # @api private
-      SIGNABLE_KEYS = [
-        'Message',
-        'MessageId',
-        'Subject',
-        'SubscribeURL',
-        'Timestamp',
-        'Token',
-        'TopicArn',
-        'Type'
-      ].freeze
-
-      # Signable fields per message type. Verifying against the exact field
-      # set for the message's Type stops a crafted message from being
-      # re-split into different fields with the same canonical string.
+      # Signable fields per message type.
       # @api private
       SIGNABLE_KEYS_BY_TYPE = {
         'Notification' => %w[Message MessageId Subject Timestamp TopicArn Type].freeze,
@@ -49,7 +35,7 @@ module Aws
 
       # Metadata fields that must be present as non-empty strings.
       # @api private
-      REQUIRED_KEYS = %w[MessageId Timestamp TopicArn Type].freeze
+      REQUIRED_KEYS = %w[MessageId Timestamp TopicArn].freeze
 
       # Only Message may contain the newline used as the field delimiter.
       # @api private
@@ -185,13 +171,10 @@ module Aws
       end
 
       def canonical_string(message)
-        keys = SIGNABLE_KEYS_BY_TYPE.fetch(message['Type']) do
-          raise VerificationError, 'the message Type is not supported'
-        end
-        keys.each_with_object(+'') do |key, str|
+        SIGNABLE_KEYS_BY_TYPE.fetch(message['Type']).filter_map do |key|
           value = message[key]
-          str << "#{key}\n#{value}\n" unless value.nil? || value.empty?
-        end
+          "#{key}\n#{value}\n" unless value.nil? || value.empty?
+        end.join
       end
 
       def public_key(message)
